@@ -5,3 +5,4 @@ node_modules/
 public/reference.png
 
 .vercel
+.env*
