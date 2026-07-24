@@ -1,6 +1,6 @@
 # AGENTS.md — Suzuki Sales Website
 
-This file applies inside `projects/suzuki-sales-website/`.
+This file applies inside `/Users/1xuan/side_projects/suzuki-sales-website/`.
 
 ## Project Overview
 
@@ -16,7 +16,7 @@ This file applies inside `projects/suzuki-sales-website/`.
 - Start dev server: `npm run dev`
 - Production build: `npm run build`
 
-Run commands from `projects/suzuki-sales-website/`.
+Run commands from `/Users/1xuan/side_projects/suzuki-sales-website/`.
 
 ## File Map
 
