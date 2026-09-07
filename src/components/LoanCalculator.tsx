@@ -134,7 +134,7 @@ export default function LoanCalculator({ preselectedCarId }: { preselectedCarId?
                 期數
               </label>
               <div className="flex flex-wrap gap-2">
-                {[12, 24, 36, 48, 60, 72].map((n) => (
+                {[12, 24, 36, 48, 60, 72, 84].map((n) => (
                   <button
                     key={n}
                     onClick={() => setMonths(n)}
@@ -154,22 +154,34 @@ export default function LoanCalculator({ preselectedCarId }: { preselectedCarId?
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label className="text-[14px] font-extrabold text-[#555]">年利率</label>
-                <span className="text-[14px] font-extrabold text-[#e60012]">{rate}%</span>
+                <div className="flex items-center gap-1 text-[14px] font-extrabold text-[#e60012]">
+                  <input
+                    aria-label="年利率（百分比）"
+                    type="number"
+                    min={0}
+                    max={8}
+                    step={0.01}
+                    value={rate}
+                    onChange={(e) => setRate(Math.min(8, Math.max(0, Number(e.target.value) || 0)))}
+                    className="w-20 h-9 px-2 border border-[#d9d9d9] rounded-lg text-right"
+                  />
+                  <span>%</span>
+                </div>
               </div>
               <input
                 type="range"
-                min={2.5}
+                min={0}
                 max={8}
-                step={0.1}
+                step={0.01}
                 value={rate}
                 onChange={(e) => setRate(Number(e.target.value))}
                 className="w-full h-2 rounded-full appearance-none cursor-pointer"
                 style={{
-                  background: `linear-gradient(to right, #e60012 ${((rate - 2.5) / (8 - 2.5)) * 100}%, #e0e0e0 ${((rate - 2.5) / (8 - 2.5)) * 100}%)`,
+                  background: `linear-gradient(to right, #e60012 ${(rate / 8) * 100}%, #e0e0e0 ${(rate / 8) * 100}%)`,
                 }}
               />
               <div className="flex justify-between text-[12px] text-[#999] mt-1">
-                <span>2.5%</span>
+                <span>0%</span>
                 <span>8%</span>
               </div>
             </div>
@@ -215,7 +227,7 @@ export default function LoanCalculator({ preselectedCarId }: { preselectedCarId?
           </div>
 
           <p className="mt-4 text-[11px] text-[#aaa] leading-relaxed">
-            * 本試算結果僅供參考，實際貸款條件依金融機構核定為準
+            * 本試算採本息平均攤還，未含手續費；預設利率為試算範例，非專案報價。活動貸款額度、期數及實際條件依金融機構核定為準。
           </p>
         </div>
       </div>

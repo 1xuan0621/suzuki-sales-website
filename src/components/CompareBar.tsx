@@ -30,8 +30,8 @@ function CompareModal({ cars, onClose }: { cars: Car[]; onClose: () => void }) {
         return s || "-";
       }
     },
-    { label: "油耗", getVal: (c) => {
-        const s = c.detail.specs.find((x) => /油耗|km\/L|km\/h/i.test(x));
+    { label: "油耗／續航", getVal: (c) => {
+        const s = c.detail.specs.find((x) => /油耗|續航里程/i.test(x));
         return s || "-";
       }
     },
@@ -125,16 +125,17 @@ function CompareModal({ cars, onClose }: { cars: Car[]; onClose: () => void }) {
 }
 
 /* ─── Floating Compare Bar ─── */
-export default function CompareBar() {
+export default function CompareBar({ lineHref, phoneHref }: { lineHref: string; phoneHref: string }) {
   const { selected, removeCar, clearAll } = useCompare();
   const [showModal, setShowModal] = useState(false);
 
-  if (selected.length === 0) return null;
 
   return (
     <>
-      {/* Floating bottom bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 flex items-center gap-3 px-4 py-3 bg-white/95 backdrop-blur-md border-t border-[#e7e7e7] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] md:pl-[calc(50%-590px+16px)] md:pr-[calc(50%-590px+16px)]">
+      {/* A single fixed container stacks comparison above mobile contact actions. */}
+      <div className={`fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#e7e7e7] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] ${selected.length === 0 ? "md:hidden" : ""}`}>
+      {selected.length > 0 && (
+      <div aria-label="已選車款" className="flex items-center gap-2 px-3 py-3 max-w-[1180px] mx-auto">
         <span className="text-[13px] font-extrabold text-[#888] whitespace-nowrap shrink-0">
           已選 {selected.length}/3 台
         </span>
@@ -166,14 +167,23 @@ export default function CompareBar() {
 
         <button
           onClick={() => setShowModal(true)}
-          className="h-[38px] px-5 bg-[#e60012] text-white rounded-[10px] font-extrabold text-[14px] cursor-pointer border-0 transition-all hover:bg-[#b9000e] whitespace-nowrap shrink-0"
+          className="h-[38px] px-4 bg-[#e60012] text-white rounded-[10px] font-extrabold text-[14px] cursor-pointer border-0 transition-all hover:bg-[#b9000e] whitespace-nowrap shrink-0"
         >
           比較
         </button>
       </div>
 
-      {/* Padding so content isn't hidden behind the bar — only on mobile (CTA bar is also fixed) */}
-      <div className="h-[60px] md:hidden" />
+      )}
+      <nav aria-label="快速聯絡" className="md:hidden flex items-center gap-2 px-3 pt-2 pb-[calc(8px+env(safe-area-inset-bottom))] border-t border-[#eee]">
+        <a href={phoneHref} className="flex-1 flex items-center justify-center gap-1.5 h-10 bg-[#e60012] text-white rounded-[10px] font-extrabold text-sm no-underline">
+          <span aria-hidden="true">📞</span>立即撥打
+        </a>
+        <a href={lineHref} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 h-10 bg-[#06c755] text-white rounded-[10px] font-extrabold text-sm no-underline">
+          <span aria-hidden="true">💬</span>加 LINE 詢問
+        </a>
+      </nav>
+      </div>
+      <div aria-hidden="true" className={selected.length > 0 ? "h-[calc(140px+env(safe-area-inset-bottom))] md:h-20" : "h-[calc(72px+env(safe-area-inset-bottom))] md:hidden"} />
 
       {showModal && <CompareModal cars={selected} onClose={() => setShowModal(false)} />}
     </>

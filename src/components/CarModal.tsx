@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import type { Car } from "@/data/site";
-import { R } from "@/data/constants";
+import { contentReviewedAt, type Car } from "@/data/site";
+import PromotionNotice from "./PromotionNotice";
 
 interface CarModalProps {
   car: Car;
@@ -119,7 +119,7 @@ export default function CarModal({ car, onClose, onInterest, lineHref }: CarModa
           {/* 車色選擇 */}
           {car.detail.colors && car.detail.colors.length > 0 && (
             <div className="px-5 pt-4 sm:px-6">
-              <p className="text-[13px] font-extrabold text-[#333] mb-2">選擇顏色</p>
+              <p className="text-[13px] font-extrabold text-[#333] mb-2">車色參考</p>
               <div className="flex flex-wrap gap-2.5">
                 {car.detail.colors.map((c: { name: string; hex: string }) => (
                   <div
@@ -163,15 +163,15 @@ export default function CarModal({ car, onClose, onInterest, lineHref }: CarModa
               </p>
             </div>
 
-            {car.detail.monthlyPromo && (
-              <div
-                className="mb-5 p-3 rounded-[10px] text-white text-[14px] leading-relaxed font-extrabold"
-                style={{ background: "linear-gradient(135deg, " + R + ", #bd0010)" }}
-              >
-                <span className="inline-block mr-1.5">🎉</span>
-                {car.detail.monthlyPromo}
-              </div>
-            )}
+            <p className="mb-3 text-xs leading-relaxed text-[#666]">
+              規格核對：<time dateTime={contentReviewedAt}>{contentReviewedAt}</time>。
+              售價為建議起價；年式、配備、車色與實際成交條件請洽詢。油耗與續航為測試值，實際依使用情況而異。
+            </p>
+            <div className="flex flex-wrap gap-4 mb-5 text-sm text-[#b9000e]">
+              <a href={car.detail.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方車款介紹</a>
+              <a href={car.detail.specUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方規配表（PDF）</a>
+            </div>
+            <PromotionNotice promotion={car.detail.promotion} />
 
             <div className="flex items-center gap-3">
               <button

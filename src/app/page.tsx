@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { cars, services, usageOptions, budgetRanges, dealer, type Car } from "@/data/site";
+import { useRef, useState } from "react";
+import { cars, services, usageOptions, budgetRanges, dealer, contentReviewedAt, type Car } from "@/data/site";
 import { R, CAR_SHAPE_CLASS } from "@/data/constants";
 import CompareProvider, { useCompare } from "@/components/CarCompareProvider";
 import CompareBar from "@/components/CompareBar";
@@ -19,37 +19,51 @@ function HomePageInner() {
   const { toggleCar, isSelected } = useCompare();
   const [form, setForm] = useState({ name: "", contact: "", car: "", usage: "", budget: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [receipt, setReceipt] = useState("");
+  const [website, setWebsite] = useState("");
+  const requestId = useRef("");
+  const sendingRef = useRef(false);
   const [sending, setSending] = useState(false);
   const [modalCar, setModalCar] = useState<Car | null>(null);
   const [loanCarId, setLoanCarId] = useState("");
 
-  const update = (f: string, v: string) => setForm((p) => ({ ...p, [f]: v }));
+  const update = (field: string, value: string) => {
+    setForm((previous) => ({ ...previous, [field]: value }));
+    requestId.current = "";
+    setFormError("");
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (sendingRef.current) return;
+    sendingRef.current = true;
     setSending(true);
+    setFormError("");
     try {
-      await Promise.all([
-        fetch(
-          "https://script.google.com/macros/s/AKfycbwHLQ1emh1ByNmQGwQqeOliUZ45KZCuGy9rxn6x92ytCMmwGdE3e4jQKyWrvyNqzAY/exec",
-          {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({ ...form, timestamp: new Date().toISOString() }),
-          }
-        ),
-        fetch("/api/notify", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        }),
-      ]);
-    } catch {
-      /* 靜默失敗 */
+      requestId.current ||= crypto.randomUUID();
+      const res = await fetch("/api/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, website, requestId: requestId.current }),
+        signal: AbortSignal.timeout(25000),
+      });
+      if (res.status === 429) throw new Error("送出次數較多，請 10 分鐘後重試，或直接使用 LINE 聯絡。");
+      const result = await res.json();
+      if (!res.ok || result.ok !== true || result.receipt !== requestId.current) {
+        if (res.status === 409) requestId.current = "";
+        throw new Error(typeof result.error === "string" ? result.error : "暫時無法確認收件，請稍後重試或使用 LINE 聯絡。");
+      }
+      setReceipt(result.receipt);
+      setSubmitted(true);
+    } catch (error) {
+      setFormError(error instanceof Error && error.name === "Error"
+        ? error.message
+        : "連線中斷，暫時無法確認收件。資料仍保留在表單，請重試或使用 LINE 聯絡。");
+    } finally {
+      sendingRef.current = false;
+      setSending(false);
     }
-    setSending(false);
-    setSubmitted(true);
   };
 
   const lineHref = `https://line.me/R/ti/p/~${dealer.line}`;
@@ -227,13 +241,16 @@ function HomePageInner() {
           </section>
 
           {/* ═══════ 車款區塊 — 6 台，點卡片開 Modal ═══════ */}
-          <section className="w-[calc(100%-88px)] mx-auto mt-[34px] pt-[34px] border-t border-[#ddd] max-sm:w-[calc(100%-28px)] max-sm:mt-5">
+          <section id="cars" className="w-[calc(100%-88px)] mx-auto mt-[34px] pt-[34px] border-t border-[#ddd] max-sm:w-[calc(100%-28px)] max-sm:mt-5">
             <div className="flex items-end justify-between gap-5 mb-5 max-sm:flex-col max-sm:items-start">
               <div>
                 <p className="m-0 text-[#666] text-[15px] font-bold">熱門車款</p>
                 <h2 className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">
                   依照需求，快速找到適合的 Suzuki
                 </h2>
+                <p className="mt-3 text-sm leading-relaxed text-[#666]">
+                  資料核對：<time dateTime={contentReviewedAt}>{contentReviewedAt}</time>｜以下為建議起價，點選車款查看規格與期間優惠。
+                </p>
               </div>
             </div>
 
@@ -357,14 +374,15 @@ function HomePageInner() {
             </div>
 
             {submitted ? (
-              <div className="text-center py-8 space-y-3">
+              <div className="text-center py-8 space-y-3" role="status">
                 <div className="flex-shrink-0 grid place-items-center w-16 h-16 rounded-full bg-[#e60012] text-white text-[30px] font-extrabold mx-auto">
                   ✓
                 </div>
-                <h3 className="text-2xl font-bold text-[#202020]">需求已送出</h3>
+                <h3 className="text-2xl font-bold text-[#202020]">需求已收件</h3>
                 <p className="text-[#666]">
                   我會盡快與你聯繫！也可以直接加 LINE 😊
                 </p>
+                <p className="text-xs text-[#666] break-all">案件編號：{receipt}</p>
                 <a
                   href={lineHref}
                   target="_blank"
@@ -408,11 +426,17 @@ function HomePageInner() {
                   </a>
                 </aside>
 
-                <form onSubmit={handleSubmit} className="grid gap-[14px]">
+                <form onSubmit={handleSubmit} className="grid gap-[14px]" aria-busy={sending}>
+                  <fieldset disabled={sending} className="contents">
+                  <div className="hidden" aria-hidden="true">
+                    <label>網站<input name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} /></label>
+                  </div>
                   <label className="grid grid-cols-[120px_1fr] gap-[18px] items-center font-extrabold max-sm:grid-cols-1 max-sm:gap-1.5">
                     <span>姓名</span>
                     <input
                       required
+                      maxLength={50}
+                      autoComplete="name"
                       value={form.name}
                       onChange={(e) => update("name", e.target.value)}
                       className="w-full h-12 px-4 border border-[#d9d9d9] rounded-lg bg-white text-[#555] font-inherit outline-none focus:border-[#e60012] focus:ring-2 focus:ring-[rgba(230,0,18,0.18)] transition-all"
@@ -423,6 +447,8 @@ function HomePageInner() {
                     <span>聯絡方式</span>
                     <input
                       required
+                      maxLength={30}
+                      autoComplete="tel"
                       value={form.contact}
                       onChange={(e) => update("contact", e.target.value)}
                       type="tel"
@@ -476,6 +502,10 @@ function HomePageInner() {
                       ))}
                     </select>
                   </label>
+                  <p className="text-xs text-[#666] leading-relaxed">
+                    資料僅用於購車諮詢與聯繫，可透過 LINE 要求更正或刪除。
+                  </p>
+                  {formError && <p role="alert" className="p-3 rounded-lg bg-red-50 text-[#b9000e] text-sm">{formError}</p>}
                   <button
                     type="submit"
                     disabled={sending}
@@ -483,6 +513,7 @@ function HomePageInner() {
                   >
                     {sending ? "送出中⋯" : "送出需求"}
                   </button>
+                  </fieldset>
                 </form>
               </div>
             )}
@@ -498,26 +529,6 @@ function HomePageInner() {
           </footer>
         </div>
       </main>
-
-      {/* ═══════ 底部固定 CTA (手機 only) ═══════ */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden flex items-center gap-2 px-3 py-2 bg-white/90 backdrop-blur-lg border-t border-[#e7e7e7] shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
-        <a
-          href={phoneHref}
-          className="flex-1 flex items-center justify-center gap-1.5 h-[40px] bg-[#e60012] text-white rounded-[10px] font-extrabold text-[14px] no-underline transition-all hover:bg-[#b9000e] active:scale-[0.98]"
-        >
-          <span className="text-lg">📞</span>
-          立即撥打
-        </a>
-        <a
-          href={lineHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-1.5 h-[40px] bg-[#06c755] text-white rounded-[10px] font-extrabold text-[14px] no-underline transition-all hover:bg-[#05b549] active:scale-[0.98]"
-        >
-          <span className="text-lg">💬</span>
-          加 LINE 詢問
-        </a>
-      </div>
 
       {/* ═══════ Modal Overlay — 車款詳細 ═══════ */}
       {modalCar && (
@@ -538,7 +549,7 @@ function HomePageInner() {
         />
       )}
 
-      <CompareBar />
+      <CompareBar lineHref={lineHref} phoneHref={phoneHref} />
     </>
   );
 }
