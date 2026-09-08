@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, type RefObject } from "react";
+import { useState, useMemo } from "react";
 import { cars } from "@/data/site";
 import { LOAN_RATE_MIN, LOAN_RATE_MAX } from "@/data/constants";
 
@@ -11,11 +11,7 @@ function parsePrice(priceStr: string): number {
   return n;
 }
 
-export default function LoanCalculator({ preselectedCarId, selectionKey, headingRef }: {
-  preselectedCarId?: string;
-  selectionKey?: number;
-  headingRef?: RefObject<HTMLHeadingElement | null>;
-}) {
+export default function LoanCalculator() {
   const [selectedCarId, setSelectedCarId] = useState("");
   const [price, setPrice] = useState("800000");
   const [downPayment, setDownPayment] = useState(160000);
@@ -52,19 +48,12 @@ export default function LoanCalculator({ preselectedCarId, selectionKey, heading
 
   const handleCarSelect = (carId: string) => doCarSelect(carId);
 
-  // 當外部傳入 preselectedCarId 時自動填入
-  useEffect(() => {
-    if (preselectedCarId) {
-      doCarSelect(preselectedCarId);
-    }
-  }, [preselectedCarId, selectionKey]);
-
   return (
     <section className="w-[calc(100%-88px)] mx-auto mt-[34px] pt-[34px] border-t border-[#ddd] max-sm:w-[calc(100%-28px)] max-sm:mt-5">
       <div className="flex items-end justify-between gap-5 mb-5 max-sm:flex-col max-sm:items-start">
         <div>
           <p className="m-0 text-[#666] text-[15px] font-bold">貸款試算</p>
-          <h2 ref={headingRef} tabIndex={-1} className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">試算月付金額，輕鬆購車</h2>
+          <h2 className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">試算月付金額，輕鬆購車</h2>
         </div>
       </div>
 

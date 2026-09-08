@@ -62,7 +62,7 @@ export const cars: Car[] = [
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178453449654.pdf",
       promotion: {
         ...septemberCampaign,
-        summary: "100 萬 84 期低利率；購車並完成領牌贈 ALLGRIP × MIZUNO SPORTSTYLE 鞋款乙雙。",
+        summary: "100 萬 84 期・年利率 3.50%（須審核）；領牌贈 ALLGRIP × MIZUNO 聯名鞋款。",
         terms: "貸款利率 3.50%，須經審核，不得與其他優惠專案併用。贈品數量與尺寸有限，送完為止；限符合官方購車及領牌資格者，排除租賃、營業車等，兌換期限至 2026/10/31。",
       },
       images: ["e-vitara", "e-vitara-side", "e-vitara-int"],
@@ -179,7 +179,7 @@ export const cars: Car[] = [
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178418897488.pdf",
       promotion: {
         ...septemberCampaign,
-        summary: "90 萬 84 期低利率購車方案。",
+        summary: "90 萬 84 期・年利率 3.50%（須審核）。",
         terms: "貸款利率 3.50%，須經經銷商及金融機構審核，不得與其他優惠專案併用。領牌及適用條件依官方活動辦法。",
       },
       images: ["vitara", "vitara-side", "vitara-int"],
@@ -218,7 +218,7 @@ export const cars: Car[] = [
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178453550663.pdf",
       promotion: {
         ...septemberCampaign,
-        summary: "90 萬 84 期低利率購車方案。",
+        summary: "90 萬 84 期・年利率 3.50%（須審核）。",
         terms: "貸款利率 3.50%，須經經銷商及金融機構審核，不得與其他優惠專案併用。領牌及適用條件依官方活動辦法。",
       },
       images: ["s-cross", "s-cross-side", "s-cross-int"],
@@ -254,7 +254,7 @@ export const cars: Car[] = [
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/169336257999.pdf",
       promotion: {
         ...septemberCampaign,
-        summary: "40 萬 48 期、月付 8,888 元方案；另有指定車款萬元購車金。",
+        summary: "40 萬 48 期・年利率 3.19%（須審核），月付 8,888 元；另有指定車款購車金。",
         terms: "貸款利率 3.19%，須經審核且不得與其他優惠專案併用。購車金限指定車款當次抵用，排除租賃、營業、政府機關及專案批／標購車輛；兩方案能否併用請洽詢。",
       },
       images: ["carry", "carry-side", "carry-int"],

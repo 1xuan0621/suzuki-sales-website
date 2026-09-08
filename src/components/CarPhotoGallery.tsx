@@ -156,16 +156,12 @@ export default function CarPhotoGallery({ car, expanded, onExpandedChange }: Pro
         </button>
         {navigation(false)}
       </div>
-      <div className="flex-shrink-0 bg-[#242424] px-5 py-3 text-white sm:px-6">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h3 className="text-2xl font-bold">{car.name}</h3>
-            <p className="text-sm text-white/90">{car.subtitle}</p>
-          </div>
-          <p aria-live="polite" aria-atomic="true" className="pt-1 text-right text-xs text-white/80">
-            {label}<span className="mt-1 block tabular-nums">{index + 1} / {images.length}</span>
-          </p>
-        </div>
+      <div className="flex h-12 shrink-0 items-center gap-3 border-b border-[#eee] bg-[#fafafa] px-5 sm:px-6">
+        <h3 className="shrink-0 whitespace-nowrap text-lg font-bold text-[#333]">{car.name}</h3>
+        <p className="min-w-0 flex-1 truncate text-xs text-[#777]">{car.subtitle}</p>
+        <p aria-live="polite" aria-atomic="true" className="shrink-0 whitespace-nowrap text-xs tabular-nums text-[#777]">
+          <span className="sr-only">{label} · </span>{index + 1} / {images.length}
+        </p>
       </div>
       {expanded && createPortal(
         <dialog

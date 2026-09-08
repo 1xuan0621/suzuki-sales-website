@@ -22,7 +22,7 @@ export function useModalDialog(open = true) {
     const handleTab = (event: KeyboardEvent) => {
       if (event.key !== "Tab") return;
       const elements = Array.from(dialog.querySelectorAll<HTMLElement>(
-        'a[href], button, input, select, textarea, [tabindex]',
+        'a[href], button, input, select, textarea, summary, [tabindex]',
       )).filter((element) => element.tabIndex >= 0 && !element.matches(":disabled")
         && !element.closest("[inert]") && element.getClientRects().length > 0
         && getComputedStyle(element).visibility !== "hidden");

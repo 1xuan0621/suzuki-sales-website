@@ -10,14 +10,13 @@ interface CarModalProps {
   car: Car;
   onClose: () => void;
   onInterest: () => void;
-  onCalculate: () => void;
   lineHref: string;
 }
 
 /**
  * 車款詳細 Modal — 圖片輪播、顏色選擇、規格、優惠與行動按鈕
  */
-export default function CarModal({ car, onClose, onInterest, onCalculate, lineHref }: CarModalProps) {
+export default function CarModal({ car, onClose, onInterest, lineHref }: CarModalProps) {
   const [photoExpanded, setPhotoExpanded] = useState(false);
   const dialog = useModalDialog();
 
@@ -54,18 +53,29 @@ export default function CarModal({ car, onClose, onInterest, onCalculate, lineHr
 
         {/* 內容區 — 可滾動 */}
         <div className="flex-1 overflow-y-auto">
-          <p className="px-5 pt-3 text-xs leading-relaxed text-[#777] sm:px-6">
-            圖片來源：台灣 Suzuki 官方。照片配備與車色請以實際販售車輛為準。
-          </p>
           {/* 車色選擇 */}
           {car.detail.colors && car.detail.colors.length > 0 && (
-            <div className="px-5 pt-4 sm:px-6">
-              <p className="text-[13px] font-extrabold text-[#333] mb-2">車色參考</p>
-              <div className="flex flex-wrap gap-2.5">
+            <div className="flex items-center gap-3 px-5 pt-4 sm:px-6">
+              <p className="shrink-0 text-[13px] font-bold text-[#666]">車色參考</p>
+              <div
+                role="region"
+                aria-label="車色參考，可左右滑動"
+                tabIndex={0}
+                className="flex min-w-0 flex-1 gap-2 overflow-x-auto overscroll-x-contain py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                onKeyDown={(event) => {
+                  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+                    event.preventDefault();
+                    event.currentTarget.scrollBy({ left: event.key === "ArrowLeft" ? -120 : 120 });
+                  } else if (event.key === "Home" || event.key === "End") {
+                    event.preventDefault();
+                    event.currentTarget.scrollLeft = event.key === "Home" ? 0 : event.currentTarget.scrollWidth;
+                  }
+                }}
+              >
                 {car.detail.colors.map((c: { name: string; hex: string }) => (
                   <div
                     key={c.name}
-                    className="flex items-center gap-1.5 px-3 py-1.5 border border-[#e0e0e0] rounded-full text-[12px] text-[#555] font-bold"
+                    className="flex shrink-0 items-center gap-1.5 whitespace-nowrap px-3 py-1.5 border border-[#e0e0e0] rounded-full text-[12px] text-[#555] font-bold"
                   >
                     <span
                       className="inline-block w-3.5 h-3.5 rounded-full"
@@ -81,7 +91,7 @@ export default function CarModal({ car, onClose, onInterest, onCalculate, lineHr
           {/* 資訊 */}
           <div className="p-5 sm:p-6">
             <div className="flex items-baseline justify-between gap-2 mb-3">
-              <span className="text-[#666] text-sm font-bold">建議售價</span>
+              <span className="text-[#666] text-sm font-bold">建議起價</span>
               <span className="text-[#e60012] text-2xl font-extrabold">{car.price}</span>
             </div>
             <p className="text-[#e60012] font-extrabold text-[17px] leading-tight mb-4">
@@ -104,14 +114,17 @@ export default function CarModal({ car, onClose, onInterest, onCalculate, lineHr
               </p>
             </div>
 
-            <p className="mb-3 text-xs leading-relaxed text-[#666]">
-              規格核對：<time dateTime={contentReviewedAt}>{contentReviewedAt}</time>。
-              售價為建議起價；年式、配備、車色與實際成交條件請洽詢。油耗與續航為測試值，實際依使用情況而異。
-            </p>
-            <div className="flex flex-wrap gap-4 mb-5 text-sm text-[#b9000e]">
-              <a href={car.detail.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方車款介紹</a>
-              <a href={car.detail.specUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方規配表（PDF）</a>
-            </div>
+            <details className="mb-3 text-xs leading-relaxed text-[#666]">
+              <summary className="cursor-pointer py-2">圖片與規格說明</summary>
+              <div className="space-y-2 pb-2">
+                <p>圖片：台灣 Suzuki。配備、車色以實車為準；成交條件請洽詢。</p>
+                <p>油耗／續航為測試值。規格核對：<time dateTime={contentReviewedAt}>{contentReviewedAt}</time>。</p>
+                <div className="flex flex-wrap gap-x-4 gap-y-2 text-[#b9000e]">
+                  <a href={car.detail.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方車款介紹</a>
+                  <a href={car.detail.specUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方規配表（PDF）</a>
+                </div>
+              </div>
+            </details>
             <PromotionNotice promotion={car.detail.promotion} />
 
             <div className="flex items-center gap-3">
@@ -130,13 +143,6 @@ export default function CarModal({ car, onClose, onInterest, onCalculate, lineHr
                 用 LINE 詢問
               </a>
             </div>
-            <button
-              type="button"
-              onClick={onCalculate}
-              className="mt-3 min-h-11 w-full rounded-[10px] text-sm font-bold text-[#555] underline underline-offset-4 hover:bg-[#f5f5f5]"
-            >
-              試算月付
-            </button>
           </div>
         </div>
       </div>

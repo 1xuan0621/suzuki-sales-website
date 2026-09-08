@@ -26,10 +26,7 @@ function HomePageInner() {
   const sendingRef = useRef(false);
   const [sending, setSending] = useState(false);
   const [modalCar, setModalCar] = useState<Car | null>(null);
-  const [loanCarId, setLoanCarId] = useState("");
-  const [loanSelectionKey, setLoanSelectionKey] = useState(0);
   const contactHeading = useRef<HTMLHeadingElement>(null);
-  const loanHeading = useRef<HTMLHeadingElement>(null);
 
   const update = (field: string, value: string) => {
     setForm((previous) => ({ ...previous, [field]: value }));
@@ -518,7 +515,7 @@ function HomePageInner() {
 
           {/* ═══════ 貸款試算 ═══════ */}
           <section id="loan-calculator">
-            <LoanCalculator preselectedCarId={loanCarId} selectionKey={loanSelectionKey} headingRef={loanHeading} />
+            <LoanCalculator />
           </section>
 
           <footer className="py-[26px] px-6 text-[#9b9b9b] text-center text-sm">
@@ -539,15 +536,6 @@ function HomePageInner() {
             requestAnimationFrame(() => {
               contactHeading.current?.focus({ preventScroll: true });
               document.getElementById("contact")?.scrollIntoView({ behavior: "instant", block: "start" });
-            });
-          }}
-          onCalculate={() => {
-            setLoanCarId(modalCar.id);
-            setLoanSelectionKey((value) => value + 1);
-            closeModal();
-            requestAnimationFrame(() => {
-              loanHeading.current?.focus({ preventScroll: true });
-              document.getElementById("loan-calculator")?.scrollIntoView({ behavior: "instant", block: "start" });
             });
           }}
           lineHref={lineHref}

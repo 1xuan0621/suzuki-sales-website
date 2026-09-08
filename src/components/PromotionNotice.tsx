@@ -36,14 +36,17 @@ export default function PromotionNotice({ promotion }: { promotion?: Promotion }
   }
 
   return (
-    <div className="mb-5 p-4 rounded-[10px] bg-[#fff5f5] border border-[#f3cccc] text-sm leading-relaxed">
+    <div className="mb-4 p-3 rounded-[10px] bg-[#fff5f5] border border-[#f3cccc] text-sm leading-relaxed">
       <p className="font-extrabold text-[#b9000e]">{promotion.title}</p>
-      <p className="mt-1 text-[#666]">活動期間：{promotion.periodLabel}</p>
+      <p className="mt-1 text-xs text-[#666]">{promotion.periodLabel}</p>
       <p className="mt-2 font-bold text-[#333]">{promotion.summary}</p>
-      <p className="mt-2 text-xs text-[#666]">{promotion.terms}</p>
-      <a className="inline-block mt-3 text-[#b9000e] underline underline-offset-4" href={promotion.sourceUrl} target="_blank" rel="noopener noreferrer">
-        查看官方活動與完整條件
-      </a>
+      <details className="mt-1 text-xs text-[#666]">
+        <summary className="cursor-pointer py-2">優惠條件</summary>
+        <p>{promotion.terms}</p>
+        <a className="inline-block mt-2 text-[#b9000e] underline underline-offset-4" href={promotion.sourceUrl} target="_blank" rel="noopener noreferrer">
+          官方活動辦法
+        </a>
+      </details>
     </div>
   );
 }
