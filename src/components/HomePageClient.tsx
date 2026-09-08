@@ -7,7 +7,7 @@ import { useConsultation } from "./ConsultationProvider";
 import ConsultationPrefill from "./ConsultationPrefill";
 import PrivacyNotice from "./PrivacyNotice";
 import SiteHeader from "./SiteHeader";
-import { cars, services, usageOptions, budgetRanges, dealer, contentReviewedAt, type Car } from "@/data/site";
+import { cars, services, usageOptions, budgetRanges, dealer, type Car } from "@/data/site";
 import { R, CAR_SHAPE_CLASS } from "@/data/constants";
 import { useCompare } from "@/components/CarCompareProvider";
 import CompareBar from "@/components/CompareBar";
@@ -84,25 +84,21 @@ export default function HomePageClient() {
               </div>
 
               <div className="flex-1">
-                <div className="flex items-center justify-between gap-4 font-bold max-md:justify-center">
-                  <div className="flex items-center gap-4 max-sm:gap-3">
-                    <img
-                      src="/suzuki-logo.svg"
-                      alt="Suzuki"
-                      className="h-[42px] w-auto max-sm:h-[34px] brightness-0 invert"
-                    />
-                    <p className="m-0 text-[15px] opacity-95 max-sm:text-[13px]">
-                      用心服務・安心購車
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-8 max-md:mt-6">
+                <div>
                   <h1
                     className="m-0 leading-none tracking-[0.06em] font-bold"
                     style={{ fontSize: "clamp(44px, 7vw, 72px)" }}
                   >
-                    <span className="mb-3 block text-xl leading-snug tracking-normal max-sm:text-lg">SUZUKI 台北汽車顧問</span>
+                    <span className="mb-4 flex items-center gap-3 text-xl leading-snug tracking-normal max-md:justify-center max-sm:text-lg">
+                      <img
+                        src="/suzuki-logo.svg"
+                        alt="SUZUKI"
+                        width={496}
+                        height={332}
+                        className="h-[42px] w-auto shrink-0 brightness-0 invert max-sm:h-[34px]"
+                      />
+                      <span>台北汽車顧問</span>
+                    </span>
                     {dealer.name}
                   </h1>
                   <p className="inline-block mt-[18px] pb-3 border-b-2 border-white/80 text-[19px] tracking-[0.18em] max-sm:text-base max-sm:tracking-[0.12em]">
@@ -204,17 +200,7 @@ export default function HomePageClient() {
 
           {/* ═══════ 車款區塊 — 6 台，點卡片開 Modal ═══════ */}
           <section id="cars" className="w-[calc(100%-88px)] mx-auto mt-[34px] pt-[34px] border-t border-[#ddd] max-sm:w-[calc(100%-28px)] max-sm:mt-5">
-            <div className="flex items-end justify-between gap-5 mb-5 max-sm:flex-col max-sm:items-start">
-              <div>
-                <p className="m-0 text-[#666] text-[15px] font-bold">熱門車款</p>
-                <h2 className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">
-                  依照需求，快速找到適合的 Suzuki
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-[#666]">
-                  資料核對：<time dateTime={contentReviewedAt}>{contentReviewedAt}</time>｜以下為建議起價，點選卡片快速瀏覽，或進入完整介紹了解選車重點。
-                </p>
-              </div>
-            </div>
+            <h2 className="mt-0 mb-5 text-[28px] font-bold leading-tight max-sm:text-[23px]">熱門車款</h2>
 
             {/* 車款卡片 — 3 欄 (6 台) */}
             <div className="grid grid-cols-3 gap-6 max-[980px]:grid-cols-2 max-[680px]:grid-cols-1 max-sm:gap-[14px]">
@@ -233,7 +219,7 @@ export default function HomePageClient() {
                         {car.name}
                       </h3>
                       <p className="m-0 mt-0 text-[13px] text-[#999] font-bold">{car.subtitle}</p>
-                      <p className="m-0 mt-1 text-[#666]">{car.description}</p>
+                      <p className="m-0 mt-1 text-sm leading-6 text-[#666]">{car.description}</p>
                       <p className="m-0 mt-auto pt-3 text-[18px] font-extrabold text-[#e60012]">
                         {car.price}
                       </p>
@@ -497,4 +483,3 @@ export default function HomePageClient() {
     </>
   );
 }
-

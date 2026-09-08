@@ -56,7 +56,7 @@ export const cars: Car[] = [
     id: "e-vitara",
     name: "e VITARA",
     subtitle: "純電休旅",
-    description: "純電世代，純電驅動的智慧移動",
+    description: "純電驅動，智慧出行",
     price: `${eVitaraVersions[0].priceTwd / 10000} 萬起`,
     highlights: ["純電行駛", "2WD 續航 516km (NEDC)", "ALLGRIP-e 四驅"],
     detail: {
@@ -94,7 +94,7 @@ export const cars: Car[] = [
     id: "swift",
     name: "SWIFT",
     subtitle: "靈活小車",
-    description: "城市經典新風範，日本進口輕油電",
+    description: "日本進口，輕油電小車",
     price: "73 萬起",
     highlights: ["24.5km/L 油耗", "日本進口", "車高 1,480mm"],
     detail: {
@@ -131,7 +131,7 @@ export const cars: Car[] = [
     id: "jimny",
     name: "Jimny 2026",
     subtitle: "硬派越野",
-    description: "經典越野本格，升級 ACC 與 DSBS II",
+    description: "經典越野，升級主動安全",
     price: "84.9 萬起",
     highlights: ["ALLGRIP PRO", "ACC 主動巡航", "DSBS II"],
     detail: {
@@ -172,7 +172,7 @@ export const cars: Car[] = [
     id: "vitara",
     name: "VITARA",
     subtitle: "都會休旅",
-    description: "ALLGRIP 四驅加持，1.4L BOOSTERJET 渦輪",
+    description: "ALLGRIP 四驅，渦輪動力",
     price: "104 萬起",
     highlights: ["ALLGRIP 四輪傳動", "1.4L BOOSTERJET", "48V 輕油電"],
     detail: {
@@ -211,7 +211,7 @@ export const cars: Car[] = [
     id: "s-cross",
     name: "S-CROSS",
     subtitle: "跨界休旅",
-    description: "寬敞行李廂，48V 輕油電，Level 2 安全",
+    description: "48V 輕油電，寬敞行李廂",
     price: "98 萬起",
     highlights: ["440L 行李廂", "48V 輕油電", "6 SRS 氣囊"],
     detail: {
@@ -247,7 +247,7 @@ export const cars: Car[] = [
     id: "carry",
     name: "CARRY",
     subtitle: "商用貨車",
-    description: "頭家首選，同級最強載重 915kg",
+    description: "頭家首選，載重 915kg",
     price: "49.9 萬起",
     highlights: ["載重 915kg", "同級最強", "低月付方案"],
     detail: {
