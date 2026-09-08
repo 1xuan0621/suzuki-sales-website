@@ -8,8 +8,8 @@ import { analyticsEnabled, createAnalytics, safeReferrer } from "../src/lib/anal
 
 test("published content has unique canonical URLs, truthful dates and no orphan editorial links", () => {
   const routes = contentRoutes.map((route) => route.path);
-  assert.equal(routes.length, 12);
-  assert.equal(new Set(routes).size, 12);
+  assert.equal(routes.length, 16);
+  assert.equal(new Set(routes).size, routes.length);
   assert.equal(getCar("unknown"), undefined);
   for (const car of cars) {
     for (const slug of carPages[car.id].guideSlugs) assert.ok(routes.includes(`/guides/${slug}`));

@@ -1,11 +1,12 @@
 import ContactLinks from "@/components/ContactLinks";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getCar, dealer } from "@/data/site";
-import { guides, getGuide, carPages, showroom } from "@/data/content";
+import { dealer } from "@/data/site";
+import { guides, getGuide } from "@/data/guides";
+import { getGeneralFaq } from "@/data/faq";
 import { guideSchema, pageMetadata, serializeJsonLd } from "@/data/seo";
-import ContentShell, { ArticleSection } from "@/components/ContentShell";
+import ContentShell from "@/components/ContentShell";
+import SourceLinks from "@/components/SourceLinks";
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -13,46 +14,46 @@ export function generateStaticParams() { return guides.map((guide) => ({ slug: g
 export async function generateMetadata({ params }: Props) {
   const guide = getGuide((await params).slug);
   if (!guide) notFound();
-  return pageMetadata(`/guides/${guide.slug}`, `${guide.title}｜${dealer.name}`, guide.description, `/images/${guide.carIds[0]}.jpg`, true);
-}
-
-function ComparisonTable() {
-  const compared = [getCar("vitara")!, getCar("s-cross")!];
-  const rows = [
-    { label: "建議起價", value: (car: typeof compared[number]) => car.price },
-    ...["引擎", "驅動", "行李箱", "油耗"].map((label) => ({ label, value: (car: typeof compared[number]) => car.detail.specs.find((spec) => spec.startsWith(`${label}：`))?.split("：").slice(1).join("：") || "請洽詢" })),
-  ];
-  return <ArticleSection title="台灣版本比較">
-    <div role="region" aria-label="VITARA 與 S-CROSS 比較表，可橫向捲動" tabIndex={0} className="overflow-x-auto rounded-xl border border-[#ddd]">
-      <table className="w-full min-w-[550px] text-left text-sm"><caption className="sr-only">台灣販售版本的 VITARA 與 S-CROSS 比較</caption><thead className="bg-[#f5f5f5]"><tr><th scope="col" className="p-4">項目</th>{compared.map((car) => <th key={car.id} scope="col" className="p-4">{car.name}</th>)}</tr></thead><tbody>{rows.map((row) => <tr key={row.label} className="border-t border-[#ddd]"><th scope="row" className="p-4 align-top">{row.label}</th>{compared.map((car) => <td key={car.id} className="p-4 align-top">{row.value(car)}</td>)}</tr>)}</tbody></table>
-    </div>
-    <p>規格核對：{carPages.vitara.specsReviewedAt}。價格、配備及量測條件請對照下方兩款官方規配表；油耗為測試值，行李箱最大容積需配合後座傾倒，不代表乘客坐滿時的可用空間。</p>
-  </ArticleSection>;
+  return pageMetadata(`/guides/${guide.slug}`, `${guide.title}｜${dealer.name}`, guide.description, "/og-image.png", true);
 }
 
 export default async function GuidePage({ params }: Props) {
   const guide = getGuide((await params).slug);
   if (!guide) notFound();
-  const primaryCar = getCar(guide.carIds[0])!;
-  return <ContentShell label={guide.title} carId={guide.carIds.length === 1 ? primaryCar.id : undefined}>
+  return <ContentShell label={guide.title}>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(guideSchema(guide)) }} />
     <article data-entry="guide">
-      <div className="grid items-center gap-7 lg:grid-cols-[1.3fr_1fr]">
-        <div><p className="mb-3 text-sm font-bold tracking-widest text-[#b9000e]">購車指南 · 選車前的準備</p><h1 className="text-balance text-3xl font-black leading-snug sm:text-4xl">{guide.title}</h1><p className="mt-5 text-[15px] leading-8 text-[#555]">{guide.description}</p><p className="mt-5 text-xs leading-7 text-[#666]">作者：<Link href="/" className="underline">{dealer.name}</Link> · 內容更新：<time dateTime={guide.updatedAt}>{guide.updatedAt}</time><br />引用資料核對：<time dateTime={guide.reviewedAt}>{guide.reviewedAt}</time></p><div className="mt-6"><ContactLinks carId={guide.carIds.length === 1 ? primaryCar.id : undefined} entry="guide" /></div></div>
-        <figure className="overflow-hidden rounded-2xl border border-[#ddd] bg-white"><div className="relative aspect-video"><Image src={`/images/${primaryCar.id}.jpg`} alt={`SUZUKI ${primaryCar.name} 官方產品外觀照片`} fill sizes="(max-width: 1024px) 100vw, 450px" className="object-contain" /></div><figcaption className="px-4 py-3 text-xs leading-6 text-[#666]">台灣 Suzuki 官方產品照片，非本站自行拍攝。</figcaption></figure>
+      <Link href="/guides" className="mb-5 inline-block text-sm font-medium text-[#b9000e] underline underline-offset-4">← 所有購車指南</Link>
+      <div className="grid items-start gap-7 lg:grid-cols-[1.4fr_1fr]">
+        <div>
+          <p className="mb-3 text-sm font-bold tracking-wide text-[#b9000e]">{guide.stage} · 約 {guide.readMinutes} 分鐘閱讀</p>
+          <h1 className="text-balance text-3xl font-black leading-snug sm:text-4xl">{guide.title}</h1>
+          <p className="mt-5 text-[15px] leading-8 text-[#555]">{guide.description}</p>
+          <p className="mt-5 text-xs leading-7 text-[#666]">整理：<Link href="/" className="underline">{dealer.name}購車諮詢網站</Link> · 內容更新：<time dateTime={guide.updatedAt}>{guide.updatedAt}</time><br />引用資料核對：<time dateTime={guide.reviewedAt}>{guide.reviewedAt}</time></p>
+          <div className="mt-6"><ContactLinks entry="guide" /></div>
+        </div>
+        <aside className="rounded-2xl border border-[#e3dcd3] bg-[#eee9e2] p-6 sm:p-7">
+          <p className="text-xs font-bold tracking-widest text-[#8b5147]">先記住這件事</p><p className="mt-3 text-lg font-bold leading-8">{guide.takeaway}</p>
+          <h2 className="mb-3 mt-6 border-t border-[#d9d0c5] pt-5 text-sm font-bold">讀完後，準備這三樣</h2>
+          <ul className="space-y-3 text-sm leading-7 text-[#555]">{guide.checklist.map((item) => <li key={item} className="flex items-start gap-3"><span aria-hidden="true" className="text-[#b9000e]">✓</span><span>{item}</span></li>)}</ul>
+        </aside>
       </div>
-      {guide.slug === "vitara-vs-s-cross" && <ComparisonTable />}
-      {guide.sections.map((section) => <ArticleSection key={section.title} title={section.title}>{section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{section.points && <ul className="list-disc space-y-2 pl-5">{section.points.map((point) => <li key={point}>{point}</li>)}</ul>}</ArticleSection>)}
-      {guide.slug === "swift-buying-cost" && <p className="mt-7"><Link href="/#loan-calculator" className="inline-block rounded-xl bg-[#e60012] px-6 py-3 font-bold text-white no-underline">前往首頁貸款試算</Link></p>}
-      <ArticleSection title="相關車款與官方資料">
-        <div className="grid gap-5 sm:grid-cols-2">{guide.carIds.map((id) => { const car = getCar(id)!; return <div key={id}><Link href={`/cars/${id}`} className="font-bold text-[#b9000e] underline underline-offset-4">SUZUKI {car.name} 完整介紹</Link><div className="mt-2 flex flex-wrap gap-4 text-sm"><a href={car.detail.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">官方車款介紹</a><a href={car.detail.specUrl} target="_blank" rel="noopener noreferrer" className="underline">官方規配表（PDF）</a></div></div>; })}</div>
-        {guide.slug === "buying-process" && <a href={showroom.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-block underline">官方據點資料</a>}
-        <p>本文整理選車及詢價時可確認的事項，實際車輛、報價、文件與交車安排請依個別需求向顧問確認。</p>
-      </ArticleSection>
-      <ArticleSection title="帶著問題，安排下一步">
-        <p><Link href="/visit/beitou" className="font-bold text-[#b9000e] underline underline-offset-4">查看台北北投到店交通與試乘預約</Link></p>
-        {guide.slug !== "buying-process" && <Link href="/guides/buying-process" className="inline-block text-[#b9000e] underline underline-offset-4">了解跨縣市購車與交車流程</Link>}
-      </ArticleSection>
+      <div className="mt-10 grid items-start gap-7 lg:grid-cols-[210px_minmax(0,1fr)]">
+        <nav aria-label="本文目錄" className="rounded-2xl border border-[#e5e1dd] bg-white p-5 lg:sticky lg:top-6">
+          <p className="mb-3 text-sm font-bold">這篇會看什麼</p>
+          <ol className="space-y-3 text-sm leading-7 text-[#666]">{guide.sections.map((section, index) => <li key={section.title}><a href={`#step-${index + 1}`} className="flex gap-2 hover:text-[#b9000e]"><span className="font-mono text-[#b9000e]">{String(index + 1).padStart(2, "0")}</span><span>{section.title}</span></a></li>)}</ol>
+        </nav>
+        <div className="min-w-0 space-y-5">
+          {guide.sections.map((section, index) => <section id={`step-${index + 1}`} key={section.title} className="scroll-mt-6 rounded-2xl border border-[#e5e1dd] bg-white p-6 sm:p-8">
+            <p aria-hidden="true" className="mb-3 font-mono text-sm text-[#b9000e]">{String(index + 1).padStart(2, "0")}</p><h2 className="mb-5 text-xl font-bold leading-8 sm:text-2xl">{section.title}</h2>
+            <div className="space-y-4 text-[15px] leading-8 text-[#555]">{section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{section.points && <ul className="list-disc space-y-3 pl-5">{section.points.map((point) => <li key={point}>{point}</li>)}</ul>}</div>
+          </section>)}
+          {["buying-cost", "financing-insurance"].includes(guide.slug) && <Link href="/#loan-calculator" className="inline-block rounded-full bg-[#b9000e] px-6 py-3 text-sm font-bold text-white no-underline">前往首頁貸款試算 →</Link>}
+          <section className="rounded-2xl border border-[#e5e1dd] bg-white p-6 sm:p-8"><h2 className="mb-4 text-lg font-bold">參考資料與核對範圍</h2><SourceLinks ids={guide.sourceIds} /><p className="mt-4 text-xs leading-7 text-[#666]">官方資料用於核對規則與基本資訊；本文的準備清單為本站整理。實際報價、文件、核貸及交車安排依個案確認。</p></section>
+        </div>
+      </div>
+      <section className="mt-9 rounded-2xl bg-[#ebe7e2] p-6 sm:p-8"><h2 className="text-xl font-bold">你可能也想問</h2><ul className="mt-4 space-y-3">{guide.faqIds.map((id) => <li key={id}><Link href={`/faq#${id}`} className="text-sm font-medium leading-7 text-[#b9000e] underline underline-offset-4">{getGeneralFaq(id)!.question} →</Link></li>)}</ul></section>
+      <section className="mt-9"><h2 className="mb-4 text-xl font-bold">接著閱讀</h2><div className="grid gap-4 sm:grid-cols-2">{guide.relatedSlugs.map((slug) => { const related = getGuide(slug)!; return <Link key={slug} href={`/guides/${slug}`} className="rounded-2xl border border-[#ddd] bg-white p-5 no-underline hover:border-[#b9000e]"><p className="text-xs text-[#666]">{related.stage}</p><h3 className="mt-2 font-bold leading-7 text-[#b9000e]">{related.title} →</h3></Link>; })}</div></section>
     </article>
   </ContentShell>;
 }

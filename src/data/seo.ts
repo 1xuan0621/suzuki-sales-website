@@ -84,7 +84,7 @@ export function guideSchema(guide: Guide) {
       {
         "@type": "Article", "@id": `${url}#article`, headline: guide.title, description: guide.description,
         url, mainEntityOfPage: url, author: { "@id": personId }, publisher: { "@id": personId },
-        dateModified: guide.updatedAt, inLanguage: "zh-TW", image: `${siteUrl}/images/${guide.carIds[0]}.jpg`,
+        dateModified: guide.updatedAt, inLanguage: "zh-TW", image: `${siteUrl}/og-image.png`,
       }, breadcrumbSchema(`/guides/${guide.slug}`, guide.title),
     ],
   };

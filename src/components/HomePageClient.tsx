@@ -2,7 +2,8 @@
 
 import { Suspense, useRef, useState } from "react";
 import Link from "next/link";
-import { homeContent, guides } from "@/data/content";
+import { homeContent } from "@/data/content";
+import GuideCards from "./GuideCards";
 import { useConsultation } from "./ConsultationProvider";
 import ConsultationPrefill from "./ConsultationPrefill";
 import PrivacyNotice from "./PrivacyNotice";
@@ -441,17 +442,26 @@ export default function HomePageClient() {
             )}
           </section>
 
-          {/* ═══════ 貸款試算 ═══════ */}
-          <section id="guides" className="mx-auto mt-9 w-[calc(100%-88px)] border-t border-[#ddd] pt-8 max-sm:w-[calc(100%-28px)]">
-            <p className="text-sm font-bold text-[#666]">購車指南</p>
-            <h2 className="mt-1 text-2xl font-bold">從選車到交車，先把問題想清楚</h2>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              {guides.map((guide) => <Link key={guide.slug} href={`/guides/${guide.slug}`} className="rounded-2xl border border-[#e7e7e7] bg-white p-5 no-underline hover:border-[#e60012]">
-                <h3 className="font-bold text-[#b9000e]">{guide.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-[#555]">{guide.description}</p>
-              </Link>)}
+          {/* ═══════ 購車指南與常見 QA ═══════ */}
+          <section id="guides" aria-labelledby="home-guides-heading" className="mx-auto mt-10 w-[calc(100%-88px)] scroll-mt-6 border-t border-[#ddd] pt-9 max-sm:w-[calc(100%-28px)]">
+            <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+              <div><p className="text-sm font-bold text-[#b9000e]">購車指南</p><h2 id="home-guides-heading" className="mt-2 text-2xl font-bold leading-snug sm:text-3xl">從第一份報價，到安心交車</h2><p className="mt-3 text-sm leading-7 text-[#666]">費用怎麼算、合約怎麼看、交車怎麼檢查。依照現在的進度，從一篇開始。</p></div>
+              <Link href="/guides" className="shrink-0 text-sm font-bold text-[#b9000e] underline underline-offset-4">查看所有指南 →</Link>
+            </div>
+            <GuideCards />
+          </section>
+          <section id="faq" aria-labelledby="home-faq-heading" className="mx-auto mt-7 grid w-[calc(100%-88px)] scroll-mt-6 gap-6 rounded-2xl bg-[#333] p-6 text-white sm:p-8 lg:grid-cols-[1fr_1.3fr] max-sm:w-[calc(100%-28px)]">
+            <div><p className="text-xs font-bold tracking-widest text-[#e2c5bf]">常見 QA</p><h2 id="home-faq-heading" className="mt-3 text-2xl font-bold">有個問題，想先問清楚？</h2><p className="mt-3 text-sm leading-7 text-[#d5d5d5]">購車與交車的通用問題放在一起。車型差異、空間和充電，回到各車型頁面了解。</p><Link href="/faq" className="mt-5 inline-block rounded-full bg-white px-5 py-3 text-sm font-bold text-[#333] no-underline">查找常見 QA →</Link></div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                { label: "購車與交車", title: "訂金、保險、領牌怎麼準備？", href: "/faq" },
+                { label: "SWIFT", title: "和 FIT 等小車怎麼選？", href: "/cars/swift#swift-vs-small-cars" },
+                { label: "Jimny", title: "改款差異與日常通勤取捨", href: "/cars/jimny#jimny-model-update" },
+                { label: "e VITARA／其他車型", title: "充電、空間與四驅常見問題", href: "/faq#car-questions" },
+              ].map((item) => <Link key={item.href} href={item.href} className="rounded-xl border border-[#626262] p-4 text-white no-underline transition-colors hover:bg-[#454545]"><p className="text-xs text-[#ccc]">{item.label}</p><h3 className="mt-2 text-sm font-bold leading-7">{item.title} <span aria-hidden="true">↗</span></h3></Link>)}
             </div>
           </section>
+          {/* ═══════ 貸款試算 ═══════ */}
           <section id="loan-calculator">
             <LoanCalculator />
           </section>

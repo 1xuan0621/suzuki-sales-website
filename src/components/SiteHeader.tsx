@@ -7,8 +7,8 @@ export default function SiteHeader({ carId }: { carId?: string }) {
         <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0"><path d="m3 11 9-8 9 8M5 9v12h5v-7h4v7h5V9" /></svg>
         <span className="whitespace-nowrap text-base font-bold leading-6 sm:text-lg">SUZUKI 汽車顧問 張鈺漣</span>
       </Link>
-      <div className="flex w-full items-center justify-between gap-2 whitespace-nowrap text-[13px] font-medium leading-7 text-[#444] sm:w-auto sm:justify-start sm:gap-5 sm:text-sm">
-        <Link href="/#cars">全車款介紹</Link><Link href="/visit/beitou">台北到店試乘</Link><Link href="/#guides">購車指南</Link><Link data-entry="content" data-car-id={carId} href={carId ? `/?car=${carId}#contact` : "/#contact"}>購車諮詢</Link>
+      <div className="flex w-full flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-medium leading-7 text-[#444] sm:w-auto sm:gap-x-5 sm:text-sm [&>a]:py-1">
+        <Link href="/#cars">全車款介紹</Link><Link href="/visit/beitou" aria-label="台北到店試乘"><span className="hidden sm:inline">台北</span>到店試乘</Link><Link href="/guides">購車指南</Link><Link href="/faq">常見 QA</Link><Link data-entry="content" data-car-id={carId} href={carId ? `/?car=${carId}#contact` : "/#contact"}>購車諮詢</Link>
       </div>
     </nav>
   </header>;

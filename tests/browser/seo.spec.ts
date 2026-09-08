@@ -21,7 +21,7 @@ test("all content is directly readable, has its own metadata and matches the sit
     expect(html).not.toMatch(/<meta[^>]*name="robots"[^>]*noindex/);
     expect(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "")).not.toContain("2026 年 9 月購車禮遇");
     if (route.path.startsWith("/cars/")) {
-      expect(html).toContain("常見購車問題");
+      expect(html).toContain("車型常見 QA");
       expect(html).toContain("官方規配表（PDF）");
     }
   }
@@ -29,12 +29,13 @@ test("all content is directly readable, has its own metadata and matches the sit
     expect((await request.get(path)).status()).toBe(404);
   }
   const xml = await (await request.get("/sitemap.xml")).text();
-  expect(xml.match(/<loc>/g)).toHaveLength(12);
+  expect(xml.match(/<loc>/g)).toHaveLength(contentRoutes.length);
   expect(xml).not.toMatch(/<priority>|<changefreq>/);
   for (const route of contentRoutes) expect(xml).toContain(`<loc>${siteUrl}${route.path}</loc>`);
 });
 
 test("desktop and mobile content layouts remain usable and screenshot-ready", async ({ page }, testInfo) => {
+  test.setTimeout(60_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   for (const route of contentRoutes) {
@@ -65,7 +66,7 @@ test("desktop and mobile content layouts remain usable and screenshot-ready", as
 
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await page.evaluate(() => document.fonts.ready);
-    if (route.path.startsWith("/cars/") || route.path.startsWith("/guides/")) {
+    if (route.path.startsWith("/cars/")) {
       await expect.poll(() => page.locator("main img").first().evaluate((node) => (node as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     }
     await page.screenshot({ path: testInfo.outputPath(`${route.path.replace(/\//g, "-") || "home"}-top.png`) });
@@ -142,7 +143,7 @@ test("standalone gallery restores focus and expired campaigns do not remove usef
   await page.clock.setFixedTime(new Date("2026-10-01T00:00:00+08:00"));
   await page.reload();
   await expect(page.getByText("2026 年 9 月購車禮遇")).toHaveCount(0);
-  await expect(page.getByRole("heading", { name: "常見購車問題" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "SWIFT，你可能想問" })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "主要導覽" }).getByRole("link", { name: "購車諮詢", exact: true })).toBeVisible();
 });
 

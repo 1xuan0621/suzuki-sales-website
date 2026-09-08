@@ -1,3 +1,6 @@
+import FaqList from "@/components/FaqList";
+import { carFaqs } from "@/data/faq";
+import { editorialReviewedAt } from "@/data/content-sources";
 import ContactLinks from "@/components/ContactLinks";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -31,6 +34,7 @@ export default async function CarPage({ params }: Props) {
         <p className="mt-5 text-[15px] leading-8 text-[#555]">{content.introduction}</p>
         <p className="mb-5 mt-6 text-sm text-[#666]">建議售價 <strong className="ml-2 text-3xl font-black text-[#b9000e]">{car.price}</strong></p>
         <ContactLinks carId={car.id} entry="car-page" />
+        <Link href="#faq" className="mr-5 mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">查看車型常見 QA</Link>
         <Link href="/visit/beitou" className="mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">台北北投到店交通與試乘預約</Link>
       </div>
       <CarPageGallery car={car} />
@@ -55,15 +59,19 @@ export default async function CarPage({ params }: Props) {
       <ul className="list-disc space-y-2 pl-5">{content.testDrive.map((text) => <li key={text}>{text}</li>)}</ul>
       <p>試乘車、路線與可預約時段須先確認，留下需求不代表預約已成立。</p>
     </ArticleSection>
-    <ArticleSection title="常見購車問題">
-      {content.questions.map((item) => <details key={item.question} className="border-b border-[#eee] pb-3"><summary className="cursor-pointer py-2 font-bold text-[#333]">{item.question}</summary><p className="pt-2">{item.answer}</p></details>)}
-    </ArticleSection>
     <ArticleSection title="購車方案與資料來源">
       <PromotionNotice promotion={car.detail.promotion} />
       <p>期間方案以官方活動條件及有效期限為準，最新購車方案請洽詢。</p>
       <div className="flex flex-wrap gap-5 text-[#b9000e]"><a href={car.detail.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方車款介紹</a><a href={car.detail.specUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方規配表（PDF）</a></div>
       <p className="text-xs">內容整理：張鈺漣購車諮詢網站 · 內容更新：<time dateTime={content.updatedAt}>{content.updatedAt}</time>。選車建議依實際需求討論。</p>
     </ArticleSection>
+    <section id="faq" aria-labelledby="car-faq-heading" className="mt-8 scroll-mt-6 rounded-2xl border border-[#e5e1dd] bg-white p-6 sm:p-8">
+      <p className="text-sm font-bold text-[#b9000e]">車型常見 QA</p>
+      <h2 id="car-faq-heading" className="mb-2 mt-2 text-2xl font-bold">{car.name}，你可能想問</h2>
+      <p className="mb-4 text-xs leading-7 text-[#777]">問答更新與引用資料核對：<time dateTime={editorialReviewedAt}>{editorialReviewedAt}</time></p>
+      <FaqList items={carFaqs[car.id]} />
+      <div className="mt-4 border-t border-[#eee] pt-5"><p className="text-sm leading-7 text-[#666]">還有訂金、保險、交車或保養的問題？</p><Link href="/faq" className="mt-2 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">查看通用購車 QA →</Link></div>
+    </section>
     <ArticleSection title="延伸閱讀與相關車款">
       <ul className="space-y-3 text-[#b9000e]">
         {content.guideSlugs.map((slug) => { const guide = getGuide(slug)!; return <li key={slug}><Link href={`/guides/${slug}`} className="underline underline-offset-4">{guide.title}</Link></li>; })}
