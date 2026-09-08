@@ -23,13 +23,13 @@ export default function FaqList({ items }: { items: FaqItem[] }) {
     return () => window.removeEventListener("hashchange", revealAnswer);
   }, [items]);
 
-  return <div ref={container} className="divide-y divide-[#e8e5e2]">
-    {items.map((item) => <details key={item.id} id={item.id} className="group scroll-mt-6 py-1">
-      <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 rounded-lg py-4 text-[15px] font-bold leading-7 text-[#292929] outline-offset-4 transition-colors hover:text-[#b9000e] focus-visible:outline-2 focus-visible:outline-[#b9000e] [&::-webkit-details-marker]:hidden">
+  return <div ref={container} className="space-y-3">
+    {items.map((item) => <details key={item.id} id={item.id} className="group scroll-mt-6 overflow-hidden rounded-xl border border-[#ddd] bg-white open:border-[#aaa]">
+      <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 px-5 py-5 text-lg font-bold leading-8 sm:px-6 sm:text-xl text-[#292929] -outline-offset-4 transition-colors hover:text-[#b9000e] focus-visible:outline-2 focus-visible:outline-[#b9000e] [&::-webkit-details-marker]:hidden">
         <span>{item.question}</span>
-        <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#f3f1ef] text-xl font-normal text-[#b9000e] group-open:rotate-45">+</span>
+        <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center text-2xl font-normal text-[#777] group-open:rotate-45">+</span>
       </summary>
-      <div className="space-y-4 pb-6 text-[15px] leading-8 text-[#555]">
+      <div className="space-y-4 border-t border-[#eee] bg-[#faf9f7] px-5 py-5 text-[15px] leading-8 text-[#555] sm:px-6">
         <p>{item.answer}</p>
         {item.table && <div role="region" aria-label={item.table.caption} tabIndex={0} className="overflow-x-auto rounded-xl border border-[#e5e5e5]">
           <table className="w-full min-w-[510px] text-left text-sm leading-7">
@@ -39,8 +39,8 @@ export default function FaqList({ items }: { items: FaqItem[] }) {
           </table>
         </div>}
         {item.points && <ul className="list-disc space-y-2 pl-5">{item.points.map((point) => <li key={point}>{point}</li>)}</ul>}
-        {item.links && <div className="flex flex-wrap gap-x-5 gap-y-2">{item.links.map((link) => <Link key={link.href} href={link.href} className="font-medium text-[#b9000e] underline underline-offset-4">{link.label} <span aria-hidden="true">→</span></Link>)}</div>}
-        <SourceLinks ids={item.sourceIds} />
+        {item.links && <div className="flex flex-wrap gap-x-5 gap-y-2">{item.links.map((link) => <Link key={link.href} href={link.href} className="text-sm font-medium text-[#555] underline underline-offset-4 hover:text-[#b9000e]">{link.label} <span aria-hidden="true">→</span></Link>)}</div>}
+        {item.sourceIds.length > 0 && <div className="border-t border-[#e5e1dd] pt-3"><p className="mb-1 text-[11px] leading-5 text-[#777]">參考資料</p><SourceLinks ids={item.sourceIds} /></div>}
       </div>
     </details>)}
   </div>;

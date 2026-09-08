@@ -1,25 +1,23 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { cars, getCar } from "../src/data/site";
-import { contentRoutes, carPages, carVersions, guides, siteUrl } from "../src/data/content";
+import { contentRoutes, carPages, carVersions, siteUrl } from "../src/data/content";
 import { pageMetadata, carSchema, siteSchema } from "../src/data/seo";
 import sitemap from "../src/app/sitemap";
 import { analyticsEnabled, createAnalytics, safeReferrer } from "../src/lib/analytics";
 
 test("published content has unique canonical URLs, truthful dates and no orphan editorial links", () => {
   const routes = contentRoutes.map((route) => route.path);
-  assert.equal(routes.length, 16);
+  assert.equal(routes.length, 10);
   assert.equal(new Set(routes).size, routes.length);
   assert.equal(getCar("unknown"), undefined);
   for (const car of cars) {
-    for (const slug of carPages[car.id].guideSlugs) assert.ok(routes.includes(`/guides/${slug}`));
     for (const id of carPages[car.id].relatedCars) assert.ok(getCar(id));
     assert.equal(Math.min(...carVersions(car.id).map((version) => version.priceTwd)), Number(car.price.replace(/[^0-9.]/g, "")) * 10000);
     const schema = carSchema(car)["@graph"][0];
     assert.ok("offers" in schema);
     assert.deepEqual(schema.offers.map((offer) => offer.price), carVersions(car.id).map((version) => version.priceTwd));
   }
-  for (const guide of guides) for (const id of guide.carIds) assert.ok(getCar(id));
   for (const route of contentRoutes) {
     const metadata = pageMetadata(route.path, route.title, "description");
     assert.equal(metadata.alternates?.canonical, siteUrl + route.path);

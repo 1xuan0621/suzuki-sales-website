@@ -39,10 +39,10 @@ SWIFT 與 Jimny 是業主指定的重點車型，通用 FAQ 選列其四題問�
 
 ## 最終內容歸屬
 
-- `/guides`：六篇指南入口；費用估算、報價合約、貸款保險、訂車至交車、跨縣市交車、舊車換購。
+- `/guides`：依業主後續指示整合為一篇核心指南，五步涵蓋預算、報價合約、貸款保險、領牌與跨縣市安排、交車檢查。移除重複摘要、閱讀目錄及推薦文章；來源收在文末。
 - `/faq`：12 題通用問題，按預算、訂車、領牌、售後分組；另選列 4 題 SWIFT／Jimny 問答，提供搜尋與分類。
 - 六款 `/cars/<id>#faq`：SWIFT 5 題、Jimny 4 題、e VITARA 5 題、VITARA 3 題、S-CROSS 3 題、CARRY 3 題。共 23 題；通用頁的重點問答由同一筆車型資料產生。
-- 舊 `/guides/swift-buying-cost` 永久導向通用費用指南；`/guides/vitara-vs-s-cross` 與 `/guides/e-vitara-charging` 永久導向所屬車型的指定答案。
-- sitemap 與分析頁面白名單依 `contentRoutes` 更新為 16 個標準頁面；舊轉址頁不列入。保留既有車型與首頁 canonical。
+- 六篇舊指南與 `/guides/swift-buying-cost` 永久導向 `/guides` 的對應段落；`/guides/vitara-vs-s-cross` 與 `/guides/e-vitara-charging` 永久導向所屬車型的指定答案。
+- sitemap 與分析頁面白名單依 `contentRoutes` 更新為 10 個標準頁面；舊轉址頁不列入。保留既有車型與首頁 canonical。
 
 來源連結集中在 `src/data/content-sources.ts`；指南與問答分別在 `src/data/guides.ts`、`src/data/faq.ts`。新增車型重點題時使用既有問答 ID，避免複製答案後更新不一致。

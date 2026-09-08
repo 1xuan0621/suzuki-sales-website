@@ -78,14 +78,14 @@ export function carSchema(car: Car) {
 }
 
 export function guideSchema(guide: Guide) {
-  const url = `${siteUrl}/guides/${guide.slug}`;
+  const url = `${siteUrl}/guides`;
   return {
     "@context": "https://schema.org", "@graph": [
       {
         "@type": "Article", "@id": `${url}#article`, headline: guide.title, description: guide.description,
         url, mainEntityOfPage: url, author: { "@id": personId }, publisher: { "@id": personId },
         dateModified: guide.updatedAt, inLanguage: "zh-TW", image: `${siteUrl}/og-image.png`,
-      }, breadcrumbSchema(`/guides/${guide.slug}`, guide.title),
+      }, breadcrumbSchema("/guides", "購車指南"),
     ],
   };
 }

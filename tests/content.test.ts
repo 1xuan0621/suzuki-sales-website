@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { contentRoutes } from "../src/data/content";
-import { guides, guideRedirects, getGuide } from "../src/data/guides";
+import { buyingGuide, guideRedirects } from "../src/data/guides";
 import { carFaqs, featuredCarFaqs, generalFaqGroups } from "../src/data/faq";
 import { contentSources } from "../src/data/content-sources";
 import type { CarId } from "../src/data/site";
@@ -13,6 +13,10 @@ function assertDestination(href: string) {
   const [path, hash] = href.split("#");
   assert.ok(contentRoutes.some((route) => route.path === path), `Missing page: ${href}`);
   if (!hash || path === "/") return;
+  if (path === "/guides") {
+    assert.ok(buyingGuide.sections.some((section) => section.id === hash), `Missing guide section: ${href}`);
+    return;
+  }
   const items = path === "/faq" ? generalItems : carFaqs[path.split("/")[2] as CarId];
   assert.ok(hash === "faq" || items?.some((item) => item.id === hash), `Missing answer: ${href}`);
 }
@@ -23,13 +27,9 @@ test("guide migrations have existing destinations and keep model topics out of t
     assert.ok(!contentRoutes.some((route) => route.path === redirect.source));
     assertDestination(redirect.destination);
   }
-  assert.equal(getGuide("vitara-vs-s-cross"), undefined);
-  assert.equal(getGuide("e-vitara-charging"), undefined);
-  for (const guide of guides) {
-    for (const slug of guide.relatedSlugs) assert.ok(getGuide(slug), slug);
-    for (const id of guide.faqIds) assert.ok(generalItems.some((item) => item.id === id), id);
-    assert.ok(guide.sourceIds.length > 0);
-  }
+  assert.equal(new Set(buyingGuide.sections.map((section) => section.id)).size, buyingGuide.sections.length);
+  for (const source of buyingGuide.sourceIds) assert.ok(contentSources[source]);
+  for (const section of buyingGuide.sections) if (section.link) assertDestination(section.link.href);
 });
 
 test("FAQ cross references resolve to the owning page and featured answers use existing car entries", () => {

@@ -42,7 +42,7 @@ test("old guide URLs redirect permanently and open the right car answer", async 
     await page.goto(redirect.source);
     expect(new URL(page.url()).pathname + new URL(page.url()).hash).toBe(redirect.destination);
     const hash = redirect.destination.split("#")[1];
-    if (hash) {
+    if (hash && redirect.destination.startsWith("/cars/")) {
       await expect(page.locator(`#${hash}`)).toHaveAttribute("open", "");
       await expect(page.locator(`#${hash} p`).first()).toBeVisible();
       await page.screenshot({ path: testInfo.outputPath(`${hash}.png`) });
@@ -61,10 +61,44 @@ test("guides link to readable answers and all FAQ content is present without Jav
     for (const item of items) expect(html).toContain(item.answer);
   }
   await page.goto("/guides/delivery-process");
-  await page.getByRole("navigation", { name: "本文目錄" }).getByRole("link").nth(2).click();
-  await expect(page).toHaveURL(/#step-3$/);
-  await expect(page.locator("#step-3 h2")).toBeVisible();
-  await page.getByRole("link", { name: "要先付尾款還是先驗車？領牌前能看車嗎？ →", exact: true }).click();
+  await expect(page).toHaveURL(/\/guides#delivery$/);
+  await expect(page.locator("#delivery h2")).toBeVisible();
+  await page.getByRole("link", { name: "還有疑問？查看常見 QA →", exact: true }).click();
+  await page.locator("#payment-inspection summary").click();
   await expect(page.locator("#payment-inspection")).toHaveAttribute("open", "");
   await expect(page.locator("#payment-inspection p").first()).toBeVisible();
+});
+
+
+test("compact entrances, single-line filters and answer typography retain a clear hierarchy", async ({ page }, testInfo) => {
+  await page.goto("/");
+  const entrance = page.locator("#guides");
+  expect((await entrance.boundingBox())!.height).toBeLessThan(100);
+  await expect(entrance.getByRole("heading")).toHaveText("購車指南");
+  await expect(page.locator("#faq").getByRole("heading")).toHaveText("常見 QA");
+  await entrance.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: testInfo.outputPath("home-compact-entrances.png") });
+  await entrance.getByRole("link").click();
+  await expect(page.locator("article > div section")).toHaveCount(5);
+  await page.screenshot({ path: testInfo.outputPath("single-guide.png"), fullPage: true });
+  await page.goto("/faq");
+  const filters = page.getByRole("group", { name: "問題分類" });
+  const buttons = await filters.getByRole("button").evaluateAll((nodes) => nodes.map((node) => node.getBoundingClientRect().top));
+  expect(new Set(buttons).size).toBe(1);
+  await filters.getByRole("button", { name: "Jimny 重點問答", exact: true }).click();
+  await expect(page.locator("main details")).toHaveCount(2);
+  await page.getByRole("button", { name: "清除篩選" }).click();
+  await expect(filters.getByRole("button", { name: "全部問題", exact: true })).toBeInViewport();
+  await page.locator("#total-cost summary").click();
+  const sizes = await page.locator("#total-cost").evaluate((el) => ({
+    question: parseFloat(getComputedStyle(el.querySelector("summary")!).fontSize),
+    answer: parseFloat(getComputedStyle(el.querySelector("p")!).fontSize),
+    source: parseFloat(getComputedStyle(el.querySelector('[aria-label="參考資料"] a')!).fontSize),
+  }));
+  expect(sizes.question).toBeGreaterThan(sizes.answer);
+  expect(sizes.answer).toBeGreaterThan(sizes.source);
+  expect(sizes.source).toBeLessThanOrEqual(12);
+  await page.screenshot({ path: testInfo.outputPath("faq-readable-answer.png") });
+  await page.locator("#total-cost").screenshot({ path: testInfo.outputPath("faq-answer-detail.png") });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });

@@ -286,7 +286,7 @@ export const services = [
   { title: "預約試乘", desc: "先確認車款與時段，預約台北北投到店", icon: "🚗", href: "/visit/beitou" },
   { title: "購車諮詢", desc: "從選車到成交，陪你走完整個流程", icon: "💬" },
   { title: "貸款試算", desc: "試算月付金額，保險需求另行諮詢", icon: "💰", href: "#loan-calculator" },
-  { title: "交車服務", desc: "跨縣市交車可洽詢，地點與費用另約", icon: "🔑", href: "/guides/buying-process" },
+  { title: "交車服務", desc: "跨縣市交車可洽詢，地點與費用另約", icon: "🔑", href: "/guides#paperwork" },
 ] as const;
 
 export const usageOptions = [

@@ -44,7 +44,7 @@ export default function VisitPage() {
     </ArticleSection>
     <ArticleSection title="出發前先了解車款">
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{cars.map((car) => <Link key={car.id} href={`/cars/${car.id}`} className="rounded-xl border border-[#ddd] px-4 py-3 font-bold text-[#b9000e] no-underline hover:bg-red-50">SUZUKI {car.name} →</Link>)}</div>
-      <Link href="/guides/buying-process" className="inline-block text-[#b9000e] underline underline-offset-4">外縣市客戶：購車與交車流程指南</Link>
+      <Link href="/guides#paperwork" className="inline-block text-[#b9000e] underline underline-offset-4">外縣市客戶：購車與交車流程指南</Link>
     </ArticleSection>
     <p className="mt-6 text-xs leading-7 text-[#666]">據點資料核對及內容更新：<time dateTime={showroom.reviewedAt}>{showroom.reviewedAt}</time> · <a href={showroom.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">台灣 Suzuki／凱騰鈴木官方據點資料</a></p>
   </ContentShell>;

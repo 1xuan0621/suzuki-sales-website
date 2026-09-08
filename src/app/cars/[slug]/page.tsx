@@ -5,7 +5,7 @@ import ContactLinks from "@/components/ContactLinks";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cars, getCar, eVitaraPriceSource } from "@/data/site";
-import { carPages, carTitle, carVersions, getGuide } from "@/data/content";
+import { carPages, carTitle, carVersions } from "@/data/content";
 import { carSchema, pageMetadata, serializeJsonLd } from "@/data/seo";
 import ContentShell, { ArticleSection } from "@/components/ContentShell";
 import CarPageGallery from "@/components/CarPageGallery";
@@ -74,7 +74,7 @@ export default async function CarPage({ params }: Props) {
     </section>
     <ArticleSection title="延伸閱讀與相關車款">
       <ul className="space-y-3 text-[#b9000e]">
-        {content.guideSlugs.map((slug) => { const guide = getGuide(slug)!; return <li key={slug}><Link href={`/guides/${slug}`} className="underline underline-offset-4">{guide.title}</Link></li>; })}
+        <li><Link href="/guides" className="underline underline-offset-4">購車指南：從預算到交車</Link></li>
         {content.relatedCars.map((id) => <li key={id}><Link href={`/cars/${id}`} className="underline underline-offset-4">了解 SUZUKI {getCar(id)!.name}</Link></li>)}
         <li><Link href="/visit/beitou" className="underline underline-offset-4">北投所交通與預約資訊</Link></li>
       </ul>
