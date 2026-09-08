@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 /**
  * 交車照片輪播 — 從 API 取得圖片列表，每頁顯示 3 張
@@ -27,11 +28,14 @@ export default function DeliveryCarousel() {
         {page.map((n) => (
           <div
             key={n}
-            className="aspect-[4/3] rounded-[14px] overflow-hidden bg-[#e8e8e8] shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
+            className="relative aspect-[4/3] rounded-[14px] overflow-hidden bg-[#e8e8e8] shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
           >
-            <img
+            <Image
               src={`/images/delivery-${n}.jpg`}
               alt={`交車照片 ${n}`}
+              fill
+              sizes="(max-width: 639px) calc(100vw - 28px), (max-width: 1180px) calc((100vw - 120px) / 3), 354px"
+              loading="lazy"
               className="w-full h-full object-cover"
               style={{ objectPosition: "center bottom" }}
               onError={(e) => {

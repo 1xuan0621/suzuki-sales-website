@@ -25,6 +25,7 @@ export interface CarDetail {
   specUrl: string;
   tagline: string;
   images?: string[];
+  imageLabels?: string[];
   colors?: ColorOption[];
 }
 
@@ -65,6 +66,7 @@ export const cars: Car[] = [
         terms: "貸款利率 3.50%，須經審核，不得與其他優惠專案併用。贈品數量與尺寸有限，送完為止；限符合官方購車及領牌資格者，排除租賃、營業車等，兌換期限至 2026/10/31。",
       },
       images: ["e-vitara", "e-vitara-side", "e-vitara-int"],
+      imageLabels: ["戶外行駛外觀", "車側與車尾外觀", "駕駛座與中控台"],
       colors: [
         { name: "2WD 白", hex: "#f0f0f0" },
         { name: "2WD 藍", hex: "#003fa7" },
@@ -102,6 +104,7 @@ export const cars: Car[] = [
         terms: "需填寫完整客戶資料，贈品數量有限，送完為止；詳細資格依官方活動辦法。",
       },
       images: ["swift", "swift-side", "swift-int"],
+      imageLabels: ["城市行駛外觀", "C 字 LED 尾燈細節", "駕駛座與中控台"],
       colors: [
         { name: "白", hex: "#f7f7f7" },
         { name: "橘", hex: "#f75000" },
@@ -140,6 +143,7 @@ export const cars: Car[] = [
         terms: "需填寫完整客戶資料，贈品數量有限，送完為止；詳細資格依官方活動辦法。",
       },
       images: ["jimny", "jimny-side", "jimny-int"],
+      imageLabels: ["城市行駛外觀", "車側外觀細節", "駕駛座與中控台"],
       colors: [
         { name: "白", hex: "#f0f0f0" },
         { name: "軍綠", hex: "#48533a" },
@@ -179,6 +183,7 @@ export const cars: Car[] = [
         terms: "貸款利率 3.50%，須經經銷商及金融機構審核，不得與其他優惠專案併用。領牌及適用條件依官方活動辦法。",
       },
       images: ["vitara", "vitara-side", "vitara-int"],
+      imageLabels: ["山路行駛外觀", "車側外觀", "駕駛座與中控台"],
       colors: [
         { name: "白", hex: "#f0f0f0" },
         { name: "銀", hex: "#b0b0b0" },
@@ -217,6 +222,7 @@ export const cars: Car[] = [
         terms: "貸款利率 3.50%，須經經銷商及金融機構審核，不得與其他優惠專案併用。領牌及適用條件依官方活動辦法。",
       },
       images: ["s-cross", "s-cross-side", "s-cross-int"],
+      imageLabels: ["城市行駛外觀", "水箱護罩細節", "駕駛座與中控台"],
       colors: [
         { name: "白", hex: "#f0f0f0" },
         { name: "藍", hex: "#204567" },
@@ -252,6 +258,7 @@ export const cars: Car[] = [
         terms: "貸款利率 3.19%，須經審核且不得與其他優惠專案併用。購車金限指定車款當次抵用，排除租賃、營業、政府機關及專案批／標購車輛；兩方案能否併用請洽詢。",
       },
       images: ["carry", "carry-side", "carry-int"],
+      imageLabels: ["載貨情境外觀", "三邊開啟貨台", "可滑動駕駛座椅"],
       colors: [
         { name: "白", hex: "#f0f0f0" },
         { name: "銀", hex: "#b0b0b0" },

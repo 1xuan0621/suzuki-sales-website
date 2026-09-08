@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import CarPhotoGallery from "./CarPhotoGallery";
 import { contentReviewedAt, type Car } from "@/data/site";
 import PromotionNotice from "./PromotionNotice";
 
@@ -15,16 +16,13 @@ interface CarModalProps {
  * 車款詳細 Modal — 圖片輪播、顏色選擇、規格、優惠與行動按鈕
  */
 export default function CarModal({ car, onClose, onInterest, lineHref }: CarModalProps) {
-  const [imgIdx, setImgIdx] = useState(0);
-
-  const images = car.detail.images || [car.id];
-  const imgCount = images.length;
+  const [photoExpanded, setPhotoExpanded] = useState(false);
 
   const handler = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape" && !photoExpanded) onClose();
     },
-    [onClose]
+    [onClose, photoExpanded]
   );
 
   useEffect(() => {
@@ -41,7 +39,9 @@ export default function CarModal({ car, onClose, onInterest, lineHref }: CarModa
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 modal-overlay"
       onClick={onClose}
       role="dialog"
-      aria-modal="true"
+      aria-modal={photoExpanded ? undefined : true}
+      aria-hidden={photoExpanded || undefined}
+      inert={photoExpanded}
       aria-label={`${car.name} 詳細資訊`}
     >
       <div
@@ -57,65 +57,18 @@ export default function CarModal({ car, onClose, onInterest, lineHref }: CarModa
           ✕
         </button>
 
-        {/* 圖片 Carousel — 固定高度 */}
-        <div className="relative w-full flex-shrink-0" style={{ height: "300px" }}>
-          {images.map((img, i) => (
-            <img
-              key={i}
-              src={"/images/" + img + ".jpg"}
-              alt={`${car.name} ${i + 1}`}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${i === imgIdx ? "opacity-100" : "opacity-0"}`}
-              onError={(e) => {
-                /* 隱藏載入失敗的圖片 */
-                e.currentTarget.style.display = "none";
-              }}
-            />
-          ))}
-
-          {imgCount > 1 && (
-            <>
-              <button
-                onClick={() => setImgIdx((p) => Math.max(0, p - 1))}
-                className={
-                  "absolute top-1/2 -translate-y-1/2 left-2 z-10 grid place-items-center w-9 h-9 rounded-full bg-white/80 shadow text-[#333] transition-all hover:bg-white " +
-                  (imgIdx === 0 ? "hidden" : "")
-                }
-                aria-label="上一張"
-              >
-                ‹
-              </button>
-              <button
-                onClick={() => setImgIdx((p) => Math.min(imgCount - 1, p + 1))}
-                className={
-                  "absolute top-1/2 -translate-y-1/2 right-2 z-10 grid place-items-center w-9 h-9 rounded-full bg-white/80 shadow text-[#333] transition-all hover:bg-white " +
-                  (imgIdx >= imgCount - 1 ? "hidden" : "")
-                }
-                aria-label="下一張"
-              >
-                ›
-              </button>
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
-                {images.map((_, i) => (
-                  <span
-                    key={i}
-                    className={
-                      "w-2 h-2 rounded-full transition-all " +
-                      (i === imgIdx ? "bg-white w-4" : "bg-white/50")
-                    }
-                  />
-                ))}
-              </div>
-            </>
-          )}
-
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 pt-10 z-10">
-            <h3 className="text-white text-2xl font-bold">{car.name}</h3>
-            <p className="text-white/90 text-sm">{car.subtitle}</p>
-          </div>
-        </div>
+        <CarPhotoGallery
+          key={car.id}
+          car={car}
+          expanded={photoExpanded}
+          onExpandedChange={setPhotoExpanded}
+        />
 
         {/* 內容區 — 可滾動 */}
         <div className="flex-1 overflow-y-auto">
+          <p className="px-5 pt-3 text-xs leading-relaxed text-[#777] sm:px-6">
+            圖片來源：台灣 Suzuki 官方。照片配備與車色請以實際販售車輛為準。
+          </p>
           {/* 車色選擇 */}
           {car.detail.colors && car.detail.colors.length > 0 && (
             <div className="px-5 pt-4 sm:px-6">
