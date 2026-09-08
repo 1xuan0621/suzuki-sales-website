@@ -16,6 +16,6 @@ export default defineConfig({
     url: "http://127.0.0.1:3101",
     reuseExistingServer: false,
     // Never connect browser tests to the local machine's real receivers.
-    env: { BLOB_READ_WRITE_TOKEN: "", DISCORD_WEBHOOK_URL: "", GOOGLE_SHEETS_WEBHOOK_URL: "" },
+    env: { BLOB_READ_WRITE_TOKEN: "", DISCORD_WEBHOOK_URL: "", GOOGLE_SHEETS_WEBHOOK_URL: "", NEXT_PUBLIC_GA_MEASUREMENT_ID: "G-TEST000" },
   },
 });

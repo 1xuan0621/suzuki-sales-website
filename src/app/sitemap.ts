@@ -1,12 +1,6 @@
 import type { MetadataRoute } from "next";
+import { contentRoutes, siteUrl } from "@/data/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: "https://suzuki-taipei.com",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1.0,
-    },
-  ];
+  return contentRoutes.map((route) => ({ url: new URL(route.path, siteUrl).toString(), lastModified: route.updatedAt }));
 }

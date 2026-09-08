@@ -2,6 +2,12 @@ import { septemberCampaign, type Promotion } from "./promotions";
 
 export const contentReviewedAt = "2026-09-07";
 
+export const eVitaraVersions = [
+  { name: "2WD", priceTwd: 1150000 },
+  { name: "ALLGRIP-e", priceTwd: 1230000 },
+];
+export const eVitaraPriceSource = "https://www.taiwansuzuki.com.tw/slt/news/439";
+
 // 業務基本資料
 export const dealer = {
   name: "張鈺漣",
@@ -30,7 +36,7 @@ export interface CarDetail {
 }
 
 export interface Car {
-  id: string;
+  id: CarId;
   name: string;
   subtitle: string;
   description: string;
@@ -39,13 +45,19 @@ export interface Car {
   detail: CarDetail;
 }
 
+export type CarId = "swift" | "jimny" | "e-vitara" | "vitara" | "s-cross" | "carry";
+
+export function getCar(id: string | null | undefined) {
+  return cars.find((car) => car.id === id);
+}
+
 export const cars: Car[] = [
   {
     id: "e-vitara",
     name: "e VITARA",
     subtitle: "純電休旅",
     description: "純電世代，純電驅動的智慧移動",
-    price: "115 萬起",
+    price: `${eVitaraVersions[0].priceTwd / 10000} 萬起`,
     highlights: ["純電行駛", "2WD 續航 516km (NEDC)", "ALLGRIP-e 四驅"],
     detail: {
       tagline: "純電新生活，即刻展開",
@@ -55,7 +67,7 @@ export const cars: Car[] = [
         "續航里程：2WD 約 516km / ALLGRIP-e 約 444km (NEDC)",
         "充電介面：AC Type 1 (J1772) / DC CCS1",
         "DC 快充：約 45 分鐘 (10%→80%，實際依溫度與電池狀態而異)",
-        "售價：2WD 115 萬 / ALLGRIP-e 123 萬",
+        `售價：${eVitaraVersions.map((version) => `${version.name} ${version.priceTwd / 10000} 萬`).join(" / ")}`,
       ],
       whoFor: "重視環保、想降低日常通勤成本的科技先驅",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/eVITARA",
@@ -271,10 +283,10 @@ export const cars: Car[] = [
 export const services = [
   { title: "新車介紹", desc: "掌握 Suzuki 全車系最新資訊與價格", icon: "📖" },
   { title: "車款比較", desc: "依你的需求幫你分析最適合的車款", icon: "⚖️" },
-  { title: "預約試乘", desc: "安排你想試的車款，到店直接上路", icon: "🚗" },
+  { title: "預約試乘", desc: "先確認車款與時段，預約台北北投到店", icon: "🚗", href: "/visit/beitou" },
   { title: "購車諮詢", desc: "從選車到成交，陪你走完整個流程", icon: "💬" },
   { title: "貸款試算", desc: "試算月付金額，保險需求另行諮詢", icon: "💰", href: "#loan-calculator" },
-  { title: "交車服務", desc: "完整交車說明，讓你安心上路", icon: "🔑" },
+  { title: "交車服務", desc: "跨縣市交車可洽詢，地點與費用另約", icon: "🔑", href: "/guides/buying-process" },
 ] as const;
 
 export const usageOptions = [

@@ -23,18 +23,23 @@ This file applies to this repository and its subdirectories. Run commands from t
 
 ## File Map
 
-- `src/app/page.tsx` — homepage composition
+- `src/app/page.tsx`, `src/components/HomePageClient.tsx` — homepage metadata and interactive composition
+- `src/app/cars/[slug]/`, `src/app/guides/[slug]/`, `src/app/visit/beitou/` — public SEO content pages
 - `src/app/sitemap.ts` — sitemap generation
 - `src/app/layout.tsx`, `src/data/seo.ts` — metadata and JSON-LD
 - `src/app/api/notify/route.ts`, `src/lib/consultation*.ts` — private lead storage and notification delivery
 - `src/app/api/delivery/route.ts` — dynamically discovers public delivery photos
 - `src/components/` — car comparison, modal, delivery carousel, calculator, and UI sections
 - `src/data/site.ts` — public site content
+- `src/data/content.ts` — page copy, related links, source review dates and meaningful update dates
+- `src/components/ConsultationProvider.tsx` — in-memory consultation state across client navigation
+- `src/lib/analytics.ts`, `src/components/Analytics.tsx` — production-only GA4 allowlist and event deduplication
 - `src/data/constants.ts` — car/business constants
 - `src/data/promotions.ts` — campaign periods in Taiwan time
 - `tests/` — maintained regression tests, not disposable test artifacts
 - `docs/IMAGE_ASSETS.md` — image sources, compression and naming rules
 - `OPERATIONS.md` — deployment, SEO, Google Business Profile, automation notes
+- `docs/SEO_MEASUREMENT.md` — search baseline, analytics activation, qualified leads and release checks
 
 ## Editing Rules
 

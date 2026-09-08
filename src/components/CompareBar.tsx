@@ -123,7 +123,7 @@ export default function CompareBar({ lineHref, phoneHref }: { lineHref: string; 
   return (
     <>
       {/* A single fixed container stacks comparison above mobile contact actions. */}
-      <div className={`fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#e7e7e7] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] ${selected.length === 0 ? "md:hidden" : ""}`}>
+      <div data-entry="sticky" className={`fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#e7e7e7] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] ${selected.length === 0 ? "md:hidden" : ""}`}>
       {selected.length > 0 && (
       <div aria-label="已選車款" className="flex items-center gap-2 px-3 py-3 max-w-[1180px] mx-auto">
         <span className="text-[13px] font-extrabold text-[#888] whitespace-nowrap shrink-0">

@@ -5,6 +5,7 @@ import { useModalDialog } from "@/lib/use-modal-dialog";
 import CarPhotoGallery from "./CarPhotoGallery";
 import { contentReviewedAt, type Car } from "@/data/site";
 import PromotionNotice from "./PromotionNotice";
+import Link from "next/link";
 
 interface CarModalProps {
   car: Car;
@@ -179,12 +180,17 @@ export default function CarModal({ car, onClose, onInterest, lineHref }: CarModa
             <div className="flex items-center gap-3">
               <button
                 onClick={onInterest}
+                data-track-event="consultation_click"
+                data-car-id={car.id}
+                data-entry="modal"
                 className="flex-1 flex items-center justify-center h-[48px] bg-[#e60012] text-white rounded-[10px] font-extrabold text-[15px] no-underline transition-all hover:bg-[#b9000e] hover:-translate-y-px cursor-pointer border-0"
               >
                 我有興趣
               </button>
               <a
                 href={lineHref}
+                data-car-id={car.id}
+                data-entry="modal"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 flex items-center justify-center h-[48px] border-2 border-[#e60012] text-[#e60012] rounded-[10px] font-extrabold text-[15px] no-underline transition-all hover:bg-[#e60012] hover:text-white"
@@ -192,6 +198,7 @@ export default function CarModal({ car, onClose, onInterest, lineHref }: CarModa
                 用 LINE 詢問
               </a>
             </div>
+            <Link href={`/cars/${car.id}`} onClick={onClose} className="mt-4 block py-2 text-center text-sm font-bold text-[#b9000e] underline underline-offset-4">查看 {car.name} 完整介紹</Link>
           </div>
         </div>
       </div>

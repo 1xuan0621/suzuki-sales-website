@@ -31,6 +31,7 @@ git diff --check
 
 - [AGENTS.md](AGENTS.md)：代理協作、修改範圍與驗證規則。
 - [OPERATIONS.md](OPERATIONS.md)：現況、維運流程與後續優先事項。
+- [SEO 量測與發布作業](docs/SEO_MEASUREMENT.md)：搜尋基準、GA4 事件、有效諮詢定義及上線核對。
 - [圖片素材紀錄](docs/IMAGE_ASSETS.md)：來源、壓縮與動態交車照片命名。
 - [第一階段稽核](WEBSITE_AUDIT_2026-09-08.md)、[第二階段修正與部署紀錄](SECURITY_AND_DEPLOYMENT_2026-09-08.md)：保留歷史證據；當時的問題及測試數量不等於目前狀態。
 

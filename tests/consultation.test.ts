@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createConsultationHandler, validateConsultation, type StoredConsultation } from "../src/lib/consultation";
 import { sendDiscord, sendSpreadsheet, spreadsheetValue } from "../src/lib/consultation-delivery";
-import { serializeJsonLd, siteSchema } from "../src/data/seo";
+import { serializeJsonLd, siteSchema, homeSchema, carSchema } from "../src/data/seo";
 import { cars } from "../src/data/site";
 
 const origin = "https://suzuki-taipei.com";
@@ -129,9 +129,10 @@ test("spreadsheet rejects HTTP 200 error pages and escapes formula input", async
 
 test("JSON-LD matches current visible car data and escapes script termination", () => {
   const schema = JSON.parse(serializeJsonLd(siteSchema));
-  const items = schema["@graph"][1].itemListElement;
-  assert.deepEqual(items.map((row: { item: { name: string } }) => row.item.name), cars.map((car) => car.name));
-  assert.equal(items[1].item.offers.price, 730000);
+  assert.deepEqual(homeSchema.itemListElement.map((row) => row.name), cars.map((car) => `SUZUKI ${car.name}`));
+  const swift = carSchema(cars.find((car) => car.id === "swift")!)["@graph"][0];
+  assert.ok("offers" in swift);
+  assert.equal(swift.offers[0].price, 730000);
   assert.equal(JSON.stringify(schema).includes("InStock"), false);
   assert.equal(JSON.stringify(schema).includes("TollFree"), false);
   const serialized = serializeJsonLd({ text: "</script><script>alert(1)</script>" });

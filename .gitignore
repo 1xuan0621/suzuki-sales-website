@@ -14,3 +14,6 @@ public/reference.png
 *.tmp
 playwright-report/
 test-results/
+
+# Private Search Console exports and lead review working files
+.seo-private/
