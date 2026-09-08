@@ -43,12 +43,24 @@ test("desktop and mobile content layouts remain usable and screenshot-ready", as
     const navigation = page.getByRole("navigation", { name: "主要導覽", exact: true });
     await expect(navigation.getByRole("link", { name: "全車款介紹", exact: true })).toHaveAttribute("href", "/#cars");
     await expect(navigation.getByRole("link", { name: /回首頁/ })).toHaveAttribute("href", "/");
+    await expect(navigation.getByRole("link", { name: /回首頁/ })).not.toContainText("回首頁");
+    await expect(navigation.getByRole("link", { name: /回首頁/ }).locator("svg")).toHaveCount(1);
     const contacts = page.locator("[data-contact-actions]");
-    await expect(contacts).toHaveCount(1);
-    await expect(contacts.getByRole("link")).toHaveCount(2);
-    await expect(contacts.getByRole("link", { name: "LINE 諮詢", exact: true })).toHaveAttribute("href", /^https:\/\/line\.me\//);
-    await expect(contacts.getByRole("link", { name: "電話諮詢", exact: true })).toHaveAttribute("href", "tel:0987629773");
-    await expect(contacts.locator('svg[aria-hidden="true"]')).toHaveCount(2);
+    if (route.path === "/") {
+      await expect(contacts).toHaveCount(0);
+      const cards = page.getByRole("region", { name: "聯絡資訊", exact: true });
+      await expect(cards.locator("article")).toHaveCount(3);
+      await expect(cards.getByRole("link", { name: "立即撥打", exact: true })).toHaveAttribute("href", "tel:0987629773");
+      await expect(cards.getByRole("link", { name: "加入好友", exact: true })).toHaveAttribute("href", /^https:\/\/line\.me\//);
+      await expect(cards.getByRole("link", { name: "查看地圖", exact: true })).toHaveAttribute("href", /^https:\/\/www\.google\.com\/maps\//);
+    } else {
+      await expect(contacts).toHaveCount(1);
+      await expect(contacts.getByRole("link")).toHaveCount(2);
+      await expect(contacts.getByRole("link", { name: "LINE 諮詢", exact: true })).toHaveAttribute("href", /^https:\/\/line\.me\//);
+      await expect(contacts.getByRole("link", { name: "電話諮詢", exact: true })).toHaveAttribute("href", "tel:0987629773");
+      await expect(contacts.locator('svg[aria-hidden="true"]')).toHaveCount(2);
+      await expect(contacts.getByRole("link", { name: "LINE 諮詢", exact: true })).toHaveCSS("background-color", "rgb(6, 199, 85)");
+    }
     await expect(page.getByRole("link", { name: "諮詢這款車", exact: true })).toHaveCount(0);
 
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
@@ -168,8 +180,8 @@ test("production analytics is isolated: clicks, routes, receipt retries and fail
   await page.evaluate(() => document.addEventListener("click", (event) => {
     if ((event.target as Element)?.closest('a[href^="tel:"], a[href^="https://line.me"]')) event.preventDefault();
   }));
-  await page.getByRole("link", { name: "電話諮詢", exact: true }).first().click();
-  await page.getByRole("link", { name: "LINE 諮詢", exact: true }).click();
+  await page.getByRole("link", { name: "立即撥打", exact: true }).first().click();
+  await page.getByRole("link", { name: "加入好友", exact: true }).click();
   await page.getByLabel("姓名", { exact: true }).fill("分析隔離測試");
   await page.getByLabel("聯絡方式", { exact: true }).fill("0900000000");
   await page.getByRole("combobox", { name: "想了解車款", exact: true }).selectOption("SWIFT");

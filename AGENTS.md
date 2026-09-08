@@ -33,7 +33,7 @@ This file applies to this repository and its subdirectories. Run commands from t
 - `src/data/site.ts` — public site content
 - `src/data/content.ts` — page copy, related links, source review dates and meaningful update dates
 - `src/components/ConsultationProvider.tsx` — in-memory consultation state across client navigation
-- `src/components/SiteHeader.tsx`, `src/components/ContactLinks.tsx` — shared navigation and the single LINE/phone action group on each page
+- `src/components/SiteHeader.tsx`, `src/components/ContactLinks.tsx` — shared navigation and the single LINE/phone action group on content pages; homepage retains separate phone, LINE and map cards
 - `src/lib/analytics.ts`, `src/components/Analytics.tsx` — production-only GA4 allowlist and event deduplication
 - `src/data/constants.ts` — car/business constants
 - `src/data/promotions.ts` — campaign periods in Taiwan time

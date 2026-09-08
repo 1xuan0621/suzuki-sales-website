@@ -7,7 +7,6 @@ import { useConsultation } from "./ConsultationProvider";
 import ConsultationPrefill from "./ConsultationPrefill";
 import PrivacyNotice from "./PrivacyNotice";
 import SiteHeader from "./SiteHeader";
-import ContactLinks from "./ContactLinks";
 import { cars, services, usageOptions, budgetRanges, dealer, contentReviewedAt, type Car } from "@/data/site";
 import { R, CAR_SHAPE_CLASS } from "@/data/constants";
 import { useCompare } from "@/components/CarCompareProvider";
@@ -28,6 +27,9 @@ export default function HomePageClient() {
   const [modalCar, setModalCar] = useState<Car | null>(null);
   const contactHeading = useRef<HTMLHeadingElement>(null);
 
+
+  const lineHref = `https://line.me/R/ti/p/~${dealer.line}`;
+  const phoneHref = `tel:${dealer.phone.replace(/\D/g, "")}`;
 
   const openModal = (car: Car) => setModalCar(car);
   const closeModal = () => setModalCar(null);
@@ -135,9 +137,69 @@ export default function HomePageClient() {
             </div>
           </section>
 
-          <section data-entry="hero" className="mx-auto mt-7 flex w-[calc(100%-48px)] flex-wrap items-center justify-between gap-5 sm:w-[calc(100%-88px)]">
-            <ContactLinks entry="hero" />
-            <Link href="/visit/beitou" className="text-sm font-bold text-[#555] underline underline-offset-4">Suzuki 北投所・到店交通與試乘預約 →</Link>
+          {/* ═══════ 聯絡資訊 3 欄 ═══════ */}
+          <section aria-label="聯絡資訊" data-entry="hero" className="w-[calc(100%-88px)] mx-auto mt-[34px] grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:w-[calc(100%-28px)] max-sm:mt-5 max-sm:grid-cols-1 max-sm:gap-[14px]">
+            <article className="flex items-center gap-[22px] min-h-[170px] p-7 bg-white border border-[#e7e7e7] rounded-[18px] shadow-[0_12px_30px_rgba(20,20,20,0.08)] border-l-5 border-l-[#e60012] max-sm:min-h-[132px] max-sm:p-5">
+              <div className="flex-shrink-0 grid place-items-center w-[66px] h-[66px] rounded-full bg-[#e60012] text-white text-[30px] font-extrabold max-sm:w-[54px] max-sm:h-[54px] max-sm:text-2xl">
+                ☎
+              </div>
+              <div>
+                <p className="m-0 text-[#666] text-[15px] font-bold">電話諮詢</p>
+                <h2 className="my-1 text-2xl text-[#e60012] leading-tight max-sm:text-xl">
+                  {dealer.phone}
+                </h2>
+                <a
+                  href={phoneHref}
+                  className="inline-flex items-center justify-center min-w-[112px] px-4 py-2 border border-[#e60012] rounded-lg text-[#e60012] font-extrabold no-underline transition-colors hover:bg-[#e60012] hover:text-white text-sm"
+                >
+                  立即撥打
+                </a>
+              </div>
+            </article>
+
+            <article className="flex items-center gap-[22px] min-h-[170px] p-7 bg-white border border-[#e7e7e7] rounded-[18px] shadow-[0_12px_30px_rgba(20,20,20,0.08)] border-l-5 border-l-[#06C755] max-sm:min-h-[132px] max-sm:p-5">
+              <div className="flex-shrink-0 grid place-items-center w-[66px] h-[66px] rounded-full bg-[#06C755] text-white text-[13px] font-extrabold max-sm:w-[54px] max-sm:h-[54px]">
+                LINE
+              </div>
+              <div>
+                <p className="m-0 text-[#666] text-[15px] font-bold">LINE 聯絡</p>
+                <h2 className="my-1 text-2xl text-[#06C755] leading-tight max-sm:text-xl">
+                  @{dealer.line}
+                </h2>
+                <a
+                  href={lineHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center min-w-[112px] px-4 py-2 border border-[#06C755] rounded-lg text-[#06C755] font-extrabold no-underline transition-colors hover:bg-[#06C755] hover:text-white text-sm"
+                >
+                  加入好友
+                </a>
+              </div>
+            </article>
+
+            <article className="flex items-center gap-[22px] min-h-[170px] p-7 bg-white border border-[#e7e7e7] rounded-[18px] shadow-[0_12px_30px_rgba(20,20,20,0.08)] border-l-5 border-l-[#e60012] max-sm:min-h-[132px] max-sm:p-5">
+              <div className="flex-shrink-0 grid place-items-center w-[66px] h-[66px] rounded-full bg-[#e60012] text-white text-[30px] font-extrabold max-sm:w-[54px] max-sm:h-[54px] max-sm:text-2xl">
+                📍
+              </div>
+              <div>
+                <p className="m-0 text-[#666] text-[15px] font-bold">服務據點</p>
+                <h2 className="my-1 text-2xl text-[#e60012] leading-tight max-sm:text-xl">
+                  Suzuki 北投所
+                </h2>
+                <p className="mt-[-6px] mb-[14px] text-[#666] text-sm">
+                  {dealer.location.split("｜")[1] || dealer.location}
+                </p>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(dealer.location.replace(/｜.*/, ""))}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center min-w-[112px] px-4 py-2 border border-[#e60012] rounded-lg text-[#e60012] font-extrabold no-underline transition-colors hover:bg-[#e60012] hover:text-white text-sm"
+                >
+                  查看地圖
+                </a>
+                <Link href="/visit/beitou" className="mt-3 block text-sm font-bold text-[#b9000e] underline underline-offset-4">到店交通與試乘預約</Link>
+              </div>
+            </article>
           </section>
 
           {/* ═══════ 車款區塊 — 6 台，點卡片開 Modal ═══════ */}

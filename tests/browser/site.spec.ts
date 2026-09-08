@@ -182,7 +182,7 @@ test("loan rate starts at 3%, supports decimal entry and clamps both controls", 
   await page.keyboard.press("ArrowLeft");
   await expect(slider).toHaveValue("3");
   await expect(page.getByRole("complementary", { name: "試算說明" }).getByRole("listitem")).toHaveCount(3);
-  await expect(page.getByRole("link", { name: "Suzuki 北投所・到店交通與試乘預約 →", exact: true })).toHaveAttribute("href", "/visit/beitou");
+  await expect(page.getByRole("heading", { name: "Suzuki 北投所", exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.locator("#loan-calculator").screenshot({ path: testInfo.outputPath("calculator.png") });
 });
