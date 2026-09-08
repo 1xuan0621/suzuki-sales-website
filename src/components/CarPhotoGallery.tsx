@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import type { Car } from "@/data/site";
 import { photoSwipeStep } from "@/lib/photo-gestures";
+import { useModalDialog } from "@/lib/use-modal-dialog";
 
 interface Props {
   car: Car;
@@ -18,8 +19,7 @@ export default function CarPhotoGallery({ car, expanded, onExpandedChange }: Pro
   const [zoomed, setZoomed] = useState(false);
   const [failedImages, setFailedImages] = useState<string[]>([]);
   const [loadedImages, setLoadedImages] = useState<string[]>([]);
-  const viewer = useRef<HTMLDivElement>(null);
-  const closeButton = useRef<HTMLButtonElement>(null);
+  const viewer = useModalDialog(expanded);
   const surface = useRef<HTMLDivElement>(null);
   const gesture = useRef<{ id: number; x: number; y: number; left: number; top: number } | null>(null);
   const suppressClick = useRef(false);
@@ -32,18 +32,6 @@ export default function CarPhotoGallery({ car, expanded, onExpandedChange }: Pro
     setIndex((previous) => Math.max(0, Math.min(images.length - 1, previous + step)));
     setZoomed(false);
   }, [images.length, index]);
-
-  useEffect(() => {
-    if (!expanded) return;
-    const previousFocus = document.activeElement as HTMLElement | null;
-    closeButton.current?.focus();
-    return () => {
-      // The parent dialog becomes interactive again after React's commit.
-      queueMicrotask(() => {
-        if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
-      });
-    };
-  }, [expanded]);
 
   useEffect(() => {
     if (surface.current) {
@@ -180,30 +168,18 @@ export default function CarPhotoGallery({ car, expanded, onExpandedChange }: Pro
         </div>
       </div>
       {expanded && createPortal(
-        <div
+        <dialog
           ref={viewer}
           role="dialog"
           aria-modal="true"
           aria-label={`${car.name} 照片檢視器`}
-          className="fixed inset-0 z-[70] flex h-dvh flex-col bg-[#111] text-white"
+          className="fixed inset-0 m-0 w-full max-w-none max-h-none border-0 p-0 flex h-dvh flex-col bg-[#111] text-white backdrop:bg-transparent"
+          onCancel={(event) => { event.preventDefault(); event.stopPropagation(); onExpandedChange(false); }}
           onKeyDown={(event) => {
-            if (event.key === "Escape") {
-              event.preventDefault();
-              event.stopPropagation();
-              onExpandedChange(false);
-            } else if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
               event.preventDefault();
               event.stopPropagation();
               changeImage(event.key === "ArrowLeft" ? -1 : 1);
-            } else if (event.key === "Tab") {
-              const buttons = Array.from(viewer.current?.querySelectorAll<HTMLButtonElement>("button:not(:disabled)") || []);
-              const first = buttons[0];
-              const last = buttons[buttons.length - 1];
-              if (event.shiftKey && document.activeElement === first) {
-                event.preventDefault(); last?.focus();
-              } else if (!event.shiftKey && document.activeElement === last) {
-                event.preventDefault(); first?.focus();
-              }
             }
           }}
         >
@@ -213,7 +189,7 @@ export default function CarPhotoGallery({ car, expanded, onExpandedChange }: Pro
               <button type="button" disabled={failed} aria-pressed={zoomed} onClick={() => setZoomed((previous) => !previous)} className="min-h-11 rounded-full bg-white/15 px-4 text-sm hover:bg-white/25 disabled:opacity-40">
                 {zoomed ? "還原大小" : "放大 2 倍"}
               </button>
-              <button ref={closeButton} type="button" aria-label="關閉放大照片" onClick={() => onExpandedChange(false)} className="grid h-11 w-11 place-items-center rounded-full bg-white/15 text-xl hover:bg-white/25">✕</button>
+              <button data-dialog-initial-focus type="button" aria-label="關閉放大照片" onClick={() => onExpandedChange(false)} className="grid h-11 w-11 place-items-center rounded-full bg-white/15 text-xl hover:bg-white/25">✕</button>
             </div>
           </div>
           <div className="relative min-h-0 flex-1">
@@ -230,7 +206,7 @@ export default function CarPhotoGallery({ car, expanded, onExpandedChange }: Pro
             <p aria-live="polite" aria-atomic="true" className="text-sm">{label} · {index + 1} / {images.length}</p>
             <p className="mt-1 text-xs text-white/60">{zoomed ? "拖曳查看細節 · 還原後可滑動換圖" : "左右滑動或使用方向鍵換圖 · Esc 關閉"}</p>
           </div>
-        </div>, document.body,
+        </dialog>, document.body,
       )}
     </>
   );

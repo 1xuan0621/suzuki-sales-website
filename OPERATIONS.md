@@ -1,0 +1,82 @@
+# Suzuki Sales Website 維運
+
+維護日期：2026-09-08。本文件是目前維運入口；日期報告保留當時檢查結果，不作為尚未修復問題的清單。平台與正式部署資訊引用既有部署紀錄，本次整理未重新登入後台驗證。
+
+## 部署
+- **平台**: Vercel（既有紀錄為 Hobby，需確認目前方案）
+- **自動部署**: GitHub push → Vercel auto-deploy
+- **網域**: `suzuki-taipei.com` → Cloudflare DNS → Vercel SSL
+- **優先確認商用資格**：2026-09-08 查閱 [Vercel 商用規則](https://vercel.com/docs/limits/fair-use-guidelines#commercial-usage)，Hobby 僅限非商業個人用途，宣傳商品／服務銷售被明列為商用。依本站購車諮詢用途判斷，若仍是 Hobby，應改用允許商用的方案或平台；本次未查看帳務、升級或產生費用。
+
+## SEO
+- 既有紀錄：Google Search Console 已驗證、sitemap 已提交；本次未查看管理後台。
+- JSON-LD 已在 `src/app/layout.tsx` 以 script 輸出，內容由 `src/data/seo.ts` 與車款資料生成；已補 canonical。
+- 未經要求不改 metadata、sitemap 或公開聯絡入口。後續搜尋成效應以 Search Console 實際資料確認。
+
+## Google Business Profile
+- 原紀錄為待業務本人註冊，目前狀態待本人確認，不據此判定仍未註冊。
+
+## 自動化
+- Discord #交車照片 → 下載 → commit → push → Vercel deploy
+- 以上為既有紀錄；本次未檢查或變更外部排程。
+- 網站以 `/api/delivery` 讀取 `public/images/delivery-N.jpg`，編號缺號可以正常運作，不要為了連號刪除或重新命名。
+
+## 諮詢收件
+
+- 前端 → 同站 `/api/notify` → Vercel 私人 Blob 保存 → Discord 與 Google 試算表通知。先有持久收件才回傳成功與案件 UUID；相同內容重試沿用 UUID。
+- 伺服器變數：`BLOB_READ_WRITE_TOKEN`、`DISCORD_WEBHOOK_URL`、`GOOGLE_SHEETS_WEBHOOK_URL`。`.env.example` 只列空值，真實值不得放入 Git 或文件。
+- 私人儲存路徑：`consultations/<UUID>.json` 為收件；`delivery/<UUID>.json` 為通知狀態。
+- `failed`、`unconfirmed`、`not_configured` 或缺少通知紀錄時，先按 UUID 核對接收端，再決定補送。未知結果不自動重送，避免重複通知；缺少通知不代表沒有收件。
+- 既有部署紀錄記載 `/api/notify` 防火牆每 IP 每 10 分鐘 5 次；這是 Vercel 設定，不是程式內限流，也不保證其他環境受保護。
+- 第一筆實際諮詢應人工核對 Blob、Discord 與試算表。主動全鏈路測試會產生外部資料及通知，需另行授權。
+- 更正或刪除案件需同步處理 Blob、Discord 及試算表。保存期限、定期清理及待處理案件流程尚需業務決定。
+
+## 內容與圖片維護
+
+- 車款規格／售價：`src/data/site.ts`；優惠期間：`src/data/promotions.ts`。本次重新查看官方 9 月公告與六款起價，與現有資料一致；未重新逐頁驗證規配表，不改全站規格核對日期。
+- [官方 9 月公告](https://www.taiwansuzuki.com.tw/news/606) 的現行方案至 2026/09/30。程式於台灣時間 10/01 00:00 隱藏到期優惠；每月仍須人工查核與替換活動、條件和來源。
+- 圖片已於上一階段壓縮，車款彈窗／交車照片使用 Next Image；詳見 [素材紀錄](docs/IMAGE_ASSETS.md)。目前仍有原生 img 和外部字型，可在量測後再決定優化。
+- `public/personal/dealer-portrait.jpg` 沒有在目前程式引用，但已有備用照片紀錄，本次保留。`favicon.svg` 與 `suzuki-logo.svg` 內容相同，但兩個公開路徑各有用途，保留。
+
+## 本次整理（本機，尚未部署）
+
+- 移除 Git 追蹤的舊首頁 `src/app/page.tsx.bak` 與 `tsconfig.tsbuildinfo`；前者含舊試算表接收網址。新增備份、快取及 Playwright 報告的忽略規則。Git 歷史仍保留舊內容，不代表舊接收端已停用。
+- 新增 README、空值環境變數範本，更新 AGENTS.md，標記早期報告為歷史狀態。
+- 保留三份有效回歸測試與 Playwright 驗證工具；沒有發現需要刪除的殘留測試報告。一般 `.next/`、`node_modules/`、`.vercel/` 為工具資料，未手動清理。
+- 貸款服務入口改由資料中的 href 決定，名稱改為「貸款試算」，保險需求另行諮詢；移除未開通 IG 佔位。
+- 交車照片讀取增加 HTTP／資料格式／取消與失敗處理，輪播邊界按鈕加入真正的 disabled 狀態。
+
+## 後續優先事項
+
+部署方案的商用資格優先確認，見上方「部署」；以下是程式與網站營運待辦。
+
+1. **收件作業可靠性**：確認實際案件全鏈路、安排待處理案件核對方式與資料保存期限；既有 Apps Script 接收端仍需評估簽章或更換端點，網站防火牆無法保護它。勿僅因刪掉備份就視為完成。
+2. **鍵盤操作（本機已改善）**：車款、比較及照片檢視器改用原生 modal dialog；補齊初始焦點、Tab／Shift+Tab 循環、Esc 關閉最上層與返回觸發按鈕。比較表可聚焦後以方向鍵捲動。[WAI 對話框規範](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+3. **諮詢入口（本機已改善）**：「我有興趣」帶入車款、保留輸入後直達聯絡表單，焦點移到諮詢標題；另設「試算月付」，帶入車價並移至試算區。重複選同款車也會重新帶入。
+4. **成效資料**：先定義 LINE 點擊、電話點擊、表單確認收件等事件，再配置統計。只傳事件及車款，不傳姓名、電話或表單內容；點擊不代表已成交。尚未設定事件工具。
+5. **車款獨立頁與內容**：每款提供可分享網址、版本差異、使用情境與常見問題，再配合 metadata 和 sitemap 更新。這是路由／SEO 改版，需另行安排；不能保證排名。[Google SEO 入門](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+6. **試算精度與速度**：貸款試算可加入本金／頭期款金額輸入；效能則先量測手機實際載入，再決定首頁拆分、字型及剩餘圖片優化。
+
+## 例行檢查
+
+- 每月：優惠、官網規配表、照片來源及內容核對日期。
+- 每次程式／依賴變更：`npm test`、`npm run build`、`git diff --check`；依賴更新另跑 `npm audit`。
+- 每次視覺修改：桌面與手機瀏覽，測試必要的點擊、圖片讀取、捲動及表單攔截回應。
+- 正式部署後：首頁／robots／sitemap、實際互動、收件及通知狀態；本機通過不能取代正式環境驗收。
+
+## 前次整理驗證結果
+
+- `npm test`：15 項通過；`npm run build` 與 `git diff --check` 通過。
+- `npm audit`：完整依賴掃描 0 項已知漏洞。這不是完整安全審查或未來保證。
+- 本機正式版本：1280 × 900、390 × 844、360 × 780 無水平溢出；服務區截圖檢視、貸款連結、輪播首末頁按鈕與表單模擬 503 保留輸入均通過，沒有 pageerror。
+- 交車 API 模擬 HTTP 503、無效 JSON、錯誤資料結構、不合法圖片編號、網路失敗，均未產生未處理的例外。
+- 表單請求由瀏覽器攔截，未送往真正收件端；未提交、推送或部署，未變更正式環境。截圖與一次性驗證程式未加入專案。
+
+## 後續使用者調整（本機，尚未部署）
+
+- 貸款試算預設與最低年利率為 3%，最高保留 8%，可輸入 3.19% 等小數；超出範圍依上下限計算，離開欄位時校正顯示。此為試算設定，未更動官方活動利率。
+- 試算右側說明改為左對齊、加深文字、增加行距的三點清單，分開說明計算方式、範例利率及核貸條件。
+- 上方服務據點顯示「Suzuki 北投所」；車款名稱顯示「Jimny 2026」，比較、試算、表單及由車款生成的 JSON-LD 同步。接收端保留舊 Jimny 名稱相容性。
+- SWIFT 第二張改為官方完整後側行駛外觀，見圖片素材紀錄。
+- 新增 `npm run test:browser` 與 `tests/browser/`，持續驗證動線、焦點與利率輸入；測試會啟動無真實接收憑證的本機正式版本。
+- 本次驗證：16 項單元測試、桌面 1280 × 900／手機 360 × 780 共 8 項 Chromium 瀏覽器測試通過；正式建置與 `git diff --check` 通過。已檢視試算區、車款彈窗及 SWIFT 新照片截圖，未發送真實通知或部署。

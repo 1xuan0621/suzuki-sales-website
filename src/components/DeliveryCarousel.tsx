@@ -12,9 +12,22 @@ export default function DeliveryCarousel() {
   const PER_PAGE = 3;
 
   useEffect(() => {
-    fetch("/api/delivery")
-      .then((r) => r.json())
-      .then((d) => setImages(d.images || []));
+    const controller = new AbortController();
+    fetch("/api/delivery", { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("Unable to load delivery photos");
+        return response.json();
+      })
+      .then((data) => {
+        if (controller.signal.aborted) return;
+        setImages(Array.isArray(data?.images)
+          ? data.images.filter((id: unknown): id is string => typeof id === "string" && /^\d+$/.test(id))
+          : []);
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setImages([]);
+      });
+    return () => controller.abort();
   }, []);
 
   if (images.length === 0) return null;
@@ -54,6 +67,7 @@ export default function DeliveryCarousel() {
       <div className="flex items-center justify-center gap-4 mt-5">
         <button
           onClick={() => setIdx((p) => Math.max(0, p - 1))}
+          disabled={idx === 0}
           className={`grid place-items-center w-10 h-10 rounded-full bg-white border border-[#e0e0e0] shadow-sm text-[#333] text-lg transition-all hover:bg-[#f5f5f5] ${idx === 0 ? "opacity-30 pointer-events-none" : ""}`}
           aria-label="上一頁"
         >
@@ -64,6 +78,7 @@ export default function DeliveryCarousel() {
         </span>
         <button
           onClick={() => setIdx((p) => Math.min(max, p + 1))}
+          disabled={idx >= max}
           className={`grid place-items-center w-10 h-10 rounded-full bg-white border border-[#e0e0e0] shadow-sm text-[#333] text-lg transition-all hover:bg-[#f5f5f5] ${idx >= max ? "opacity-30 pointer-events-none" : ""}`}
           aria-label="下一頁"
         >

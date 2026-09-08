@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
+import { useModalDialog } from "@/lib/use-modal-dialog";
 import CarPhotoGallery from "./CarPhotoGallery";
 import { contentReviewedAt, type Car } from "@/data/site";
 import PromotionNotice from "./PromotionNotice";
@@ -9,39 +10,25 @@ interface CarModalProps {
   car: Car;
   onClose: () => void;
   onInterest: () => void;
+  onCalculate: () => void;
   lineHref: string;
 }
 
 /**
  * 車款詳細 Modal — 圖片輪播、顏色選擇、規格、優惠與行動按鈕
  */
-export default function CarModal({ car, onClose, onInterest, lineHref }: CarModalProps) {
+export default function CarModal({ car, onClose, onInterest, onCalculate, lineHref }: CarModalProps) {
   const [photoExpanded, setPhotoExpanded] = useState(false);
-
-  const handler = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape" && !photoExpanded) onClose();
-    },
-    [onClose, photoExpanded]
-  );
-
-  useEffect(() => {
-    document.addEventListener("keydown", handler);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", handler);
-      document.body.style.overflow = "";
-    };
-  }, [handler]);
+  const dialog = useModalDialog();
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 modal-overlay"
-      onClick={onClose}
+    <dialog
+      ref={dialog}
+      className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none border-0 flex items-center justify-center bg-black/50 p-4 text-[#333] backdrop:bg-transparent modal-overlay"
+      onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}
+      onCancel={(event) => { event.preventDefault(); event.stopPropagation(); onClose(); }}
       role="dialog"
       aria-modal={photoExpanded ? undefined : true}
-      aria-hidden={photoExpanded || undefined}
-      inert={photoExpanded}
       aria-label={`${car.name} 詳細資訊`}
     >
       <div
@@ -50,6 +37,7 @@ export default function CarModal({ car, onClose, onInterest, lineHref }: CarModa
         onClick={(e) => e.stopPropagation()}
       >
         <button
+          data-dialog-initial-focus
           onClick={onClose}
           className="absolute top-3 right-3 z-20 grid place-items-center w-9 h-9 rounded-full bg-black/30 text-white text-lg transition-colors hover:bg-black/50 sm:top-4 sm:right-4"
           aria-label="關閉"
@@ -142,9 +130,16 @@ export default function CarModal({ car, onClose, onInterest, lineHref }: CarModa
                 用 LINE 詢問
               </a>
             </div>
+            <button
+              type="button"
+              onClick={onCalculate}
+              className="mt-3 min-h-11 w-full rounded-[10px] text-sm font-bold text-[#555] underline underline-offset-4 hover:bg-[#f5f5f5]"
+            >
+              試算月付
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }

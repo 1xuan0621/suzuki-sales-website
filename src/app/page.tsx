@@ -27,6 +27,9 @@ function HomePageInner() {
   const [sending, setSending] = useState(false);
   const [modalCar, setModalCar] = useState<Car | null>(null);
   const [loanCarId, setLoanCarId] = useState("");
+  const [loanSelectionKey, setLoanSelectionKey] = useState(0);
+  const contactHeading = useRef<HTMLHeadingElement>(null);
+  const loanHeading = useRef<HTMLHeadingElement>(null);
 
   const update = (field: string, value: string) => {
     setForm((previous) => ({ ...previous, [field]: value }));
@@ -165,12 +168,6 @@ function HomePageInner() {
                   >
                     @
                   </a>
-                  <span
-                    className="grid place-items-center w-9 h-9 bg-white/8 rounded-full text-white/40 text-[14px] font-bold"
-                    aria-label="Instagram（即將開通）"
-                  >
-                    IG
-                  </span>
                 </div>
               </div>
             </div>
@@ -223,7 +220,7 @@ function HomePageInner() {
               <div>
                 <p className="m-0 text-[#666] text-[15px] font-bold">服務據點</p>
                 <h2 className="my-1 text-2xl text-[#e60012] leading-tight max-sm:text-xl">
-                  凱騰鈴木 Suzuki 北投所
+                  Suzuki 北投所
                 </h2>
                 <p className="mt-[-6px] mb-[14px] text-[#666] text-sm">
                   {dealer.location.split("｜")[1] || dealer.location}
@@ -278,6 +275,7 @@ function HomePageInner() {
                     </button>
                     {/* 加入比較按鈕 */}
                     <button
+                      aria-pressed={selected}
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleCar(car);
@@ -309,7 +307,6 @@ function HomePageInner() {
 
             <div className="grid grid-cols-6 gap-3 max-lg:grid-cols-3 max-sm:grid-cols-1 max-sm:gap-[14px]">
               {services.map((s) => {
-                const isLoan = s.title === "貸款／保險試算";
                 const inner = (
                   <>
                     <span className="text-[26px] leading-none">{s.icon}</span>
@@ -319,11 +316,11 @@ function HomePageInner() {
                     <span className="text-[#888] text-[13px] leading-snug">{s.desc}</span>
                   </>
                 );
-                if (isLoan) {
+                if ("href" in s) {
                   return (
                     <a
                       key={s.title}
-                      href="#loan-calculator"
+                      href={s.href}
                       className="flex flex-col gap-1.5 min-h-[112px] p-4 bg-white border border-[#e7e7e7] rounded-[14px] shadow-[0_2px_8px_rgba(20,20,20,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(20,20,20,0.10)] hover:border-l-[#e60012] hover:border-l-3 no-underline cursor-pointer"
                     >
                       {inner}
@@ -367,7 +364,7 @@ function HomePageInner() {
               </div>
               <div>
                 <p className="m-0 text-[#666] text-[15px] font-bold">快速諮詢</p>
-                <h2 className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">
+                <h2 ref={contactHeading} tabIndex={-1} id="contact-heading" className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">
                   留下需求，我將盡快與您聯繫
                 </h2>
               </div>
@@ -521,7 +518,7 @@ function HomePageInner() {
 
           {/* ═══════ 貸款試算 ═══════ */}
           <section id="loan-calculator">
-            <LoanCalculator preselectedCarId={loanCarId} />
+            <LoanCalculator preselectedCarId={loanCarId} selectionKey={loanSelectionKey} headingRef={loanHeading} />
           </section>
 
           <footer className="py-[26px] px-6 text-[#9b9b9b] text-center text-sm">
@@ -537,13 +534,21 @@ function HomePageInner() {
           onClose={closeModal}
           onInterest={() => {
             update("car", modalCar.name);
-            setLoanCarId(modalCar.id);
+            setSubmitted(false);
             closeModal();
-            setTimeout(
-              () =>
-                document.getElementById("loan-calculator")?.scrollIntoView({ behavior: "smooth" }),
-              100
-            );
+            requestAnimationFrame(() => {
+              contactHeading.current?.focus({ preventScroll: true });
+              document.getElementById("contact")?.scrollIntoView({ behavior: "instant", block: "start" });
+            });
+          }}
+          onCalculate={() => {
+            setLoanCarId(modalCar.id);
+            setLoanSelectionKey((value) => value + 1);
+            closeModal();
+            requestAnimationFrame(() => {
+              loanHeading.current?.focus({ preventScroll: true });
+              document.getElementById("loan-calculator")?.scrollIntoView({ behavior: "instant", block: "start" });
+            });
           }}
           lineHref={lineHref}
         />

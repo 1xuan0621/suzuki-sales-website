@@ -102,6 +102,12 @@ test("normalizes supported Taiwan mobile phone formats", () => {
   assert.equal(validateConsultation({ ...payload, contact: "0900<script>000000" }), null);
 });
 
+test("accepts the Jimny 2026 display name and names from previously loaded pages", () => {
+  for (const car of ["Jimny 2026", "THE NEW Jimny", "Jimny"]) {
+    assert.equal(validateConsultation({ ...payload, car })?.car, car);
+  }
+});
+
 test("Discord requires a message acknowledgment and disables mentions", async () => {
   const mock = (async (url: URL | RequestInfo, options?: RequestInit) => {
     assert.equal(new URL(String(url)).searchParams.get("wait"), "true");

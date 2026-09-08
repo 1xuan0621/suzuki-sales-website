@@ -10,7 +10,7 @@
 | `public/images/e-vitara-side.jpg` | [原始圖片](https://www.taiwansuzuki.com.tw/uploads/car_list/image-176708861746.png) |
 | `public/images/e-vitara-int.jpg` | [原始圖片](https://www.taiwansuzuki.com.tw/uploads/car_list/image-176674256024.jpg) |
 | `public/images/swift.jpg` | [原始圖片](https://www.taiwansuzuki.com.tw/uploads/car_list/image-172049669030.jpg) |
-| `public/images/swift-side.jpg` | [原始圖片](https://www.taiwansuzuki.com.tw/uploads/car_list/image-171981429667.jpg) |
+| `public/images/swift-rear.jpg` | [原始圖片](https://www.taiwansuzuki.com.tw/uploads/car_list/image-171999074921.jpg) |
 | `public/images/swift-int.jpg` | [原始圖片](https://www.taiwansuzuki.com.tw/uploads/car_list/image-171982021621.jpg) |
 | `public/images/jimny.jpg` | [原始圖片](https://www.taiwansuzuki.com.tw/uploads/car_list/image-178287852222.png) |
 | `public/images/jimny-side.jpg` | [原始圖片](https://www.taiwansuzuki.com.tw/uploads/car_list/image-178287859211.jpg) |
@@ -26,6 +26,8 @@
 | `public/images/carry-int.jpg` | [原始圖片](https://www.taiwansuzuki.com.tw/uploads/news_dealer_list/168136844580.jpg) |
 
 ## 壓縮方式
+
+後續依使用者要求，SWIFT 第二張已由尾燈特寫替換為完整後側行駛外觀；採新檔名 `swift-rear.jpg` 避免沿用舊圖片快取，移除不再使用的 `swift-side.jpg`。來源是官方 SWIFT 頁面，保留原圖油耗標示與長寬比例。下方大小統計為第一階段壓縮紀錄，不包含這次換圖差異。
 
 - 車款圖片：依原比例縮至最大寬 1200px，JPEG quality 82 / MozJPEG。
 - 交車照片與備用顧問照片：依原比例縮至最大寬 1000px，不放大、不裁切；JPEG quality 82 / MozJPEG。

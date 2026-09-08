@@ -103,8 +103,8 @@ export const cars: Car[] = [
         summary: "完成試乘贈哈根達斯 100ml 冰淇淋乙份。",
         terms: "需填寫完整客戶資料，贈品數量有限，送完為止；詳細資格依官方活動辦法。",
       },
-      images: ["swift", "swift-side", "swift-int"],
-      imageLabels: ["城市行駛外觀", "C 字 LED 尾燈細節", "駕駛座與中控台"],
+      images: ["swift", "swift-rear", "swift-int"],
+      imageLabels: ["城市行駛外觀", "後側行駛外觀", "駕駛座與中控台"],
       colors: [
         { name: "白", hex: "#f7f7f7" },
         { name: "橘", hex: "#f75000" },
@@ -117,7 +117,7 @@ export const cars: Car[] = [
   },
   {
     id: "jimny",
-    name: "THE NEW Jimny",
+    name: "Jimny 2026",
     subtitle: "硬派越野",
     description: "經典越野本格，升級 ACC 與 DSBS II",
     price: "84.9 萬起",
@@ -273,7 +273,7 @@ export const services = [
   { title: "車款比較", desc: "依你的需求幫你分析最適合的車款", icon: "⚖️" },
   { title: "預約試乘", desc: "安排你想試的車款，到店直接上路", icon: "🚗" },
   { title: "購車諮詢", desc: "從選車到成交，陪你走完整個流程", icon: "💬" },
-  { title: "貸款／保險試算", desc: "試算月付金額，找到最輕鬆的方案", icon: "💰" },
+  { title: "貸款試算", desc: "試算月付金額，保險需求另行諮詢", icon: "💰", href: "#loan-calculator" },
   { title: "交車服務", desc: "完整交車說明，讓你安心上路", icon: "🔑" },
 ] as const;
 

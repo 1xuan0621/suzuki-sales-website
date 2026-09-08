@@ -1,26 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
+import { useModalDialog } from "@/lib/use-modal-dialog";
 import { useCompare } from "./CarCompareProvider";
 import type { Car } from "@/data/site";
 
 /* ─── Compare Modal ─── */
 function CompareModal({ cars, onClose }: { cars: Car[]; onClose: () => void }) {
-  const handler = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    },
-    [onClose]
-  );
-
-  useEffect(() => {
-    document.addEventListener("keydown", handler);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", handler);
-      document.body.style.overflow = "";
-    };
-  }, [handler]);
+  const dialog = useModalDialog();
 
   const rows: { label: string; getVal: (c: Car) => string }[] = [
     { label: "售價", getVal: (c) => c.price },
@@ -45,9 +32,11 @@ function CompareModal({ cars, onClose }: { cars: Car[]; onClose: () => void }) {
   ];
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 modal-overlay"
-      onClick={onClose}
+    <dialog
+      ref={dialog}
+      className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none border-0 flex items-center justify-center bg-black/50 p-4 text-[#333] backdrop:bg-transparent modal-overlay"
+      onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}
+      onCancel={(event) => { event.preventDefault(); onClose(); }}
       role="dialog"
       aria-modal="true"
       aria-label="車款比較"
@@ -60,6 +49,7 @@ function CompareModal({ cars, onClose }: { cars: Car[]; onClose: () => void }) {
         <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-[#eee] flex-shrink-0">
           <h3 className="m-0 text-[22px] font-extrabold text-[#202020]">車款比較</h3>
           <button
+            data-dialog-initial-focus
             onClick={onClose}
             className="grid place-items-center w-9 h-9 rounded-full bg-[#f0f0f0] text-[#666] text-lg transition-colors hover:bg-[#e0e0e0] cursor-pointer border-0"
             aria-label="關閉"
@@ -69,7 +59,7 @@ function CompareModal({ cars, onClose }: { cars: Car[]; onClose: () => void }) {
         </div>
 
         {/* Scrollable Table */}
-        <div className="flex-1 overflow-auto p-6">
+        <div className="flex-1 overflow-auto p-6" tabIndex={0} role="region" aria-label="車款比較表，可使用方向鍵捲動">
           <table className="w-full border-collapse">
             <thead>
               <tr>
@@ -120,7 +110,7 @@ function CompareModal({ cars, onClose }: { cars: Car[]; onClose: () => void }) {
           </button>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }
 

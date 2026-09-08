@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "tsx --test tests/*.test.ts tests/*.test.mjs"
+    "test": "tsx --test tests/*.test.ts tests/*.test.mjs",
+    "test:browser": "playwright test"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0",

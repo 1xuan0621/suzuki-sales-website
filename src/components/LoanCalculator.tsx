@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, type RefObject } from "react";
 import { cars } from "@/data/site";
+import { LOAN_RATE_MIN, LOAN_RATE_MAX } from "@/data/constants";
 
 function parsePrice(priceStr: string): number {
   const cleaned = priceStr.replace(/[^0-9.]/g, "");
@@ -10,12 +11,17 @@ function parsePrice(priceStr: string): number {
   return n;
 }
 
-export default function LoanCalculator({ preselectedCarId }: { preselectedCarId?: string }) {
+export default function LoanCalculator({ preselectedCarId, selectionKey, headingRef }: {
+  preselectedCarId?: string;
+  selectionKey?: number;
+  headingRef?: RefObject<HTMLHeadingElement | null>;
+}) {
   const [selectedCarId, setSelectedCarId] = useState("");
   const [price, setPrice] = useState("800000");
   const [downPayment, setDownPayment] = useState(160000);
   const [months, setMonths] = useState(60);
-  const [rate, setRate] = useState(2.5);
+  const [rateInput, setRateInput] = useState(String(LOAN_RATE_MIN));
+  const rate = Math.min(LOAN_RATE_MAX, Math.max(LOAN_RATE_MIN, Number(rateInput) || LOAN_RATE_MIN));
   const [loanRatio, setLoanRatio] = useState(80); // 貸款成數 %
 
   const principal = parseInt(price) || 0;
@@ -48,17 +54,17 @@ export default function LoanCalculator({ preselectedCarId }: { preselectedCarId?
 
   // 當外部傳入 preselectedCarId 時自動填入
   useEffect(() => {
-    if (preselectedCarId && preselectedCarId !== selectedCarId) {
+    if (preselectedCarId) {
       doCarSelect(preselectedCarId);
     }
-  }, [preselectedCarId]);
+  }, [preselectedCarId, selectionKey]);
 
   return (
     <section className="w-[calc(100%-88px)] mx-auto mt-[34px] pt-[34px] border-t border-[#ddd] max-sm:w-[calc(100%-28px)] max-sm:mt-5">
       <div className="flex items-end justify-between gap-5 mb-5 max-sm:flex-col max-sm:items-start">
         <div>
           <p className="m-0 text-[#666] text-[15px] font-bold">貸款試算</p>
-          <h2 className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">試算月付金額，輕鬆購車</h2>
+          <h2 ref={headingRef} tabIndex={-1} className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">試算月付金額，輕鬆購車</h2>
         </div>
       </div>
 
@@ -68,10 +74,11 @@ export default function LoanCalculator({ preselectedCarId }: { preselectedCarId?
           <div className="grid gap-5">
             {/* Select Car */}
             <div>
-              <label className="block text-[14px] font-extrabold text-[#555] mb-1.5">
+              <label htmlFor="loan-car" className="block text-[14px] font-extrabold text-[#555] mb-1.5">
                 選擇車款（自動帶入價格）
               </label>
               <select
+                id="loan-car"
                 value={selectedCarId}
                 onChange={(e) => handleCarSelect(e.target.value)}
                 className="w-full h-11 px-4 border border-[#d9d9d9] rounded-lg bg-white text-[#555] font-inherit outline-none focus:border-[#e60012] focus:ring-2 focus:ring-[rgba(230,0,18,0.18)] transition-all text-[14px]"
@@ -87,10 +94,11 @@ export default function LoanCalculator({ preselectedCarId }: { preselectedCarId?
 
             {/* Price Input */}
             <div>
-              <label className="block text-[14px] font-extrabold text-[#555] mb-1.5">
+              <label htmlFor="loan-price" className="block text-[14px] font-extrabold text-[#555] mb-1.5">
                 車價（元）
               </label>
               <input
+                id="loan-price"
                 type="number"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
@@ -102,12 +110,13 @@ export default function LoanCalculator({ preselectedCarId }: { preselectedCarId?
             {/* 貸款成數 Slider */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-[14px] font-extrabold text-[#555]">貸款成數</label>
+                <label htmlFor="loan-ratio" className="text-[14px] font-extrabold text-[#555]">貸款成數</label>
                 <span className="text-[14px] font-extrabold text-[#e60012]">
                   {loanRatio}%（頭期 {100 - loanRatio}%）
                 </span>
               </div>
               <input
+                id="loan-ratio"
                 type="range"
                 min={50}
                 max={90}
@@ -130,13 +139,15 @@ export default function LoanCalculator({ preselectedCarId }: { preselectedCarId?
 
             {/* Payment Period */}
             <div>
-              <label className="block text-[14px] font-extrabold text-[#555] mb-1.5">
+              <p id="loan-months-label" className="block text-[14px] font-extrabold text-[#555] mb-1.5">
                 期數
-              </label>
-              <div className="flex flex-wrap gap-2">
+              </p>
+              <div role="group" aria-labelledby="loan-months-label" className="flex flex-wrap gap-2">
                 {[12, 24, 36, 48, 60, 72, 84].map((n) => (
                   <button
                     key={n}
+                    type="button"
+                    aria-pressed={months === n}
                     onClick={() => setMonths(n)}
                     className={`px-4 h-10 rounded-lg font-extrabold text-[14px] cursor-pointer border-2 transition-all ${
                       months === n
@@ -153,37 +164,43 @@ export default function LoanCalculator({ preselectedCarId }: { preselectedCarId?
             {/* Interest Rate Slider */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-[14px] font-extrabold text-[#555]">年利率</label>
+                <label htmlFor="loan-rate" className="text-[14px] font-extrabold text-[#555]">年利率</label>
                 <div className="flex items-center gap-1 text-[14px] font-extrabold text-[#e60012]">
                   <input
+                    id="loan-rate"
                     aria-label="年利率（百分比）"
                     type="number"
-                    min={0}
-                    max={8}
+                    min={LOAN_RATE_MIN}
+                    max={LOAN_RATE_MAX}
                     step={0.01}
-                    value={rate}
-                    onChange={(e) => setRate(Math.min(8, Math.max(0, Number(e.target.value) || 0)))}
+                    value={rateInput}
+                    onChange={(e) => setRateInput(e.target.value)}
+                    onBlur={() => setRateInput(String(rate))}
+                    aria-describedby="loan-rate-hint"
                     className="w-20 h-9 px-2 border border-[#d9d9d9] rounded-lg text-right"
                   />
                   <span>%</span>
                 </div>
               </div>
               <input
+                aria-label="調整年利率"
+                aria-describedby="loan-rate-hint"
                 type="range"
-                min={0}
-                max={8}
+                min={LOAN_RATE_MIN}
+                max={LOAN_RATE_MAX}
                 step={0.01}
                 value={rate}
-                onChange={(e) => setRate(Number(e.target.value))}
+                onChange={(e) => setRateInput(e.target.value)}
                 className="w-full h-2 rounded-full appearance-none cursor-pointer"
                 style={{
-                  background: `linear-gradient(to right, #e60012 ${(rate / 8) * 100}%, #e0e0e0 ${(rate / 8) * 100}%)`,
+                  background: `linear-gradient(to right, #e60012 ${((rate - LOAN_RATE_MIN) / (LOAN_RATE_MAX - LOAN_RATE_MIN)) * 100}%, #e0e0e0 ${((rate - LOAN_RATE_MIN) / (LOAN_RATE_MAX - LOAN_RATE_MIN)) * 100}%)`,
                 }}
               />
               <div className="flex justify-between text-[12px] text-[#999] mt-1">
-                <span>0%</span>
-                <span>8%</span>
+                <span>{LOAN_RATE_MIN}%</span>
+                <span>{LOAN_RATE_MAX}%</span>
               </div>
+              <p id="loan-rate-hint" className="mt-2 text-xs leading-relaxed text-[#666]">試算範圍 {LOAN_RATE_MIN}%–{LOAN_RATE_MAX}%；輸入超出範圍時，依上下限計算並於離開欄位後調整。</p>
             </div>
           </div>
         </div>
@@ -226,9 +243,14 @@ export default function LoanCalculator({ preselectedCarId }: { preselectedCarId?
             </div>
           </div>
 
-          <p className="mt-4 text-[11px] text-[#aaa] leading-relaxed">
-            * 本試算採本息平均攤還，未含手續費；預設利率為試算範例，非專案報價。活動貸款額度、期數及實際條件依金融機構核定為準。
-          </p>
+          <aside aria-labelledby="loan-notice-title" className="mt-5 w-full rounded-xl bg-[#f6f6f6] p-4 text-left text-[13px] leading-7 text-[#555]">
+            <h3 id="loan-notice-title" className="mb-2 text-sm font-bold text-[#333]">試算說明</h3>
+            <ul className="list-disc space-y-2 pl-4 marker:text-[#888]">
+              <li>採本息平均攤還計算，金額未含手續費。</li>
+              <li>預設年利率為 {LOAN_RATE_MIN}%，僅供試算參考，非專案報價。</li>
+              <li>活動貸款額度、期數、利率及實際條件，依金融機構核定為準。</li>
+            </ul>
+          </aside>
         </div>
       </div>
     </section>

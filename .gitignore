@@ -6,3 +6,11 @@ public/reference.png
 
 .vercel
 .env*
+!.env.example
+
+# Generated caches and local review artifacts
+*.tsbuildinfo
+*.bak
+*.tmp
+playwright-report/
+test-results/

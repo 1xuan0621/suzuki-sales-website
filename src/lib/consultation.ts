@@ -33,7 +33,7 @@ export function validateConsultation(value: unknown): Consultation | null {
   if (data.contact.length > 30 || !/^[+\d ()-]+$/.test(data.contact)) return null;
   data.contact = data.contact.replace(/[ ()-]/g, "").replace(/^\+886/, "0");
   if (!/^09\d{8}$/.test(data.contact)) return null;
-  if (!["", "還不確定", "Jimny", ...cars.map((car) => car.name)].includes(data.car)) return null;
+  if (!["", "還不確定", "Jimny", "THE NEW Jimny", ...cars.map((car) => car.name)].includes(data.car)) return null;
   if (!["", ...usageOptions].includes(data.usage) || !["", ...budgetRanges].includes(data.budget)) return null;
   data.requestId = data.requestId.toLowerCase();
   return data;
