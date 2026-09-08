@@ -1,8 +1,9 @@
+import ContactLinks from "@/components/ContactLinks";
 import Link from "next/link";
 import { showroom } from "@/data/content";
 import { dealer, cars } from "@/data/site";
 import { pageMetadata, breadcrumbSchema, serializeJsonLd } from "@/data/seo";
-import ContentShell, { ArticleSection, ContactLinks } from "@/components/ContentShell";
+import ContentShell, { ArticleSection } from "@/components/ContentShell";
 
 export const metadata = pageMetadata("/visit/beitou", showroom.title, showroom.description);
 export default function VisitPage() {

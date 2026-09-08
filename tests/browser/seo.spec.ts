@@ -40,6 +40,17 @@ test("desktop and mobile content layouts remain usable and screenshot-ready", as
   for (const route of contentRoutes) {
     await page.goto(route.path);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    const navigation = page.getByRole("navigation", { name: "主要導覽", exact: true });
+    await expect(navigation.getByRole("link", { name: "全車款介紹", exact: true })).toHaveAttribute("href", "/#cars");
+    await expect(navigation.getByRole("link", { name: /回首頁/ })).toHaveAttribute("href", "/");
+    const contacts = page.locator("[data-contact-actions]");
+    await expect(contacts).toHaveCount(1);
+    await expect(contacts.getByRole("link")).toHaveCount(2);
+    await expect(contacts.getByRole("link", { name: "LINE 諮詢", exact: true })).toHaveAttribute("href", /^https:\/\/line\.me\//);
+    await expect(contacts.getByRole("link", { name: "電話諮詢", exact: true })).toHaveAttribute("href", "tel:0987629773");
+    await expect(contacts.locator('svg[aria-hidden="true"]')).toHaveCount(2);
+    await expect(page.getByRole("link", { name: "諮詢這款車", exact: true })).toHaveCount(0);
+
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await page.evaluate(() => document.fonts.ready);
     if (route.path.startsWith("/cars/") || route.path.startsWith("/guides/")) {
@@ -58,14 +69,15 @@ test("internal navigation preserves form and comparison state and preselects onl
   await page.getByRole("button", { name: "+ 加入比較", exact: true }).nth(1).click();
   await page.getByRole("link", { name: "查看 SWIFT 完整介紹", exact: true }).click();
   await expect(page).toHaveURL(/\/cars\/swift$/);
-  await page.getByRole("link", { name: "諮詢這款車", exact: true }).first().click();
+  await page.getByRole("navigation", { name: "主要導覽" }).getByRole("link", { name: "購車諮詢", exact: true }).click();
   await expect(page.locator("#contact-heading")).toBeFocused();
   await expect(page.getByLabel("姓名", { exact: true })).toHaveValue("本機保留輸入測試");
   await expect(page.getByLabel("聯絡方式", { exact: true })).toHaveValue("0900000000");
   await expect(page.getByRole("combobox", { name: "想了解車款", exact: true })).toHaveValue("SWIFT");
   await expect(page.getByRole("button", { name: "✓ 已選取比較", exact: true })).toHaveCount(1);
   await page.getByRole("link", { name: "查看 Jimny 2026 完整介紹", exact: true }).click();
-  await page.getByRole("link", { name: "諮詢這款車", exact: true }).first().click();
+  await expect(page).toHaveURL(/\/cars\/jimny$/);
+  await page.getByRole("navigation", { name: "主要導覽" }).getByRole("link", { name: "購車諮詢", exact: true }).click();
   await expect(page.getByRole("combobox", { name: "想了解車款", exact: true })).toHaveValue("Jimny 2026");
   await expect(page.getByLabel("姓名", { exact: true })).toHaveValue("本機保留輸入測試");
 });
@@ -97,7 +109,8 @@ test("an interrupted request keeps its ID and an in-flight receipt survives navi
   await page.getByRole("button", { name: "送出需求", exact: true }).click();
   await expect.poll(() => Boolean(pending)).toBe(true);
   await page.getByRole("link", { name: "查看 SWIFT 完整介紹", exact: true }).click();
-  await page.getByRole("link", { name: "諮詢這款車", exact: true }).first().click();
+  await expect(page).toHaveURL(/\/cars\/swift$/);
+  await page.getByRole("navigation", { name: "主要導覽" }).getByRole("link", { name: "購車諮詢", exact: true }).click();
   await expect(page.getByRole("button", { name: "送出中⋯", exact: true })).toBeDisabled();
   await pending!.fulfill({ status: 200, json: { ok: true, receipt: ids[1] } });
   await expect(page.getByRole("heading", { name: "需求已收件" })).toBeVisible();
@@ -118,7 +131,7 @@ test("standalone gallery restores focus and expired campaigns do not remove usef
   await page.reload();
   await expect(page.getByText("2026 年 9 月購車禮遇")).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "常見購車問題" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "諮詢這款車", exact: true }).first()).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "主要導覽" }).getByRole("link", { name: "購車諮詢", exact: true })).toBeVisible();
 });
 
 async function analyticsEvents(page: Page) {
@@ -155,8 +168,8 @@ test("production analytics is isolated: clicks, routes, receipt retries and fail
   await page.evaluate(() => document.addEventListener("click", (event) => {
     if ((event.target as Element)?.closest('a[href^="tel:"], a[href^="https://line.me"]')) event.preventDefault();
   }));
-  await page.getByRole("link", { name: "立即撥打", exact: true }).first().click();
-  await page.getByRole("link", { name: "加入好友", exact: true }).click();
+  await page.getByRole("link", { name: "電話諮詢", exact: true }).first().click();
+  await page.getByRole("link", { name: "LINE 諮詢", exact: true }).click();
   await page.getByLabel("姓名", { exact: true }).fill("分析隔離測試");
   await page.getByLabel("聯絡方式", { exact: true }).fill("0900000000");
   await page.getByRole("combobox", { name: "想了解車款", exact: true }).selectOption("SWIFT");
@@ -164,7 +177,8 @@ test("production analytics is isolated: clicks, routes, receipt retries and fail
   await expect(page.getByText("本機模擬暫時失敗")).toBeVisible();
   // Returning with the same car must not reset the failed request's UUID.
   await page.getByRole("link", { name: "查看 SWIFT 完整介紹", exact: true }).click();
-  await page.getByRole("link", { name: "諮詢這款車", exact: true }).first().click();
+  await expect(page).toHaveURL(/\/cars\/swift$/);
+  await page.getByRole("navigation", { name: "主要導覽" }).getByRole("link", { name: "購車諮詢", exact: true }).click();
   for (let attempt = 2; attempt <= 3; attempt++) {
     await page.getByRole("button", { name: "送出需求", exact: true }).click();
     await expect.poll(() => attempts).toBe(attempt);

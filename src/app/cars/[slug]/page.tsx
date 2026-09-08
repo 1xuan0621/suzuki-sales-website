@@ -1,9 +1,10 @@
+import ContactLinks from "@/components/ContactLinks";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cars, getCar, eVitaraPriceSource } from "@/data/site";
 import { carPages, carTitle, carVersions, getGuide } from "@/data/content";
 import { carSchema, pageMetadata, serializeJsonLd } from "@/data/seo";
-import ContentShell, { ArticleSection, ContactLinks } from "@/components/ContentShell";
+import ContentShell, { ArticleSection } from "@/components/ContentShell";
 import CarPageGallery from "@/components/CarPageGallery";
 import PromotionNotice from "@/components/PromotionNotice";
 
@@ -20,7 +21,7 @@ export default async function CarPage({ params }: Props) {
   const car = getCar((await params).slug);
   if (!car) notFound();
   const content = carPages[car.id];
-  return <ContentShell label={`SUZUKI ${car.name}`}>
+  return <ContentShell label={`SUZUKI ${car.name}`} carId={car.id}>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(carSchema(car)) }} />
     <div data-car-id={car.id} data-entry="car-page" className="grid items-start gap-8 lg:grid-cols-2">
       <div>
@@ -52,7 +53,7 @@ export default async function CarPage({ params }: Props) {
     </ArticleSection>
     <ArticleSection title="到店賞車與試乘觀察清單">
       <ul className="list-disc space-y-2 pl-5">{content.testDrive.map((text) => <li key={text}>{text}</li>)}</ul>
-      <p>試乘車、路線與可預約時段須先確認，留下需求不代表預約已成立。</p><ContactLinks carId={car.id} entry="car-page" />
+      <p>試乘車、路線與可預約時段須先確認，留下需求不代表預約已成立。</p>
     </ArticleSection>
     <ArticleSection title="常見購車問題">
       {content.questions.map((item) => <details key={item.question} className="border-b border-[#eee] pb-3"><summary className="cursor-pointer py-2 font-bold text-[#333]">{item.question}</summary><p className="pt-2">{item.answer}</p></details>)}

@@ -115,15 +115,15 @@ function CompareModal({ cars, onClose }: { cars: Car[]; onClose: () => void }) {
 }
 
 /* ─── Floating Compare Bar ─── */
-export default function CompareBar({ lineHref, phoneHref }: { lineHref: string; phoneHref: string }) {
+export default function CompareBar() {
   const { selected, removeCar, clearAll } = useCompare();
   const [showModal, setShowModal] = useState(false);
 
 
   return (
     <>
-      {/* A single fixed container stacks comparison above mobile contact actions. */}
-      <div data-entry="sticky" className={`fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#e7e7e7] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] ${selected.length === 0 ? "md:hidden" : ""}`}>
+      {/* Only selected cars need a fixed comparison bar. */}
+      <div data-entry="sticky" className={`fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#e7e7e7] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] ${selected.length === 0 ? "hidden" : ""}`}>
       {selected.length > 0 && (
       <div aria-label="已選車款" className="flex items-center gap-2 px-3 py-3 max-w-[1180px] mx-auto">
         <span className="text-[13px] font-extrabold text-[#888] whitespace-nowrap shrink-0">
@@ -164,16 +164,9 @@ export default function CompareBar({ lineHref, phoneHref }: { lineHref: string; 
       </div>
 
       )}
-      <nav aria-label="快速聯絡" className="md:hidden flex items-center gap-2 px-3 pt-2 pb-[calc(8px+env(safe-area-inset-bottom))] border-t border-[#eee]">
-        <a href={phoneHref} className="flex-1 flex items-center justify-center gap-1.5 h-10 bg-[#e60012] text-white rounded-[10px] font-extrabold text-sm no-underline">
-          <span aria-hidden="true">📞</span>立即撥打
-        </a>
-        <a href={lineHref} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 h-10 bg-[#06c755] text-white rounded-[10px] font-extrabold text-sm no-underline">
-          <span aria-hidden="true">💬</span>加 LINE 詢問
-        </a>
-      </nav>
+
       </div>
-      <div aria-hidden="true" className={selected.length > 0 ? "h-[calc(140px+env(safe-area-inset-bottom))] md:h-20" : "h-[calc(72px+env(safe-area-inset-bottom))] md:hidden"} />
+      <div aria-hidden="true" className={selected.length > 0 ? "h-[calc(80px+env(safe-area-inset-bottom))]" : "hidden"} />
 
       {showModal && <CompareModal cars={selected} onClose={() => setShowModal(false)} />}
     </>

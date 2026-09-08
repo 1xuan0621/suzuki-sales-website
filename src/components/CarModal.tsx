@@ -6,18 +6,18 @@ import CarPhotoGallery from "./CarPhotoGallery";
 import { contentReviewedAt, type Car } from "@/data/site";
 import PromotionNotice from "./PromotionNotice";
 import Link from "next/link";
+import ContactLinks from "./ContactLinks";
 
 interface CarModalProps {
   car: Car;
   onClose: () => void;
   onInterest: () => void;
-  lineHref: string;
 }
 
 /**
  * 車款詳細 Modal — 圖片輪播、顏色選擇、規格、優惠與行動按鈕
  */
-export default function CarModal({ car, onClose, onInterest, lineHref }: CarModalProps) {
+export default function CarModal({ car, onClose, onInterest }: CarModalProps) {
   const [photoExpanded, setPhotoExpanded] = useState(false);
   const dialog = useModalDialog();
   const colorRow = useRef<HTMLDivElement>(null);
@@ -177,28 +177,11 @@ export default function CarModal({ car, onClose, onInterest, lineHref }: CarModa
             </details>
             <PromotionNotice promotion={car.detail.promotion} />
 
-            <div className="flex items-center gap-3">
-              <button
-                onClick={onInterest}
-                data-track-event="consultation_click"
-                data-car-id={car.id}
-                data-entry="modal"
-                className="flex-1 flex items-center justify-center h-[48px] bg-[#e60012] text-white rounded-[10px] font-extrabold text-[15px] no-underline transition-all hover:bg-[#b9000e] hover:-translate-y-px cursor-pointer border-0"
-              >
-                我有興趣
-              </button>
-              <a
-                href={lineHref}
-                data-car-id={car.id}
-                data-entry="modal"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center h-[48px] border-2 border-[#e60012] text-[#e60012] rounded-[10px] font-extrabold text-[15px] no-underline transition-all hover:bg-[#e60012] hover:text-white"
-              >
-                用 LINE 詢問
-              </a>
+            <ContactLinks carId={car.id} entry="modal" />
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm font-bold text-[#b9000e]">
+              <button onClick={onInterest} data-track-event="consultation_click" data-car-id={car.id} data-entry="modal" className="cursor-pointer border-0 bg-transparent py-2 underline underline-offset-4">我有興趣</button>
+              <Link href={`/cars/${car.id}`} onClick={onClose} className="py-2 underline underline-offset-4">查看 {car.name} 完整介紹</Link>
             </div>
-            <Link href={`/cars/${car.id}`} onClick={onClose} className="mt-4 block py-2 text-center text-sm font-bold text-[#b9000e] underline underline-offset-4">查看 {car.name} 完整介紹</Link>
           </div>
         </div>
       </div>

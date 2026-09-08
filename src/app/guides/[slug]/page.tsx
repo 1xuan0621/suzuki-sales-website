@@ -1,10 +1,11 @@
+import ContactLinks from "@/components/ContactLinks";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getCar, dealer } from "@/data/site";
 import { guides, getGuide, carPages, showroom } from "@/data/content";
 import { guideSchema, pageMetadata, serializeJsonLd } from "@/data/seo";
-import ContentShell, { ArticleSection, ContactLinks } from "@/components/ContentShell";
+import ContentShell, { ArticleSection } from "@/components/ContentShell";
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -33,11 +34,11 @@ export default async function GuidePage({ params }: Props) {
   const guide = getGuide((await params).slug);
   if (!guide) notFound();
   const primaryCar = getCar(guide.carIds[0])!;
-  return <ContentShell label={guide.title}>
+  return <ContentShell label={guide.title} carId={guide.carIds.length === 1 ? primaryCar.id : undefined}>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(guideSchema(guide)) }} />
     <article data-entry="guide">
       <div className="grid items-center gap-7 lg:grid-cols-[1.3fr_1fr]">
-        <div><p className="mb-3 text-sm font-bold tracking-widest text-[#b9000e]">購車指南 · 選車前的準備</p><h1 className="text-balance text-3xl font-black leading-snug sm:text-4xl">{guide.title}</h1><p className="mt-5 text-[15px] leading-8 text-[#555]">{guide.description}</p><p className="mt-5 text-xs leading-7 text-[#666]">作者：<Link href="/" className="underline">{dealer.name}</Link> · 內容更新：<time dateTime={guide.updatedAt}>{guide.updatedAt}</time><br />引用資料核對：<time dateTime={guide.reviewedAt}>{guide.reviewedAt}</time></p></div>
+        <div><p className="mb-3 text-sm font-bold tracking-widest text-[#b9000e]">購車指南 · 選車前的準備</p><h1 className="text-balance text-3xl font-black leading-snug sm:text-4xl">{guide.title}</h1><p className="mt-5 text-[15px] leading-8 text-[#555]">{guide.description}</p><p className="mt-5 text-xs leading-7 text-[#666]">作者：<Link href="/" className="underline">{dealer.name}</Link> · 內容更新：<time dateTime={guide.updatedAt}>{guide.updatedAt}</time><br />引用資料核對：<time dateTime={guide.reviewedAt}>{guide.reviewedAt}</time></p><div className="mt-6"><ContactLinks carId={guide.carIds.length === 1 ? primaryCar.id : undefined} entry="guide" /></div></div>
         <figure className="overflow-hidden rounded-2xl border border-[#ddd] bg-white"><div className="relative aspect-video"><Image src={`/images/${primaryCar.id}.jpg`} alt={`SUZUKI ${primaryCar.name} 官方產品外觀照片`} fill sizes="(max-width: 1024px) 100vw, 450px" className="object-contain" /></div><figcaption className="px-4 py-3 text-xs leading-6 text-[#666]">台灣 Suzuki 官方產品照片，非本站自行拍攝。</figcaption></figure>
       </div>
       {guide.slug === "vitara-vs-s-cross" && <ComparisonTable />}
@@ -50,7 +51,6 @@ export default async function GuidePage({ params }: Props) {
       </ArticleSection>
       <ArticleSection title="帶著問題，安排下一步">
         <p><Link href="/visit/beitou" className="font-bold text-[#b9000e] underline underline-offset-4">查看台北北投到店交通與試乘預約</Link></p>
-        <ContactLinks carId={guide.carIds.length === 1 ? primaryCar.id : undefined} entry="guide" />
         {guide.slug !== "buying-process" && <Link href="/guides/buying-process" className="inline-block text-[#b9000e] underline underline-offset-4">了解跨縣市購車與交車流程</Link>}
       </ArticleSection>
     </article>

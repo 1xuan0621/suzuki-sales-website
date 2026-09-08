@@ -50,10 +50,10 @@
 | 事件 | 觸發 | 用途 |
 | --- | --- | --- |
 | `page_view` | 首次載入及已知內容頁 pathname 變更；錨點、查詢參數、彈窗與照片切換不加計 | 內容瀏覽 |
-| `line_click` | LINE 連結點擊，包括原首頁、彈窗及手機列 | 聯絡意向 |
+| `line_click` | LINE 連結點擊，包括首頁、車款／指南／到店頁及車款彈窗；重複手機聯絡列已移除 | 聯絡意向 |
 | `phone_click` | 電話連結點擊 | 聯絡意向 |
 | `directions_click` | 地圖連結點擊 | 到店意向 |
-| `consultation_click` | 前往表單或彈窗「我有興趣」 | 表單入口 |
+| `consultation_click` | 導覽列「購車諮詢」或彈窗「我有興趣」；所在車款由入口帶入 | 表單入口 |
 | `generate_lead` | HTTP 成功、`ok=true`、receipt 與本次 UUID 相符 | 已持久收件 |
 
 事件欄位只允許 `car_id`、`entry` 與清洗後的頁面資訊。`car_id` 只允許六個既定 ID，其餘為 `unspecified`；`entry` 為已知介面位置。頁面路徑只允許 12 個內容頁；移除 query／hash，外站 referrer 只保留網域。不傳姓名、電話、表單內容、原始錯誤或 UUID，分析失敗不影響表單。
