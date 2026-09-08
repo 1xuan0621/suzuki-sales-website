@@ -122,6 +122,22 @@ test("color row supports horizontal scrolling without moving the page", async ({
   await page.getByRole("button", { name: /^e VITARA/ }).click();
   const colors = page.getByRole("region", { name: "車色參考，可左右滑動" });
   await colors.scrollIntoViewIfNeeded();
+  if (!isMobile) {
+    const previous = page.getByRole("button", { name: "查看前面的車色" });
+    const next = page.getByRole("button", { name: "查看後面的車色" });
+    await expect(previous).toBeDisabled();
+    await next.click();
+    await expect.poll(() => colors.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+    await expect(previous).toBeEnabled();
+    await colors.focus();
+    await colors.press("End");
+    await expect(next).toBeDisabled();
+    await previous.click();
+    await expect(next).toBeEnabled();
+    await colors.focus();
+    await colors.press("Home");
+    await expect(previous).toBeDisabled();
+  }
   const box = (await colors.boundingBox())!;
   if (isMobile) {
     const session = await page.context().newCDPSession(page);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useModalDialog } from "@/lib/use-modal-dialog";
 import CarPhotoGallery from "./CarPhotoGallery";
 import { contentReviewedAt, type Car } from "@/data/site";
@@ -19,6 +19,32 @@ interface CarModalProps {
 export default function CarModal({ car, onClose, onInterest, lineHref }: CarModalProps) {
   const [photoExpanded, setPhotoExpanded] = useState(false);
   const dialog = useModalDialog();
+  const colorRow = useRef<HTMLDivElement>(null);
+  const [colorScroll, setColorScroll] = useState({ left: false, right: false });
+  const updateColorScroll = useCallback(() => {
+    const row = colorRow.current;
+    if (!row) return;
+    const next = { left: row.scrollLeft > 1, right: row.scrollLeft + row.clientWidth < row.scrollWidth - 1 };
+    setColorScroll((previous) => previous.left === next.left && previous.right === next.right ? previous : next);
+  }, []);
+
+  useEffect(() => {
+    const row = colorRow.current;
+    if (!row) return;
+    const observer = new ResizeObserver(updateColorScroll);
+    observer.observe(row);
+    updateColorScroll();
+    return () => observer.disconnect();
+  }, [car.id, updateColorScroll]);
+
+  function scrollColors(direction: number) {
+    const row = colorRow.current;
+    if (!row) return;
+    row.scrollBy({
+      left: direction * Math.max(120, row.clientWidth * 0.75),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+    });
+  }
 
   return (
     <dialog
@@ -57,7 +83,20 @@ export default function CarModal({ car, onClose, onInterest, lineHref }: CarModa
           {car.detail.colors && car.detail.colors.length > 0 && (
             <div className="flex items-center gap-3 px-5 pt-4 sm:px-6">
               <p className="shrink-0 text-[13px] font-bold text-[#666]">車色參考</p>
+              <button
+                type="button"
+                aria-label="查看前面的車色"
+                aria-controls={`car-colors-${car.id}`}
+                disabled={!colorScroll.left}
+                onClick={() => scrollColors(-1)}
+                className="hidden h-8 w-8 shrink-0 place-items-center rounded-full border border-[#ddd] bg-white text-xl text-[#555] hover:bg-[#f5f5f5] disabled:opacity-30 disabled:cursor-default sm:grid"
+              >
+                ‹
+              </button>
               <div
+                ref={colorRow}
+                id={`car-colors-${car.id}`}
+                onScroll={updateColorScroll}
                 role="region"
                 aria-label="車色參考，可左右滑動"
                 tabIndex={0}
@@ -85,6 +124,16 @@ export default function CarModal({ car, onClose, onInterest, lineHref }: CarModa
                   </div>
                 ))}
               </div>
+              <button
+                type="button"
+                aria-label="查看後面的車色"
+                aria-controls={`car-colors-${car.id}`}
+                disabled={!colorScroll.right}
+                onClick={() => scrollColors(1)}
+                className="hidden h-8 w-8 shrink-0 place-items-center rounded-full border border-[#ddd] bg-white text-xl text-[#555] hover:bg-[#f5f5f5] disabled:opacity-30 disabled:cursor-default sm:grid"
+              >
+                ›
+              </button>
             </div>
           )}
 
