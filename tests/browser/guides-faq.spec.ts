@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { guideRedirects } from "../../src/data/guides";
+import { guideRedirects, guides } from "../../src/data/guides";
 import { carFaqs, generalFaqGroups } from "../../src/data/faq";
 
 test.beforeEach(async ({ page }) => {
@@ -61,7 +61,7 @@ test("guides link to readable answers and all FAQ content is present without Jav
     for (const item of items) expect(html).toContain(item.answer);
   }
   await page.goto("/guides/delivery-process");
-  await expect(page).toHaveURL(/\/guides#delivery$/);
+  await expect(page).toHaveURL(/\/guides\/first-car#delivery$/);
   await expect(page.locator("#delivery h2")).toBeVisible();
   await page.getByRole("link", { name: "還有疑問？查看常見 QA →", exact: true }).click();
   await page.locator("#payment-inspection summary").click();
@@ -79,8 +79,10 @@ test("compact entrances, single-line filters and answer typography retain a clea
   await entrance.scrollIntoViewIfNeeded();
   await page.screenshot({ path: testInfo.outputPath("home-compact-entrances.png") });
   await entrance.getByRole("link").click();
-  await expect(page.locator("article > div section")).toHaveCount(5);
-  await page.screenshot({ path: testInfo.outputPath("single-guide.png"), fullPage: true });
+  await expect(page.getByRole("navigation", { name: "購車流程", exact: true }).getByRole("link")).toHaveCount(6);
+  await expect(page.getByRole("heading", { name: "第一次買車", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "舊車換新車", exact: true })).toBeVisible();
+  await page.screenshot({ path: testInfo.outputPath("guide-overview.png"), fullPage: true });
   await page.goto("/faq");
   const filters = page.getByRole("group", { name: "問題分類" });
   const buttons = await filters.getByRole("button").evaluateAll((nodes) => nodes.map((node) => node.getBoundingClientRect().top));
@@ -101,4 +103,37 @@ test("compact entrances, single-line filters and answer typography retain a clea
   await page.screenshot({ path: testInfo.outputPath("faq-readable-answer.png") });
   await page.locator("#total-cost").screenshot({ path: testInfo.outputPath("faq-answer-detail.png") });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
+
+
+test("both guide flows navigate to readable steps and retain advisor identity", async ({ page, request }) => {
+  for (const guide of guides) {
+    await page.goto("/guides");
+    await page.getByRole("link", { name: `閱讀${guide.audience}指南` }).click();
+    await expect(page).toHaveURL(new RegExp(`/guides/${guide.slug}$`));
+    const flow = page.getByRole("navigation", { name: "購車流程", exact: true });
+    for (const section of guide.sections) {
+      const stepLink = flow.getByRole("link", { name: section.step });
+      await stepLink.focus();
+      await page.keyboard.press("Enter");
+      await expect(page.locator(`#${section.id} h2`)).toBeInViewport();
+    }
+    const html = await (await request.get(`/guides/${guide.slug}`)).text();
+    const body = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
+    for (const section of guide.sections) for (const paragraph of section.paragraphs) expect(body).toContain(paragraph);
+    const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((match) => JSON.parse(match[1]));
+    const article = schemas.flatMap((schema) => schema["@graph"] || [schema]).find((node) => node["@type"] === "Article");
+    expect(article.url).toBe(`https://suzuki-taipei.com/guides/${guide.slug}`);
+    expect(article.headline).toBe(guide.title);
+  }
+  await page.goto("/guides#budget");
+  await page.locator("#budget a").click();
+  await expect(page).toHaveURL(/\/guides\/first-car#budget$/);
+  for (const path of ["/", "/guides"]) {
+    await page.goto(path);
+    await expect(page.getByText(/我是鈺漣，從 2018 年/)).toContainText("2025 年起在 Suzuki 服務");
+    await expect(page.getByRole("navigation", { name: "主要導覽", exact: true })).toContainText("張鈺漣");
+    if (path === "/") await expect(page.getByRole("heading", { level: 1 })).toContainText("張鈺漣");
+    else await expect(page.locator("main")).not.toContainText("張鈺漣");
+  }
 });

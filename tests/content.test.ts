@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { contentRoutes } from "../src/data/content";
-import { buyingGuide, guideRedirects } from "../src/data/guides";
+import { firstCarGuide, guides, getGuide, guideRedirects } from "../src/data/guides";
 import { carFaqs, featuredCarFaqs, generalFaqGroups } from "../src/data/faq";
 import { contentSources } from "../src/data/content-sources";
 import type { CarId } from "../src/data/site";
@@ -14,7 +14,11 @@ function assertDestination(href: string) {
   assert.ok(contentRoutes.some((route) => route.path === path), `Missing page: ${href}`);
   if (!hash || path === "/") return;
   if (path === "/guides") {
-    assert.ok(buyingGuide.sections.some((section) => section.id === hash), `Missing guide section: ${href}`);
+    assert.ok(firstCarGuide.sections.some((section) => section.id === hash), `Missing guide section: ${href}`);
+    return;
+  }
+  if (path.startsWith("/guides/")) {
+    assert.ok(getGuide(path.split("/")[2])?.sections.some((section) => section.id === hash), `Missing guide section: ${href}`);
     return;
   }
   const items = path === "/faq" ? generalItems : carFaqs[path.split("/")[2] as CarId];
@@ -27,9 +31,12 @@ test("guide migrations have existing destinations and keep model topics out of t
     assert.ok(!contentRoutes.some((route) => route.path === redirect.source));
     assertDestination(redirect.destination);
   }
-  assert.equal(new Set(buyingGuide.sections.map((section) => section.id)).size, buyingGuide.sections.length);
-  for (const source of buyingGuide.sourceIds) assert.ok(contentSources[source]);
-  for (const section of buyingGuide.sections) if (section.link) assertDestination(section.link.href);
+  for (const guide of guides) {
+    assertDestination(`/guides/${guide.slug}`);
+    assert.equal(new Set(guide.sections.map((section) => section.id)).size, guide.sections.length);
+    for (const source of guide.sourceIds) assert.ok(contentSources[source]);
+    for (const section of guide.sections) if (section.link) assertDestination(section.link.href);
+  }
 });
 
 test("FAQ cross references resolve to the owning page and featured answers use existing car entries", () => {

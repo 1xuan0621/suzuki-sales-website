@@ -20,9 +20,10 @@ export const siteSchema = {
   "@graph": [
     { "@type": "WebSite", "@id": websiteId, url: `${siteUrl}/`, name: "SUZUKI 汽車顧問 張鈺漣", inLanguage: "zh-TW", publisher: { "@id": personId } },
     {
-      "@type": "Person", "@id": personId, name: dealer.name, jobTitle: "SUZUKI 汽車顧問",
+      "@type": "Person", "@id": personId, name: dealer.fullName, alternateName: dealer.name, jobTitle: "SUZUKI 汽車顧問",
       url: `${siteUrl}/`, image: `${siteUrl}/images/avatar.jpg`,
       telephone: `+886${dealer.phone.replace(/\D/g, "").slice(1)}`,
+      description: dealer.biography,
       worksFor: { "@id": businessId },
     },
     {
@@ -78,14 +79,22 @@ export function carSchema(car: Car) {
 }
 
 export function guideSchema(guide: Guide) {
-  const url = `${siteUrl}/guides`;
+  const path = `/guides/${guide.slug}`;
+  const url = `${siteUrl}${path}`;
   return {
     "@context": "https://schema.org", "@graph": [
       {
         "@type": "Article", "@id": `${url}#article`, headline: guide.title, description: guide.description,
         url, mainEntityOfPage: url, author: { "@id": personId }, publisher: { "@id": personId },
         dateModified: guide.updatedAt, inLanguage: "zh-TW", image: `${siteUrl}/og-image.png`,
-      }, breadcrumbSchema("/guides", "購車指南"),
+      }, {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "首頁", item: `${siteUrl}/` },
+          { "@type": "ListItem", position: 2, name: "購車指南", item: `${siteUrl}/guides` },
+          { "@type": "ListItem", position: 3, name: guide.audience, item: url },
+        ],
+      },
     ],
   };
 }

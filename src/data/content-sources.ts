@@ -9,6 +9,7 @@ export const contentSources = {
   autoInsurance: { title: "金管會｜自用汽車保險契約範本（PDF）", url: "https://www.fsc.gov.tw/userfiles/file/自用汽車保險定型化契約範本2018-12-24.pdf" },
   registration: { title: "我的 E 政府｜新領牌照與監理服務", url: "https://www.gov.tw/News_Content_26_721782" },
   tax: { title: "財政部｜購車與汰舊換新貨物稅減徵條件", url: "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-saving-manual/national/commodity-tax/0Q6AK66" },
+  tradeInTax: { title: "財政部｜新購與舊換新減稅條件、流程及文件", url: "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-saving-secret/re5JYe3" },
   service: { title: "Taiwan Suzuki｜保養維修中心", url: "https://www.taiwansuzuki.com.tw/locator?type=2" },
   swift: { title: "Taiwan Suzuki｜SWIFT", url: "https://www.taiwansuzuki.com.tw/cars/swift" },
   fit: { title: "Honda Taiwan｜FIT 台灣規格", url: "https://www.honda-taiwan.com.tw/Auto/Cars/FIT" },

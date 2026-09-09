@@ -63,7 +63,7 @@ export default function HomePageClient() {
                 <div className="w-[140px] h-[140px] max-sm:w-[120px] max-sm:h-[120px] rounded-full border-4 border-white/70 shadow-[0_8px_24px_rgba(0,0,0,0.15)] overflow-hidden bg-white/10">
                   <img
                     src="/images/avatar.jpg"
-                    alt={dealer.name}
+                    alt={dealer.fullName}
                     className="w-full h-full object-cover"
                     style={{ objectPosition: "center 0%" }}
                     onError={(e) => {
@@ -77,7 +77,7 @@ export default function HomePageClient() {
                         "font-bold",
                         "text-3xl"
                       );
-                      t.parentElement!.textContent = dealer.name.charAt(0);
+                      t.parentElement!.textContent = dealer.fullName.charAt(0);
                     }}
                   />
                 </div>
@@ -99,14 +99,15 @@ export default function HomePageClient() {
                       />
                       <span>台北汽車顧問</span>
                     </span>
-                    {dealer.name}
+                    {dealer.fullName}
                   </h1>
                   <p className="inline-block mt-[18px] pb-3 border-b-2 border-white/80 text-[19px] tracking-[0.18em] max-sm:text-base max-sm:tracking-[0.12em]">
                     全台購車諮詢 / 台北預約試乘
                   </p>
                 </div>
 
-                <p className="mt-3 max-w-[650px] text-sm leading-7 text-white/95">{homeContent.introduction}</p>
+                <p className="mt-3 max-w-[650px] text-[15px] leading-7 text-white">{dealer.biography}</p>
+                <p className="mt-2 max-w-[650px] text-sm leading-7 text-white/95">{homeContent.introduction}</p>
 
                 {/* 社群按鈕 — 僅 logo 小圓 */}
                 <div className="flex justify-end max-md:justify-center gap-2 mt-4 md:mt-0">
@@ -456,7 +457,7 @@ export default function HomePageClient() {
 
           <footer className="py-[26px] px-6 text-[#9b9b9b] text-center text-sm">
             <PrivacyNotice />
-            © 2026 Suzuki 汽車顧問 {dealer.name}｜凱騰鈴木北投所
+            © 2026 Suzuki 汽車顧問 {dealer.fullName}｜凱騰鈴木北投所
           </footer>
         </div>
       </main>

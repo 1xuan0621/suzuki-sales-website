@@ -63,7 +63,7 @@ export default async function CarPage({ params }: Props) {
       <PromotionNotice promotion={car.detail.promotion} />
       <p>期間方案以官方活動條件及有效期限為準，最新購車方案請洽詢。</p>
       <div className="flex flex-wrap gap-5 text-[#b9000e]"><a href={car.detail.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方車款介紹</a><a href={car.detail.specUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方規配表（PDF）</a></div>
-      <p className="text-xs">內容整理：張鈺漣購車諮詢網站 · 內容更新：<time dateTime={content.updatedAt}>{content.updatedAt}</time>。選車建議依實際需求討論。</p>
+      <p className="text-xs">內容整理：鈺漣購車諮詢網站 · 內容更新：<time dateTime={content.updatedAt}>{content.updatedAt}</time>。選車建議依實際需求討論。</p>
     </ArticleSection>
     <section id="faq" aria-labelledby="car-faq-heading" className="mt-8 scroll-mt-6 rounded-2xl border border-[#e5e1dd] bg-white p-6 sm:p-8">
       <p className="text-sm font-bold text-[#b9000e]">車型常見 QA</p>
