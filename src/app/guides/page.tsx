@@ -1,8 +1,7 @@
 import Link from "next/link";
 import ContentShell from "@/components/ContentShell";
 import ContactLinks from "@/components/ContactLinks";
-import GuideFlow from "@/components/GuideFlow";
-import { firstCarGuide, guides, guideIndex } from "@/data/guides";
+import { guides, guideIndex } from "@/data/guides";
 import { dealer } from "@/data/site";
 import { siteUrl } from "@/data/content";
 import { breadcrumbSchema, pageMetadata, serializeJsonLd } from "@/data/seo";
@@ -23,14 +22,8 @@ export default function GuidesPage() {
       <header>
         <p className="text-xs font-bold tracking-[0.16em] text-[#b9000e]">跟鈺漣一起準備下一台車</p>
         <h1 className="mt-3 text-3xl font-black leading-snug sm:text-4xl">Suzuki 購車指南</h1>
-        <p className="mt-4 max-w-2xl text-base leading-8 text-[#555]">第一次買車，和開了多年想換車，煩惱的事不太一樣。<br className="hidden sm:block" />先看看整個流程，再從適合你的那篇開始。</p>
+        <p className="mt-4 max-w-2xl text-base leading-8 text-[#555]">第一次買車，和開了多年想換車，煩惱的事不太一樣。<br className="hidden sm:block" />選擇適合你的指南，了解各自的購車流程與準備事項。</p>
       </header>
-      <section aria-labelledby="flow-heading" className="mt-8 rounded-2xl bg-[#efede9] p-5 sm:p-7">
-        <h2 id="flow-heading" className="text-lg font-bold">從看車到交車，大致這樣走</h2>
-        <GuideFlow sections={firstCarGuide.sections} basePath="/guides/first-car" preserveIds />
-        <p className="mt-5 text-xs leading-6 text-[#666]">點選步驟就能看詳細說明。付款、看實車、領牌與施工順序，訂車時再一起約好。</p>
-        <Link href="/guides/trade-in#valuation" className="mt-3 inline-block text-sm font-medium text-[#b9000e] underline underline-offset-4">有舊車？先估價、確認換購條件，再銜接交車時間 →</Link>
-      </section>
       <section aria-labelledby="choose-guide-heading" className="mt-10">
         <h2 id="choose-guide-heading" className="text-xl font-bold">你是第一次買車，還是準備換車？</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
