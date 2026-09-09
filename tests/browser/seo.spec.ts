@@ -77,22 +77,22 @@ test("desktop and mobile content layouts remain usable and screenshot-ready", as
 
 test("internal navigation preserves form and comparison state and preselects only the requested car", async ({ page }) => {
   await page.goto("/");
-  await page.getByLabel("姓名", { exact: true }).fill("本機保留輸入測試");
-  await page.getByLabel("聯絡方式", { exact: true }).fill("0900000000");
+  await page.getByRole("textbox", { name: "姓名", exact: true }).fill("本機保留輸入測試");
+  await page.getByRole("textbox", { name: "聯絡方式", exact: true }).fill("0900000000");
   await page.getByRole("button", { name: "+ 加入比較", exact: true }).nth(1).click();
   await page.getByRole("link", { name: "查看 SWIFT 完整介紹", exact: true }).click();
   await expect(page).toHaveURL(/\/cars\/swift$/);
   await page.getByRole("navigation", { name: "主要導覽" }).getByRole("link", { name: "購車諮詢", exact: true }).click();
   await expect(page.locator("#contact-heading")).toBeFocused();
-  await expect(page.getByLabel("姓名", { exact: true })).toHaveValue("本機保留輸入測試");
-  await expect(page.getByLabel("聯絡方式", { exact: true })).toHaveValue("0900000000");
+  await expect(page.getByRole("textbox", { name: "姓名", exact: true })).toHaveValue("本機保留輸入測試");
+  await expect(page.getByRole("textbox", { name: "聯絡方式", exact: true })).toHaveValue("0900000000");
   await expect(page.getByRole("combobox", { name: "想了解車款", exact: true })).toHaveValue("SWIFT");
   await expect(page.getByRole("button", { name: "✓ 已選取比較", exact: true })).toHaveCount(1);
   await page.getByRole("link", { name: "查看 Jimny 2026 完整介紹", exact: true }).click();
   await expect(page).toHaveURL(/\/cars\/jimny$/);
   await page.getByRole("navigation", { name: "主要導覽" }).getByRole("link", { name: "購車諮詢", exact: true }).click();
   await expect(page.getByRole("combobox", { name: "想了解車款", exact: true })).toHaveValue("Jimny 2026");
-  await expect(page.getByLabel("姓名", { exact: true })).toHaveValue("本機保留輸入測試");
+  await expect(page.getByRole("textbox", { name: "姓名", exact: true })).toHaveValue("本機保留輸入測試");
 });
 
 test("direct consultation links accept all six IDs and ignore unknown input", async ({ page }) => {
@@ -115,8 +115,8 @@ test("an interrupted request keeps its ID and an in-flight receipt survives navi
     else pending = route;
   });
   await page.goto("/?car=swift#contact");
-  await page.getByLabel("姓名", { exact: true }).fill("本機非同步測試");
-  await page.getByLabel("聯絡方式", { exact: true }).fill("0900000000");
+  await page.getByRole("textbox", { name: "姓名", exact: true }).fill("本機非同步測試");
+  await page.getByRole("textbox", { name: "聯絡方式", exact: true }).fill("0900000000");
   await page.getByRole("button", { name: "送出需求", exact: true }).click();
   await expect(page.getByText(/連線中斷，暫時無法確認收件/)).toBeVisible();
   await page.getByRole("button", { name: "送出需求", exact: true }).click();
@@ -183,8 +183,8 @@ test("production analytics is isolated: clicks, routes, receipt retries and fail
   }));
   await page.getByRole("link", { name: "立即撥打", exact: true }).first().click();
   await page.getByRole("link", { name: "加入好友", exact: true }).click();
-  await page.getByLabel("姓名", { exact: true }).fill("分析隔離測試");
-  await page.getByLabel("聯絡方式", { exact: true }).fill("0900000000");
+  await page.getByRole("textbox", { name: "姓名", exact: true }).fill("分析隔離測試");
+  await page.getByRole("textbox", { name: "聯絡方式", exact: true }).fill("0900000000");
   await page.getByRole("combobox", { name: "想了解車款", exact: true }).selectOption("SWIFT");
   await page.getByRole("button", { name: "送出需求", exact: true }).click();
   await expect(page.getByText("本機模擬暫時失敗")).toBeVisible();

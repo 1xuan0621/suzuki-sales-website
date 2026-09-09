@@ -355,7 +355,7 @@ export default function HomePageClient() {
                     <label>網站<input name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} /></label>
                   </div>
                   <label className="grid grid-cols-[120px_1fr] gap-[18px] items-center font-extrabold max-sm:grid-cols-1 max-sm:gap-1.5">
-                    <span>姓名</span>
+                    <span>姓名 <span aria-hidden="true" className="text-xs font-normal text-[#666]">必填</span></span>
                     <input
                       required
                       maxLength={50}
@@ -367,7 +367,7 @@ export default function HomePageClient() {
                     />
                   </label>
                   <label className="grid grid-cols-[120px_1fr] gap-[18px] items-center font-extrabold max-sm:grid-cols-1 max-sm:gap-1.5">
-                    <span>聯絡方式</span>
+                    <span>聯絡方式 <span aria-hidden="true" className="text-xs font-normal text-[#666]">必填</span></span>
                     <input
                       required
                       maxLength={30}
@@ -380,7 +380,7 @@ export default function HomePageClient() {
                     />
                   </label>
                   <label className="grid grid-cols-[120px_1fr] gap-[18px] items-center font-extrabold max-sm:grid-cols-1 max-sm:gap-1.5">
-                    <span>想了解車款</span>
+                    <span>想了解車款 <span aria-hidden="true" className="text-xs font-normal text-[#666]">選填</span></span>
                     <select
                       value={form.car}
                       onChange={(e) => update("car", e.target.value)}
@@ -396,7 +396,7 @@ export default function HomePageClient() {
                     </select>
                   </label>
                   <label className="grid grid-cols-[120px_1fr] gap-[18px] items-center font-extrabold max-sm:grid-cols-1 max-sm:gap-1.5">
-                    <span>購車用途</span>
+                    <span>購車用途 <span aria-hidden="true" className="text-xs font-normal text-[#666]">選填</span></span>
                     <select
                       value={form.usage}
                       onChange={(e) => update("usage", e.target.value)}
@@ -411,7 +411,7 @@ export default function HomePageClient() {
                     </select>
                   </label>
                   <label className="grid grid-cols-[120px_1fr] gap-[18px] items-center font-extrabold max-sm:grid-cols-1 max-sm:gap-1.5">
-                    <span>預算區間</span>
+                    <span>預算區間 <span aria-hidden="true" className="text-xs font-normal text-[#666]">選填</span></span>
                     <select
                       value={form.budget}
                       onChange={(e) => update("budget", e.target.value)}

@@ -20,7 +20,8 @@ export default function LoanCalculator() {
   const rate = Math.min(LOAN_RATE_MAX, Math.max(LOAN_RATE_MIN, Number(rateInput) || LOAN_RATE_MIN));
   const [loanRatio, setLoanRatio] = useState(80); // 貸款成數 %
 
-  const principal = parseInt(price) || 0;
+  const numericPrice = Number(price);
+  const principal = Number.isFinite(numericPrice) ? Math.max(0, Math.floor(numericPrice)) : 0;
   // 兩種計算模式：有設定成數時優先，否則用頭期款
   const effectiveLoanAmount = loanRatio > 0
     ? Math.round(principal * loanRatio / 100)
@@ -89,8 +90,14 @@ export default function LoanCalculator() {
               <input
                 id="loan-price"
                 type="number"
+                min={0}
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "-") e.preventDefault(); }}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const amount = Number(value);
+                  setPrice(Number.isFinite(amount) && amount >= 0 ? value : "0");
+                }}
                 className="w-full h-11 px-4 border border-[#d9d9d9] rounded-lg bg-white text-[#555] font-inherit outline-none focus:border-[#e60012] focus:ring-2 focus:ring-[rgba(230,0,18,0.18)] transition-all text-[14px]"
                 placeholder="例如 800000"
               />

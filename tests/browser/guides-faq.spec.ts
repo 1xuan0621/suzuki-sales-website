@@ -106,7 +106,7 @@ test("compact entrances, single-line filters and answer typography retain a clea
 });
 
 
-test("both guide flows navigate to readable steps and retain advisor identity", async ({ page, request }) => {
+test("both guide flows navigate to readable steps and retain advisor identity", async ({ page, request }, testInfo) => {
   for (const guide of guides) {
     await page.goto("/guides");
     await page.getByRole("link", { name: `閱讀${guide.audience}指南` }).click();
@@ -118,6 +118,15 @@ test("both guide flows navigate to readable steps and retain advisor identity", 
       await page.keyboard.press("Enter");
       await expect(page.locator(`#${section.id} h2`)).toBeInViewport();
     }
+    const returnLink = page.getByRole("link", { name: "返回聯絡區，找鈺漣聊聊 ↑", exact: true });
+    await returnLink.focus();
+    await page.getByRole("region", { name: "找鈺漣聊，可以這樣開始" }).screenshot({ path: testInfo.outputPath(`${guide.slug}-return-contact.png`) });
+    await page.keyboard.press("Enter");
+    await expect(page.locator("#guide-contact")).toBeInViewport();
+    await expect(page.locator("#guide-contact")).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("link", { name: "LINE 諮詢", exact: true })).toBeFocused();
+    await expect(page.locator("[data-contact-actions]")).toHaveCount(1);
     const html = await (await request.get(`/guides/${guide.slug}`)).text();
     const body = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
     for (const section of guide.sections) for (const paragraph of section.paragraphs) expect(body).toContain(paragraph);

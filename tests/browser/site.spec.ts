@@ -61,12 +61,12 @@ test("comparison dialog supports keyboard scrolling, Tab wrapping and returning 
 });
 
 test("interest leads to consultation; the homepage calculator remains available", async ({ page }) => {
-  await page.getByLabel("姓名", { exact: true }).fill("本機保留輸入測試");
+  await page.getByRole("textbox", { name: "姓名", exact: true }).fill("本機保留輸入測試");
   await swiftCard(page).click();
   await page.getByRole("button", { name: "我有興趣", exact: true }).click();
   await expect(page.locator("#contact-heading")).toBeFocused();
   await expect(page.getByRole("combobox", { name: "想了解車款", exact: true })).toHaveValue("SWIFT");
-  await expect(page.getByLabel("姓名", { exact: true })).toHaveValue("本機保留輸入測試");
+  await expect(page.getByRole("textbox", { name: "姓名", exact: true })).toHaveValue("本機保留輸入測試");
   await expect.poll(() => page.locator("#contact").evaluate((element) => Math.abs(element.getBoundingClientRect().top))).toBeLessThan(4);
   await page.getByRole("button", { name: /^Jimny 2026 硬派越野/ }).click();
   await expect(page.getByRole("button", { name: "試算月付", exact: true })).toHaveCount(0);
@@ -155,6 +155,27 @@ test("color row supports horizontal scrolling without moving the page", async ({
   }
   await expect.poll(() => colors.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test("loan price rejects negatives and correctly parses numeric input", async ({ page }) => {
+  const price = page.getByRole("spinbutton", { name: "車價（元）", exact: true });
+  const calculator = page.locator("#loan-calculator");
+  await price.fill("-800000");
+  await expect(price).toHaveValue("0");
+  await expect(calculator.getByText("0 元", { exact: true })).toHaveCount(2);
+  await price.press("ArrowDown");
+  await expect(price).toHaveValue("0");
+  await price.fill("0.5");
+  await expect(calculator.getByText("0 元", { exact: true })).toHaveCount(2);
+  await price.fill("");
+  await price.press("-");
+  await price.press("8");
+  await expect(price).toHaveValue("8");
+  await price.fill("1e6");
+  await expect(calculator.getByText("800,000 元", { exact: true })).toBeVisible();
+  await expect(calculator.getByText("200,000 元", { exact: true })).toBeVisible();
+  await price.fill("800000");
+  await expect(calculator.getByText("11,500", { exact: true })).toBeVisible();
 });
 
 test("loan rate starts at 3%, supports decimal entry and clamps both controls", async ({ page }, testInfo) => {
