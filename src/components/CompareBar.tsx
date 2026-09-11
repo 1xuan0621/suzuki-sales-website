@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useModalDialog } from "@/lib/use-modal-dialog";
 import { useCompare } from "./CarCompareProvider";
-import type { Car } from "@/data/site";
+import { dealer, type Car } from "@/data/site";
+import { ContactIcon } from "./ContactLinks";
 
 /* ─── Compare Modal ─── */
 function CompareModal({ cars, onClose }: { cars: Car[]; onClose: () => void }) {
@@ -118,12 +119,42 @@ function CompareModal({ cars, onClose }: { cars: Car[]; onClose: () => void }) {
 export default function CompareBar() {
   const { selected, removeCar, clearAll } = useCompare();
   const [showModal, setShowModal] = useState(false);
+  const [showContact, setShowContact] = useState(false);
+
+  useEffect(() => {
+    let previous = window.scrollY;
+    let travel = 0;
+    const onScroll = () => {
+      // Clamp Safari overscroll so bouncing at the edges does not reverse direction.
+      const current = Math.max(0, Math.min(window.scrollY, document.documentElement.scrollHeight - window.innerHeight));
+      const delta = current - previous;
+      previous = current;
+      travel = Math.sign(delta) === Math.sign(travel) ? travel + delta : delta;
+      const editing = document.activeElement?.matches("input, textarea, select, [contenteditable='true']");
+      if (current < 80 || editing) {
+        setShowContact(false);
+        travel = 0;
+      } else if (Math.abs(travel) >= 12) {
+        setShowContact(travel > 0);
+        travel = 0;
+      }
+    };
+    const onFocus = (event: FocusEvent) => {
+      if (event.target instanceof HTMLElement && event.target.matches("input, textarea, select, [contenteditable='true']")) setShowContact(false);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("focusin", onFocus);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("focusin", onFocus);
+    };
+  }, []);
 
 
   return (
     <>
-      {/* Only selected cars need a fixed comparison bar. */}
-      <div data-entry="sticky" className={`fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#e7e7e7] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] ${selected.length === 0 ? "hidden" : ""}`}>
+      {/* Stack comparison and contact actions so they never overlap. */}
+      <div data-entry="sticky" className={`fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#e7e7e7] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] ${selected.length === 0 ? (showContact ? "md:hidden" : "hidden") : ""}`}>
       {selected.length > 0 && (
       <div aria-label="已選車款" className="flex items-center gap-2 px-3 py-3 max-w-[1180px] mx-auto">
         <span className="text-[13px] font-extrabold text-[#888] whitespace-nowrap shrink-0">
@@ -164,9 +195,14 @@ export default function CompareBar() {
       </div>
 
       )}
-
+      <nav aria-label="快速聯絡" hidden={!showContact} className="md:hidden border-t border-[#eee] px-3 pt-1.5 pb-[calc(6px+env(safe-area-inset-bottom))]">
+        <div className="flex gap-2">
+          <a href={`https://line.me/R/ti/p/~${dealer.line}`} target="_blank" rel="noopener noreferrer" className="flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-[#06C755] text-sm font-bold text-white no-underline"><ContactIcon type="line" />加入 LINE</a>
+          <a href={`tel:${dealer.phone.replace(/\D/g, "")}`} className="flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-[#e60012] text-sm font-bold text-white no-underline"><ContactIcon type="phone" />電話諮詢</a>
+        </div>
+      </nav>
       </div>
-      <div aria-hidden="true" className={selected.length > 0 ? "h-[calc(80px+env(safe-area-inset-bottom))]" : "hidden"} />
+      <div aria-hidden="true" className={selected.length > 0 ? "h-[calc(140px+env(safe-area-inset-bottom))] md:h-20" : "h-[calc(60px+env(safe-area-inset-bottom))] md:hidden"} />
 
       {showModal && <CompareModal cars={selected} onClose={() => setShowModal(false)} />}
     </>
