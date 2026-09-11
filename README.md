@@ -15,15 +15,22 @@ npm run dev
 
 ## 驗證
 
+依修改範圍選擇檢查，不再每次更新執行全套。完整清單與刪除理由見 [測試清單](docs/TESTING.md)。
+
 ```sh
-npm test
+# 指南／FAQ 資料有改動
+npx tsx --test tests/content.test.ts
+# 貸款試算互動有改動（桌面＋手機）
+npm run test:browser -- site.spec.ts --grep "loan"
+# 元件／樣式修改，且本次沒有跑瀏覽器測試
 npm run build
+
 git diff --check
 ```
 
-`npm start` 可啟動已建置版本。單元測試採 Node test runner + tsx，外部儲存與通知以模擬依賴驗證。
+`npm test` 保留為手動執行全部 7 項資料／邏輯測試的入口。`npm run test:browser` 手動執行核心 11 項檢查：1 項 HTTP，加上 5 個情境各跑桌面／手機；平常用檔名或 `--grep` 選擇受影響測試。
 
-`npm run test:browser` 會建置並在 3101 埠啟動隔離的正式版本，以 Chromium 驗證桌面與手機版的諮詢動線、巢狀彈窗鍵盤操作及貸款利率邊界。首次使用可執行 `npx playwright install chromium` 安裝測試瀏覽器。測試伺服器清空外部接收憑證，表單 API 另由瀏覽器攔截；報告位於已忽略的 `test-results/`。
+瀏覽器測試會自行建置並在 3101 埠啟動隔離的正式版本，不需額外重複建置。首次使用可執行 `npx playwright install chromium`。測試伺服器清空外部接收與 GA4 設定，表單 API 另由瀏覽器攔截；失敗 trace 位於已忽略的 `test-results/`，不再每次產生全站截圖。視覺修改仍應檢視受影響頁面的桌面與手機版面。
 
 依賴更新時另外執行 `npm audit`。支援的 Node.js 版本以已安裝 Next.js 的 `engines` 要求為準，正式建置版本需與 Vercel 專案設定核對。
 

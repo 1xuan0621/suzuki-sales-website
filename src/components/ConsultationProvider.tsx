@@ -10,7 +10,6 @@ function useConsultationState() {
   const draft = useRef(form);
   const [submitted, setSubmitted] = useState(false);
   const [formError, setFormError] = useState("");
-  const [receipt, setReceipt] = useState("");
   const [website, setWebsite] = useState("");
   const requestId = useRef("");
   const sendingRef = useRef(false);
@@ -52,7 +51,6 @@ function useConsultationState() {
         if (res.status === 409) requestId.current = "";
         throw new Error(typeof result.error === "string" ? result.error : "暫時無法確認收件，請稍後重試或使用 LINE 聯絡。");
       }
-      setReceipt(result.receipt);
       setSubmitted(true);
       trackLead(submittedId, cars.find((car) => car.name === values.car)?.id);
     } catch (error) {
@@ -63,7 +61,7 @@ function useConsultationState() {
       setSending(false);
     }
   };
-  return { form, update, submitted, formError, receipt, website, setWebsite, sending, handleSubmit, beginConsultation };
+  return { form, update, submitted, formError, website, setWebsite, sending, handleSubmit, beginConsultation };
 }
 
 const ConsultationContext = createContext<ReturnType<typeof useConsultationState> | null>(null);

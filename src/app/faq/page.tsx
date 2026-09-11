@@ -21,8 +21,8 @@ export default function FaqPage() {
       <section id="car-questions" className="mt-10 scroll-mt-6 border-t border-[#ddd] pt-7">
         <h2 className="text-lg font-bold">各車型常見問題</h2>
         <div className="mt-4 grid grid-cols-2 gap-x-6 sm:grid-cols-3">{cars.map((car) => <Link key={car.id} href={`/cars/${car.id}#faq`} className="flex items-center justify-between gap-2 border-b border-[#e3e0dc] py-4 text-sm font-medium no-underline hover:text-[#b9000e]">{car.name}<span aria-hidden="true">→</span></Link>)}</div>
-        <Link href="/guides" className="mt-7 inline-block text-sm font-medium text-[#333] underline underline-offset-4">從預算到交車，查看購車指南 →</Link>
-        <p className="mt-5 text-xs leading-6 text-[#777]">內容更新與資料核對：<time dateTime={faqPage.updatedAt}>{faqPage.updatedAt}</time></p>
+        <Link href="/guides" className="mt-7 inline-block text-sm font-medium text-[#333] underline underline-offset-4">從選車、交車到保養，查看購車指南 →</Link>
+        <p className="mt-5 text-xs leading-6 text-[#777]">內容更新：<time dateTime={faqPage.updatedAt}>{faqPage.updatedAt}</time>。各題參考資料列於答案內。</p>
       </section>
     </div>
   </ContentShell>;

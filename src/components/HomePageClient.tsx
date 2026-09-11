@@ -23,7 +23,7 @@ import "@/components/car-shapes.css";
    ═══════════════════════════ */
 export default function HomePageClient() {
   const { toggleCar, isSelected } = useCompare();
-  const { form, update, submitted, formError, receipt, website, setWebsite, sending, handleSubmit, beginConsultation } = useConsultation();
+  const { form, update, submitted, formError, website, setWebsite, sending, handleSubmit, beginConsultation } = useConsultation();
   const [modalCar, setModalCar] = useState<Car | null>(null);
   const contactHeading = useRef<HTMLHeadingElement>(null);
 
@@ -334,7 +334,6 @@ export default function HomePageClient() {
                 <p className="text-[#666]">
                   我會盡快與你聯繫！也可以直接加 LINE 😊
                 </p>
-                <p className="text-xs text-[#666] break-all">案件編號：{receipt}</p>
               </div>
             ) : (
               <div className="grid grid-cols-[280px_1fr] gap-[34px] items-stretch max-lg:grid-cols-1">

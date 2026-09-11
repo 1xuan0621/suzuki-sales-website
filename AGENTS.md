@@ -17,8 +17,8 @@ This file applies to this repository and its subdirectories. Run commands from t
 - Start dev server: `npm run dev`
 - Production build: `npm run build`
 - Serve the production build locally: `npm start`
-- Regression tests: `npm test`
-- Browser regressions: `npm run test:browser` (builds and starts an isolated production server on port 3101; Chromium must be installed)
+- Optional full data/logic suite: `npm test`; select affected files with `npx tsx --test tests/<name>.test.ts`
+- Core browser regressions (11 checks: 1 HTTP + 5 desktop/mobile flows): `npm run test:browser` (builds and starts an isolated production server on port 3101; Chromium must be installed)
 - Dependency scan: `npm audit` (do not apply `--force` fixes without reviewing the changes)
 
 ## File Map
@@ -58,11 +58,17 @@ This file applies to this repository and its subdirectories. Run commands from t
 
 ## Verification
 
+- 預設不新增測試，先修改或補充既有案例。新增前說明：要攔住哪個核心錯誤，以及最接近的現有測試為何攔不住。
+- 文案、排版、圖示、固定選項、版本更新或單純重構，不因此增加測試。
+- 新實作取代舊實作時，同輪移除過時或重複測試，保留仍有效的獨有保護。
+- 一般更新只跑受影響的測試；全套限大範圍變更、測試大量刪減、必要發布檢查或使用者明確要求。
 - For content-only changes, inspect the rendered page or affected data usage when practical.
 - For component, routing, SEO, or style changes, run `npm run build`.
-- Run `npm test` for behavior, data, API or dependency changes. Tests deliberately simulate storage/notification failures; those log lines are expected when the suite passes.
+- Select affected tests by file. Content/FAQ edits: `npx tsx --test tests/content.test.ts`; SEO data: `npx tsx --test tests/seo.test.ts`; campaigns: `npx tsx --test tests/promotions.test.mjs`; swipe logic: `npx tsx --test tests/photo-gestures.test.ts`.
+- The owner requested deletion of consultation storage/retry/notification/input-validation, JSON-LD security and analytics regression tests. Do not recreate them as routine cleanup or require them for unrelated website updates.
 - For visual changes, verify desktop and mobile layouts before reporting completion.
-- Run `npm run test:browser` when changing consultation navigation, modal keyboard behavior or calculator input behavior. Keep test receivers isolated and reports ignored.
+- For interaction changes, select the affected browser file or scenario, e.g. `npm run test:browser -- site.spec.ts --grep "loan"`. Use desktop and mobile for affected UI. Keep test receivers isolated and reports ignored.
+- Browser tests already build the production app; do not also run a separate build for the same unchanged revision.
 - Run `git diff --check` and report what was actually checked; local verification does not prove production deployment or external delivery.
 
 <!-- BEGIN:nextjs-agent-rules -->

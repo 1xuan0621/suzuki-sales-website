@@ -1,3 +1,4 @@
+import { after } from "next/server";
 import { createConsultationHandler } from "@/lib/consultation";
 import { saveConsultation } from "@/lib/consultation-storage";
 import { deliverConsultation } from "@/lib/consultation-delivery";
@@ -14,4 +15,5 @@ export const POST = createConsultationHandler({
   ],
   save: saveConsultation,
   deliver: deliverConsultation,
+  afterResponse: after,
 });

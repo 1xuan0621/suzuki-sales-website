@@ -1,5 +1,5 @@
 import type { CarId } from "./site";
-import { editorialReviewedAt, type ContentSourceId } from "./content-sources";
+import type { ContentSourceId } from "./content-sources";
 
 export interface FaqItem {
   id: string;
@@ -12,31 +12,45 @@ export interface FaqItem {
 }
 
 export const faqPage = {
-  updatedAt: editorialReviewedAt,
+  updatedAt: "2026-09-11",
   title: "常見 QA｜購車、交車與 SUZUKI 車型問題｜鈺漣",
-  description: "查找購車費用、訂金、貸款、保險、跨縣市交車與保養問題，也能快速了解 SWIFT 小車比較、Jimny 改款差異，連到各車型完整問答。",
+  description: "查找購車費用、訂金、交車、休旅選擇、油電回本與保養胎壓問題，也能了解 SWIFT 與 Jimny 重點問答，連到各車型完整說明。",
 };
 
 export const generalFaqGroups: { id: string; title: string; items: FaqItem[] }[] = [
+  { id: "selection", title: "選車與用車需求", items: [
+    { id: "suv-or-hatchback", question: "小家庭一定要買休旅車嗎？掀背小車夠不夠？", answer: "不一定。先用正常前座坐姿，確認全家就座、安全座椅與常用行李能否同時安排；再看車位和上下車動作。若小車已滿足需求，可以一起比較停車便利性。車身比較高或比較長，都不代表你的乘坐組合一定更好用。", sourceIds: ["swift", "sCross"], links: [{ href: "/guides/suv-selection", label: "用五步驟挑家庭用車" }] },
+    { id: "two-child-seats", question: "後座放兩張安全座椅，中間還能坐大人嗎？", answer: "不能只看五人座標示判斷。需以實際安全座椅正確安裝後，確認中間座面、肩部空間與安全帶扣具，讓成人試坐並正確繫帶。安裝位置和固定方式依車輛及安全座椅手冊，不為了擠出空間移動固定點。", sourceIds: [], links: [{ href: "/guides/suv-selection#seating", label: "帶家人試坐時確認這幾件事" }] },
+    { id: "hybrid-payback", question: "一年只開五千公里，買油電就不划算嗎？", answer: "沒有固定里程門檻。先用實際成交價差、預估油耗與年里程算能源費差異，再把稅費、保養、保險與持有年數一起比較。里程少通常讓能源費較慢抵銷價差，但起步、煞車和乘坐感受仍可納入選擇；不要直接套用別台車的回本年限。", sourceIds: ["energyLabel"], links: [{ href: "/guides/powertrain-choice#cost", label: "看油電成本與回本算式範例" }] },
+    { id: "hybrid-plug", question: "輕油電、一般油電、純電都要插電嗎？", answer: "不用一概而論。Suzuki 的 SWIFT、VITARA、S-CROSS 輕油電不用外接充電；一般 HEV 油電也不用插電，但動力運作與輕油電不同。e VITARA 是需要充電的純電車。PHEV 則是另一類插電式油電，選車前先確認完整動力名稱。", sourceIds: ["swift", "vitara", "sCross", "fit", "eVitara"], links: [{ href: "/guides/powertrain-choice#systems", label: "一次看懂動力系統差異" }] },
+    { id: "suv-motion", question: "休旅車後座一定比較晃，或比較容易暈車嗎？", answer: "不能只用車型類別判斷每個人的感受。建議讓常坐車的人一起試乘，以相近路線、座位及一般起步煞車比較，記下座椅支撐、路面震動與噪音。網友心得適合拿來找試乘重點，無法代替家人的實際感受。", sourceIds: [], links: [{ href: "/guides/suv-selection#test-drive", label: "如何安排有比較基準的試乘" }] },
+  ] },
   { id: "budget", title: "預算與付款", items: [
     { id: "total-cost", question: "網頁車價就是交車總價嗎？還有哪些費用？", answer: "網頁標示的是建議售價。請另外核對成交車價、保險、領牌及稅費、選配、貸款費用和另約運送費。已包含的項目不重複加算；已付訂金會抵車款。先拿到明細，再比較交車前支出與全期總成本。", sourceIds: ["consumer", "registration"], links: [{ href: "/guides/first-car#budget", label: "看購車預算與試算範例" }] },
     { id: "cash-or-loan", question: "現金、零利率或低月付，哪一種比較划算？", answer: "先取得各方案實際車價，再加總頭款、全部期款、尾期款及另收費用。低月付可能只是拉長期數或把金額留到後面；零利率也要看費用與折扣差異。請同時比較總費用年百分率、提前清償條件及自己的現金需求。", sourceIds: ["loan"], links: [{ href: "/guides/first-car#payment", label: "看貸款與保險比較清單" }, { href: "/#loan-calculator", label: "前往貸款試算" }] },
     { id: "insurance-coverage", question: "只買強制險夠嗎？「全險」到底包含什麼？", answer: "強制險提供法定範圍的人身傷亡保障，不包含車輛修復費用。對方財物損失、自己的車損與其他風險，需要分別確認相應險種。「全險」不是所有事故都賠的保證；請逐項核對保額、自負額及除外條款，再比較同條件保費。", sourceIds: ["insurance", "autoInsurance"], links: [{ href: "/guides/first-car#payment", label: "了解車險與投保前確認事項" }] },
   ] },
-  { id: "order", title: "訂車與合約", items: [
+  { id: "order", title: "看車與訂車", items: [
+    { id: "test-drive-booking", question: "試乘一定要先預約嗎？到北投所可以停車嗎？", answer: "建議先確認展示或試乘車款、可安排時段與路線，並說明同行人數。北投所提供免費停車位，抵達時可詢問現場人員停放位置；留下網站需求後，仍需由顧問確認才算完成預約。", sourceIds: [], links: [{ href: "/visit/beitou", label: "查看北投所交通與試乘預約" }] },
     { id: "deposit", question: "付了訂金可以退嗎？貸款沒過怎麼辦？", answer: "要看契約、解除原因與適用規定。先談妥退訂、貸款未核准、額度不足或利率不符預期時的處理方式，連同已施工配件如何結算一起留下書面約定。保留契約與收據，有爭議時再依實際文件尋求消費諮詢。", sourceIds: ["consumer"], links: [{ href: "/guides/first-car#contract", label: "看訂車前合約核對清單" }] },
     { id: "model-year", question: "年式、出廠年份和領牌日期有什麼不同？", answer: "年式指車輛款式或配備版本，出廠年月指實際生產時間，領牌日則是車籍登記的日期。三者可能不同；詢價時分開列出，並確認是否已領牌、實際配備與保固起算方式。不要只用『今年的新車』作為約定。", sourceIds: ["consumer"], links: [{ href: "/guides/first-car#contract", label: "了解報價與車輛身分核對" }] },
-    { id: "waiting-time", question: "訂車後多久能交？有車是不是就能馬上領？", answer: "交期還會受到車色與版本供應、貸款及文件進度、領牌與配件施工影響。先確認是否已有可分配車輛、目前完成哪個步驟，以及預估時間或約定期限。若有指定用車日期，下訂前就提出並談妥延誤處理。", sourceIds: [], links: [{ href: "/guides/first-car#delivery", label: "看訂車到交車的每一步" }] },
+    { id: "waiting-time", question: "訂車後多久能交？有車是不是就能馬上領？", answer: "交期還會受到車色與版本供應、貸款及文件進度、領牌與配件施工影響。先確認是否已有可分配車輛、目前完成哪個步驟，以及預估時間或約定期限。若有指定用車日期，下訂前就提出並談妥延誤處理。", sourceIds: [], links: [{ href: "/guides/first-car#paperwork", label: "看訂車到交車的安排" }] },
   ] },
   { id: "delivery", title: "領牌與交車", items: [
-    { id: "payment-inspection", question: "要先付尾款還是先驗車？領牌前能看車嗎？", answer: "看車、付款、領牌及配件施工的順序，應在簽約時明確約定。希望領牌前看指定實車，就提前安排查看時間及付款條件；不要把別人的交車經驗當成所有車商都相同的流程。交車當天仍需依契約點交並記錄待處理事項。", sourceIds: ["consumer"], links: [{ href: "/guides/first-car#delivery", label: "看付款安排與交車檢查清單" }] },
-    { id: "registration-documents", question: "領牌要準備什麼？證件什麼時候交？", answer: "個人、公司及委託代辦所需文件不同。個人身分證明與印章、車輛出廠及完稅資料、發票、保險等需按監理要求備妥，請承辦人提供完整清單。交付前確認用途、管道與歸還時間；本站諮詢表單不用填證件或銀行資料。", sourceIds: ["registration"], links: [{ href: "/guides/first-car#delivery", label: "看領牌文件與交車準備" }] },
+    { id: "payment-inspection", question: "要先付尾款還是先驗車？領牌前能看車嗎？", answer: "看車、付款、領牌及配件施工的順序，應在簽約時明確約定。希望領牌前看指定實車，就提前安排查看時間及付款條件；不要把別人的交車經驗當成所有車商都相同的流程。交車當天仍需依契約點交並記錄待處理事項。", sourceIds: ["consumer"], links: [{ href: "/guides/first-car#paperwork", label: "看付款與領牌前的安排" }] },
+    { id: "registration-documents", question: "領牌要準備什麼？證件什麼時候交？", answer: "個人、公司及委託代辦所需文件不同。個人身分證明與印章、車輛出廠及完稅資料、發票、保險等需按監理要求備妥，請承辦人提供完整清單。交付前確認用途、管道與歸還時間；本站諮詢表單不用填證件或銀行資料。", sourceIds: ["registration"], links: [{ href: "/guides/first-car#paperwork", label: "看領牌文件與交車準備" }] },
     { id: "remote-purchase", question: "住外縣市也能買嗎？可以送到家嗎？", answer: "可以先遠端了解車款、需求與報價，再確認到店或文件安排。若希望其他地點交車，需依地點討論運送方式、費用、保險與驗收；交車地點、時程和可安排範圍以個案約定為準。", sourceIds: [], links: [{ href: "/guides/first-car#paperwork", label: "看跨縣市購車與交車流程" }] },
   ] },
   { id: "ownership", title: "換車與售後", items: [
     { id: "local-service", question: "在台北買車，之後保養一定要回台北嗎？", answer: "可先從 Taiwan Suzuki 官方保修據點查找附近服務中心，洽詢預約及車輛保養需求。保固依隨車文件與適用條件辦理；購車贈送保養或經銷商專案是否限店使用，另行確認。加裝配件也要分清施工與保固窗口。", sourceIds: ["service"], links: [{ href: "/guides/first-car#paperwork", label: "看跨縣市交車安排" }] },
     { id: "trade-in-tax", question: "沒有舊車也能減稅嗎？換購一定能折 10 萬嗎？", answer: "新購小客車減稅與汰舊換新是兩組條件。依財政部現行規則，符合條件的新購 2,000cc 以下小客車可減徵最高 5 萬元；符合汰舊換新可另申請最高 5 萬元，合計受已繳貨物稅額限制。純電車、小貨車等須另核對，不是每台車都能折 10 萬。", sourceIds: ["tax"], links: [{ href: "/guides/trade-in#tax", label: "看舊車換購與減稅注意事項" }] },
-    { id: "test-drive-booking", question: "試乘一定要先預約嗎？到北投所可以停車嗎？", answer: "建議先確認展示或試乘車款、可安排時段與路線，並說明同行人數。北投所提供免費停車位，抵達時可詢問現場人員停放位置；留下網站需求後，仍需由顧問確認才算完成預約。", sourceIds: [], links: [{ href: "/visit/beitou", label: "查看北投所交通與試乘預約" }] },
+  ] },
+  { id: "maintenance", title: "保養與日常檢查", items: [
+    { id: "maintenance-low-mileage", question: "半年開不到三千公里，也要保養嗎？", answer: "先看自己的保養表，不能只看里程。若同時規定時間與里程、採先到者為準，時間到仍應安排相應保養。首次檢查與後續定保分開核對；各車型、年式和使用條件可能不同，請服務廠依 Suzuki 台灣隨車文件確認，不套用其他品牌或海外週期。", sourceIds: ["maintenancePrinciples", "service"], links: [{ href: "/guides/car-maintenance#schedule", label: "找到自己適用的保養週期" }] },
+    { id: "maintenance-extras", question: "保養單上的清潔、添加劑都一定要做嗎？", answer: "先問這一項是手冊到期項目、檢查後的症狀處理，還是可自選的清潔服務，並請接待說明原因與費用。不能把所有加項都當必要，也不要只看名稱就刪掉有車況依據的處置。維修與追加項目應事先說明、取得同意，取車時再核對工單。", sourceIds: ["repairConsent"], links: [{ href: "/guides/car-maintenance#work-order", label: "把保養工單分成三類來看" }] },
+    { id: "tire-pressure", question: "胎壓要打多少？可以跟別台車一樣嗎？", answer: "依自己車門框標籤或車主手冊的建議冷胎胎壓，在冷胎時量測，並確認前後輪、負載條件和單位。不同車型不共用同一個 PSI 數字，也不要把胎壁最大壓力當成車輛建議值。找不到標籤或讀不懂時，請服務廠協助核對。", sourceIds: ["tirePressure"], links: [{ href: "/guides/car-maintenance#daily-checks", label: "查看日常檢查與紀錄清單" }] },
+    { id: "ev-maintenance", question: "油電車少換機油、純電車不用保養，是真的嗎？", answer: "不能這樣推定。汽油引擎仍在的輕油電或一般油電，須依各車保養表維護引擎；純電車雖沒有引擎機油，輪胎、煞車等仍需檢查。實際更換項目與週期以該車手冊為準，不能直接沿用別種動力的保養單。", sourceIds: ["maintenancePrinciples", "service"], links: [{ href: "/guides/car-maintenance#powertrain", label: "不同動力的保養差別" }] },
+    { id: "battery-life", question: "油電或電動車的電池，保固到期就得換嗎？", answer: "保固期限不是固定更換日期，也不是壽命保證。是否需要更換要看電池種類、檢測結果與車況；先分清一般供電電瓶、輕油電電池與純電動力電池。詢價時再核對零件、工資及保固條件，不直接拿網友帳單推算自己的費用。", sourceIds: [], links: [{ href: "/guides/powertrain-choice#decision", label: "選車前要問清楚哪些電池條件？" }] },
   ] },
 ];
 

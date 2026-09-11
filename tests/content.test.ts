@@ -35,6 +35,10 @@ test("guide migrations have existing destinations and keep model topics out of t
     assertDestination(`/guides/${guide.slug}`);
     assert.equal(new Set(guide.sections.map((section) => section.id)).size, guide.sections.length);
     for (const source of guide.sourceIds) assert.ok(contentSources[source]);
+    for (const slug of guide.relatedSlugs) {
+      assert.notEqual(slug, guide.slug);
+      assertDestination(`/guides/${slug}`);
+    }
     for (const section of guide.sections) if (section.link) assertDestination(section.link.href);
   }
 });

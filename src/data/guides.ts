@@ -2,6 +2,7 @@ import type { ContentSourceId } from "./content-sources";
 
 export interface Guide {
   slug: string;
+  category: "process" | "selection" | "ownership";
   audience: string;
   title: string;
   description: string;
@@ -9,6 +10,8 @@ export interface Guide {
   updatedAt: string;
   reviewedAt: string;
   sourceIds: ContentSourceId[];
+  sourceNote?: string;
+  relatedSlugs: string[];
   conversation: string;
   sections: {
     id: string;
@@ -23,13 +26,20 @@ export interface Guide {
 
 const guideReviewedAt = "2026-09-09";
 export const guideIndex = {
-  updatedAt: guideReviewedAt,
-  title: "Suzuki 購車指南｜第一次買車、舊車換新車｜鈺漣",
-  description: "跟鈺漣買 Suzuki，從哪一步開始？先看購車流程圖，再依第一次買車或舊車換新車，了解試乘、報價、舊車估價與交車安排。",
+  updatedAt: "2026-09-11",
+  title: "Suzuki 購車指南｜選車比較、購車流程與保養｜鈺漣",
+  description: "從第一次買車、舊車換新車，到家庭休旅選擇、汽油與油電比較、交車後保養，依你的用車問題找到指南與實用清單。",
 };
+
+export const guideCategories = [
+  { id: "process", title: "準備買車與換車", description: "從預算、報價到交車，先把購車這件事安排好。" },
+  { id: "selection", title: "找到適合自己的車", description: "用家人、停車位與日常路線，決定空間和動力怎麼選。" },
+  { id: "ownership", title: "交車後的保養與使用", description: "知道何時回廠、工單怎麼看，慢慢熟悉照顧愛車的方法。" },
+] as const;
 
 export const firstCarGuide: Guide = {
   slug: "first-car",
+  category: "process",
   audience: "第一次買車",
   title: "第一次買 Suzuki，從看車到開回家",
   description: "第一次買車不用先背熟規格。鈺漣陪你從用車需求與預算開始，弄懂 Suzuki 試乘、購車菜單、訂金、貸款保險和交車當天要確認的事。",
@@ -37,6 +47,7 @@ export const firstCarGuide: Guide = {
   updatedAt: guideReviewedAt,
   reviewedAt: guideReviewedAt,
   sourceIds: ["consumer", "loan", "insurance", "registration", "service", "swift", "jimny", "eVitara"],
+  relatedSlugs: ["suv-selection", "car-maintenance"],
   conversation: "鈺漣你好，我第一次買車，主要是＿＿通勤，平常坐＿＿人，車停＿＿。希望交車前支出在＿＿以內，每月連養車大約＿＿，想先了解＿＿／還沒決定車款。",
   sections: [
     {
@@ -86,6 +97,7 @@ export const firstCarGuide: Guide = {
 
 export const tradeInGuide: Guide = {
   slug: "trade-in",
+  category: "process",
   audience: "舊車換新車",
   title: "換一台 Suzuki，舊車和新車怎麼接上？",
   description: "舊車還能開，現在換 Suzuki 值不值得？鈺漣帶你分開看舊車估價、新車報價與減稅，算出要補的錢，再安排交車和舊車交接。",
@@ -93,6 +105,7 @@ export const tradeInGuide: Guide = {
   updatedAt: guideReviewedAt,
   reviewedAt: guideReviewedAt,
   sourceIds: ["consumer", "tradeInTax", "registration", "service", "eVitara"],
+  relatedSlugs: ["first-car", "powertrain-choice"],
   conversation: "鈺漣你好，我現在開＿＿，＿＿年、約＿＿公里，還有／沒有貸款。想換車主要因為＿＿，考慮 Suzuki 的＿＿，希望＿＿前交車，舊車在這之前還需要每天使用。",
   sections: [
     {
@@ -127,7 +140,134 @@ export const tradeInGuide: Guide = {
   ],
 };
 
-export const guides = [firstCarGuide, tradeInGuide];
+const suvSelectionGuide: Guide = {
+  slug: "suv-selection",
+  category: "selection",
+  audience: "家庭休旅怎麼選",
+  title: "家庭休旅怎麼選？先試家人、行李和停車位",
+  description: "小家庭一定需要休旅車嗎？從安全座椅、嬰兒車、長輩上下車、後座舒適度到停車條件，用五個步驟縮小選擇。",
+  introduction: "「想買一台空間大的休旅」是很好的起點，但空間大在哪裡，最好再說清楚。是要同時放嬰兒車和行李，還是讓長輩容易上下車？先把平日與假日的乘坐情境列出來，會比只看車長、公升數或網友推薦更容易找到適合的車。",
+  updatedAt: "2026-09-11", reviewedAt: "2026-09-11",
+  sourceIds: ["swift", "vitara", "sCross", "jimny", "eVitara"],
+  sourceNote: "試坐與比較清單為本站依用車需求整理；乘坐舒適度沒有統一排名，車型配置以台灣版本為準。",
+  relatedSlugs: ["powertrain-choice", "first-car"],
+  conversation: "鈺漣你好，平常坐＿＿位大人、＿＿位小孩，有＿＿張安全座椅，常帶＿＿。車位限制是＿＿，最想改善＿＿，想比較適合的家庭用車。",
+  sections: [
+    {
+      id: "needs", step: "列出乘坐情境", title: "先寫平日坐誰、假日帶什麼",
+      paragraphs: ["把一週的用車拆成平日通勤、接送家人和假日出遊。平常一人開車、偶爾兩人旅行，與每天都要帶孩子出門，需要的後座機能不同。先列三項不能妥協的需求，再把偶爾才用到的條件放後面。", "休旅、小型跨界與掀背的名稱不能代替試坐。若小車已滿足乘坐和行李需求，可以一起比較停車便利性；如果每次出門都得犧牲乘客位置才能放行李，就要重新評估空間。"],
+      points: [{ label: "通勤日", text: "誰開車、常停哪裡、每天要經過哪些窄巷或坡道？" }, { label: "全家出門", text: "幾位乘客、幾張安全座椅、嬰兒車與旅行箱是否要同時帶？" }, { label: "未來需求", text: "預計持有期間是否會增加成員、改變工作地點或照顧長輩？" }],
+    },
+    {
+      id: "seating", step: "家人一起試坐", title: "有五個座位，不等於你的組合都坐得下",
+      paragraphs: ["先把前座調成主要駕駛的正常坐姿，再試後座膝部、腳部與頭部空間。需要後向安全座椅時，請帶實際型號確認能否依座椅和車輛手冊正確安裝，以及前座是否仍能正常使用。", "兩張安全座椅裝好後，中間還能不能坐成人，要再確認座面寬度、安全帶扣具是否可用，以及乘客能否正確繫帶。不要只因為標示五人座，就認定兩張安全座椅加一位大人一定可行。", "長輩則親自走一次開門、坐入、轉身與下車。座椅高不一定適合每個人；實際感受門檻、踏地和抓握位置，比替家人想像更準。"],
+      note: "安全座椅試裝先和展間確認；安裝位置與固定方式依車輛及安全座椅手冊，不為了多坐一人更改固定點。",
+    },
+    {
+      id: "luggage-parking", step: "試放與量車位", title: "行李放得進，回家也要停得下",
+      paragraphs: ["比較行李箱時，固定後座直立、相同乘員和同一組物品。先放最難收的嬰兒車或露營箱，再放旅行袋，確認尾門能正常關閉、物品可固定，也不需要讓乘客抱著大型行李。公升數之外，開口、輪拱與底板形狀都會影響實際使用。", "帶著車位限長、限寬、限高與載重核對實車；入口坡道、轉彎空間、開門和尾門上方空間也要量。機械車位另請設備管理者確認適用條件，包含輪胎定位與實際停放規範。"],
+      note: "試放可以帶這一組：家用嬰兒車、常用旅行箱，以及出遊時會多帶的一個袋子。先確認最常出現的組合，再考慮一年一次的大量載物。",
+    },
+    {
+      id: "test-drive", step: "同條件試乘", title: "後座會不會晃，讓常坐的人一起感受",
+      paragraphs: ["論壇上的晃動、隔音或座椅心得，可用來提醒自己要測什麼，但別當成家人的乘坐結果。安排相近路線、乘坐位置和空調設定，觀察一般起步、煞車、轉彎與路面接縫時的感受。若沒有安排到常走的路況，就把這項留作待確認。", "有 ACC 或車道輔助，也先問清楚作動速度、停止後是否需自行起步，以及哪些情況會退出。配備名稱相似，功能範圍可能不同；試乘時請顧問示範正常操作，駕駛仍要隨時掌握車況。"],
+      points: [{ label: "駕駛記一項", text: "哪個視野、操控或停車動作最不習慣？" }, { label: "乘客記一項", text: "上下車、座椅支撐、噪音或晃動，哪一項最影響日常？" }],
+      link: { href: "/visit/beitou", label: "先確認可安排的展示與試乘車" },
+    },
+    {
+      id: "shortlist", step: "留下兩三台", title: "最後比較總支出，再決定要哪台 Suzuki",
+      paragraphs: ["先刪掉坐不下、裝不下或車位不合的選項，再比較成交條件、停車、油電、保險、保養及輪胎費用。詢問輪胎時列出實際尺寸與單條報價，避免只比較第一年看起來較低的支出。", "在 Suzuki 車系中，VITARA 與 S-CROSS 可以先用家庭乘坐和驅動需求比較；Jimny 則需另外接受三門進出與載物取捨。e VITARA 要把固定充電方式一起納入。四驅功能與模式因車型不同，不能只用『有四驅』推定所有道路都適合。"],
+      link: { href: "/cars/vitara#vitara-vs-s-cross", label: "核對 VITARA 與 S-CROSS 的台灣版本差異" },
+    },
+  ],
+};
+
+const maintenanceGuide: Guide = {
+  slug: "car-maintenance",
+  category: "ownership",
+  audience: "第一次保養怎麼準備",
+  title: "第一次汽車保養怎麼準備？週期、工單與日常檢查",
+  description: "里程少也要回廠嗎？第一次保養先準備車型與紀錄，分清定期項目、車況維修和自選服務，再確認費用與下次保養時間。",
+  introduction: "保養最容易困惑的，常常不是怎麼換零件，而是「現在該不該做、這張單為什麼多了這些項目」。先找到自己車輛適用的保養表，再請接待人員逐項說明，就能把必要的維護和可自行選擇的服務分清楚。",
+  updatedAt: "2026-09-11", reviewedAt: "2026-09-11",
+  sourceIds: ["service", "maintenancePrinciples", "repairConsent", "tirePressure"],
+  sourceNote: "保養表讀法參考台灣原廠公開說明；Toyota 頁面的公里數、月份與保固不適用於 Suzuki。本次未取得各年式 Suzuki 台灣隨車保養表，因此不列統一換油、換電池或更換耗材週期。請依自己的隨車文件確認。",
+  relatedSlugs: ["powertrain-choice", "first-car"],
+  conversation: "鈺漣你好，我的車是＿＿、＿＿年式，目前＿＿公里，上次保養在＿＿。平常多為＿＿路線，想確認保養據點與這次應準備的資料。",
+  sections: [
+    {
+      id: "schedule", step: "找到保養表", title: "先看月份與里程，別只等公里數到",
+      paragraphs: ["翻出車主手冊、保養手冊與上次工單，核對車型、年式、動力和上次實際完成的項目。保養表若同時規定時間與里程並採先到者為準，就不能因為里程少而忽略時間。首次檢查與後續定保也可能有不同安排，交車時就請接待人員寫清楚。", "短程、市區走走停停、長時間停放或特殊使用環境，都先如實告知服務廠，再核對手冊是否有不同保養要求。不要把網友的換油間隔、別款車或海外版本週期直接搬到自己的車上。"],
+      note: "預約前準備：車型與年式、目前里程、上次日期與工單、近期異常，以及這次必須取車的時間。保養週期若有疑問，請服務廠指出對應手冊頁次。",
+    },
+    {
+      id: "work-order", step: "看懂保養工單", title: "工單先分三類，再決定這次做什麼",
+      paragraphs: ["請接待人員先列項目、材料規格、數量、工資與預估總額。看到不熟的名稱，可以問：「這是保養表到期項目，還是檢查後發現的問題？不處理會影響什麼？」先弄懂原因，才有辦法討論取捨。"],
+      points: [{ label: "保養表到期項目", text: "核對本次時間或里程對應的檢查、更換內容；『檢查』和『一律更換』是不同動作。" }, { label: "依車況需要的維修", text: "例如磨耗、滲漏或異音，請技師說明檢查結果、急迫性與報價；不要只憑網友說可刪就取消。" }, { label: "可自行選擇的服務", text: "美容、除臭或額外清潔先問用途，確認是否屬於手冊要求、症狀處理或單純自選服務。" }],
+      note: "維修及追加項目、費用應先告知並取得同意。留下可聯絡方式，約定有加項先通知；交車時再對照原報價與實際施作內容。",
+      link: { href: "/faq#maintenance-extras", label: "保養加項可以怎麼問？" },
+    },
+    {
+      id: "daily-checks", step: "平常看什麼", title: "從輪胎、視線與異常紀錄開始",
+      paragraphs: ["每月及長途出發前留意輪胎狀態，在冷胎時依車門標籤或手冊核對胎壓；前後輪與不同負載可能有不同設定。也看看燈光、雨刷和玻璃清潔狀況，常用操作是否正常。這些日常觀察不能取代定期保養。", "異音或警示偶爾才出現時，停妥車後記下冷車或熱車、車速區間、天候和發生頻率，提供技師重現問題。不要為了拍攝而分心駕駛。若涉及煞車、轉向異常或明顯輪胎損傷，應先安全停車並聯絡專業協助，不等到下次定保才處理。"],
+      link: { href: "/faq#tire-pressure", label: "胎壓要打多少？" },
+    },
+    {
+      id: "powertrain", step: "分清動力系統", title: "輕油電仍有引擎，純電也不是免保養",
+      paragraphs: ["如果車上仍有汽油引擎，就要核對引擎相關的保養要求；不能因為車名有 Hybrid 就省略換油。純電車沒有引擎機油這一項，但輪胎、煞車與其他系統仍需按車輛保養表檢查。實際項目與油液規格由適用手冊決定。", "一般供電電瓶、輕油電系統電池與純電車動力電池，也不是同一種零件。詢問更換或保固時，要說清楚是哪一顆、檢測結果和適用條件；不要用別人的電池帳單推定自己的價格或壽命。"],
+      link: { href: "/guides/powertrain-choice#systems", label: "先弄懂汽油、輕油電、油電與純電的差別" },
+    },
+    {
+      id: "records", step: "留單據與預算", title: "這次做完，留下下次能接續的紀錄",
+      paragraphs: ["取車時對照施作明細，留下日期、里程、零件規格、費用、檢查結果與下次預計時間。未完成的項目另寫處理方式，避免換一位接待人員就得從頭解釋。預約時間不等於保證完工時間，需用車時先談妥取車安排。", "抓養車預算時，將定保和較低頻率的耗材分開列，像輪胎或電瓶先詢問適用規格及報價，再按自己的持有期間預留費用。贈送保養有沒有包含材料、工資，是否限店與限期，也要看使用條件。"],
+      link: { href: "/faq#local-service", label: "購車與保養可以在不同縣市嗎？" },
+    },
+  ],
+};
+
+const powertrainGuide: Guide = {
+  slug: "powertrain-choice",
+  category: "selection",
+  audience: "汽油、油電與純電怎麼選",
+  title: "汽油、輕油電、油電與純電怎麼選？從里程和充電開始",
+  description: "一年開不多就不適合油電嗎？先分清輕油電、一般油電與純電，再用年里程、實際價差、能源費和充電時間評估。",
+  introduction: "「一年要開幾公里才划算」沒有所有車款共用的答案。價差、路線和打算開幾年都會改變結果；每天起步、煞車與補充能源是否順手，也值得一起比較。先看懂車子的動力系統，再用自己的生活算一次。",
+  updatedAt: "2026-09-11", reviewedAt: "2026-09-11",
+  sourceIds: ["swift", "vitara", "sCross", "eVitara", "fit", "energyLabel"],
+  sourceNote: "費用範例全部為假設值，展示計算方式；不是現行油價、電價、實測油耗或 Suzuki 報價。各車型的充電、保養與保固依台灣版本資料確認。",
+  relatedSlugs: ["suv-selection", "car-maintenance"],
+  conversation: "鈺漣你好，我一年大約開＿＿公里，市區／高速約＿＿，預計持有＿＿年。住家或工作地點＿＿充電，想比較＿＿，最在意＿＿。",
+  sections: [
+    {
+      id: "systems", step: "先分清動力", title: "名字都有電，使用方式卻不一樣",
+      paragraphs: ["不要只看 Hybrid 字樣就推定能純電行駛或需要插電。先核對實際車型的動力和補充能源方式，再來看價格與使用成本。"],
+      points: [{ label: "汽油車", text: "以汽油引擎提供動力，日常到加油站補充燃油；排氣量之外，也要確認變速箱、車重與實際反應。" }, { label: "輕油電 MHEV", text: "Suzuki SWIFT、VITARA 與 S-CROSS 的系統利用回收電能輔助引擎，不用外接充電；不能套用其他油電車的純電行駛能力。" }, { label: "一般油電 HEV", text: "例如 FIT e:HEV 可依條件切換馬達與引擎運作，不需外接充電。純電行駛有條件限制，不能把它當成有固定純電續航的電動車。" }, { label: "純電 BEV", text: "例如 e VITARA，以電池與馬達行駛，需要安排充電。若看到 PHEV，則是另一類插電式油電，不能和 HEV 或純電混為一談。" }],
+    },
+    {
+      id: "routine", step: "記下一週路線", title: "除了年里程，還要知道每天怎麼開",
+      paragraphs: ["先估每天通勤距離、每週天數，加上假日和長途行程，換算一年里程。分開記市區停走與高速巡航，試乘時針對起步、引擎介入、再加速和煞車感受比較。里程少不代表一定不適合油電，只是省下的能源費可能需要更久才抵銷價差。", "官方能源效率值適合在相同測試標準下比較，不能當作每位車主都能達成的結果。自己的預算可以用較保守的情境再算一次；短程、冷氣、載重和路況不同，都可能讓實際結果改變。"],
+    },
+    {
+      id: "cost", step: "算持有成本", title: "用同一段里程算，別只比一公升跑多遠",
+      paragraphs: ["汽油或油電車的年能源費，可用『年里程 ÷ 預估油耗（km/L）× 每公升油價』估算。純電車則用『年里程 ÷ 預估效率（km/kWh）× 每度電價』起算，再考慮充電損耗、停車及其他收費；若採每分鐘計價，要按實際站點規則另估。", "假設一年開 12,000 公里，兩台車油耗分別為 15 與 20 km/L、油價假設每公升 30 元，年油費分別是 24,000 與 18,000 元，相差 6,000 元。若成交價差 60,000 元，單靠油費約需 10 年抵銷；里程減半，其他條件不變時約需 20 年。"],
+      points: [{ label: "完整持有成本", text: "購車支出，加持有期間的能源、稅費、保險、保養、停車及融資成本，最後扣掉出售收入；未確定的殘值用不同假設比較。" }, { label: "避免算兩次", text: "計入完整車價後，不再把貸款本金重複加入，融資另計利息與費用；已用車價減出售收入，也不要再加一次折舊。" }, { label: "支出和感受分開評估", text: "省錢差異算清楚後，再決定較喜歡的起步、安靜程度或操作感，值不值得多付這筆差額。" }],
+      note: "以上只是假設算式，不是任何兩款實車的比較。若算出的每年淨節省小於或等於零，就不能用這個除法推算回本年限；保養、配備或殘值差異也不能省略。",
+      link: { href: "/guides/first-car#budget", label: "交車前現金需求，另看購車預算" },
+    },
+    {
+      id: "charging", step: "實走充電安排", title: "考慮純電，先走一次平常的補電路線",
+      paragraphs: ["有固定車位時，先確認能否設置相容設備，再由合格專業人員勘查供電與施工條件。社區同意、設備、配線與費用都應確認，不能只因為車位附近有插座就算完成家充準備。", "沒有家充時，實際到平常會用的公共站看看接頭、開放時間、收費與占用狀況，把繞路、等待和充電時間一起算進生活。準備第二個相容站點，長途也確認目的地能否補電；『附近有樁』和『每週都方便用』是不同的條件。"],
+      link: { href: "/cars/e-vitara#e-vitara-charging", label: "查 e VITARA 台灣充電接頭與準備事項" },
+    },
+    {
+      id: "decision", step: "試乘後決定", title: "把還不確定的成本和感受問完",
+      paragraphs: ["詢價時指定同一版本與必要配備，分別拿到成交明細、定保項目與電池保固條件。電池保固要區分故障保固和容量條件，並核對年限、里程與除外事項；不能把保固到期當成必定要換電池的時間。", "最後留下一張比較表：買車差額、年能源費、其他固定支出、充電時間，以及自己和家人的試乘感受。如果能源費差距小，就更應把每天會遇到的使用便利性放回決策裡。"],
+      link: { href: "/guides/car-maintenance#powertrain", label: "不同動力的保養要留意什麼？" },
+    },
+  ],
+};
+
+export const guides = [firstCarGuide, tradeInGuide, suvSelectionGuide, powertrainGuide, maintenanceGuide];
 export function getGuide(slug: string) { return guides.find((guide) => guide.slug === slug); }
 export function guideTitle(guide: Guide) { return `${guide.title}｜鈺漣購車指南`; }
 

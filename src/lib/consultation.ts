@@ -19,6 +19,7 @@ export interface ConsultationDependencies {
   allowedOrigins: string[];
   save: (record: StoredConsultation) => Promise<{ created: boolean; record: StoredConsultation }>;
   deliver: (record: StoredConsultation) => Promise<void>;
+  afterResponse: (task: () => Promise<void>) => void;
 }
 
 export function validateConsultation(value: unknown): Consultation | null {
@@ -88,7 +89,12 @@ export function createConsultationHandler(deps: ConsultationDependencies) {
       }
       // Only the atomic create winner delivers. Concurrent retries and later deployments reuse the receipt.
       if (saved.created) {
-        try { await deps.deliver(saved.record); }
+        try {
+          deps.afterResponse(async () => {
+            try { await deps.deliver(saved.record); }
+            catch { console.error("consultation_delivery_pending", { requestId: data.requestId }); }
+          });
+        }
         catch { console.error("consultation_delivery_pending", { requestId: data.requestId }); }
       }
       return response(200, { ok: true, receipt: data.requestId });

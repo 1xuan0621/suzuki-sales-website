@@ -1,12 +1,13 @@
 import Link from "next/link";
 import type { Guide } from "@/data/guides";
 
-export default function GuideFlow({ sections, basePath = "", preserveIds = false }: {
+export default function GuideFlow({ sections, basePath = "", preserveIds = false, label = "購車流程" }: {
   sections: Guide["sections"];
   basePath?: string;
   preserveIds?: boolean;
+  label?: string;
 }) {
-  return <nav aria-label="購車流程" className="mt-6">
+  return <nav aria-label={label} className="mt-6">
     <ol className={`grid gap-5 ${sections.length === 5 ? "lg:grid-cols-5" : "lg:grid-cols-6"}`}>
       {sections.map((section, index) => <li key={section.id} id={preserveIds ? section.id : undefined} className="relative min-w-0 scroll-mt-6">
         <Link href={`${basePath}#${section.id}`} className="group flex h-full items-center gap-3 rounded-xl border border-[#dfdcd7] bg-white px-4 py-3 no-underline transition-colors hover:border-[#b9000e] hover:bg-[#fff9f8] lg:block lg:px-3 lg:py-4">
