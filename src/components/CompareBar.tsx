@@ -154,7 +154,11 @@ export default function CompareBar() {
   return (
     <>
       {/* Stack comparison and contact actions so they never overlap. */}
-      <div data-entry="sticky" className={`fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#e7e7e7] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] ${selected.length === 0 ? (showContact ? "md:hidden" : "hidden") : ""}`}>
+      <div
+        data-entry="sticky"
+        inert={selected.length === 0 && !showContact}
+        className={`fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#e7e7e7] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] transition-transform duration-400 ease-in-out motion-reduce:transition-none md:translate-y-0 ${selected.length === 0 ? "md:hidden" : ""} ${showContact ? "translate-y-0" : selected.length > 0 ? "translate-y-[calc(57px+env(safe-area-inset-bottom))]" : "translate-y-[calc(100%+24px)]"}`}
+      >
       {selected.length > 0 && (
       <div aria-label="已選車款" className="flex items-center gap-2 px-3 py-3 max-w-[1180px] mx-auto">
         <span className="text-[13px] font-extrabold text-[#888] whitespace-nowrap shrink-0">
@@ -195,7 +199,7 @@ export default function CompareBar() {
       </div>
 
       )}
-      <nav aria-label="快速聯絡" hidden={!showContact} className="md:hidden border-t border-[#eee] px-3 pt-1.5 pb-[calc(6px+env(safe-area-inset-bottom))]">
+      <nav aria-label="快速聯絡" aria-hidden={!showContact} inert={!showContact} className="md:hidden border-t border-[#eee] px-3 pt-1.5 pb-[calc(6px+env(safe-area-inset-bottom))]">
         <div className="flex gap-2">
           <a href={`https://line.me/R/ti/p/~${dealer.line}`} target="_blank" rel="noopener noreferrer" className="flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-[#06C755] text-sm font-bold text-white no-underline"><ContactIcon type="line" />加入 LINE</a>
           <a href={`tel:${dealer.phone.replace(/\D/g, "")}`} className="flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-[#e60012] text-sm font-bold text-white no-underline"><ContactIcon type="phone" />電話諮詢</a>
