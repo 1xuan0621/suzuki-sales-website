@@ -10,6 +10,10 @@ const generalItems = generalFaqGroups.flatMap((group) => group.items);
 const allItems = [...generalItems, ...Object.values(carFaqs).flat()];
 
 function assertDestination(href: string) {
+  if (href.startsWith("https://")) {
+    assert.ok(Object.values(contentSources).some((source) => source.url === href), `Unregistered source: ${href}`);
+    return;
+  }
   const [path, hash] = href.split("#");
   assert.ok(contentRoutes.some((route) => route.path === path), `Missing page: ${href}`);
   if (!hash || path === "/") return;

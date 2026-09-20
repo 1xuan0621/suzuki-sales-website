@@ -134,66 +134,68 @@ export default function HomePageClient({ introduction, buyingTopics }: { introdu
           </section>
 
           {/* ═══════ 聯絡資訊 3 欄 ═══════ */}
-          <section aria-label="聯絡資訊" data-entry="hero" className="w-[calc(100%-88px)] mx-auto mt-[34px] grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:w-[calc(100%-28px)] max-sm:mt-5 max-sm:grid-cols-1 max-sm:gap-[14px]">
-            <article className="flex items-center gap-[22px] min-h-[170px] p-7 bg-white border border-[#e7e7e7] rounded-[18px] shadow-[0_12px_30px_rgba(20,20,20,0.08)] border-l-5 border-l-[#e60012] max-sm:min-h-[132px] max-sm:p-5">
-              <div className="flex-shrink-0 grid place-items-center w-[66px] h-[66px] rounded-full bg-[#e60012] text-white text-[30px] font-extrabold max-sm:w-[54px] max-sm:h-[54px] max-sm:text-2xl">
+          <section aria-label="聯絡資訊" data-entry="hero" className="w-[calc(100%-88px)] mx-auto mt-[34px] grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 max-sm:w-[calc(100%-28px)] max-sm:mt-5 max-sm:grid-cols-1 max-sm:gap-[14px]">
+            <article className="flex min-w-0 items-center gap-3 p-4 bg-white border border-[#e7e7e7] rounded-2xl shadow-[0_6px_18px_rgba(20,20,20,0.05)] border-l-5 border-l-[#e60012]">
+              <div className="flex-shrink-0 grid place-items-center w-11 h-11 rounded-full bg-[#e60012] text-white text-2xl font-extrabold">
                 ☎
               </div>
-              <div>
-                <p className="m-0 text-[#666] text-[15px] font-bold">電話諮詢</p>
-                <h2 className="my-1 text-2xl text-[#e60012] leading-tight max-sm:text-xl">
+              <div className="min-w-0 flex-1">
+                <p className="m-0 text-[#666] text-xs font-bold leading-5">電話諮詢</p>
+                <h2 className="my-1 whitespace-nowrap text-[22px] font-semibold leading-7 text-[#e60012]">
                   {dealer.phone}
                 </h2>
                 <a
                   href={phoneHref}
-                  className="inline-flex items-center justify-center min-w-[112px] px-4 py-2 border border-[#e60012] rounded-lg text-[#e60012] font-extrabold no-underline transition-colors hover:bg-[#e60012] hover:text-white text-sm"
+                  className="mt-2 inline-flex min-h-10 items-center justify-center whitespace-nowrap px-3 py-2 border border-[#e60012] rounded-lg text-[#e60012] font-extrabold no-underline transition-colors hover:bg-[#e60012] hover:text-white text-sm"
                 >
                   立即撥打
                 </a>
               </div>
             </article>
 
-            <article className="flex items-center gap-[22px] min-h-[170px] p-7 bg-white border border-[#e7e7e7] rounded-[18px] shadow-[0_12px_30px_rgba(20,20,20,0.08)] border-l-5 border-l-[#06C755] max-sm:min-h-[132px] max-sm:p-5">
-              <div className="flex-shrink-0 grid place-items-center w-[66px] h-[66px] rounded-full bg-[#06C755] text-white text-[13px] font-extrabold max-sm:w-[54px] max-sm:h-[54px]">
+            <article className="flex min-w-0 items-center gap-3 p-4 bg-white border border-[#e7e7e7] rounded-2xl shadow-[0_6px_18px_rgba(20,20,20,0.05)] border-l-5 border-l-[#06C755]">
+              <div className="flex-shrink-0 grid place-items-center w-11 h-11 rounded-full bg-[#06C755] text-white text-[11px] font-extrabold">
                 LINE
               </div>
-              <div>
-                <p className="m-0 text-[#666] text-[15px] font-bold">LINE 聯絡</p>
-                <h2 className="my-1 text-2xl text-[#06C755] leading-tight max-sm:text-xl">
+              <div className="min-w-0 flex-1">
+                <p className="m-0 text-[#666] text-xs font-bold leading-5">LINE 聯絡</p>
+                <h2 className="my-1 whitespace-nowrap text-[22px] font-semibold leading-7 text-[#06C755]">
                   @{dealer.line}
                 </h2>
                 <a
                   href={lineHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center min-w-[112px] px-4 py-2 border border-[#06C755] rounded-lg text-[#06C755] font-extrabold no-underline transition-colors hover:bg-[#06C755] hover:text-white text-sm"
+                  className="mt-2 inline-flex min-h-10 items-center justify-center whitespace-nowrap px-3 py-2 border border-[#06C755] rounded-lg text-[#06C755] font-extrabold no-underline transition-colors hover:bg-[#06C755] hover:text-white text-sm"
                 >
                   加入好友
                 </a>
               </div>
             </article>
 
-            <article className="flex items-center gap-[22px] min-h-[170px] p-7 bg-white border border-[#e7e7e7] rounded-[18px] shadow-[0_12px_30px_rgba(20,20,20,0.08)] border-l-5 border-l-[#e60012] max-sm:min-h-[132px] max-sm:p-5">
-              <div className="flex-shrink-0 grid place-items-center w-[66px] h-[66px] rounded-full bg-[#e60012] text-white text-[30px] font-extrabold max-sm:w-[54px] max-sm:h-[54px] max-sm:text-2xl">
+            <article className="sm:col-span-2 lg:col-span-1 flex min-w-0 items-center gap-3 p-4 bg-white border border-[#e7e7e7] rounded-2xl shadow-[0_6px_18px_rgba(20,20,20,0.05)] border-l-5 border-l-[#e60012]">
+              <div className="flex-shrink-0 grid place-items-center w-11 h-11 rounded-full bg-[#e60012] text-white text-2xl font-extrabold">
                 📍
               </div>
-              <div>
-                <p className="m-0 text-[#666] text-[15px] font-bold">服務據點</p>
-                <h2 className="my-1 text-2xl text-[#e60012] leading-tight max-sm:text-xl">
-                  Suzuki 北投所
+              <div className="min-w-0 flex-1">
+                <p className="m-0 text-[#666] text-xs font-bold leading-5">服務據點</p>
+                <h2 className="my-1 text-lg font-semibold leading-6 text-[#e60012]">
+                  凱騰鈴木北投所
                 </h2>
-                <p className="mt-[-6px] mb-[14px] text-[#666] text-sm">
+                <p className="m-0 text-[13px] leading-5 text-[#666]">
                   {dealer.location.split("｜")[1] || dealer.location}
                 </p>
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(dealer.location.replace(/｜.*/, ""))}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center min-w-[112px] px-4 py-2 border border-[#e60012] rounded-lg text-[#e60012] font-extrabold no-underline transition-colors hover:bg-[#e60012] hover:text-white text-sm"
+                  className="inline-flex min-h-10 items-center justify-center whitespace-nowrap px-3 py-2 border border-[#e60012] rounded-lg text-[#e60012] font-extrabold no-underline transition-colors hover:bg-[#e60012] hover:text-white text-sm"
                 >
                   查看地圖
                 </a>
-                <Link href="/visit/beitou" className="mt-3 block text-sm font-bold text-[#b9000e] underline underline-offset-4">到店交通與試乘預約</Link>
+                <Link href="/visit/beitou" className="inline-flex min-h-10 items-center whitespace-nowrap text-sm font-bold text-[#b9000e] underline underline-offset-4">交通與試乘</Link>
+                </div>
               </div>
             </article>
           </section>

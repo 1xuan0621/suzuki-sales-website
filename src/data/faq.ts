@@ -14,7 +14,7 @@ export interface FaqItem {
 
 export const faqPage = {
   updatedAt: "2026-09-20",
-  title: "常見 QA｜購車、交車與 SUZUKI 車型問題｜鈺漣",
+  title: "常見 QA｜購車、交車與 SUZUKI 車型問題｜張鈺漣",
   description: "查找購車費用、訂金、交車、休旅選擇、油電回本與保養胎壓問題，也能了解 SWIFT 與 Jimny 重點問答，連到各車型完整說明。",
 };
 
@@ -39,7 +39,7 @@ export const generalFaqGroups: { id: string; title: string; items: FaqItem[] }[]
   ] },
   { id: "delivery", title: "領牌與交車", items: [
     { id: "payment-inspection", question: "要先付尾款還是先驗車？領牌前能看車嗎？", answer: "看車、付款、領牌及配件施工的順序，應在簽約時明確約定。希望領牌前看指定實車，就提前安排查看時間及付款條件；不要把別人的交車經驗當成所有車商都相同的流程。交車當天仍需依契約點交並記錄待處理事項。", sourceIds: ["consumer"], links: [{ href: "/guides/first-car#paperwork", label: "看付款與領牌前的安排" }] },
-    { id: "registration-documents", question: "領牌要準備什麼？證件什麼時候交？", answer: "個人、公司及委託代辦所需文件不同。個人身分證明與印章、車輛出廠及完稅資料、發票、保險等需按監理要求備妥，請承辦人提供完整清單。交付前確認用途、管道與歸還時間；本站諮詢表單不用填證件或銀行資料。", sourceIds: ["registration"], links: [{ href: "/guides/first-car#paperwork", label: "看領牌文件與交車準備" }] },
+    { id: "registration-documents", question: "領牌要準備什麼？證件什麼時候交？", answer: "個人、公司及委託代辦所需文件不同。個人身分證明與印章、車輛出廠及完稅資料、發票、保險等需按監理要求備妥，請承辦人提供完整清單。交付前確認用途、管道與歸還時間；本站諮詢表單不用填證件或銀行資料。", sourceIds: ["registration"], links: [{ href: "/guides/first-car#paperwork", label: "看領牌文件與交車準備" }, { href: "/guides/license-plate", label: "車牌怎麼選？看費用、競標與領牌期限" }] },
     { id: "remote-purchase", question: "住外縣市也能買嗎？可以送到家嗎？", answer: "可以先遠端了解車款、需求與報價，再確認到店或文件安排。若希望其他地點交車，需依地點討論運送方式、費用、保險與驗收；交車地點、時程和可安排範圍以個案約定為準。", sourceIds: [], links: [{ href: "/guides/first-car#paperwork", label: "看跨縣市購車與交車流程" }] },
   ] },
   { id: "ownership", title: "換車與售後", items: [

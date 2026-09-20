@@ -22,7 +22,7 @@ export default function GuidesPage() {
       <header>
         <p className="text-xs font-bold tracking-[0.16em] text-[#b9000e]">跟鈺漣一起準備下一台車</p>
         <h1 className="mt-3 text-3xl font-black leading-snug sm:text-4xl">Suzuki 購車指南</h1>
-        <p className="mt-4 max-w-2xl text-base leading-8 text-[#555]">從第一次買車、準備換車，到選休旅、比較油電與交車後保養。<br className="hidden sm:block" />找到你正在想的問題，帶著清單一步一步確認。</p>
+        <p className="mt-4 max-w-2xl text-base leading-8 text-[#555]">從第一次買車、準備換車、挑選車牌，到選休旅、比較油電與交車後保養。<br className="hidden sm:block" />找到你正在想的問題，帶著清單一步一步確認。</p>
       </header>
       {guideCategories.map((category) => <section key={category.id} aria-labelledby={`guide-${category.id}-heading`} className="mt-10">
         <h2 id={`guide-${category.id}-heading`} className="text-xl font-bold">{category.title}</h2>

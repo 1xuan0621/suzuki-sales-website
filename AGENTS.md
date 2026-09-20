@@ -44,6 +44,8 @@ This file applies to this repository and its subdirectories. Run commands from t
 
 ## Editing Rules
 
+- 稱呼：頁首、頁尾、正式顧問資料、作者署名、SEO／分享標題使用「張鈺漣」（`dealer.fullName`）；文章內文、自我介紹及自然對話中的自稱使用「鈺漣」（`dealer.name`）。不要全站搜尋取代姓名。
+
 - Prefer structured data edits in `src/data/` before changing component logic.
 - Preserve SEO-sensitive metadata, sitemap behavior, and public contact paths unless the owner asks to change them.
 - Do not hand-edit generated files or tool state: `.next/`, `.vercel/`, `node_modules/`, `next-env.d.ts`, `*.tsbuildinfo`, or `.DS_Store`. Normal build/install commands may regenerate them.

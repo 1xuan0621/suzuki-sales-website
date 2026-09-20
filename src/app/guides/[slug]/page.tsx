@@ -26,7 +26,7 @@ export default async function GuidePage({ params }: Props) {
     <article data-entry="guide" className="mx-auto max-w-5xl">
       <header className="mx-auto max-w-3xl">
         <Link href="/guides" className="text-sm text-[#b9000e] underline underline-offset-4">← 購車指南總覽</Link>
-        <p className="mt-6 text-xs font-bold tracking-widest text-[#777]">{guide.audience} · 鈺漣的 Suzuki 購車指南</p>
+        <p className="mt-6 text-xs font-bold tracking-widest text-[#777]">{guide.audience} · 張鈺漣的 Suzuki 購車指南</p>
         <h1 className="mt-3 text-balance text-3xl font-black leading-snug sm:text-4xl">{guide.title}</h1>
         <p className="mt-5 text-base leading-8 text-[#555]">{guide.introduction}</p>
         <div id="guide-contact" tabIndex={-1} className="mt-5 scroll-mt-6"><ContactLinks entry="guide" /></div>

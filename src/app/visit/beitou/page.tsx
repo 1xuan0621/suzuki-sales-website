@@ -22,7 +22,7 @@ export default function VisitPage() {
         <a data-entry="visit" href={showroom.mapsUrl} target="_blank" rel="noopener noreferrer" className="inline-block rounded-xl bg-[#e60012] px-5 py-2 font-bold text-white no-underline">開啟地圖導航</a>
       </ArticleSection>
       <ArticleSection title="購車與試乘請聯繫顧問">
-        <p><strong>汽車顧問：</strong>{dealer.name}</p>
+        <p><strong>汽車顧問：</strong>{dealer.fullName}</p>
         <p><strong>顧問手機：</strong><a data-entry="visit" href={`tel:${dealer.phone.replace(/\D/g, "")}`} className="underline underline-offset-4">{dealer.phone}</a></p>
         <p><strong>LINE：</strong>@{dealer.line}</p>
         <p>顧問可先了解車款、用途及購車需求，再確認到店安排。展示間電話與顧問手機分別提供據點及個人服務聯繫。</p>

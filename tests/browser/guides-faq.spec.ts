@@ -57,4 +57,16 @@ test("guide entrance reaches the article and returns to contact links", async ({
   await page.getByRole("link", { name: "保養加項可以怎麼問？" }).click();
   await expect(page).toHaveURL(/\/faq#maintenance-extras$/);
   await expect(page.locator("#maintenance-extras")).toHaveAttribute("open", "");
+  await page.goto("/guides");
+  await page.locator('a[href="/guides/license-plate"]').click();
+  await expect(page).toHaveURL(/\/guides\/license-plate$/);
+  await expect(page.getByRole("navigation", { name: "購車流程" }).getByRole("link")).toHaveCount(5);
+  await page.getByRole("navigation", { name: "購車流程" }).getByRole("link", { name: /先確認領牌日/ }).click();
+  await expect(page.locator("#timing")).toBeInViewport();
+  await expect(page.getByRole("link", { name: "到監理服務網查詢可選號碼" })).toHaveAttribute("href", /^https:\/\/www\.mvdis\.gov\.tw\//);
+  await page.getByRole("link", { name: "查看領牌文件與交付方式" }).click();
+  await expect(page.locator("#registration-documents")).toHaveAttribute("open", "");
+  await page.getByRole("link", { name: "車牌怎麼選？看費用、競標與領牌期限" }).click();
+  await expect(page).toHaveURL(/\/guides\/license-plate$/);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

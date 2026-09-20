@@ -15,7 +15,7 @@ export default function ContentShell({ children, label, carId }: { children: Rea
       </main>
       <footer className="border-t border-[#ddd] px-6 py-6 text-center text-xs leading-6 text-[#666]">
         <p className="mx-auto mb-5 max-w-3xl text-left leading-7">{homeContent.introduction}</p>
-        <PrivacyNotice />© 2026 SUZUKI 汽車顧問 {dealer.name}｜凱騰鈴木北投所
+        <PrivacyNotice />© 2026 SUZUKI 汽車顧問 {dealer.fullName}｜凱騰鈴木北投所
       </footer>
     </div>
   </div>;

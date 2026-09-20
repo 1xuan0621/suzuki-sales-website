@@ -27,7 +27,7 @@ export const showroom = {
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("凱騰鈴木北投所 台北市北投區承德路六段337號"),
   reviewedAt: "2026-09-08",
   updatedAt: "2026-09-08",
-  title: "SUZUKI 台北到店賞車與試乘｜北投所交通及預約｜鈺漣",
+  title: "SUZUKI 台北到店賞車與試乘｜北投所交通及預約｜張鈺漣",
   description: "預約 SUZUKI 台北北投所賞車與試乘，查看承德路六段據點地址、營業時間、交通及停車確認事項。由鈺漣先確認車款與時段，外縣市客戶也可先遠端諮詢。",
 };
 
@@ -130,9 +130,9 @@ export const carPages: Record<CarId, CarPageContent> = {
 
 export function carTitle(id: CarId) {
   const car = cars.find((item) => item.id === id)!;
-  if (id === "jimny") return `SUZUKI ${car.name} 改款、價格與台北試乘｜鈺漣`;
-  if (id === "swift") return "SUZUKI SWIFT 價格與選購｜輕油電、台北試乘｜鈺漣";
-  return `SUZUKI ${car.name} 價格、${id === "e-vitara" ? "充電" : "規格"}與台北試乘｜鈺漣`;
+  if (id === "jimny") return `SUZUKI ${car.name} 改款、價格與台北試乘｜張鈺漣`;
+  if (id === "swift") return "SUZUKI SWIFT 價格與選購｜輕油電、台北試乘｜張鈺漣";
+  return `SUZUKI ${car.name} 價格、${id === "e-vitara" ? "充電" : "規格"}與台北試乘｜張鈺漣`;
 }
 
 // Single-version starting prices continue to come from the existing shared car data.

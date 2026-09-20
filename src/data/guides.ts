@@ -28,9 +28,9 @@ export interface Guide {
 
 const guideReviewedAt = "2026-09-09";
 export const guideIndex = {
-  updatedAt: "2026-09-11",
-  title: "Suzuki 購車指南｜選車比較、購車流程與保養｜鈺漣",
-  description: "從第一次買車、舊車換新車，到家庭休旅選擇、汽油與油電比較、交車後保養，依你的用車問題找到指南與實用清單。",
+  updatedAt: "2026-09-20",
+  title: "Suzuki 購車指南｜選車比較、購車流程與保養｜張鈺漣",
+  description: "從第一次買車、舊車換新車、車牌選號與領牌，到家庭休旅選擇、汽油與油電比較、交車後保養，依你的用車問題找到指南與實用清單。",
 };
 
 export const guideCategories = [
@@ -46,7 +46,7 @@ export const firstCarGuide: Guide = {
   title: "第一次買 Suzuki，從看車到開回家",
   description: "第一次買車不用先背熟規格。鈺漣陪你從用車需求與預算開始，弄懂 Suzuki 試乘、購車菜單、訂金、貸款保險和交車當天要確認的事。",
   introduction: "第一次走進展間，不知道要問什麼很正常。你可以先告訴鈺漣平常怎麼通勤、會載誰、車停哪裡，以及希望花多少錢。還沒選定 Suzuki 哪一款也沒關係，先把每天會用到的事情想清楚，再來看車。",
-  updatedAt: guideReviewedAt,
+  updatedAt: "2026-09-20",
   reviewedAt: guideReviewedAt,
   sourceIds: ["consumer", "loan", "insurance", "registration", "service", "swift", "jimny", "eVitara"],
   relatedSlugs: ["suv-selection", "car-maintenance"],
@@ -83,6 +83,7 @@ export const firstCarGuide: Guide = {
       id: "paperwork", step: "領牌與安排", title: "訂好車後，先約定哪一天做哪件事",
       paragraphs: ["接下來會碰到看指定實車、付款、保險生效、領牌與配件施工。這些順序要在簽約時跟鈺漣約好；如果你希望領牌前先看車，請提早說，讓看車時間與付款條件一起排進去。需要的證件，則依個人、公司或委託代辦身分，由承辦人提供清單。", "住外縣市可以先遠端談需求和報價，再安排必要的到店行程。想自取或在其他地點交車，就先確認地點、運送方式、費用、保險與驗收安排。有指定用車日也請一開始就說，供車、核貸、領牌和施工都可能影響日期。"],
       note: "等車時可以直接問：「目前完成到哪一步？下一步需要我準備什麼？」領牌文件另按確認好的方式交付，本站諮詢表單不用提供證件或銀行資料。",
+      link: { href: "/guides/license-plate", label: "想自己挑車牌？先看選號、競標與領牌期限" },
     },
     {
       id: "delivery", step: "交車與上路", title: "交車當天，留一段時間慢慢認識新車",
@@ -271,9 +272,73 @@ const powertrainGuide: Guide = {
   ],
 };
 
-export const guides = [firstCarGuide, tradeInGuide, suvSelectionGuide, powertrainGuide, maintenanceGuide];
+export const licensePlateGuide: Guide = {
+  slug: "license-plate",
+  category: "process",
+  audience: "選車牌與領牌",
+  title: "新車車牌怎麼選？選號費用、競標與領牌期限",
+  description: "順編、一般選號與競標差在哪？整理自用小型車選號費、英文與數字查詢、跨區領牌、委託代辦，以及付款前一定要確認的期限。",
+  introduction: "買好車，想配一組好記或有紀念意義的號碼，很自然。最容易卡住的卻是：喜歡的號碼查不到、以為查到就保留了，或車還沒準備好就先付選號費。鈺漣建議先把領牌時間和選號方式談好，再開始挑號碼，讓車牌配合交車安排。",
+  updatedAt: "2026-09-20",
+  reviewedAt: "2026-09-20",
+  sourceIds: ["platePortal", "plateRules", "plateSelection", "plateAuction", "plateCosts"],
+  sourceNote: "本文以台灣自用小型車新領牌為主要情境；其他車種、已領牌車換號或有領牌限制者，需另向監理機關確認。選題參考公開買家討論，費用與期限依官方資料核對；付款前仍以當次系統及招標公告為準，不承諾指定號碼或交期。",
+  relatedSlugs: ["first-car", "trade-in"],
+  conversation: "鈺漣你好，我想了解＿＿的選號安排，偏好＿＿或＿＿，英文有／沒有指定，選號預算約＿＿，希望＿＿前交車。我想自己操作／請你協助確認代辦，可以先核對車輛與文件是否準備好了嗎？",
+  sections: [
+    {
+      id: "options", step: "選方式與預算", title: "順編、一般選號、競標，費用怎麼分？",
+      paragraphs: ["先決定你在意的是『有牌就好』『挑一組喜歡的數字』，還是『非某組號碼不可』。這三種需求對應的花費與時間不同，不必一開始就把自己綁在單一號碼。"],
+      points: [
+        { label: "順編：不指定號碼", text: "依監理機關順序領用，不另付挑號碼的選號費；一般領牌規費、稅費、保險或代辦費仍須分開核對，不能把順編說成整個領牌免費。" },
+        { label: "一般選號：從開放清單挑選", text: "自用小型汽車的基本選號費為 2,000 元；系統處理與金融轉帳費等另外確認。特殊號牌、流標號牌可能依公告底價選購，不能認定每組都只要 2,000 元。" },
+        { label: "競標：依公告出價", text: "標售中的號碼依底價及競價結果收費，熱門號碼不保證以底價得標。先設定願意支付的上限，也確認代辦費是否另計。" },
+      ],
+      note: "報價寫『含選號』時，請問清楚包含一般選號費、手續費或代辦費中的哪些項目；競標價差是否另付，也要先約定。",
+    },
+    {
+      id: "timing", step: "先確認領牌日", title: "車還沒到，可以先付錢保留車牌嗎？",
+      paragraphs: ["可以先查號碼、列偏好，但一般網路選號不適合拿來長期占號等車。付款前，先確認車輛資料、領牌文件、保險與承辦時間是否已能配合；還在等配車時，不要只因為看到喜歡的號碼就急著繳費。"],
+      points: [
+        { label: "一般網路選號", text: "轉帳成功後，須在次一工作日的收件截止前辦妥領牌。這不是固定 24 小時，也不是可以放三個月；假日及受理時段要向承辦單位確認。" },
+        { label: "網路競標", text: "得標後原則上在決標後 24 小時內完成繳款，實際以招標機關公告為準；領牌則須在決標次日起三個月內完成。繳款期限與領牌期限要分別記下。" },
+      ],
+      note: "逾期領牌會失去該號牌權利，已繳款項不予退還。請承辦人確認可辦理的日期，再操作選號或競標；不要用一般選號與競標的期限互相套用。",
+      link: { href: "/guides/first-car#paperwork", label: "先把付款、保險與領牌順序排好" },
+    },
+    {
+      id: "find-number", step: "查號碼與備選", title: "英文可以自己選嗎？想要的數字查不到怎麼辦？",
+      paragraphs: ["到監理服務網的『選號標牌 → 網路選號 → 選號及轉帳』，先選管轄單位、領牌地點、車種及能源別，再看當下開放的號碼。英文和數字是同一組號牌，不能把不同地點的英文與數字拆開自由拼成一面新牌。", "查不到可能是尚未開放、已被選走，或正列入其他標售安排，先核對官方清單與公告。第三方查號工具可以協助篩選，但可能有更新時間差；收藏、截圖或把號碼傳給業務，都不代表已經保留成功。"],
+      points: [
+        { label: "先排偏好", text: "列三至五組候選，寫明只在意數字、還是英文也有指定；能否接受其他領牌地點，也一起說。" },
+        { label: "以自己喜歡為準", text: "紀念日、好記的排列或諧音都可以當個人偏好。網路上的吉凶評分不代表行車安全，也沒有必要為了別人的評分超出預算。" },
+      ],
+      link: { href: "https://www.mvdis.gov.tw/m3-emv-plate/webpickno/member/operatePickNo?keepQryData=y", label: "到監理服務網查詢可選號碼" },
+    },
+    {
+      id: "delegate", step: "確認誰辦與地點", title: "沒有自然人憑證能選嗎？可以選外縣市的牌嗎？",
+      paragraphs: ["官方網路選號須知允許車主委託具會員資格者操作。自己辦理時，先確認會員、自然人憑證、讀卡機及可用付款方式；想委託業務或代辦，就先確認誰負責查號、繳費、送件及回傳證明，費用也分項說清楚。", "可跨監理所、站查選號碼，但領牌必須到該號牌的管轄單位辦理，不能要求把牌寄到另一個監理站領取。看上外縣市號碼時，先問承辦人能否安排、需要哪些文件及是否增加費用或時間。特定車種或車輛狀態另有限制。"],
+      note: "代為操作不等於把車登記在代辦人名下。選號時的車主與車輛資料必須核對正確，一般選號完成後不能任意移給另一人或另一台車。",
+      link: { href: "/faq#registration-documents", label: "查看領牌文件與交付方式" },
+    },
+    {
+      id: "before-payment", step: "付款前最後核對", title: "確定要這組號碼，再一起核對五件事",
+      paragraphs: ["選號成功的關鍵是完成官方系統要求的繳費程序。若畫面結果不明，先查轉帳紀錄與繳費證明，必要時聯絡系統或承辦單位確認，不要只靠截圖判定成功。"],
+      points: [
+        { label: "號碼與車主", text: "完整英文、數字，以及登記車主和指定車輛資料，有沒有填錯？" },
+        { label: "總費用", text: "選號費或得標金、系統與轉帳費、代辦費分別是多少？是否已包含在原報價？" },
+        { label: "領牌地點", text: "誰會到哪個監理單位辦理？跨區安排已確認了嗎？" },
+        { label: "兩個期限", text: "何時以前要繳款、何時以前要領牌？車輛和文件能否趕上？" },
+        { label: "成功紀錄", text: "保存官方繳費證明並交給承辦人核對，領牌完成後再確認實際車牌與行照。" },
+      ],
+      note: "本站可以先聊選號偏好與交車安排；證件及車輛文件依確認好的管道交付，一般諮詢表單不需要填身分證字號或銀行資料。",
+    },
+  ],
+};
+
+export const guides = [firstCarGuide, tradeInGuide, licensePlateGuide, suvSelectionGuide, powertrainGuide, maintenanceGuide];
 export function getGuide(slug: string) { return guides.find((guide) => guide.slug === slug); }
-export function guideTitle(guide: Guide) { return `${guide.title}｜鈺漣購車指南`; }
+export function guideTitle(guide: Guide) { return `${guide.title}｜張鈺漣購車指南`; }
 
 // Keep published URLs useful; trade-in is restored as its own canonical article.
 export const guideRedirects = [
