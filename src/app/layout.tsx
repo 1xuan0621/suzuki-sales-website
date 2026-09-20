@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { siteSchema, serializeJsonLd } from "@/data/seo";
-import { siteUrl } from "@/data/content";
+import { contentRoutes, siteUrl } from "@/data/content";
 import SiteProviders from "@/components/SiteProviders";
 import Analytics from "@/components/Analytics";
 
@@ -18,6 +18,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return <html lang="zh-TW"><body>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteSchema) }} />
     <SiteProviders>{children}</SiteProviders>
-    <Analytics />
+    <Analytics content={{ siteUrl, routes: contentRoutes.map(({ path, title }) => ({ path, title })) }} />
   </body></html>;
 }

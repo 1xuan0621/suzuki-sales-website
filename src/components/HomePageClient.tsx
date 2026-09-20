@@ -2,7 +2,6 @@
 
 import { Suspense, useRef, useState } from "react";
 import Link from "next/link";
-import { homeContent } from "@/data/content";
 import { useConsultation } from "./ConsultationProvider";
 import ConsultationPrefill from "./ConsultationPrefill";
 import PrivacyNotice from "./PrivacyNotice";
@@ -21,7 +20,7 @@ import "@/components/car-shapes.css";
    HomePage（內層）
    使用 useCompare，必須包在 CompareProvider 內
    ═══════════════════════════ */
-export default function HomePageClient() {
+export default function HomePageClient({ introduction }: { introduction: string }) {
   const { toggleCar, isSelected } = useCompare();
   const { form, update, submitted, formError, website, setWebsite, sending, handleSubmit, beginConsultation } = useConsultation();
   const [modalCar, setModalCar] = useState<Car | null>(null);
@@ -107,7 +106,7 @@ export default function HomePageClient() {
                 </div>
 
                 <p className="mt-3 max-w-[650px] text-[15px] leading-7 text-white">{dealer.biography}</p>
-                <p className="mt-2 max-w-[650px] text-sm leading-7 text-white/95">{homeContent.introduction}</p>
+                <p className="mt-2 max-w-[650px] text-sm leading-7 text-white/95">{introduction}</p>
 
                 {/* 社群按鈕 — 僅 logo 小圓 */}
                 <div className="flex justify-end max-md:justify-center gap-2 mt-4 md:mt-0">

@@ -35,9 +35,10 @@ export interface CarPageContent {
   considerations: string[];
   testDrive: string[];
   relatedCars: CarId[];
+  relatedGuides: string[];
 }
 
-const carDates = { updatedAt: "2026-09-08", specsReviewedAt: contentReviewedAt, pricesReviewedAt: "2026-09-08" };
+const carDates = { updatedAt: "2026-09-19", specsReviewedAt: contentReviewedAt, pricesReviewedAt: "2026-09-08" };
 export const carPages: Record<CarId, CarPageContent> = {
   swift: {
     ...carDates,
@@ -46,6 +47,7 @@ export const carPages: Record<CarId, CarPageContent> = {
     considerations: ["經常同時載滿乘客與大型行李，請把實際行李帶到現場確認，不能只看後座傾倒後的容積。", "機械車位需逐項核對限高、限寬、限長及載重；車身高度符合並不代表所有車位都能使用。", "官方油耗是測試值，塞車、短程與空調使用都會影響實際表現，不以測試值承諾每月油錢。"],
     testDrive: ["調整成平常開車的坐姿，查看前方、轉彎及倒車時的視野。", "讓常同行的家人試坐後座，確認上下車與腿部空間。", "詢問可安排的路段，觀察起步、低速跟車與停車操作感受。"],
     relatedCars: ["s-cross"],
+    relatedGuides: ["first-car", "powertrain-choice"],
   },
   jimny: {
     ...carDates,
@@ -54,6 +56,7 @@ export const carPages: Record<CarId, CarPageContent> = {
     considerations: ["後座乘坐與行李需求會互相影響，請用平常同行人數安排試坐，並確認上下車方式。", "四驅功能不等於任何路況都能安全通過；模式使用、輪胎及駕駛方式須遵守車主手冊。", "若主要需求是長途多人乘坐，建議同時試坐休旅車，比較座艙及乘坐感受。"],
     testDrive: ["在允許的試乘路線感受一般道路的轉向、煞車與乘坐。", "確認前後座進出、行李擺放與日常停車視野。", "由顧問說明四驅模式使用條件；一般到店試乘不代表能安排越野體驗。"],
     relatedCars: ["vitara"],
+    relatedGuides: ["first-car", "suv-selection"],
   },
   "e-vitara": {
     ...carDates,
@@ -62,6 +65,7 @@ export const carPages: Record<CarId, CarPageContent> = {
     considerations: ["沒有固定充電位置時，先確認常用公共站點的相容接頭、營業條件及替代站點。", "NEDC 續航是指定測試條件下的結果，不能直接當成高速、滿載或開空調時的保證行駛里程。", "居家充電是否能裝、要花多少費用，需由合格專業人員勘查供電、配線與停車位條件。"],
     testDrive: ["體驗起步與減速感受，確認駕駛姿勢及中控操作。", "請顧問示範充電口、充電資訊與日常操作方式。", "帶著通勤里程和充電安排討論版本，不只比較最高續航。"],
     relatedCars: ["vitara"],
+    relatedGuides: ["powertrain-choice", "car-maintenance"],
   },
   vitara: {
     ...carDates,
@@ -70,6 +74,7 @@ export const carPages: Record<CarId, CarPageContent> = {
     considerations: ["先確認四驅是否符合自己的使用情境，再比較價格與日常支出。", "四驅仍受輪胎、路況與駕駛操作限制，不能視為任何路面的通行保證。", "露營裝備或嬰兒車是否好放，應以實際尺寸及後座使用情況確認。"],
     testDrive: ["感受通勤路段的起步、轉向及停車視野。", "請同行家人試坐，並核對行李箱開口與常用物品尺寸。", "詢問 ALLGRIP 模式與使用限制，並與 S-CROSS 比較乘坐感受。"],
     relatedCars: ["s-cross", "e-vitara"],
+    relatedGuides: ["suv-selection", "powertrain-choice"],
   },
   "s-cross": {
     ...carDates,
@@ -78,6 +83,7 @@ export const carPages: Record<CarId, CarPageContent> = {
     considerations: ["行李箱公升數不能直接代表所有物品都放得下，開口形狀、物品長寬高與後座是否有人同樣重要。", "若需要四驅，請比較 VITARA 的台灣版本；不要把不同市場的 S-CROSS 配備混在一起。", "駕駛輔助功能有作動條件，仍需要駕駛持續注意路況與操作。"],
     testDrive: ["家人一起試坐前後座，查看空調、置物與上下車便利性。", "確認停車時的車身感受與視野，請顧問示範相關輔助功能。", "依實際行李尺寸核對行李箱，並比較後座直立及傾倒兩種狀態。"],
     relatedCars: ["vitara", "swift"],
+    relatedGuides: ["suv-selection", "powertrain-choice"],
   },
   carry: {
     ...carDates,
@@ -86,6 +92,7 @@ export const carPages: Record<CarId, CarPageContent> = {
     considerations: ["重量估算須包含實際裝載與加裝設備的影響，不能只看貨台放不放得下。", "特殊貨物、設備或車體改裝需求，請在下訂前確認適用性及相關要求。", "商用貸款與活動資格需個別審核，不能將一般購車優惠直接套用到所有用途。"],
     testDrive: ["先提供平常貨物尺寸、重量及裝卸情境，確認貨台使用方式。", "實際坐入駕駛座，確認上下車與日常操作位置。", "賞車或試乘車輛是否可安排，請先向顧問確認，不預設現場有展示或試乘車。"],
     relatedCars: [],
+    relatedGuides: ["trade-in", "car-maintenance"],
   },
 };
 

@@ -5,6 +5,7 @@ import ContactLinks from "@/components/ContactLinks";
 import SourceLinks from "@/components/SourceLinks";
 import GuideFlow from "@/components/GuideFlow";
 import { getGuide, guides, guideTitle } from "@/data/guides";
+import { getCar } from "@/data/site";
 import { guideSchema, pageMetadata, serializeJsonLd } from "@/data/seo";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -19,6 +20,7 @@ export default async function GuidePage({ params }: Props) {
   const guide = getGuide((await params).slug);
   if (!guide) notFound();
   const relatedGuides = guide.relatedSlugs.map(getGuide).filter((item) => item !== undefined);
+  const relatedCars = guide.relatedCars?.map(getCar).filter((car) => car !== undefined) || [];
   return <ContentShell label={guide.audience}>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(guideSchema(guide)) }} />
     <article data-entry="guide" className="mx-auto max-w-5xl">
@@ -55,6 +57,12 @@ export default async function GuidePage({ params }: Props) {
         </section>
       </div>
       <footer className="mx-auto max-w-3xl border-t border-[#ddd] pt-6">
+        {relatedCars.length > 0 && <section aria-labelledby="related-cars-heading" className="mb-6">
+          <h2 id="related-cars-heading" className="text-base font-bold">延伸了解文中車款</h2>
+          <ul className="mt-3 space-y-3 text-sm font-bold text-[#b9000e]">
+            {relatedCars.map((car) => <li key={car.id}><Link href={`/cars/${car.id}`} className="underline underline-offset-4">SUZUKI {car.name}：價格、規格與試乘重點 →</Link></li>)}
+          </ul>
+        </section>}
         <div className="flex flex-wrap gap-x-7 gap-y-4 text-sm font-bold text-[#555]">
           <Link href="/faq" className="underline underline-offset-4">還有疑問？查看常見 QA →</Link>
           {relatedGuides.map((related) => <Link key={related.slug} href={`/guides/${related.slug}`} className="underline underline-offset-4">{related.audience} →</Link>)}

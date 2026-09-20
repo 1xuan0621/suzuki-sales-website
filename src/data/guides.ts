@@ -1,4 +1,5 @@
 import type { ContentSourceId } from "./content-sources";
+import type { CarId } from "./site";
 
 export interface Guide {
   slug: string;
@@ -12,6 +13,7 @@ export interface Guide {
   sourceIds: ContentSourceId[];
   sourceNote?: string;
   relatedSlugs: string[];
+  relatedCars?: CarId[];
   conversation: string;
   sections: {
     id: string;
@@ -147,10 +149,11 @@ const suvSelectionGuide: Guide = {
   title: "家庭休旅怎麼選？先試家人、行李和停車位",
   description: "小家庭一定需要休旅車嗎？從安全座椅、嬰兒車、長輩上下車、後座舒適度到停車條件，用五個步驟縮小選擇。",
   introduction: "「想買一台空間大的休旅」是很好的起點，但空間大在哪裡，最好再說清楚。是要同時放嬰兒車和行李，還是讓長輩容易上下車？先把平日與假日的乘坐情境列出來，會比只看車長、公升數或網友推薦更容易找到適合的車。",
-  updatedAt: "2026-09-11", reviewedAt: "2026-09-11",
+  updatedAt: "2026-09-19", reviewedAt: "2026-09-11",
   sourceIds: ["swift", "vitara", "sCross", "jimny", "eVitara"],
   sourceNote: "試坐與比較清單為本站依用車需求整理；乘坐舒適度沒有統一排名，車型配置以台灣版本為準。",
   relatedSlugs: ["powertrain-choice", "first-car"],
+  relatedCars: ["vitara", "s-cross"],
   conversation: "鈺漣你好，平常坐＿＿位大人、＿＿位小孩，有＿＿張安全座椅，常帶＿＿。車位限制是＿＿，最想改善＿＿，想比較適合的家庭用車。",
   sections: [
     {
@@ -232,10 +235,11 @@ const powertrainGuide: Guide = {
   title: "汽油、輕油電、油電與純電怎麼選？從里程和充電開始",
   description: "一年開不多就不適合油電嗎？先分清輕油電、一般油電與純電，再用年里程、實際價差、能源費和充電時間評估。",
   introduction: "「一年要開幾公里才划算」沒有所有車款共用的答案。價差、路線和打算開幾年都會改變結果；每天起步、煞車與補充能源是否順手，也值得一起比較。先看懂車子的動力系統，再用自己的生活算一次。",
-  updatedAt: "2026-09-11", reviewedAt: "2026-09-11",
+  updatedAt: "2026-09-19", reviewedAt: "2026-09-11",
   sourceIds: ["swift", "vitara", "sCross", "eVitara", "fit", "energyLabel"],
   sourceNote: "費用範例全部為假設值，展示計算方式；不是現行油價、電價、實測油耗或 Suzuki 報價。各車型的充電、保養與保固依台灣版本資料確認。",
   relatedSlugs: ["suv-selection", "car-maintenance"],
+  relatedCars: ["swift", "e-vitara"],
   conversation: "鈺漣你好，我一年大約開＿＿公里，市區／高速約＿＿，預計持有＿＿年。住家或工作地點＿＿充電，想比較＿＿，最在意＿＿。",
   sections: [
     {

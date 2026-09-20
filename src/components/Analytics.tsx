@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
-import { startAnalytics, type AnalyticsEvent } from "@/lib/analytics";
+import { startAnalytics, type AnalyticsContent, type AnalyticsEvent } from "@/lib/analytics";
 
-export default function Analytics() {
+export default function Analytics({ content }: { content: AnalyticsContent }) {
   const pathname = usePathname();
   const [enabled, setEnabled] = useState(false);
   const id = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   useEffect(() => {
-    const tracker = startAnalytics(id);
+    const tracker = startAnalytics(id, content);
     if (!tracker) return;
     setEnabled(true);
     tracker.page(pathname);
@@ -33,7 +33,7 @@ export default function Analytics() {
     }
     document.addEventListener("click", onClick, true);
     return () => document.removeEventListener("click", onClick, true);
-  }, [id, pathname]);
+  }, [id, pathname, content]);
 
   return enabled ? <Script id="suzuki-ga4" src={`https://www.googletagmanager.com/gtag/js?id=${id}`} strategy="afterInteractive" /> : null;
 }

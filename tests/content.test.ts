@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { contentRoutes } from "../src/data/content";
+import { carPages, contentRoutes } from "../src/data/content";
 import { firstCarGuide, guides, getGuide, guideRedirects } from "../src/data/guides";
 import { carFaqs, featuredCarFaqs, generalFaqGroups } from "../src/data/faq";
 import { contentSources } from "../src/data/content-sources";
@@ -39,7 +39,12 @@ test("guide migrations have existing destinations and keep model topics out of t
       assert.notEqual(slug, guide.slug);
       assertDestination(`/guides/${slug}`);
     }
+    for (const carId of guide.relatedCars || []) assertDestination(`/cars/${carId}`);
     for (const section of guide.sections) if (section.link) assertDestination(section.link.href);
+  }
+  for (const content of Object.values(carPages)) {
+    for (const slug of content.relatedGuides) assertDestination(`/guides/${slug}`);
+    for (const carId of content.relatedCars) assertDestination(`/cars/${carId}`);
   }
 });
 
