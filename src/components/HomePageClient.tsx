@@ -20,7 +20,7 @@ import "@/components/car-shapes.css";
    HomePage（內層）
    使用 useCompare，必須包在 CompareProvider 內
    ═══════════════════════════ */
-export default function HomePageClient({ introduction }: { introduction: string }) {
+export default function HomePageClient({ introduction, buyingTopics }: { introduction: string; buyingTopics: { href: string; title: string; description: string }[] }) {
   const { toggleCar, isSelected } = useCompare();
   const { form, update, submitted, formError, website, setWebsite, sending, handleSubmit, beginConsultation } = useConsultation();
   const [modalCar, setModalCar] = useState<Car | null>(null);
@@ -201,6 +201,12 @@ export default function HomePageClient({ introduction }: { introduction: string 
           {/* ═══════ 車款區塊 — 6 台，點卡片開 Modal ═══════ */}
           <section id="cars" className="w-[calc(100%-88px)] mx-auto mt-[34px] pt-[34px] border-t border-[#ddd] max-sm:w-[calc(100%-28px)] max-sm:mt-5">
             <h2 className="mt-0 mb-5 text-[28px] font-bold leading-tight max-sm:text-[23px]">熱門車款</h2>
+            <div className="mb-6 grid gap-3 sm:grid-cols-2">
+              {buyingTopics.map((topic) => <Link key={topic.href} href={topic.href} className="rounded-xl border border-[#e1d8d2] bg-[#fffaf6] p-5 no-underline transition-colors hover:border-[#b9000e] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b9000e]">
+                <h3 className="text-lg font-bold leading-7 text-[#b9000e]">{topic.title} <span aria-hidden="true">→</span></h3>
+                <p className="mt-2 text-sm leading-7 text-[#666]">{topic.description}</p>
+              </Link>)}
+            </div>
 
             {/* 車款卡片 — 3 欄 (6 台) */}
             <div className="grid grid-cols-3 gap-6 max-[980px]:grid-cols-2 max-[680px]:grid-cols-1 max-sm:gap-[14px]">

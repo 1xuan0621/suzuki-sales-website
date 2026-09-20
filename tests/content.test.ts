@@ -51,6 +51,11 @@ test("guide migrations have existing destinations and keep model topics out of t
 test("FAQ cross references resolve to the owning page and featured answers use existing car entries", () => {
   assert.equal(new Set(allItems.map((item) => item.id)).size, allItems.length);
   for (const entry of featuredCarFaqs) assert.ok(carFaqs[entry.carId].some((item) => item.id === entry.faqId));
+  for (const [carId, content] of Object.entries(carPages)) {
+    const ids = content.buyingFocus?.faqIds || [];
+    assert.equal(new Set(ids).size, ids.length);
+    for (const id of ids) assertDestination(`/cars/${carId}#${id}`);
+  }
   for (const item of allItems) {
     for (const link of item.links || []) assertDestination(link.href);
     for (const source of item.sourceIds) assert.equal(new URL(contentSources[source].url).protocol, "https:");

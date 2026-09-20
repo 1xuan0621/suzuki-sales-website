@@ -5,6 +5,7 @@ export interface FaqItem {
   id: string;
   question: string;
   answer: string;
+  reviewedAt?: string;
   points?: string[];
   table?: { caption: string; columns: string[]; rows: string[][] };
   sourceIds: ContentSourceId[];
@@ -12,7 +13,7 @@ export interface FaqItem {
 }
 
 export const faqPage = {
-  updatedAt: "2026-09-11",
+  updatedAt: "2026-09-20",
   title: "常見 QA｜購車、交車與 SUZUKI 車型問題｜鈺漣",
   description: "查找購車費用、訂金、交車、休旅選擇、油電回本與保養胎壓問題，也能了解 SWIFT 與 Jimny 重點問答，連到各車型完整說明。",
 };
@@ -68,13 +69,13 @@ const suvTable = {
 export const carFaqs: Record<CarId, FaqItem[]> = {
   swift: [
     { id: "swift-vs-small-cars", question: "SWIFT 和 FIT 等小車怎麼選？", answer: "先比停車、後座與載物，再看動力。SWIFT 是 1.2L 輕油電小車；FIT 在台灣有汽油及 e:HEV 版本，動力系統不同。若主要一至兩人通勤，先試停車與市區操作；常載家人或大型物品，就讓家人試坐，帶行李尺寸比較。", table: { caption: "SWIFT 與 Honda FIT：依台灣版本整理的選車重點", columns: ["比較項目", "SWIFT", "Honda FIT"], rows: [["動力選擇", "1.2L、12V 輕油電", "1.5L 汽油／e:HEV 油電"], ["座椅與載物", "確認後座傾倒與行李放入方式", "可確認 ULTRA SEAT 椅墊上掀與座椅變化"], ["試乘要做什麼", "走自己的通勤情境，確認視野、起步與停車", "使用相同乘坐人數、行李和路線比較"]] }, points: ["先選定要比的台灣版本，不能把汽油版價格和油電版配備混用。", "比較油耗時核對測試條件；實際油錢依自己的路線與駕駛習慣。", "沒有單一全面勝出的答案，把最常用到的條件排在前面。"], sourceIds: ["swift", "fit"], links: [{ href: "/guides/first-car#budget", label: "把完整購車與養車成本也算進去" }] },
-    { id: "swift-hybrid", question: "SWIFT 輕油電需要充電嗎？和一般油電一樣嗎？", answer: "不用外接充電。SWIFT 的 12V 輕油電由系統回收電能、輔助引擎，不能直接套用其他油電車的純電行駛能力。試乘時可留意起步、怠速熄火與再啟動感受，系統作動及保養依原廠說明。", sourceIds: ["swift"], links: [{ href: "/cars/e-vitara#e-vitara-charging", label: "需要插電的 e VITARA 有哪些差別？" }] },
-    { id: "swift-rear-seat", question: "SWIFT 後座和行李箱夠用嗎？可以放嬰兒車嗎？", answer: "先用平常的前座坐姿試坐後座，再確認嬰兒車收折尺寸及行李箱開口。若後座要裝安全座椅或坐家人，就以後座直立的狀態試放；後座傾倒後的最大容積不能當成全家出遊時的可用空間。", sourceIds: ["swift"], links: [{ href: "/visit/beitou", label: "帶著家人與行李尺寸到店確認" }] },
-    { id: "swift-parking", question: "SWIFT 可以停機械車位嗎？", answer: "請帶車位的限長、限寬、限高、載重與入口條件，逐項對照官方規配表。也要檢查輪胎定位、車道轉彎及設備規範，並請停車設備管理者確認；只看車高符合，仍不足以判定一定能停。", sourceIds: ["swift"] },
+    { id: "swift-hybrid", question: "SWIFT 輕油電需要充電嗎？和一般油電一樣嗎？", answer: "不用外接充電。台灣 SWIFT 搭載 1.2L 汽油引擎、12V 輕油電與 CVT，由系統回收電能、輔助引擎，不能直接套用其他油電車的純電行駛能力。試乘時可留意起步、怠速熄火與再啟動感受，系統作動及保養依原廠說明。", reviewedAt: "2026-09-20", sourceIds: ["swift", "swiftSpecs"], links: [{ href: "/guides/powertrain-choice", label: "比較輕油電、一般油電與純電的選購條件" }] },
+    { id: "swift-rear-seat", question: "SWIFT 後座和行李箱夠用嗎？可以放嬰兒車嗎？", answer: "SWIFT 是五人座，官方行李箱容積在後座直立時為 265 L。先用平常的前座坐姿試坐後座，再確認嬰兒車收折尺寸及行李箱開口。若後座要裝安全座椅或坐家人，就以後座直立的狀態試放；後座傾倒後的最大容積不能當成全家出遊時的可用空間。", reviewedAt: "2026-09-20", sourceIds: ["swift", "swiftSpecs"], links: [{ href: "/visit/beitou", label: "帶著家人與行李尺寸到店確認" }] },
+    { id: "swift-parking", question: "SWIFT 尺寸多大？可以停機械車位嗎？", answer: "台灣 SWIFT 車長 3,860 mm、車寬 1,735 mm、車高 1,480 mm，空車重 945 kg、最小迴轉半徑 4.8 m。請帶車位的限長、限寬、限高、載重與入口條件逐項核對，也要確認輪胎定位、車道轉彎及設備規範，並請停車設備管理者確認；只看車高符合，仍不足以判定一定能停。", reviewedAt: "2026-09-20", sourceIds: ["swiftSpecs"] },
     { id: "swift-consumption", question: "SWIFT 官方油耗等於我的實際油耗嗎？", answer: "官方油耗是在指定條件下測得。短程、塞車、冷氣、載重和駕駛方式都會改變實際結果。可先用通勤里程做保守估算，交車後再以多次加油與里程紀錄觀察，不以單次最佳數字推估整年支出。", sourceIds: ["swift"], links: [{ href: "/guides/first-car#budget", label: "看每月養車費怎麼抓" }] },
   ],
   jimny: [
-    { id: "jimny-model-update", question: "Jimny 改款差在哪？新舊配備要怎麼比？", answer: "與官方 2024 台灣型錄相比，現行台灣官網的重點是主動安全與車內介面升級，包含 ACC、DSBS II、LDP、TSR，以及 9 吋多媒體系統。仍保留 Jimny 的大樑與加力箱四驅配置，選車時也要評估日常乘坐和載物取捨。", table: { caption: "Jimny：2024 台灣型錄與現行台灣官網對照", columns: ["核對重點", "先前台灣型錄", "現行台灣官網"], rows: [["煞車輔助", "DSBS 雙感知器", "DSBS II 雙感知器"], ["巡航", "定速巡航", "ACC 主動式車距巡航"], ["車道與路標", "LDWS 車道偏離警示", "保留 LDWS，加入 LDP 與 TSR"], ["車機", "CD／MP3、藍牙；觸控螢幕為選配", "標配 9 吋觸控螢幕、無線手機連結"], ["動力骨架", "1.5L、四速自排、加力箱四驅", "維持 1.5L、四速自排、加力箱四驅"]] }, points: ["本站沿用 Jimny 2026 車名；網路上的年份稱呼不一定等於實際供應年式。", "下訂時以台灣規配表、實際車輛及合約配備清單確認。"], sourceIds: ["jimny", "jimnyPrevious"], links: [{ href: "/faq#model-year", label: "年式、出廠與領牌日期有何不同？" }] },
+    { id: "jimny-model-update", question: "Jimny 2026 改款差在哪？新舊配備要怎麼比？", answer: "與官方 2024 台灣型錄相比，Jimny 2026 改款的重點是主動安全與車內介面升級：ACC 主動式車距巡航、DSBS II 煞車輔助、LDP 車道偏離輔助、TSR 交通標誌辨識，以及支援無線 Apple CarPlay／Android Auto 的 9 吋車機。仍保留 1.5L 引擎、四速自排、大樑與加力箱四驅配置。", reviewedAt: "2026-09-20", table: { caption: "Jimny：2024 台灣型錄與 2026 現行台灣規配對照", columns: ["核對重點", "2024 台灣型錄", "2026 現行台灣規配"], rows: [["煞車輔助", "DSBS 雙感知器", "DSBS II 雙感知器"], ["巡航", "定速巡航", "ACC 主動式車距巡航"], ["車道與路標", "LDWS 車道偏離警示", "保留 LDWS，加入 LDP 與 TSR"], ["車機", "CD／MP3、藍牙；觸控螢幕為選配", "標配 9 吋觸控螢幕、無線手機連結"], ["動力與四驅", "1.5L、四速自排、加力箱四驅", "維持 1.5L、四速自排、加力箱四驅"]] }, points: ["本文 Jimny 2026 指台灣現行 THE NEW Jimny 三門四人座；不混用海外五門車型的價格與配備。", "年式、出廠年月與領牌日期分開確認，下訂時以台灣規配表、實際車輛及合約配備清單為準。", "駕駛輔助有作動條件，請依車主手冊使用，駕駛仍須持續注意路況。"], sourceIds: ["jimny", "jimnySpecs", "jimnyPrevious", "jimny2026"], links: [{ href: "/faq#model-year", label: "年式、出廠與領牌日期有何不同？" }] },
     { id: "jimny-daily-use", question: "Jimny 適合通勤嗎？後座、長途會不會不習慣？", answer: "先看你能否接受三門車的後座進出方式、乘坐感受與載物取捨。試乘不要只看外型：讓常同行的人坐後座，走可安排的一般道路，留意轉向、起伏、風噪與行李空間。如果常滿載跑長途，建議同時試坐其他休旅。", sourceIds: ["jimny"], links: [{ href: "/cars/vitara#vitara-vs-s-cross", label: "看看 VITARA 與 S-CROSS 的選擇方向" }] },
     { id: "jimny-four-wheel-drive", question: "Jimny 四驅可以一直開著嗎？試乘能去越野嗎？", answer: "四驅模式要依原廠手冊及路面條件使用，不要把分時四驅當成任何路面都能常駐開啟的模式。一般到店試乘以事先確認的路線為準；四驅操作可請顧問說明，本站不承諾越野試乘。", sourceIds: ["jimny"] },
     { id: "jimny-modifications", question: "想改輪胎、保桿或加裝配件，下訂前要問什麼？", answer: "先列出預計更動項目，確認是否影響安全感知器、輪胎與車身條件及保固。現行 Jimny 有雷達與攝影機等駕駛輔助設備，不能假設舊款配件可直接沿用；請原廠及施工單位核對適用性與必要校正。", sourceIds: ["jimny"] },

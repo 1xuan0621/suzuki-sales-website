@@ -5,11 +5,16 @@ import { faqPage } from "./faq";
 export type { Guide } from "./guides";
 
 export const siteUrl = "https://suzuki-taipei.com";
+const startingPrice = (id: CarId) => cars.find((car) => car.id === id)!.price;
 export const homeContent = {
-  updatedAt: "2026-09-09",
+  updatedAt: "2026-09-20",
   title: "SUZUKI 台北購車與試乘諮詢｜汽車顧問張鈺漣",
   description: "SUZUKI 汽車顧問張鈺漣以台北為主要服務地區，提供全台選車、購車諮詢與跨縣市交車協助。了解六款車的價格、規格與購車流程，預約凱騰鈴木北投所賞車及試乘；交車安排依個案確認。",
   introduction: "以台北為主要服務地區，提供全台購車諮詢，並協助跨縣市購車與交車。實際服務據點位於凱騰鈴木北投所，到店賞車與試乘請先預約；交車地點、費用與時程依個案確認。",
+  buyingTopics: [
+    { href: "/cars/jimny", title: "Jimny 2026 改款、價格與試乘", description: `建議售價 ${startingPrice("jimny")}。先看新舊配備差異，再確認車色、交期與台北試乘。` },
+    { href: "/cars/swift", title: "SWIFT 選購：輕油電、空間與價格", description: `建議售價 ${startingPrice("swift")}。一次了解充電、停車尺寸與後座需求，準備詢價與試乘。` },
+  ],
 };
 
 export const showroom = {
@@ -36,27 +41,54 @@ export interface CarPageContent {
   testDrive: string[];
   relatedCars: CarId[];
   relatedGuides: string[];
+  buyingFocus?: {
+    heading: string;
+    faqHeading: string;
+    faqIds: string[];
+    priceNote: string;
+    inquiryPrompt: string;
+  };
 }
 
 const carDates = { updatedAt: "2026-09-19", specsReviewedAt: contentReviewedAt, pricesReviewedAt: "2026-09-08" };
 export const carPages: Record<CarId, CarPageContent> = {
   swift: {
     ...carDates,
-    description: "了解 SUZUKI SWIFT 台灣售價、輕油電規格、停車尺寸與後座空間取捨。鈺漣提供全台購車諮詢與跨縣市交車協助，台北北投到店賞車及試乘請先預約。",
-    introduction: "選通勤小車，除了看車價，也要把每天停車、常坐幾人與週末載物一起考慮。SWIFT 可從車身尺寸、座椅調整與行李空間三個面向實際確認，讓選車回到自己的生活需求。",
+    updatedAt: "2026-09-20",
+    specsReviewedAt: "2026-09-20",
+    pricesReviewedAt: "2026-09-20",
+    description: `SUZUKI SWIFT 台灣建議售價 ${startingPrice("swift")}，1.2L 輕油電不用外接充電。比較停車尺寸、後座與行李箱需求，向鈺漣確認完整報價、車色交期及台北北投試乘時段。`,
+    introduction: "SWIFT 搭載不用外接充電的 1.2L 輕油電與 CVT。選購前，先把停車位、常坐幾人與常用行李一起確認，再比較包含車色、選配、保險及領牌費用的完整報價。",
     considerations: ["經常同時載滿乘客與大型行李，請把實際行李帶到現場確認，不能只看後座傾倒後的容積。", "機械車位需逐項核對限高、限寬、限長及載重；車身高度符合並不代表所有車位都能使用。", "官方油耗是測試值，塞車、短程與空調使用都會影響實際表現，不以測試值承諾每月油錢。"],
-    testDrive: ["調整成平常開車的坐姿，查看前方、轉彎及倒車時的視野。", "讓常同行的家人試坐後座，確認上下車與腿部空間。", "詢問可安排的路段，觀察起步、低速跟車與停車操作感受。"],
+    testDrive: ["先提供希望到店的日期、同行人數與主要通勤情境，讓鈺漣確認台北北投所可安排的車輛與時段。", "在可安排的路線留意起步、停走再啟動、煞車與停車視野，確認是否符合自己的駕駛習慣。", "前座調成平常坐姿，請家人試坐後座；需要放嬰兒車時，以後座直立狀態試放。", "帶車位限長、限寬、限高及載重資料核對，另確認車道和停車設備條件。"],
     relatedCars: ["s-cross"],
     relatedGuides: ["first-car", "powertrain-choice"],
+    buyingFocus: {
+      heading: "價格、輕油電選購與台北試乘",
+      faqHeading: "SWIFT 選購，先確認這三件事",
+      faqIds: ["swift-hybrid", "swift-parking", "swift-rear-seat"],
+      priceNote: "台灣現行規配為 1.2L 輕油電 CVT。詢價時可先提供想看的車色、預計購車時間，以及現金或貸款需求；請把成交車價、配件、保險及領牌費用分開列出，連同可供應車輛與交期一起確認。",
+      inquiryPrompt: "想問 SWIFT 報價或試乘？告訴鈺漣車色、預計購車時間與希望到店的日期。",
+    },
   },
   jimny: {
     ...carDates,
-    description: "認識 SUZUKI Jimny 2026 台灣售價、四驅規格與日常乘坐、載物取捨。鈺漣提供全台購車諮詢，跨縣市交車依個案確認；台北北投賞車及試乘請先預約。",
-    introduction: "Jimny 的選車重點在於是否需要它的四驅與車身配置，以及是否接受日常乘坐與載物的取捨。先把通勤、同行人數與戶外行程列出來，再透過實車確認，會比只看外型更容易判斷。",
+    updatedAt: "2026-09-20",
+    specsReviewedAt: "2026-09-20",
+    pricesReviewedAt: "2026-09-20",
+    description: `Jimny 2026 改款台灣建議售價 ${startingPrice("jimny")}。對照 2024 型錄，了解 ACC、DSBS II 與 9 吋車機升級，確認三門四人座是否適合日常需求，向鈺漣詢問報價、交期與台北北投試乘。`,
+    introduction: "想知道 Jimny 2026 改款差在哪、價格包含什麼、台北如何預約試乘？這裡以台灣現行 THE NEW Jimny 三門四人座為準，整理新舊配備差異、完整報價與日常試乘重點。",
     considerations: ["後座乘坐與行李需求會互相影響，請用平常同行人數安排試坐，並確認上下車方式。", "四驅功能不等於任何路況都能安全通過；模式使用、輪胎及駕駛方式須遵守車主手冊。", "若主要需求是長途多人乘坐，建議同時試坐休旅車，比較座艙及乘坐感受。"],
-    testDrive: ["在允許的試乘路線感受一般道路的轉向、煞車與乘坐。", "確認前後座進出、行李擺放與日常停車視野。", "由顧問說明四驅模式使用條件；一般到店試乘不代表能安排越野體驗。"],
+    testDrive: ["先提供希望到店的日期、同行人數與主要通勤路線，讓鈺漣確認台北北投所可安排的 Jimny 車輛與時段。", "想了解改款配備，可先提出 ACC 操作、9 吋車機與手機連結的問題，到店時依展示或試乘車實際配備確認。", "讓常同行的人試坐後座，確認三門車的進出方式、行李擺放與日常停車視野。", "在可安排的一般道路感受轉向、煞車及路面起伏；由顧問說明四驅使用條件，試乘不代表能安排越野體驗。"],
     relatedCars: ["vitara"],
     relatedGuides: ["first-car", "suv-selection"],
+    buyingFocus: {
+      heading: "改款重點、價格與台北試乘",
+      faqHeading: "Jimny 2026 改款差異",
+      faqIds: ["jimny-model-update"],
+      priceNote: "建議售價不是含所有費用的交車總價。詢價時，請一起確認車色、實際年式與出廠年月，再把成交車價、配件、保險、領牌稅費及付款方案分項列出。交期依可供應車輛與作業安排確認；若有指定用車日期，請先提出。",
+      inquiryPrompt: "想問 Jimny 改款、報價或試乘？告訴鈺漣車色、預計購車時間與希望到店的日期。",
+    },
   },
   "e-vitara": {
     ...carDates,
@@ -98,6 +130,8 @@ export const carPages: Record<CarId, CarPageContent> = {
 
 export function carTitle(id: CarId) {
   const car = cars.find((item) => item.id === id)!;
+  if (id === "jimny") return `SUZUKI ${car.name} 改款、價格與台北試乘｜鈺漣`;
+  if (id === "swift") return "SUZUKI SWIFT 價格與選購｜輕油電、台北試乘｜鈺漣";
   return `SUZUKI ${car.name} 價格、${id === "e-vitara" ? "充電" : "規格"}與台北試乘｜鈺漣`;
 }
 

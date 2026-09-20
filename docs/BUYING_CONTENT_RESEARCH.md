@@ -1,6 +1,6 @@
 # 購車指南與常見 QA 內容研究
 
-最新增補：2026-09-11，見文末「選車與養車內容擴充」。前文保留各輪研究與當時的頁面配置。
+最新增補：2026-09-20，見文末「Jimny 與 SWIFT 購車意圖內容」。前文保留各輪研究與當時的頁面配置。
 
 整理日期：2026-09-08。這份文件記錄本輪選題依據、內容歸屬和核對範圍；不是搜尋量、成交量或問題發生率調查。
 
@@ -133,3 +133,24 @@ Threads 已以 `threads.com`、`threads.net` 搭配購車、油電、保養等�
 - 404 情境觸發既有 Next.js `NoFallbackError` 日誌，HTTP 檢查仍確認未知頁回傳 404；不代表新增指南發生錯誤。
 - 瀏覽器檢查使用隔離的本機正式服務，未送出真實諮詢、推送或部署。
 - 最後標題換行與分類調整後另跑 `npm run build`、受影響內容 2 項檢查，均通過；人工檢視 1280×900 與 360×780 的總覽卡片、文章標題／流程及 QA 展開，沒有水平溢出。`git diff --check` 通過。
+
+
+## 2026-09-20：Jimny 與 SWIFT 購車意圖內容
+
+業主確認唯一收件為本人測試，並指定優先增加 Jimny 改款／價格／試乘與 SWIFT 選購的自然搜尋流量。延續既有 `/cars/jimny`、`/cars/swift`，不恢復已轉址的 SWIFT 舊指南，也不另外建立內容重複的年式頁。這是依業主經驗與少量 GSC 查詢訊號選題，並非搜尋量排名。
+
+- Jimny：調整 title、摘要、主標題及開場，將既有 `jimny-model-update` 新舊配備比較移至價格段後並預設展開，補上完整報價與北投試乘前準備。
+- SWIFT：調整 title、摘要與主標題，集中既有輕油電、停車尺寸、後座／行李箱問答，補明確詢價資料與試乘觀察清單。
+- 首頁在車款區新增兩個完整車頁入口；價格仍取自共用車款資料。兩頁保留 canonical、原 FAQ ID、聯絡方式與諮詢預填；移到前方的問答不在頁尾重複。
+- 同頁問答連結會重新展開收合的答案，包括重複點擊相同錨點；保留原生 details 的鍵盤開合。
+
+本輪核對日期為 2026-09-20：
+
+| 官方來源 | 採用資訊 |
+| --- | --- |
+| [Taiwan Suzuki 首頁](https://www.taiwansuzuki.com.tw/) | THE NEW Jimny 84.9 萬元起、SWIFT 73 萬元起；不當作含保險、領牌及配件的交車總價 |
+| [Jimny 現行車款頁](https://www.taiwansuzuki.com.tw/cars/jimny)、[現行規配表](https://www.taiwansuzuki.com.tw/uploads/car_list/178382615010.pdf)、[2024 台灣型錄](https://www.taiwansuzuki.com.tw/uploads/car_list/170444669498.pdf) | 新舊 PDF 已視覺核對：DSBS → DSBS II、定速 → ACC、LDP／TSR、9 吋車機標配；無線 CarPlay／Android Auto 由現行網頁核對。1.5L、4AT、大樑／加力箱四驅延續。不宣稱全速域 ACC 或車道置中 |
+| [官方 ALLGRIP 專頁](https://www.taiwansuzuki.com.tw/research-allgrip) | 官方描述 2026 年發表的 Jimny；頁面限定台灣現行三門四人座，實際供應年式、出廠年月與合約配備另行確認 |
+| [SWIFT 現行車款頁](https://www.taiwansuzuki.com.tw/cars/swift)、[2026.08 規配表](https://www.taiwansuzuki.com.tw/uploads/car_list/178781313014.pdf) | PDF 已視覺核對：1.2L／12V 輕油電／CVT、3,860 × 1,735 × 1,480 mm、945 kg、4.8 m、五人座／後座直立 265 L。不自行加上官方未標示的 GLX 等版本名稱 |
+
+只更新實際重新核對的兩款價格／規格日期及四題問答日期；其他車款和全站引用日期保留。沒有改價格、優惠、庫存或固定交期，也沒有承諾到店即有試乘車。新一輪發布與量測依 [維運紀錄](../OPERATIONS.md) 及 [SEO 量測作業](SEO_MEASUREMENT.md#購車意圖頁追蹤2026-09-20-起)。

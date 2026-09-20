@@ -29,10 +29,29 @@ test("internal navigation preserves form and comparison state and preselects onl
   await expect(contacts.getByRole("link", { name: "LINE 諮詢", exact: true })).toHaveAttribute("href", /^https:\/\/line\.me\//);
   await expect(contacts.getByRole("link", { name: "電話諮詢", exact: true })).toHaveAttribute("href", "tel:0987629773");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await expect(page.locator("#swift-hybrid")).toHaveAttribute("open", "");
+  await page.locator("#swift-parking summary").click();
+  await expect(page.locator("#swift-parking")).toHaveAttribute("open", "");
   await page.getByRole("navigation", { name: "主要導覽" }).getByRole("link", { name: "購車諮詢", exact: true }).click();
   await expect(page.locator("#contact-heading")).toBeFocused();
   await expect(page.getByRole("textbox", { name: "姓名", exact: true })).toHaveValue("本機保留輸入測試");
   await expect(page.getByRole("textbox", { name: "聯絡方式", exact: true })).toHaveValue("0900000000");
   await expect(page.getByRole("combobox", { name: "想了解車款", exact: true })).toHaveValue("SWIFT");
   await expect(page.getByRole("button", { name: "✓ 已選取比較", exact: true })).toHaveCount(1);
+  await page.getByRole("link", { name: /^Jimny 2026 改款、價格與試乘/ }).click();
+  await expect(page).toHaveURL(/\/cars\/jimny$/);
+  const update = page.locator("#jimny-model-update");
+  await expect(update).toHaveCount(1);
+  await expect(update).toHaveAttribute("open", "");
+  for (let attempt = 0; attempt < 2; attempt++) {
+    await update.locator("summary").focus();
+    await page.keyboard.press("Enter");
+    await expect(update).not.toHaveAttribute("open", "");
+    await page.getByRole("navigation", { name: "車款選購重點" }).getByRole("link", { name: "2026 改款差異", exact: true }).click();
+    await expect(update).toHaveAttribute("open", "");
+    await expect(update).toBeInViewport();
+  }
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole("navigation", { name: "車款選購重點" }).getByRole("link", { name: "台北試乘準備", exact: true }).click();
+  await expect(page.locator("#test-drive")).toBeInViewport();
 });

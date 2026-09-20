@@ -6,6 +6,6 @@ export const metadata = pageMetadata("/", homeContent.title, homeContent.descrip
 export default function HomePage() {
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeSchema) }} />
-    <HomePageClient introduction={homeContent.introduction} />
+    <HomePageClient introduction={homeContent.introduction} buyingTopics={homeContent.buyingTopics} />
   </>;
 }
