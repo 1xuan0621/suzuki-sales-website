@@ -4,6 +4,7 @@ import ContentShell from "@/components/ContentShell";
 import ContactLinks from "@/components/ContactLinks";
 import SourceLinks from "@/components/SourceLinks";
 import GuideFlow from "@/components/GuideFlow";
+import { GuideChecklist, GuideOptions, GuideWorkedExample } from "@/components/GuideContent";
 import { getGuide, guides, guideTitle } from "@/data/guides";
 import { dealer, getCar } from "@/data/site";
 import { guideSchema, pageMetadata, serializeJsonLd } from "@/data/seo";
@@ -26,26 +27,37 @@ export default async function GuidePage({ params }: Props) {
     <article data-entry="guide" className="mx-auto max-w-5xl">
       <header className="mx-auto max-w-3xl">
         <Link href="/guides" className="text-sm text-[#b9000e] underline underline-offset-4">← 購車指南總覽</Link>
-        <p className="mt-6 text-xs font-bold tracking-widest text-[#777]">{guide.audience} · {dealer.fullName}的 Suzuki 購車指南</p>
+        <p className="mt-6 text-xs font-bold tracking-widest text-[#777]">{guide.audience}</p>
         <h1 className="mt-3 text-balance text-3xl font-black leading-snug sm:text-4xl">{guide.title}</h1>
         <p className="mt-3 text-xs leading-6 text-[#666]">內容整理：<Link href="/" className="underline underline-offset-4">{dealer.fullName}購車諮詢網站</Link> · 更新 <time dateTime={guide.updatedAt}>{guide.updatedAt}</time></p>
-        <p className="mt-5 text-base leading-8 text-[#555]">{guide.introduction}</p>
+        <div className="mt-6 border-l-4 border-[#b9000e] pl-4">
+          <p className="text-xs font-bold text-[#b9000e]">先看重點</p>
+          <p className="mt-2 text-base font-medium leading-8 text-[#333]">{guide.introduction}</p>
+        </div>
         <div id="guide-contact" tabIndex={-1} className="mt-5 scroll-mt-6"><ContactLinks entry="guide" /></div>
       </header>
-      <section aria-labelledby="article-flow-heading" className="mx-auto mt-7 max-w-3xl rounded-xl bg-[#efede9] px-4 py-4 sm:px-6">
-        <h2 id="article-flow-heading" className="text-sm font-bold">直接看你需要的段落</h2>
+      <section aria-labelledby="article-flow-heading" className="mx-auto mt-8 rounded-2xl border border-[#e5dcd5] bg-[#f5f1ed] p-4 sm:p-6">
+        <h2 id="article-flow-heading" className="text-lg font-bold">{guide.sections.length} 步{guide.category === "process" ? "看懂流程" : guide.category === "ownership" ? "看懂保養" : "整理你的選擇"}</h2>
+        <p className="mt-1 text-sm leading-7 text-[#665c56]">按順序看，或點選目前需要的步驟。</p>
         <GuideFlow sections={guide.sections} label={guide.category === "process" ? "購車流程" : "指南閱讀重點"} />
       </section>
       <div className="mx-auto mt-3 max-w-3xl divide-y divide-[#ddd]">
-        {guide.sections.map((section, index) => <section id={section.id} key={section.id} className="scroll-mt-6 py-7 sm:py-9">
-          <h2 className="text-xl font-bold leading-8 sm:text-2xl"><span aria-hidden="true" className="mr-3 text-sm tabular-nums text-[#b9000e]">{String(index + 1).padStart(2, "0")}</span>{section.title}</h2>
-          <div className="mt-4 space-y-3 text-base leading-8 text-[#4b4b4b]">
+        {guide.sections.map((section, index) => <section id={section.id} key={section.id} className="scroll-mt-6 py-9 sm:py-11">
+          <h2 className="flex items-start gap-3 text-xl font-bold leading-8 sm:text-2xl"><span aria-hidden="true" className="grid size-8 shrink-0 place-items-center rounded-full bg-[#b9000e] text-sm tabular-nums text-white">{index + 1}</span>{section.title}</h2>
+          {section.paragraphs.length > 0 && <div className="mt-4 space-y-3 text-base leading-8 text-[#4b4b4b]">
             {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          </div>
-          {section.points && <ul className="mt-4 space-y-3 text-[15px] leading-7 text-[#555]">
-            {section.points.map((point) => <li key={point.label} className="border-l-2 border-[#d8cec9] pl-4"><strong className="text-[#333]">{point.label}：</strong>{point.text}</li>)}
-          </ul>}
-          {section.note && <p className="mt-5 rounded-lg bg-[#efede9] px-5 py-4 text-sm leading-7 text-[#555]">{section.note}</p>}
+          </div>}
+          {section.options && <div className="mt-5"><GuideOptions options={section.options} /></div>}
+          {section.points && <div className="mt-5"><GuideChecklist points={section.points} /></div>}
+          {section.calculation && <div className="mt-6"><GuideWorkedExample example={section.calculation} /></div>}
+          {section.note && <aside className="mt-5 rounded-xl border border-[#e7d9bd] bg-[#faf6ed] px-4 py-4 text-sm leading-7 text-[#655231]"><p className="font-bold">提醒</p><p className="mt-1">{section.note}</p></aside>}
+          {section.details && <details className="mt-5 rounded-xl border border-[#ddd] bg-white px-4 sm:px-5">
+            <summary className="cursor-pointer py-4 text-sm font-bold leading-7 text-[#444]">{section.details.title}</summary>
+            <div className="space-y-3 border-t border-[#eee] py-4 text-[15px] leading-7 text-[#555]">
+              {section.details.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              {section.details.points && <GuideChecklist points={section.details.points} />}
+            </div>
+          </details>}
           {section.link && <Link href={section.link.href} className="mt-5 inline-block text-sm font-medium text-[#b9000e] underline underline-offset-4">{section.link.label} →</Link>}
         </section>)}
         <section aria-labelledby="conversation-heading" className="py-8">

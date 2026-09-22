@@ -69,4 +69,16 @@ test("guide entrance reaches the article and returns to contact links", async ({
   await page.getByRole("link", { name: "車牌怎麼選？看費用、競標與領牌期限" }).click();
   await expect(page).toHaveURL(/\/guides\/license-plate$/);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.goto("/guides/trade-in");
+  await page.getByRole("navigation", { name: "購車流程" }).locator('a[href="#valuation"]').click();
+  await expect(page.locator("#valuation")).toBeInViewport();
+  const detail = page.locator("#valuation details");
+  await expect(detail).not.toHaveAttribute("open", "");
+  await detail.locator("summary").focus();
+  await page.keyboard.press("Enter");
+  await expect(detail).toHaveAttribute("open", "");
+  await expect(detail.locator("div").first()).toBeVisible();
+  await page.keyboard.press("Space");
+  await expect(detail).not.toHaveAttribute("open", "");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
