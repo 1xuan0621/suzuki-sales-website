@@ -7,14 +7,13 @@ export default function GuideFlow({ sections, basePath = "", preserveIds = false
   preserveIds?: boolean;
   label?: string;
 }) {
-  return <nav aria-label={label} className="mt-6">
-    <ol className={`grid gap-5 ${sections.length === 5 ? "lg:grid-cols-5" : "lg:grid-cols-6"}`}>
-      {sections.map((section, index) => <li key={section.id} id={preserveIds ? section.id : undefined} className="relative min-w-0 scroll-mt-6">
-        <Link href={`${basePath}#${section.id}`} className="group flex h-full items-center gap-3 rounded-xl border border-[#dfdcd7] bg-white px-4 py-3 no-underline transition-colors hover:border-[#b9000e] hover:bg-[#fff9f8] lg:block lg:px-3 lg:py-4">
-          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#f8eceb] text-xs font-bold tabular-nums text-[#b9000e]">{String(index + 1).padStart(2, "0")}</span>
-          <span className="text-sm font-bold leading-6 text-[#333] lg:mt-3 lg:block">{section.step}</span>
+  return <nav aria-label={label} className="mt-3">
+    <ol className="grid grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-3">
+      {sections.map((section, index) => <li key={section.id} id={preserveIds ? section.id : undefined} className="min-w-0 scroll-mt-6">
+        <Link href={`${basePath}#${section.id}`} className="flex min-h-11 items-center gap-2 rounded-md py-2 text-sm leading-6 no-underline hover:text-[#b9000e] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b9000e]">
+          <span aria-hidden="true" className="shrink-0 text-xs tabular-nums text-[#b9000e]">{String(index + 1).padStart(2, "0")}</span>
+          <span className="font-bold">{section.step}</span>
         </Link>
-        {index < sections.length - 1 && <span aria-hidden="true" className="pointer-events-none absolute -bottom-5 left-[26px] text-sm leading-5 text-[#ae9c96] lg:-right-4 lg:bottom-auto lg:left-auto lg:top-1/2 lg:-translate-y-1/2"><span className="lg:hidden">↓</span><span className="hidden lg:inline">→</span></span>}
       </li>)}
     </ol>
   </nav>;
