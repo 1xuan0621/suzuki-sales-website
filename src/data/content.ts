@@ -54,7 +54,7 @@ const carDates = { updatedAt: "2026-09-19", specsReviewedAt: contentReviewedAt, 
 export const carPages: Record<CarId, CarPageContent> = {
   swift: {
     ...carDates,
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-27",
     specsReviewedAt: "2026-09-20",
     pricesReviewedAt: "2026-09-20",
     description: `SUZUKI SWIFT 台灣建議售價 ${startingPrice("swift")}，1.2L 輕油電不用外接充電。比較停車尺寸、後座與行李箱需求，向鈺漣確認完整報價、車色交期及台北北投試乘時段。`,
@@ -73,7 +73,7 @@ export const carPages: Record<CarId, CarPageContent> = {
   },
   jimny: {
     ...carDates,
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-27",
     specsReviewedAt: "2026-09-20",
     pricesReviewedAt: "2026-09-20",
     description: `Jimny 2026 改款台灣建議售價 ${startingPrice("jimny")}。對照 2024 型錄，了解 ACC、DSBS II 與 9 吋車機升級，確認三門四人座是否適合日常需求，向鈺漣詢問報價、交期與台北北投試乘。`,
@@ -92,6 +92,7 @@ export const carPages: Record<CarId, CarPageContent> = {
   },
   "e-vitara": {
     ...carDates,
+    updatedAt: "2026-09-27",
     description: "了解 SUZUKI e VITARA 台灣版本、售價、充電介面及續航測試條件，評估居家與外出充電。鈺漣提供全台購車諮詢及跨縣市交車協助，台北北投試乘請先預約。",
     introduction: "選純電車先從充電安排開始：平常停在哪裡、能否安裝設備、長途會在哪裡補電。e VITARA 的版本選擇也要一起考慮驅動需求與測試續航，避免只用單一里程數決定。",
     considerations: ["沒有固定充電位置時，先確認常用公共站點的相容接頭、營業條件及替代站點。", "NEDC 續航是指定測試條件下的結果，不能直接當成高速、滿載或開空調時的保證行駛里程。", "居家充電是否能裝、要花多少費用，需由合格專業人員勘查供電、配線與停車位條件。"],
@@ -101,6 +102,7 @@ export const carPages: Record<CarId, CarPageContent> = {
   },
   vitara: {
     ...carDates,
+    updatedAt: "2026-09-27",
     description: "比較 SUZUKI VITARA 台灣售價、輕油電與 ALLGRIP 四驅規格，了解與 S-CROSS 的空間及用途差異。鈺漣提供全台購車諮詢，台北北投賞車及試乘請先預約。",
     introduction: "VITARA 可從四驅需求、車身與空間配置來評估。若平日通勤、週末戶外出遊，請把常走道路、乘坐人數及裝備一起列入選車條件，再與 S-CROSS 比較。",
     considerations: ["先確認四驅是否符合自己的使用情境，再比較價格與日常支出。", "四驅仍受輪胎、路況與駕駛操作限制，不能視為任何路面的通行保證。", "露營裝備或嬰兒車是否好放，應以實際尺寸及後座使用情況確認。"],
@@ -110,6 +112,7 @@ export const carPages: Record<CarId, CarPageContent> = {
   },
   "s-cross": {
     ...carDates,
+    updatedAt: "2026-09-27",
     description: "了解 SUZUKI S-CROSS 台灣售價、前驅輕油電規格及家庭載物需求，與 VITARA 比較選車取捨。鈺漣提供全台購車諮詢與跨縣市交車協助，台北北投試乘請先預約。",
     introduction: "家庭選車可以先從每天怎麼用開始：誰常坐後座、行李是否要和乘客同時上車、停車場是否好進出。S-CROSS 的空間配置值得實車確認，再依自己的驅動需求與 VITARA 比較。",
     considerations: ["行李箱公升數不能直接代表所有物品都放得下，開口形狀、物品長寬高與後座是否有人同樣重要。", "若需要四驅，請比較 VITARA 的台灣版本；不要把不同市場的 S-CROSS 配備混在一起。", "駕駛輔助功能有作動條件，仍需要駕駛持續注意路況與操作。"],
@@ -119,6 +122,7 @@ export const carPages: Record<CarId, CarPageContent> = {
   },
   carry: {
     ...carDates,
+    updatedAt: "2026-09-27",
     description: "查看 SUZUKI CARRY 台灣售價、貨台尺寸與載重規格，整理商用購車及交車前確認事項。鈺漣提供全台購車諮詢，跨縣市交車地點、費用及時程依個案確認。",
     introduction: "工作車先看工作內容：貨物尺寸、重量、裝卸方式與每天的路線，再看購車及使用成本。CARRY 的貨台與載重資料可作為初步篩選，實際用途仍需對照車輛核定資料。",
     considerations: ["重量估算須包含實際裝載與加裝設備的影響，不能只看貨台放不放得下。", "特殊貨物、設備或車體改裝需求，請在下訂前確認適用性及相關要求。", "商用貸款與活動資格需個別審核，不能將一般購車優惠直接套用到所有用途。"],

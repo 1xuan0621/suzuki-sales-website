@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" fill="none">
+  <title>S-CROSS 行李試放順序</title>
+  <desc>以通用行李箱輪廓說明：先看開口，再看底面，最後確認尾門關閉。非比例繪製，箱體不代表保證可放的物品。</desc>
+  <rect width="640" height="480" fill="#f5f6f2"/>
+  <text x="320" y="48" font-family="Arial, 'PingFang TC', 'Noto Sans TC', sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="#33412c">先坐好家人，再試放行李</text>
+  <rect x="116" y="324" width="44" height="61" rx="9" fill="#535a4d"/>
+  <rect x="480" y="324" width="44" height="61" rx="9" fill="#535a4d"/>
+  <path d="M159 164Q320 126 481 164L526 265V354H114V265Z" fill="#fff" stroke="#56614b" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M176 186Q320 160 464 186L485 307H155Z" fill="#e1ead7" stroke="#778a63" stroke-width="3"/>
+  <path d="M196 198H444L459 246H181Z" fill="#e0e2dc" stroke="#9ba391" stroke-width="2"/>
+  <path d="M258 195V242M382 195V242" stroke="#9ba391" stroke-width="2"/>
+  <path d="M181 246H459L485 307H155Z" fill="#dce8ce" stroke="#778a63" stroke-width="2"/>
+  <path d="M158 169L141 104Q320 78 499 104L482 169" fill="#fff" stroke="#56614b" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M165 115Q320 95 475 115L468 147H172Z" fill="#dce5e4" stroke="#a6b7b3" stroke-width="2"/>
+  <path d="M152 171L136 255M488 171L504 255" stroke="#9ba391" stroke-width="3"/>
+  <rect x="265" y="254" width="93" height="64" rx="10" fill="#f5f6f2" stroke="#56614b" stroke-width="3"/>
+  <path d="M294 253V242H328V253M284 265V306M338 265V306" stroke="#9ba391" stroke-width="3"/>
+  <path d="M161 330H479" stroke="#d9dfd1" stroke-width="4" stroke-linecap="round"/>
+  <path d="M507 126Q563 182 540 260M535 249L540 260L551 255" stroke="#b9000e" stroke-width="3" stroke-dasharray="6 5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#56614b"><circle cx="158" cy="217" r="22"/><circle cx="413" cy="289" r="22"/><circle cx="539" cy="162" r="22"/></g>
+  <g font-family="Arial, 'PingFang TC', 'Noto Sans TC', sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="#fff">
+    <text x="158" y="227">1</text><text x="413" y="299">2</text><text x="539" y="172">3</text>
+  </g>
+  <path d="M74 403H566" stroke="#d9dfd1" stroke-width="2"/>
+  <g font-family="Arial, 'PingFang TC', 'Noto Sans TC', sans-serif" font-size="28" font-weight="600" text-anchor="middle" fill="#56614b">
+    <text x="139" y="451">1 開口</text><text x="320" y="451">2 底面</text><text x="501" y="451">3 關門</text>
+  </g>
+</svg>

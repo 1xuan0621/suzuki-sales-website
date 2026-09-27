@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" fill="none">
+  <title>SWIFT 車位與進出空間檢查</title>
+  <desc>俯視車位，左右預留開門位置，後方預留取物位置；另核對限長、限寬、限高與載重。非比例繪製。</desc>
+  <rect width="640" height="480" fill="#f5f6f2"/>
+  <g font-family="Arial, 'PingFang TC', 'Noto Sans TC', sans-serif" font-weight="700" text-anchor="middle">
+    <text x="320" y="48" font-size="32" fill="#33412c">車位之外，也留活動空間</text>
+  </g>
+  <path d="M122 352V78H518V352" stroke="#a6b09a" stroke-width="4"/>
+  <path d="M143 93H497V338H143Z" fill="#e7ecdf"/>
+  <rect x="227" y="123" width="17" height="44" rx="5" fill="#535a4d"/>
+  <rect x="396" y="123" width="17" height="44" rx="5" fill="#535a4d"/>
+  <rect x="227" y="248" width="17" height="44" rx="5" fill="#535a4d"/>
+  <rect x="396" y="248" width="17" height="44" rx="5" fill="#535a4d"/>
+  <rect x="238" y="97" width="164" height="226" rx="39" fill="#fff" stroke="#56614b" stroke-width="4"/>
+  <path d="M257 132Q320 114 383 132L388 164H252Z" fill="#dce5e4" stroke="#a6b7b3" stroke-width="2"/>
+  <rect x="258" y="178" width="124" height="75" rx="15" fill="#e0e2dc" stroke="#9ba391" stroke-width="2"/>
+  <path d="M252 278H388L379 302H261Z" fill="#dce5e4" stroke="#a6b7b3" stroke-width="2"/>
+  <g stroke="#b9000e" stroke-width="3" stroke-linecap="round">
+    <path d="M236 173L176 210M404 173L464 210"/>
+    <path d="M237 237A64 64 0 0 1 175 210M403 237A64 64 0 0 0 465 210" stroke-dasharray="6 6"/>
+    <path d="M257 328V370H383V328" stroke-dasharray="6 6"/>
+  </g>
+  <g font-family="Arial, 'PingFang TC', 'Noto Sans TC', sans-serif" font-size="28" font-weight="600" text-anchor="middle" fill="#9b000b">
+    <text x="170" y="278">開門</text><text x="470" y="278">開門</text>
+    <text x="320" y="405">後方取物</text>
+  </g>
+  <path d="M96 425H544" stroke="#d9dfd1" stroke-width="2"/>
+  <text x="320" y="462" font-family="Arial, 'PingFang TC', 'Noto Sans TC', sans-serif" font-size="28" font-weight="600" text-anchor="middle" fill="#56614b">限長 · 限寬 · 限高 · 載重</text>
+</svg>

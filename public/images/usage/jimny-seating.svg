@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" fill="none">
+  <title>Jimny 座位與載物概念</title>
+  <desc>左側兩人用車、後座傾倒；右側四人用車、後座直立。綠色代表載物區域，非比例繪製。</desc>
+  <defs>
+    <pattern id="cargo" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V14" stroke="#728263" stroke-opacity=".2" stroke-width="3"/></pattern>
+    <g id="seat">
+      <rect width="66" height="67" rx="12" fill="#e0e2dc" stroke="#596152" stroke-width="3"/>
+      <path d="M10 48H56M12 10V36M54 10V36" stroke="#9ba391" stroke-width="3"/>
+      <rect x="16" y="-7" width="34" height="18" rx="6" fill="#596152"/>
+    </g>
+    <g id="body">
+      <rect x="-10" y="74" width="16" height="54" rx="5" fill="#535a4d"/>
+      <rect x="194" y="74" width="16" height="54" rx="5" fill="#535a4d"/>
+      <rect x="-10" y="240" width="16" height="54" rx="5" fill="#535a4d"/>
+      <rect x="194" y="240" width="16" height="54" rx="5" fill="#535a4d"/>
+      <rect width="200" height="332" rx="42" fill="#fff" stroke="#56614b" stroke-width="4"/>
+      <path d="M26 38Q100 18 174 38L178 73H22Z" fill="#dce5e4" stroke="#a6b7b3" stroke-width="2"/>
+      <path d="M8 157V229M192 157V229" stroke="#b7beb0" stroke-width="3"/>
+      <rect x="76" y="324" width="48" height="16" rx="7" fill="#56614b"/>
+    </g>
+  </defs>
+  <rect width="640" height="480" fill="#f5f6f2"/>
+  <g font-family="Arial, 'PingFang TC', 'Noto Sans TC', sans-serif" font-weight="700" text-anchor="middle">
+    <text x="166" y="48" font-size="32" fill="#33412c">兩人用車</text>
+    <text x="474" y="48" font-size="32" fill="#33412c">四人用車</text>
+  </g>
+  <path d="M320 83V423" stroke="#d9dfd1" stroke-dasharray="5 9" stroke-width="2"/>
+  <g transform="translate(66 76)">
+    <use href="#body"/>
+    <use href="#seat" x="25" y="95"/><use href="#seat" x="109" y="95"/>
+    <rect x="23" y="179" width="154" height="128" rx="10" fill="#dce8ce" stroke="#778a63" stroke-width="2"/>
+    <rect x="23" y="179" width="154" height="128" rx="10" fill="url(#cargo)"/>
+    <path d="M100 184V300" stroke="#778a63" stroke-dasharray="5 5" stroke-width="2"/>
+  </g>
+  <g transform="translate(374 76)">
+    <use href="#body"/>
+    <use href="#seat" x="25" y="95"/><use href="#seat" x="109" y="95"/>
+    <use href="#seat" x="25" y="208"/><use href="#seat" x="109" y="208"/>
+    <rect x="23" y="286" width="154" height="24" rx="6" fill="#dce8ce" stroke="#778a63" stroke-width="2"/>
+    <rect x="23" y="286" width="154" height="24" rx="6" fill="url(#cargo)"/>
+  </g>
+  <g font-family="Arial, 'PingFang TC', 'Noto Sans TC', sans-serif" font-size="28" font-weight="600" fill="#56614b" text-anchor="middle">
+    <text x="166" y="456">後座傾倒</text><text x="474" y="456">後座直立</text>
+  </g>
+</svg>

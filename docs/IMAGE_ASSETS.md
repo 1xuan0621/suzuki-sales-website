@@ -1,5 +1,22 @@
 # 圖片素材紀錄
 
+## 2026-09-27：六款車用車示意圖
+
+新增六張本站原創 SVG，沒有描摹、重製或截取媒體照片；皆於頁面標示「用車情境示意圖」，按主題說明比例、試放或操作條件。統一 640 × 480、米白底 `#f5f6f2`、灰綠描邊 `#56614b`、淺綠功能區及紅色提醒，主標 32 px、說明 28 px 起；保留相同圖說元件與手機縮放方式。
+
+| 圖片 | 用途與依據 |
+| --- | --- |
+| `public/images/usage/jimny-seating.svg` | 兩人／四人用車的座椅與載物取捨。僅表達後座直立／傾倒概念，不提供容積、實測尺寸或行李件數。 |
+| `public/images/usage/carry-loading.svg` | 貨台俯視、三邊裝卸空間。2,565 × 1,660 mm 依 [台灣官方介紹](https://www.taiwansuzuki.com.tw/cars/carry) 於 9/27 核對；虛線不表示實際開啟距離。 |
+| `public/images/usage/swift-parking.svg` | 車位與開門、尾門取物空間。通用俯視圖，不標示最小車位尺寸或保證適用的機械車位。 |
+| `public/images/usage/e-vitara-charging.svg` | AC Type 1／DC CCS1 與備用站點。介面依 [台灣官方介紹](https://www.taiwansuzuki.com.tw/cars/eVITARA) 9/27 核對，不提供接線、設備施工或保證充電時間。 |
+| `public/images/usage/s-cross-luggage.svg` | 依開口、底面、尾門順序試放行李。通用後廂輪廓，不代表實車精確比例、容量或可裝件數。 |
+| `public/images/usage/vitara-modes.svg` | AUTO／SPORT／SNOW／LOCK 的用途。依 [台灣官方模式說明](https://www.taiwansuzuki.com.tw/cars/vitara) 9/27 核對，不描繪扭力分配比例或保證路況通行能力。 |
+
+已搜尋免費素材：[Vauxford 的 2019 Jimny 內裝](https://commons.wikimedia.org/wiki/File:2019_Suzuki_Jimny_AllGrip_Interior.jpg) 為 CC BY-SA 4.0；[RichardSummersault 的印尼 CARRY 後方照片](https://commons.wikimedia.org/wiki/File:Suzuki_Carry_(Rear),_Jakarta,_Indonesia.jpg) 為 CC0。前者為海外舊年式內裝，後者為海外車輛且不是尺寸示範，未採用、未下載。媒體試駕照片無已確認的免費商用授權，未引用圖片。
+
+六張 SVG 由 Next Image 按比例顯示。日後有授權實拍照時，修改 `src/data/car-usage.ts` 中對應的 `image.src/alt/caption/width/height` 即可替換；按下方既有壓縮原則處理照片，不把示意圖說明沿用為實拍說明。
+
 更新日期：2026-09-08。彈窗圖片取自各車款的台灣 Suzuki 官方介紹頁。官方產品照片不代表本站自行拍攝；各圖版權歸原權利人所有。
 
 原有手繪車款圖、SVG 與 CSS shape 保持原樣。保留既有 JPG 與 OG 圖路徑；每張照片維持其來源長寬比例，OG 圖維持原尺寸，維持 JSON-LD、交車照片 API 和分享圖片相容。

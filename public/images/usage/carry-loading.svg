@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" fill="none">
+  <title>CARRY 貨台尺寸與裝卸方向示意</title>
+  <desc>貨台長 2,565 mm、寬 1,660 mm。左、右、後方欄板可開啟；虛線區域提醒預留裝卸空間。非比例繪製。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#56614b"/></marker>
+    <pattern id="bed" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M0 0H20" stroke="#c4d3b5" stroke-width="2"/></pattern>
+  </defs>
+  <rect width="640" height="480" fill="#f5f6f2"/>
+  <g font-family="Arial, 'PingFang TC', 'Noto Sans TC', sans-serif" font-weight="700" text-anchor="middle" fill="#33412c">
+    <text x="320" y="48" font-size="32">貨台俯視</text>
+    <text x="350" y="103" font-size="32">2,565 mm</text>
+    <text transform="translate(617 270) rotate(-90)" font-size="32">1,660 mm</text>
+  </g>
+  <path d="M188 125H512" stroke="#56614b" stroke-width="2.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <path d="M183 115V142M517 115V142M582 179H559M582 361H559" stroke="#9aa58f" stroke-width="2"/>
+  <path d="M577 184V356" stroke="#56614b" stroke-width="2.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <rect x="75" y="167" width="46" height="17" rx="5" fill="#535a4d"/>
+  <rect x="75" y="356" width="46" height="17" rx="5" fill="#535a4d"/>
+  <rect x="430" y="167" width="46" height="17" rx="5" fill="#535a4d"/>
+  <rect x="430" y="356" width="46" height="17" rx="5" fill="#535a4d"/>
+  <path d="M61 186Q39 191 39 218V322Q39 349 61 354H167V186Z" fill="#fff" stroke="#56614b" stroke-width="4"/>
+  <path d="M64 206V334L93 342V198Z" fill="#dce5e4" stroke="#a6b7b3" stroke-width="2"/>
+  <rect x="106" y="211" width="42" height="47" rx="8" fill="#e0e2dc" stroke="#9ba391" stroke-width="2"/>
+  <rect x="106" y="283" width="42" height="47" rx="8" fill="#e0e2dc" stroke="#9ba391" stroke-width="2"/>
+  <rect x="181" y="180" width="338" height="180" rx="5" fill="#e1ead7" stroke="#56614b" stroke-width="4"/>
+  <rect x="190" y="190" width="319" height="160" rx="3" fill="url(#bed)"/>
+  <path d="M197 165V150H503V165M197 375V390H503V375M534 195H549V345H534" stroke="#b9000e" stroke-opacity=".65" stroke-width="2.5" stroke-dasharray="7 5"/>
+  <path d="M350 175V151M350 365V389M524 270H547" stroke="#b9000e" stroke-width="3"/>
+  <path d="M344 157L350 151L356 157M344 383L350 389L356 383M541 264L547 270L541 276" stroke="#b9000e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g font-family="Arial, 'PingFang TC', 'Noto Sans TC', sans-serif" font-size="28" font-weight="600" text-anchor="middle">
+    <text x="350" y="283" font-size="36" fill="#56614b">載物區</text>
+    <text x="320" y="453" fill="#9b000b">三邊可開啟 · 預留裝卸空間</text>
+  </g>
+</svg>

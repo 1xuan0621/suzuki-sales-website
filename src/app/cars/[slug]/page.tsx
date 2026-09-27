@@ -11,6 +11,8 @@ import { carSchema, pageMetadata, serializeJsonLd } from "@/data/seo";
 import ContentShell, { ArticleSection } from "@/components/ContentShell";
 import CarPageGallery from "@/components/CarPageGallery";
 import PromotionNotice from "@/components/PromotionNotice";
+import CarUsageSection from "@/components/CarUsageSection";
+import { carUsage } from "@/data/car-usage";
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -26,6 +28,7 @@ export default async function CarPage({ params }: Props) {
   if (!car) notFound();
   const content = carPages[car.id];
   const focus = content.buyingFocus;
+  const usage = carUsage[car.id];
   const priorityFaqs = focus?.faqIds.map((id) => carFaqs[car.id].find((item) => item.id === id)!) || [];
   const remainingFaqs = carFaqs[car.id].filter((item) => !focus?.faqIds.includes(item.id));
   const relatedGuides = content.relatedGuides.map(getGuide).filter((guide) => guide !== undefined);
@@ -44,9 +47,11 @@ export default async function CarPage({ params }: Props) {
           <Link href="#pricing" className="underline underline-offset-4">價格與報價</Link>
           <Link href={`#${focus.faqIds[0]}`} className="underline underline-offset-4">{car.id === "jimny" ? "2026 改款差異" : "輕油電與選購重點"}</Link>
           <Link href="#test-drive" className="underline underline-offset-4">台北試乘準備</Link>
+          {usage && <Link href="#daily-use" className="underline underline-offset-4">{usage.label}檢查</Link>}
           <Link href="#faq" className="underline underline-offset-4">更多車型 QA</Link>
         </nav>}
         {!focus && <Link href="#faq" className="mr-5 mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">查看車型常見 QA</Link>}
+        {!focus && usage && <Link href="#daily-use" className="mr-5 mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">{usage.label}檢查</Link>}
         <Link href="/visit/beitou" className="mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">台北北投到店交通與試乘預約</Link>
       </div>
       <CarPageGallery car={car} />
@@ -64,6 +69,7 @@ export default async function CarPage({ params }: Props) {
       <h2 id="buying-focus-heading" className="mb-4 text-xl font-bold sm:text-2xl">{focus.faqHeading}</h2>
       <FaqList items={priorityFaqs} defaultOpenId={focus.faqIds[0]} />
     </section>}
+    {usage && <CarUsageSection content={usage} />}
     <ArticleSection title="主要規格與車色">
       <ul className="list-disc space-y-2 pl-5">{car.detail.specs.map((spec) => <li key={spec}>{spec}</li>)}</ul>
       <p>車色參考：{car.detail.colors?.map((color) => color.name).join("、")}。實際車色與配備以台灣規配表及實車為準。</p>
