@@ -66,7 +66,7 @@ export const firstCarGuide: Guide = {
   title: "第一次買 Suzuki，從看車到開回家",
   description: "第一次買車不用先背熟規格。鈺漣陪你從用車需求與預算開始，弄懂 Suzuki 試乘、購車菜單、訂金、貸款保險和交車當天要確認的事。",
   introduction: "先決定自己能負擔多少，再看車、談報價。照下面六步走，每次只處理眼前這一步。",
-  updatedAt: "2026-09-22",
+  updatedAt: "2026-10-03",
   reviewedAt: guideReviewedAt,
   sourceIds: ["consumer", "loan", "insurance", "registration", "service", "swift", "jimny", "eVitara"],
   relatedSlugs: ["suv-selection", "car-maintenance"],
@@ -185,7 +185,7 @@ export const firstCarGuide: Guide = {
         },
         {
           label: "配件明細",
-          text: "寫出品牌、型號、價格及保固窗口；「送隔熱紙」還不夠明確。"
+          text: "寫出品牌、型號、價格及保固窗口；隔熱紙另分車窗寫明完整型號與透光率，贈送也一樣。"
         },
         {
           label: "最後總額",
@@ -193,6 +193,7 @@ export const firstCarGuide: Guide = {
         }
       ],
       note: "下訂前審閱完整契約，寫清交期、付款、退訂與貸款未過的處理。匯款核對車商指定帳戶並留收據；契約審閱不等於簽約後可隨時無條件退款。",
+      link: { href: "/faq#window-tint", label: "隔熱紙的合格標識與前擋、前側窗規定" },
       action: "把車、配件、費用寫清楚",
     },
     {

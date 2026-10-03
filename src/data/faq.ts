@@ -13,7 +13,7 @@ export interface FaqItem {
 }
 
 export const faqPage = {
-  updatedAt: "2026-09-20",
+  updatedAt: "2026-10-03",
   title: "常見 QA｜購車、交車與 SUZUKI 車型問題｜張鈺漣",
   description: "查找購車費用、訂金、交車、休旅選擇、油電回本與保養胎壓問題，也能了解 SWIFT 與 Jimny 重點問答，連到各車型完整說明。",
 };
@@ -30,11 +30,13 @@ export const generalFaqGroups: { id: string; title: string; items: FaqItem[] }[]
     { id: "total-cost", question: "網頁車價就是交車總價嗎？還有哪些費用？", answer: "網頁標示的是建議售價。請另外核對成交車價、保險、領牌及稅費、選配、貸款費用和另約運送費。已包含的項目不重複加算；已付訂金會抵車款。先拿到明細，再比較交車前支出與全期總成本。", sourceIds: ["consumer", "registration"], links: [{ href: "/guides/first-car#budget", label: "看購車預算與試算範例" }] },
     { id: "cash-or-loan", question: "現金、零利率或低月付，哪一種比較划算？", answer: "先取得各方案實際車價，再加總頭款、全部期款、尾期款及另收費用。低月付可能只是拉長期數或把金額留到後面；零利率也要看費用與折扣差異。請同時比較總費用年百分率、提前清償條件及自己的現金需求。", sourceIds: ["loan"], links: [{ href: "/guides/first-car#payment", label: "看貸款與保險比較清單" }, { href: "/#loan-calculator", label: "前往貸款試算" }] },
     { id: "insurance-coverage", question: "只買強制險夠嗎？「全險」到底包含什麼？", answer: "強制險提供法定範圍的人身傷亡保障，不包含車輛修復費用。對方財物損失、自己的車損與其他風險，需要分別確認相應險種。「全險」不是所有事故都賠的保證；請逐項核對保額、自負額及除外條款，再比較同條件保費。", sourceIds: ["insurance", "autoInsurance"], links: [{ href: "/guides/first-car#payment", label: "了解車險與投保前確認事項" }] },
+    { id: "insurance-choice", question: "買新車一定要跟業務買乙式車險嗎？", answer: "汽車買賣定型化契約不得寫入排除或限制消費者自由投保的條款。乙式車體險不是所有新車都必買；但領牌仍須備妥有效的強制險。先分清強制險、車體險及第三人責任險，再依自己能承擔的損失選保障。若有人說報價、貸款或活動必須搭配特定保險，請對方把條件和不搭配時的價格寫清楚，再比較。", reviewedAt: "2026-10-03", points: ["用相同保障項目、保額、自負額及被保險人條件，分別取得報價；不要只比乙式或丙式的名稱與保費。", "自行投保時先與領牌承辦人確認保單生效及文件；簽約前看完整購車契約，確認理賠和後續服務找誰。"], sourceIds: ["carSalesContract", "insurance", "registration", "autoInsurance"], links: [{ href: "/faq#insurance-coverage", label: "強制險、第三人責任與車體險怎麼分" }] },
   ] },
   { id: "order", title: "看車與訂車", items: [
     { id: "test-drive-booking", question: "試乘一定要先預約嗎？到北投所可以停車嗎？", answer: "建議先確認展示或試乘車款、可安排時段與路線，並說明同行人數。北投所提供免費停車位，抵達時可詢問現場人員停放位置；留下網站需求後，仍需由顧問確認才算完成預約。", sourceIds: [], links: [{ href: "/visit/beitou", label: "查看北投所交通與試乘預約" }] },
     { id: "deposit", question: "付了訂金可以退嗎？貸款沒過怎麼辦？", answer: "要看契約、解除原因與適用規定。先談妥退訂、貸款未核准、額度不足或利率不符預期時的處理方式，連同已施工配件如何結算一起留下書面約定。保留契約與收據，有爭議時再依實際文件尋求消費諮詢。", sourceIds: ["consumer"], links: [{ href: "/guides/first-car#contract", label: "看訂車前合約核對清單" }] },
     { id: "model-year", question: "年式、出廠年份和領牌日期有什麼不同？", answer: "年式指車輛款式或配備版本，出廠年月指實際生產時間，領牌日則是車籍登記的日期。三者可能不同；詢價時分開列出，並確認是否已領牌、實際配備與保固起算方式。不要只用『今年的新車』作為約定。", sourceIds: ["consumer"], links: [{ href: "/guides/first-car#contract", label: "了解報價與車輛身分核對" }] },
+    { id: "window-tint", question: "2026 年新車隔熱紙怎麼選？業務送的也要符合規定嗎？", answer: "2026 年 2 月 28 日起首次領牌的新車若貼隔熱紙，一般車的前擋須用可見光透過率至少 70% 的合格產品，前側窗至少 40%，並有合格標識。贈送的隔熱紙也一樣。這是隔熱紙產品的規範；一般車的後側窗與後擋沒有同一數值門檻，計程車與幼童專用車另有要求。", reviewedAt: "2026-10-03", points: ["報價或訂單寫明每個車窗的隔熱紙廠牌、完整型號、透光率、費用及施工保固；「送隔熱紙」四個字不足以核對。", "用完整型號到官方合格產品清單查詢；合格型號會更新，不用舊貼文的款數或推薦名單判斷。", "交車時核對實際產品與合格標識，並在夜間或雨天留意視線；有攝影機或感測器的區域，請施工方依車輛手冊確認不可遮蔽的位置。"], sourceIds: ["windowTintRules", "windowTintProducts"], links: [{ href: "/guides/first-car#contract", label: "看報價單還要寫清哪些配件" }] },
     { id: "waiting-time", question: "訂車後多久能交？有車是不是就能馬上領？", answer: "交期還會受到車色與版本供應、貸款及文件進度、領牌與配件施工影響。先確認是否已有可分配車輛、目前完成哪個步驟，以及預估時間或約定期限。若有指定用車日期，下訂前就提出並談妥延誤處理。", sourceIds: [], links: [{ href: "/guides/first-car#paperwork", label: "看訂車到交車的安排" }] },
   ] },
   { id: "delivery", title: "領牌與交車", items: [
@@ -50,6 +52,8 @@ export const generalFaqGroups: { id: string; title: string; items: FaqItem[] }[]
     { id: "maintenance-low-mileage", question: "半年開不到三千公里，也要保養嗎？", answer: "先看自己的保養表，不能只看里程。若同時規定時間與里程、採先到者為準，時間到仍應安排相應保養。首次檢查與後續定保分開核對；各車型、年式和使用條件可能不同，請服務廠依 Suzuki 台灣隨車文件確認，不套用其他品牌或海外週期。", sourceIds: ["maintenancePrinciples", "service"], links: [{ href: "/guides/car-maintenance#schedule", label: "找到自己適用的保養週期" }] },
     { id: "maintenance-extras", question: "保養單上的清潔、添加劑都一定要做嗎？", answer: "先問這一項是手冊到期項目、檢查後的症狀處理，還是可自選的清潔服務，並請接待說明原因與費用。不能把所有加項都當必要，也不要只看名稱就刪掉有車況依據的處置。維修與追加項目應事先說明、取得同意，取車時再核對工單。", sourceIds: ["repairConsent"], links: [{ href: "/guides/car-maintenance#work-order", label: "把保養工單分成三類來看" }] },
     { id: "tire-pressure", question: "胎壓要打多少？可以跟別台車一樣嗎？", answer: "依自己車門框標籤或車主手冊的建議冷胎胎壓，在冷胎時量測，並確認前後輪、負載條件和單位。不同車型不共用同一個 PSI 數字，也不要把胎壁最大壓力當成車輛建議值。找不到標籤或讀不懂時，請服務廠協助核對。", sourceIds: ["tirePressure"], links: [{ href: "/guides/car-maintenance#daily-checks", label: "查看日常檢查與紀錄清單" }] },
+    { id: "tire-replacement", question: "第一次換輪胎，幾公里或幾年一定要換？", answer: "沒有適用所有車的固定公里數。先看四輪最淺胎紋與磨耗指示點，再看胎側是否有裂傷、鼓包或異常變形，以及製造日期與使用狀況。交通部建議輪胎從製造日起最長使用 10 年，並非保證 10 年內都安全。胎紋任一點不足 1.6 mm 不得行駛高速或快速公路；雨天抓地和排水可能在磨到下限前就變差，有疑慮應請專業人員檢查。", reviewedAt: "2026-10-03", points: ["請技師量四輪胎紋、指出是否偏磨，說明是調整胎壓、檢查定位，還是需要換胎。", "輪胎破損、胎壓持續下降或行駛異常時，先安全停車尋求協助，不靠補氣或只看胎紋判定能繼續開。"], sourceIds: ["tireSafety", "tireAge", "tireManufacturerAdvice", "tireReplacement"], links: [{ href: "/guides/car-maintenance#daily-checks", label: "平常怎麼檢查輪胎與胎壓" }] },
+    { id: "tire-pair", question: "只換兩條輪胎可以嗎？新胎要放前輪還是後輪？", answer: "先看另外兩條的胎紋、胎齡與損傷，不能只因兩條看起來還有紋就保留。輪胎廠建議四條一致；若經檢查只換兩條，至少同軸成對，尺寸與類型須符合原車規格，新胎通常裝後軸以維持濕地穩定。四驅車更要先依車主手冊及服務廠確認四輪規格與磨耗差，不能直接套用一般換兩條的做法。", reviewedAt: "2026-10-03", points: ["帶車主手冊或車門標示，請店家列明新胎尺寸、載重與速度指數、完整型號、製造日期及含安裝的總價。", "問清楚新胎安裝位置、是否需要檢查定位與胎壓警示系統，施工後核對工單；選安靜、耐磨或濕地表現時，以自己常走路況排序。"], sourceIds: ["tireReplacement", "tireManufacturerAdvice"], links: [{ href: "/faq#tire-replacement", label: "先看自己的輪胎是否該換" }, { href: "/faq#tire-pressure", label: "確認適用的冷胎胎壓" }] },
     { id: "ev-maintenance", question: "油電車少換機油、純電車不用保養，是真的嗎？", answer: "不能這樣推定。汽油引擎仍在的輕油電或一般油電，須依各車保養表維護引擎；純電車雖沒有引擎機油，輪胎、煞車等仍需檢查。實際更換項目與週期以該車手冊為準，不能直接沿用別種動力的保養單。", sourceIds: ["maintenancePrinciples", "service"], links: [{ href: "/guides/car-maintenance#powertrain", label: "不同動力的保養差別" }] },
     { id: "battery-life", question: "油電或電動車的電池，保固到期就得換嗎？", answer: "保固期限不是固定更換日期，也不是壽命保證。是否需要更換要看電池種類、檢測結果與車況；先分清一般供電電瓶、輕油電電池與純電動力電池。詢價時再核對零件、工資及保固條件，不直接拿網友帳單推算自己的費用。", sourceIds: [], links: [{ href: "/guides/powertrain-choice#decision", label: "選車前要問清楚哪些電池條件？" }] },
   ] },
