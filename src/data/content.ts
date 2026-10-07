@@ -19,6 +19,13 @@ export const homeContent = {
     { href: "/guides/jimny-history", title: "Jimny 發展史：從 1970 到第四代", description: "四代演進、JB64／JB74、三門與五門，一次看懂車迷常說的名字。" },
     { href: "/guides/jimny-modifications", title: "Jimny 改裝前，先看這五件事", description: "輪胎、升高、車頂架與保固，把討論區的改裝靈感變成能核對的清單。" },
   ],
+  jimnyPhoto: {
+    src: "/personal/dealer-jimny-outdoor-door.jpg",
+    alt: "鈺漣倚在綠色 Jimny 車門旁，身後是戶外樹蔭",
+    width: 1000,
+    height: 1419,
+    caption: "鈺漣與 Jimny 的戶外合照",
+  },
 };
 
 export const showroom = {

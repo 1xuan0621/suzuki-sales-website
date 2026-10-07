@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useConsultation } from "./ConsultationProvider";
 import ConsultationPrefill from "./ConsultationPrefill";
@@ -21,8 +22,9 @@ import "@/components/car-shapes.css";
    使用 useCompare，必須包在 CompareProvider 內
    ═══════════════════════════ */
 type HomeTopic = { href: string; title: string; description: string };
+type HomePhoto = { src: string; alt: string; width: number; height: number; caption: string };
 
-export default function HomePageClient({ introduction, buyingTopics, jimnyTopics }: { introduction: string; buyingTopics: HomeTopic[]; jimnyTopics: HomeTopic[] }) {
+export default function HomePageClient({ introduction, buyingTopics, jimnyTopics, jimnyPhoto }: { introduction: string; buyingTopics: HomeTopic[]; jimnyTopics: HomeTopic[]; jimnyPhoto: HomePhoto }) {
   const { toggleCar, isSelected } = useCompare();
   const { form, update, submitted, formError, website, setWebsite, sending, handleSubmit, beginConsultation } = useConsultation();
   const [modalCar, setModalCar] = useState<Car | null>(null);
@@ -256,17 +258,34 @@ export default function HomePageClient({ introduction, buyingTopics, jimnyTopics
           </section>
 
           <section aria-labelledby="jimny-topics-heading" className="w-[calc(100%-88px)] mx-auto mt-[34px] rounded-2xl border border-[#e1d8d2] bg-[#fffaf6] p-6 max-sm:w-[calc(100%-28px)] max-sm:mt-5 max-sm:p-5">
-            <p className="text-xs font-bold tracking-widest text-[#b9000e]">JIMNY 專題</p>
-            <h2 id="jimny-topics-heading" className="mt-2 text-2xl font-bold leading-snug">喜歡 Jimny，從認識它開始</h2>
-            <p className="mt-3 text-sm leading-7 text-[#666]">從小越野車的故事，到買車前常問的改裝與日常使用問題。</p>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              {jimnyTopics.map((topic) => <Link key={topic.href} href={topic.href} className="rounded-xl border border-[#e1d8d2] bg-white p-5 no-underline transition-colors hover:border-[#b9000e] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b9000e]">
-                <h3 className="text-lg font-bold leading-7 text-[#333]">{topic.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-[#666]">{topic.description}</p>
-                <span className="mt-4 inline-block text-sm font-bold text-[#b9000e]">閱讀專題 <span aria-hidden="true">→</span></span>
-              </Link>)}
+            <div className="grid gap-x-8 gap-y-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-center">
+              <div className="lg:col-start-2 lg:self-end">
+                <p className="text-xs font-bold tracking-widest text-[#b9000e]">JIMNY 專題</p>
+                <h2 id="jimny-topics-heading" className="mt-2 text-2xl font-bold leading-snug">喜歡 Jimny，從認識它開始</h2>
+                <p className="mt-3 text-sm leading-7 text-[#666]">從小越野車的故事，到買車前常問的改裝與日常使用問題。</p>
+              </div>
+              <figure className="w-full max-w-[320px] justify-self-center lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:max-w-none">
+                <Image
+                  src={jimnyPhoto.src}
+                  alt={jimnyPhoto.alt}
+                  width={jimnyPhoto.width}
+                  height={jimnyPhoto.height}
+                  sizes="(min-width: 1024px) 280px, (min-width: 390px) 320px, calc(100vw - 70px)"
+                  className="h-auto w-full rounded-xl"
+                />
+                <figcaption className="mt-2 text-center text-xs leading-6 text-[#666]">{jimnyPhoto.caption}</figcaption>
+              </figure>
+              <div className="min-w-0 lg:col-start-2 lg:self-start">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {jimnyTopics.map((topic) => <Link key={topic.href} href={topic.href} className="rounded-xl border border-[#e1d8d2] bg-white p-5 no-underline transition-colors hover:border-[#b9000e] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b9000e]">
+                    <h3 className="text-lg font-bold leading-7 text-[#333]">{topic.title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-[#666]">{topic.description}</p>
+                    <span className="mt-4 inline-block text-sm font-bold text-[#b9000e]">閱讀專題 <span aria-hidden="true">→</span></span>
+                  </Link>)}
+                </div>
+                <Link href="/cars/jimny#faq" className="mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">想問通勤、四驅或五門？看 Jimny 常見 QA →</Link>
+              </div>
             </div>
-            <Link href="/cars/jimny#faq" className="mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">想問通勤、四驅或五門？看 Jimny 常見 QA →</Link>
           </section>
 
           {/* ═══════ 服務項目 ═══════ */}
