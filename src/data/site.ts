@@ -283,6 +283,11 @@ export const cars: Car[] = [
   },
 ];
 
+// First three requested by the owner; remaining order uses public discussion signals.
+// Evidence and limitations: docs/JIMNY_CONTENT_RESEARCH_2026-10-07.md.
+export const homeCarOrder: CarId[] = ["jimny", "swift", "carry", "e-vitara", "vitara", "s-cross"];
+export const homeCars = homeCarOrder.map((id) => cars.find((car) => car.id === id)!);
+
 export const services = [
   { title: "新車介紹", desc: "掌握 Suzuki 全車系最新資訊與價格", icon: "📖" },
   { title: "車款比較", desc: "依你的需求幫你分析最適合的車款", icon: "⚖️" },

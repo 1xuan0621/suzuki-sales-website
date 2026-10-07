@@ -7,13 +7,17 @@ export type { Guide } from "./guides";
 export const siteUrl = "https://suzuki-taipei.com";
 const startingPrice = (id: CarId) => cars.find((car) => car.id === id)!.price;
 export const homeContent = {
-  updatedAt: "2026-09-20",
+  updatedAt: "2026-10-07",
   title: "SUZUKI 台北購車與試乘諮詢｜汽車顧問張鈺漣",
   description: "SUZUKI 汽車顧問張鈺漣以台北為主要服務地區，提供全台選車、購車諮詢與跨縣市交車協助。了解六款車的價格、規格與購車流程，預約凱騰鈴木北投所賞車及試乘；交車安排依個案確認。",
   introduction: "以台北為主要服務地區，提供全台購車諮詢，並協助跨縣市購車與交車。實際服務據點位於凱騰鈴木北投所，到店賞車與試乘請先預約；交車地點、費用與時程依個案確認。",
   buyingTopics: [
     { href: "/cars/jimny", title: "Jimny 2026 改款、價格與試乘", description: `建議售價 ${startingPrice("jimny")}。先看新舊配備差異，再確認車色、交期與台北試乘。` },
     { href: "/cars/swift", title: "SWIFT 選購：輕油電、空間與價格", description: `建議售價 ${startingPrice("swift")}。一次了解充電、停車尺寸與後座需求，準備詢價與試乘。` },
+  ],
+  jimnyTopics: [
+    { href: "/guides/jimny-history", title: "Jimny 發展史：從 1970 到第四代", description: "四代演進、JB64／JB74、三門與五門，一次看懂車迷常說的名字。" },
+    { href: "/guides/jimny-modifications", title: "Jimny 改裝前，先看這五件事", description: "輪胎、升高、車頂架與保固，把討論區的改裝靈感變成能核對的清單。" },
   ],
 };
 
@@ -73,7 +77,7 @@ export const carPages: Record<CarId, CarPageContent> = {
   },
   jimny: {
     ...carDates,
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-10-07",
     specsReviewedAt: "2026-09-20",
     pricesReviewedAt: "2026-09-20",
     description: `Jimny 2026 改款台灣建議售價 ${startingPrice("jimny")}。對照 2024 型錄，了解 ACC、DSBS II 與 9 吋車機升級，確認三門四人座是否適合日常需求，向鈺漣詢問報價、交期與台北北投試乘。`,
@@ -81,7 +85,7 @@ export const carPages: Record<CarId, CarPageContent> = {
     considerations: ["後座乘坐與行李需求會互相影響，請用平常同行人數安排試坐，並確認上下車方式。", "四驅功能不等於任何路況都能安全通過；模式使用、輪胎及駕駛方式須遵守車主手冊。", "若主要需求是長途多人乘坐，建議同時試坐休旅車，比較座艙及乘坐感受。"],
     testDrive: ["先提供希望到店的日期、同行人數與主要通勤路線，讓鈺漣確認台北北投所可安排的 Jimny 車輛與時段。", "想了解改款配備，可先提出 ACC 操作、9 吋車機與手機連結的問題，到店時依展示或試乘車實際配備確認。", "讓常同行的人試坐後座，確認三門車的進出方式、行李擺放與日常停車視野。", "在可安排的一般道路感受轉向、煞車及路面起伏；由顧問說明四驅使用條件，試乘不代表能安排越野體驗。"],
     relatedCars: ["vitara"],
-    relatedGuides: ["first-car", "suv-selection"],
+    relatedGuides: ["jimny-history", "jimny-modifications", "first-car", "suv-selection"],
     buyingFocus: {
       heading: "改款重點、價格與台北試乘",
       faqHeading: "Jimny 2026 改款差異",

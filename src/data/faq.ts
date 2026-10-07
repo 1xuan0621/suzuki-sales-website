@@ -13,7 +13,7 @@ export interface FaqItem {
 }
 
 export const faqPage = {
-  updatedAt: "2026-10-03",
+  updatedAt: "2026-10-07",
   title: "常見 QA｜購車、交車與 SUZUKI 車型問題｜張鈺漣",
   description: "查找購車費用、訂金、交車、休旅選擇、油電回本與保養胎壓問題，也能了解 SWIFT 與 Jimny 重點問答，連到各車型完整說明。",
 };
@@ -81,8 +81,10 @@ export const carFaqs: Record<CarId, FaqItem[]> = {
   jimny: [
     { id: "jimny-model-update", question: "Jimny 2026 改款差在哪？新舊配備要怎麼比？", answer: "與官方 2024 台灣型錄相比，Jimny 2026 改款的重點是主動安全與車內介面升級：ACC 主動式車距巡航、DSBS II 煞車輔助、LDP 車道偏離輔助、TSR 交通標誌辨識，以及支援無線 Apple CarPlay／Android Auto 的 9 吋車機。仍保留 1.5L 引擎、四速自排、大樑與加力箱四驅配置。", reviewedAt: "2026-09-20", table: { caption: "Jimny：2024 台灣型錄與 2026 現行台灣規配對照", columns: ["核對重點", "2024 台灣型錄", "2026 現行台灣規配"], rows: [["煞車輔助", "DSBS 雙感知器", "DSBS II 雙感知器"], ["巡航", "定速巡航", "ACC 主動式車距巡航"], ["車道與路標", "LDWS 車道偏離警示", "保留 LDWS，加入 LDP 與 TSR"], ["車機", "CD／MP3、藍牙；觸控螢幕為選配", "標配 9 吋觸控螢幕、無線手機連結"], ["動力與四驅", "1.5L、四速自排、加力箱四驅", "維持 1.5L、四速自排、加力箱四驅"]] }, points: ["本文 Jimny 2026 指台灣現行 THE NEW Jimny 三門四人座；不混用海外五門車型的價格與配備。", "年式、出廠年月與領牌日期分開確認，下訂時以台灣規配表、實際車輛及合約配備清單為準。", "駕駛輔助有作動條件，請依車主手冊使用，駕駛仍須持續注意路況。"], sourceIds: ["jimny", "jimnySpecs", "jimnyPrevious", "jimny2026"], links: [{ href: "/faq#model-year", label: "年式、出廠與領牌日期有何不同？" }] },
     { id: "jimny-daily-use", question: "Jimny 適合通勤嗎？後座、長途會不會不習慣？", answer: "先看你能否接受三門車的後座進出方式、乘坐感受與載物取捨。試乘不要只看外型：讓常同行的人坐後座，走可安排的一般道路，留意轉向、起伏、風噪與行李空間。如果常滿載跑長途，建議同時試坐其他休旅。", sourceIds: ["jimny"], links: [{ href: "/cars/vitara#vitara-vs-s-cross", label: "看看 VITARA 與 S-CROSS 的選擇方向" }] },
-    { id: "jimny-four-wheel-drive", question: "Jimny 四驅可以一直開著嗎？試乘能去越野嗎？", answer: "四驅模式要依原廠手冊及路面條件使用，不要把分時四驅當成任何路面都能常駐開啟的模式。一般到店試乘以事先確認的路線為準；四驅操作可請顧問說明，本站不承諾越野試乘。", sourceIds: ["jimny"] },
-    { id: "jimny-modifications", question: "想改輪胎、保桿或加裝配件，下訂前要問什麼？", answer: "先列出預計更動項目，確認是否影響安全感知器、輪胎與車身條件及保固。現行 Jimny 有雷達與攝影機等駕駛輔助設備，不能假設舊款配件可直接沿用；請原廠及施工單位核對適用性與必要校正。", sourceIds: ["jimny"] },
+    { id: "jimny-four-wheel-drive", question: "Jimny 四驅可以一直開著嗎？下雨就要切 4H 嗎？", answer: "一般柏油道路以 2H 為原廠列出的使用情境，不能只因下雨就一律切到 4H。Jimny 是分時四驅，4H 與 4L 要按路面條件及隨車手冊使用，不是所有道路都能常駐開啟。到店可先了解操作條件，試乘以事前確認的路線為準，不承諾越野體驗。", reviewedAt: "2026-10-07", sourceIds: ["jimny", "jimnyDrive"], links: [{ href: "/guides/jimny-history#off-road-design", label: "了解 Jimny 越野結構與日常使用的關係" }] },
+    { id: "jimny-modifications", question: "Jimny 想改 AT 胎、升高或車頂架，先改哪一項？", answer: "先試原廠車，確認要改善的是舒適、裝載還是非鋪裝路能力。通勤不一定需要 AT 胎，升高也不等於一定更舒服。台灣避震器變更有不得超過原核定車身高度等規定；車頂架另按固定方式確認檢驗登記。現行 Jimny 的雷達、攝影機與保固，也要按實際配件核對。", reviewedAt: "2026-10-07", sourceIds: ["jimny", "allTerrainTyres", "vehicleModificationRules", "roofRackRules"], links: [{ href: "/guides/jimny-modifications", label: "看輪胎、升高、車頂架與保固的完整確認清單" }] },
+    { id: "jimny-five-door", question: "Jimny 五門、Sierra、Nomade 和台灣三門版有什麼不同？", answer: "日本 Jimny 輕型版與 Jimny Sierra 的車體、動力規格不同；五門版在 2023 年全球發表，日本則於 2025 年推出名為 Nomade 的版本。台灣官網本次核對仍以三門四人座 Jimny 為準，不能直接套用海外價格、配備或交期；想看五門消息，請以台灣官方後續公告確認。", reviewedAt: "2026-10-07", sourceIds: ["jimnyHistory", "jimnyFiveDoor", "jimnyNomade", "jimny"], links: [{ href: "/guides/jimny-history#model-names", label: "對照 JB64、JB74 與五門版的名稱" }] },
+    { id: "jimny-all-terrain-tyres", question: "Jimny 換 AT 胎，雨天就一定更安全嗎？", answer: "不能這樣判斷。AT 代表全地形取向，不是濕地煞車保證；不同胎款仍有噪音與公路性能取捨。多數時間通勤時，先比較符合原廠規格的輪胎、濕地表現、載重與速度等級，再依實際路況選擇，不只看胎紋外型。", reviewedAt: "2026-10-07", sourceIds: ["allTerrainTyres"], links: [{ href: "/guides/jimny-modifications#tyres", label: "換胎與輪圈前要核對哪些項目？" }] },
   ],
   "e-vitara": [
     { id: "e-vitara-charging", question: "e VITARA 充電前要準備什麼？用哪種接頭？", answer: "台灣 e VITARA 使用 AC Type 1（J1772）與 DC CCS1。先找出住家或工作地點能使用的相容設備，再確認停車、充電時段與備用站點。不要直接套用海外車型或只看站點標示有充電樁。", points: ["列出平日里程、長途頻率，以及平常停車多久。", "常用站核對接頭、開放時間、停車費、充電費及付款方式。", "需要裝家充時，先由合格專業人員勘查供電與配線，再取得設備及施工報價。", "社區或共用停車場先確認管理與施工安排；長途另備相容站點。"], sourceIds: ["eVitara"], links: [{ href: "/guides/first-car#budget", label: "把設備、施工與充電費納入預算" }] },
@@ -114,6 +116,8 @@ export const featuredCarFaqs: { carId: CarId; faqId: string }[] = [
   { carId: "swift", faqId: "swift-hybrid" },
   { carId: "jimny", faqId: "jimny-model-update" },
   { carId: "jimny", faqId: "jimny-daily-use" },
+  { carId: "jimny", faqId: "jimny-modifications" },
+  { carId: "jimny", faqId: "jimny-five-door" },
 ];
 
 export function getGeneralFaq(id: string) { return generalFaqGroups.flatMap((group) => group.items).find((item) => item.id === id); }

@@ -1,5 +1,7 @@
 import type { ContentSourceId } from "./content-sources";
 import type { CarId } from "./site";
+import { jimnyHistoryGuide } from "./jimny-guides";
+import { jimnyModificationsGuide } from "./jimny-modifications";
 
 export interface GuidePoint { label: string; text: string }
 
@@ -19,7 +21,7 @@ export interface GuideCalculation {
 
 export interface Guide {
   slug: string;
-  category: "process" | "selection" | "ownership";
+  category: "process" | "selection" | "ownership" | "jimny";
   audience: string;
   title: string;
   description: string;
@@ -48,12 +50,13 @@ export interface Guide {
 
 const guideReviewedAt = "2026-09-09";
 export const guideIndex = {
-  updatedAt: "2026-09-20",
-  title: "Suzuki 購車指南｜選車比較、購車流程與保養｜張鈺漣",
-  description: "從第一次買車、舊車換新車、車牌選號與領牌，到家庭休旅選擇、汽油與油電比較、交車後保養，依你的用車問題找到指南與實用清單。",
+  updatedAt: "2026-10-07",
+  title: "Suzuki 購車指南｜Jimny 專題、選車與保養｜張鈺漣",
+  description: "從 Jimny 發展史、改裝與日常用車，到第一次買車、舊車換新、選號領牌、休旅與油電比較及保養，依你的問題找到實用答案與清單。",
 };
 
 export const guideCategories = [
+  { id: "jimny", title: "Jimny 專題", description: "先認識小越野車的故事，再看改裝、通勤與選購時真正要確認的事。" },
   { id: "process", title: "準備買車與換車", description: "從預算、報價到交車，先把購車這件事安排好。" },
   { id: "selection", title: "找到適合自己的車", description: "用家人、停車位與日常路線，決定空間和動力怎麼選。" },
   { id: "ownership", title: "交車後的保養與使用", description: "知道何時回廠、工單怎麼看，慢慢熟悉照顧愛車的方法。" },
@@ -1215,7 +1218,7 @@ export const licensePlateGuide: Guide = {
   ],
 };
 
-export const guides = [firstCarGuide, tradeInGuide, licensePlateGuide, suvSelectionGuide, powertrainGuide, maintenanceGuide];
+export const guides = [jimnyHistoryGuide, jimnyModificationsGuide, firstCarGuide, tradeInGuide, licensePlateGuide, suvSelectionGuide, powertrainGuide, maintenanceGuide];
 export function getGuide(slug: string) { return guides.find((guide) => guide.slug === slug); }
 export function guideTitle(guide: Guide) { return `${guide.title}｜張鈺漣購車指南`; }
 

@@ -37,8 +37,8 @@ export default async function GuidePage({ params }: Props) {
         <div id="guide-contact" tabIndex={-1} className="mt-5 scroll-mt-6"><ContactLinks entry="guide" /></div>
       </header>
       <section aria-labelledby="article-flow-heading" className="mx-auto mt-8 rounded-2xl border border-[#e5dcd5] bg-[#f5f1ed] p-4 sm:p-6">
-        <h2 id="article-flow-heading" className="text-lg font-bold">{guide.sections.length} 步{guide.category === "process" ? "看懂流程" : guide.category === "ownership" ? "看懂保養" : "整理你的選擇"}</h2>
-        <p className="mt-1 text-sm leading-7 text-[#665c56]">按順序看，或點選目前需要的步驟。</p>
+        <h2 id="article-flow-heading" className="text-lg font-bold">{guide.sections.length}{guide.category === "jimny" ? " 個閱讀重點" : ` 步${guide.category === "process" ? "看懂流程" : guide.category === "ownership" ? "看懂保養" : "整理你的選擇"}`}</h2>
+        <p className="mt-1 text-sm leading-7 text-[#665c56]">{guide.category === "jimny" ? "從頭認識，或直接點選你想找的答案。" : "按順序看，或點選目前需要的步驟。"}</p>
         <GuideFlow sections={guide.sections} label={guide.category === "process" ? "購車流程" : "指南閱讀重點"} />
       </section>
       <div className="mx-auto mt-3 max-w-3xl divide-y divide-[#ddd]">

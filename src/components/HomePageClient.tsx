@@ -6,7 +6,7 @@ import { useConsultation } from "./ConsultationProvider";
 import ConsultationPrefill from "./ConsultationPrefill";
 import PrivacyNotice from "./PrivacyNotice";
 import SiteHeader from "./SiteHeader";
-import { cars, services, usageOptions, budgetRanges, dealer, type Car } from "@/data/site";
+import { cars, homeCars, services, usageOptions, budgetRanges, dealer, type Car } from "@/data/site";
 import { R, CAR_SHAPE_CLASS } from "@/data/constants";
 import { useCompare } from "@/components/CarCompareProvider";
 import CompareBar from "@/components/CompareBar";
@@ -20,7 +20,9 @@ import "@/components/car-shapes.css";
    HomePage（內層）
    使用 useCompare，必須包在 CompareProvider 內
    ═══════════════════════════ */
-export default function HomePageClient({ introduction, buyingTopics }: { introduction: string; buyingTopics: { href: string; title: string; description: string }[] }) {
+type HomeTopic = { href: string; title: string; description: string };
+
+export default function HomePageClient({ introduction, buyingTopics, jimnyTopics }: { introduction: string; buyingTopics: HomeTopic[]; jimnyTopics: HomeTopic[] }) {
   const { toggleCar, isSelected } = useCompare();
   const { form, update, submitted, formError, website, setWebsite, sending, handleSubmit, beginConsultation } = useConsultation();
   const [modalCar, setModalCar] = useState<Car | null>(null);
@@ -211,7 +213,7 @@ export default function HomePageClient({ introduction, buyingTopics }: { introdu
 
             {/* 車款卡片 — 3 欄 (6 台) */}
             <div id="cars" className="scroll-mt-6 grid grid-cols-3 gap-6 max-[980px]:grid-cols-2 max-[680px]:grid-cols-1 max-sm:gap-[14px]">
-              {cars.map((car) => {
+              {homeCars.map((car) => {
                 const shapeClass = CAR_SHAPE_CLASS[car.id] ?? "";
                 const selected = isSelected(car.id);
                 return (
@@ -251,6 +253,20 @@ export default function HomePageClient({ introduction, buyingTopics }: { introdu
                 );
               })}
             </div>
+          </section>
+
+          <section aria-labelledby="jimny-topics-heading" className="w-[calc(100%-88px)] mx-auto mt-[34px] rounded-2xl border border-[#e1d8d2] bg-[#fffaf6] p-6 max-sm:w-[calc(100%-28px)] max-sm:mt-5 max-sm:p-5">
+            <p className="text-xs font-bold tracking-widest text-[#b9000e]">JIMNY 專題</p>
+            <h2 id="jimny-topics-heading" className="mt-2 text-2xl font-bold leading-snug">喜歡 Jimny，從認識它開始</h2>
+            <p className="mt-3 text-sm leading-7 text-[#666]">從小越野車的故事，到買車前常問的改裝與日常使用問題。</p>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              {jimnyTopics.map((topic) => <Link key={topic.href} href={topic.href} className="rounded-xl border border-[#e1d8d2] bg-white p-5 no-underline transition-colors hover:border-[#b9000e] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b9000e]">
+                <h3 className="text-lg font-bold leading-7 text-[#333]">{topic.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-[#666]">{topic.description}</p>
+                <span className="mt-4 inline-block text-sm font-bold text-[#b9000e]">閱讀專題 <span aria-hidden="true">→</span></span>
+              </Link>)}
+            </div>
+            <Link href="/cars/jimny#faq" className="mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">想問通勤、四驅或五門？看 Jimny 常見 QA →</Link>
           </section>
 
           {/* ═══════ 服務項目 ═══════ */}

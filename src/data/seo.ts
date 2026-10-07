@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { cars, dealer, type Car } from "./site";
+import { homeCars, dealer, type Car } from "./site";
 import { siteUrl, showroom, carPages, carVersions, type Guide } from "./content";
 
 const businessId = `${siteUrl}/#business`;
@@ -48,7 +48,7 @@ export const siteSchema = {
 
 export const homeSchema = {
   "@context": "https://schema.org", "@type": "ItemList", name: "SUZUKI 車款介紹",
-  itemListElement: cars.map((car, index) => ({ "@type": "ListItem", position: index + 1, name: `SUZUKI ${car.name}`, url: `${siteUrl}/cars/${car.id}` })),
+  itemListElement: homeCars.map((car, index) => ({ "@type": "ListItem", position: index + 1, name: `SUZUKI ${car.name}`, url: `${siteUrl}/cars/${car.id}` })),
 };
 
 export function breadcrumbSchema(path: string, name: string) {
