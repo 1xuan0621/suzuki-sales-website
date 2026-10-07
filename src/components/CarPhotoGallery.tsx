@@ -9,12 +9,16 @@ import { useModalDialog } from "@/lib/use-modal-dialog";
 
 interface Props {
   car: Car;
+  photos?: { src: string; label: string }[];
   expanded: boolean;
   onExpandedChange: (expanded: boolean) => void;
 }
 
-export default function CarPhotoGallery({ car, expanded, onExpandedChange }: Props) {
-  const images = car.detail.images?.length ? car.detail.images : [car.id];
+export default function CarPhotoGallery({ car, photos, expanded, onExpandedChange }: Props) {
+  const images = photos?.length ? photos : (car.detail.images?.length ? car.detail.images : [car.id]).map((image, index) => ({
+    src: `/images/${image}.jpg`,
+    label: car.detail.imageLabels?.[index] || `車款照片 ${index + 1}`,
+  }));
   const [index, setIndex] = useState(0);
   const [zoomed, setZoomed] = useState(false);
   const [failedImages, setFailedImages] = useState<string[]>([]);
@@ -23,8 +27,8 @@ export default function CarPhotoGallery({ car, expanded, onExpandedChange }: Pro
   const surface = useRef<HTMLDivElement>(null);
   const gesture = useRef<{ id: number; x: number; y: number; left: number; top: number } | null>(null);
   const suppressClick = useRef(false);
-  const currentImage = images[index];
-  const label = car.detail.imageLabels?.[index] || `車款照片 ${index + 1}`;
+  const currentImage = images[index].src;
+  const label = images[index].label;
   const failed = failedImages.includes(currentImage);
 
   const changeImage = useCallback((step: number) => {
@@ -100,7 +104,7 @@ export default function CarPhotoGallery({ car, expanded, onExpandedChange }: Pro
       )}
       <Image
         key={`${currentImage}-${fullscreen}`}
-        src={`/images/${currentImage}.jpg`}
+        src={currentImage}
         alt={`${car.name} ${label}`}
         fill
         sizes={fullscreen ? (zoomed ? "200vw" : "100vw") : "(max-width: 544px) calc(100vw - 32px), 512px"}

@@ -7,10 +7,12 @@
 | 素材 | 尺寸／檔案大小 | 使用狀態 |
 | --- | --- | --- |
 | `public/personal/dealer-jimny-outdoor-door.jpg` | 1000 × 1419／355,150 bytes | 第 3 張車門合照；首頁「喜歡 Jimny，從認識它開始」專題圖。完整比例顯示，桌面左圖右文、手機直向排列，使用 Next Image 響應式尺寸及延遲載入。 |
-| `public/personal/dealer-jimny-motor-show.jpg` | 1000 × 1333／202,570 bytes | 第 1 張車展合照；備用素材，未在頁面引用。未確認拍攝場館，不作為北投展示間照片。 |
-| `public/personal/dealer-jimny-outdoor-front.jpg` | 1000 × 1333／372,340 bytes | 第 2 張車頭合照；備用素材，未在頁面引用，保留原有車牌遮蔽。 |
+| `public/personal/dealer-jimny-motor-show.jpg` | 1000 × 1333／202,570 bytes | 第 1 張車展合照；首頁 Jimny 小卡彈窗第一張。未確認拍攝場館，不作為北投展示間照片。 |
+| `public/personal/dealer-jimny-outdoor-front.jpg` | 1000 × 1333／372,340 bytes | 第 2 張車頭合照；首頁 Jimny 小卡彈窗第二張，保留原有車牌遮蔽。 |
 
-上述皆為顧問個人合照，不併入官方車款圖庫或交車輪播，也不作為現行年式規配、座椅空間或可安排試乘路線的證據。備用素材放在既有公開 `public/personal/` 目錄，屬可透過網址取得的網站素材；既有 `dealer-portrait.jpg` 繼續保留。
+依業主後續指示，首頁 Jimny 小卡彈窗改為車展合照、戶外車頭合照、原第一張官方外觀照；原第二、三張僅從首頁彈窗移出，Jimny 獨立車款頁仍使用原官方圖庫，原始素材繼續保留。彈窗圖片來源說明同步區分個人合照與官方照片。
+
+上述皆為顧問個人合照，不併入交車輪播，也不作為現行年式規配、座椅空間或可安排試乘路線的證據。素材放在既有公開 `public/personal/` 目錄，屬可透過網址取得的網站素材；既有 `dealer-portrait.jpg` 繼續保留。
 
 發布前驗證：`npm run build` 與 `git diff --check` 通過；本機以 1280／1024／360／320px 檢查照片載入、完整比例與無水平溢出，檢視桌面／手機截圖，並確認原有兩篇專題及 Jimny QA 連結正常。未新增回歸測試；檢查環境停用外部收件及 GA4，未提交諮詢。
 
