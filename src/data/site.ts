@@ -1,4 +1,4 @@
-import { septemberCampaign, type Promotion } from "./promotions";
+import { octoberCampaign, type Promotion } from "./promotions";
 
 export const contentReviewedAt = "2026-09-07";
 
@@ -76,9 +76,10 @@ export const cars: Car[] = [
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/eVITARA",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178453449654.pdf",
       promotion: {
-        ...septemberCampaign,
-        summary: "100 萬 84 期・年利率 3.50%（須審核）；領牌贈 ALLGRIP × MIZUNO 聯名鞋款。",
-        terms: "貸款利率 3.50%，須經審核，不得與其他優惠專案併用。贈品數量與尺寸有限，送完為止；限符合官方購車及領牌資格者，排除租賃、營業車等，兌換期限至 2026/10/31。",
+        ...octoberCampaign,
+        sourceUrl: "https://www.taiwansuzuki.com.tw/news/638",
+        summary: "100 萬 84 期・年利率 3.50%（須審核）；另有領牌贈 ALLGRIP × MIZUNO 聯名鞋款方案。",
+        terms: "購車及領牌須於活動期間內完成。貸款須經經銷商及和潤企業審核，不得與其他優惠專案併用。贈鞋方案適用於活動期間購買 e VITARA 並完成領牌者，贈 MXR 乙雙，數量與尺寸有限，送完為止；不適用租賃、營業車、政府機關及專案批／標購車輛，不得更換、退費或折抵現金，兌換期限至 2026/11/30。完整資格與兌換辦法請見官方公告。",
       },
       images: ["e-vitara", "e-vitara-side", "e-vitara-int"],
       imageLabels: ["戶外行駛外觀", "車側與車尾外觀", "駕駛座與中控台"],
@@ -114,9 +115,10 @@ export const cars: Car[] = [
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/swift",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178781313014.pdf",
       promotion: {
-        ...septemberCampaign,
-        summary: "完成試乘贈哈根達斯 100ml 冰淇淋乙份。",
-        terms: "需填寫完整客戶資料，贈品數量有限，送完為止；詳細資格依官方活動辦法。",
+        ...octoberCampaign,
+        sourceUrl: "https://www.taiwansuzuki.com.tw/news/636",
+        summary: "完成 SWIFT 試乘贈「TAIWAN SUZUKI 胖才可愛兜風趣」LINE 貼圖。",
+        terms: "須於 2026/10/30 前至展間完成 SWIFT 試乘並填寫完整客戶資料；贈品數量有限，送完為止，詳細資格依官方活動辦法。",
       },
       images: ["swift", "swift-rear", "swift-int"],
       imageLabels: ["城市行駛外觀", "後側行駛外觀", "駕駛座與中控台"],
@@ -152,11 +154,6 @@ export const cars: Car[] = [
       whoFor: "戶外玩家、露營愛好者、想要個性化車款的你",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/jimny",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178382615010.pdf",
-      promotion: {
-        ...septemberCampaign,
-        summary: "完成試乘贈 Jimny 限量帆布袋乙個。",
-        terms: "需填寫完整客戶資料，贈品數量有限，送完為止；詳細資格依官方活動辦法。",
-      },
       images: ["jimny", "jimny-side", "jimny-int"],
       imageLabels: ["城市行駛外觀", "車側外觀細節", "駕駛座與中控台"],
       colors: [
@@ -193,9 +190,10 @@ export const cars: Car[] = [
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/vitara",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178418897488.pdf",
       promotion: {
-        ...septemberCampaign,
+        ...octoberCampaign,
+        sourceUrl: "https://www.taiwansuzuki.com.tw/news/637",
         summary: "90 萬 84 期・年利率 3.50%（須審核）。",
-        terms: "貸款利率 3.50%，須經經銷商及金融機構審核，不得與其他優惠專案併用。領牌及適用條件依官方活動辦法。",
+        terms: "須於活動期間內完成領牌，貸款須經經銷商及和潤企業審核，不得與其他優惠專案併用；詳細適用條件依官方活動辦法。",
       },
       images: ["vitara", "vitara-side", "vitara-int"],
       imageLabels: ["山路行駛外觀", "車側外觀", "駕駛座與中控台"],
@@ -232,9 +230,10 @@ export const cars: Car[] = [
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/s-cross",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178453550663.pdf",
       promotion: {
-        ...septemberCampaign,
+        ...octoberCampaign,
+        sourceUrl: "https://www.taiwansuzuki.com.tw/news/639",
         summary: "90 萬 84 期・年利率 3.50%（須審核）。",
-        terms: "貸款利率 3.50%，須經經銷商及金融機構審核，不得與其他優惠專案併用。領牌及適用條件依官方活動辦法。",
+        terms: "須於活動期間內完成領牌，貸款須經經銷商及和潤企業審核，不得與其他優惠專案併用；詳細適用條件依官方活動辦法。",
       },
       images: ["s-cross", "s-cross-side", "s-cross-int"],
       imageLabels: ["城市行駛外觀", "水箱護罩細節", "駕駛座與中控台"],
@@ -268,9 +267,10 @@ export const cars: Car[] = [
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/carry",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/169336257999.pdf",
       promotion: {
-        ...septemberCampaign,
-        summary: "40 萬 48 期・年利率 3.19%（須審核），月付 8,888 元；另有指定車款購車金。",
-        terms: "貸款利率 3.19%，須經審核且不得與其他優惠專案併用。購車金限指定車款當次抵用，排除租賃、營業、政府機關及專案批／標購車輛；兩方案能否併用請洽詢。",
+        ...octoberCampaign,
+        sourceUrl: "https://www.taiwansuzuki.com.tw/news/640",
+        summary: "40 萬 48 期・年利率 3.19%（須審核），月付 8,888 元；另有指定車款最高 10,000 元購車金。",
+        terms: "須於活動期間內完成領牌。貸款須經經銷商及和潤企業審核，不得與其他優惠專案併用。購車金限指定車款當車當次購買抵用，上限 10,000 元，實際交易價格依買賣雙方議定；購車金不適用租賃、營業、政府機關及專案批／標購車輛。詳細適用條件依官方活動辦法。",
       },
       images: ["carry", "carry-side", "carry-int"],
       imageLabels: ["載貨情境外觀", "三邊開啟貨台", "可滑動駕駛座椅"],

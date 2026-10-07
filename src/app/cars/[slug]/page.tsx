@@ -92,7 +92,7 @@ export default async function CarPage({ params }: Props) {
     <section id="faq" aria-labelledby="car-faq-heading" className="mt-8 scroll-mt-6 rounded-2xl border border-[#e5e1dd] bg-white p-6 sm:p-8">
       <p className="text-sm font-bold text-[#b9000e]">車型常見 QA</p>
       <h2 id="car-faq-heading" className="mb-2 mt-2 text-2xl font-bold">{car.name}，你可能想問</h2>
-      <p className="mb-4 text-xs leading-7 text-[#777]">問答更新與引用資料核對：<time dateTime={editorialReviewedAt}>{editorialReviewedAt}</time></p>
+      <p className="mb-4 text-xs leading-7 text-[#777]">問答資料核對日期以各題標示為準；未另標示者為 <time dateTime={editorialReviewedAt}>{editorialReviewedAt}</time>。</p>
       <FaqList items={remainingFaqs} />
       <div className="mt-4 border-t border-[#eee] pt-5"><p className="text-sm leading-7 text-[#666]">還有訂金、保險、交車或保養的問題？</p><Link href="/faq" className="mt-2 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">查看通用購車 QA →</Link></div>
     </section>
