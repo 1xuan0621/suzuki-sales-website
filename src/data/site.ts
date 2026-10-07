@@ -35,8 +35,8 @@ export interface CarDetail {
   tagline: string;
   images?: string[];
   imageLabels?: string[];
-  modalPhotos?: { src: string; label: string }[];
-  modalPhotoCredit?: string;
+  galleryPhotos?: { src: string; label: string }[];
+  galleryPhotoCredit?: string;
   colors?: ColorOption[];
 }
 
@@ -158,12 +158,12 @@ export const cars: Car[] = [
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178382615010.pdf",
       images: ["jimny", "jimny-side", "jimny-int"],
       imageLabels: ["城市行駛外觀", "車側外觀細節", "駕駛座與中控台"],
-      modalPhotos: [
+      galleryPhotos: [
         { src: "/personal/dealer-jimny-motor-show.jpg", label: "鈺漣與 Jimny 的車展合照" },
         { src: "/personal/dealer-jimny-outdoor-front.jpg", label: "鈺漣與 Jimny 的戶外車頭合照" },
         { src: "/images/jimny.jpg", label: "城市行駛外觀（官方照片）" },
       ],
-      modalPhotoCredit: "前兩張為鈺漣提供的個人合照，第三張為台灣 Suzuki 官方照片。合照車輛不代表現行年式規配；配備、車色以實車為準，成交條件請洽詢。",
+      galleryPhotoCredit: "前兩張為鈺漣提供的個人合照，第三張為台灣 Suzuki 官方照片。合照車輛不代表現行年式規配；配備、車色以實車為準，成交條件請洽詢。",
       colors: [
         { name: "白", hex: "#f0f0f0" },
         { name: "軍綠", hex: "#48533a" },
