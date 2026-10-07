@@ -56,9 +56,9 @@ export const guideIndex = {
 };
 
 export const guideCategories = [
-  { id: "jimny", title: "Jimny 專題", description: "先認識小越野車的故事，再看改裝、通勤與選購時真正要確認的事。" },
   { id: "process", title: "準備買車與換車", description: "從預算、報價到交車，先把購車這件事安排好。" },
   { id: "selection", title: "找到適合自己的車", description: "用家人、停車位與日常路線，決定空間和動力怎麼選。" },
+  { id: "jimny", title: "Jimny 專題", description: "先認識小越野車的故事，再看改裝、通勤與選購時真正要確認的事。" },
   { id: "ownership", title: "交車後的保養與使用", description: "知道何時回廠、工單怎麼看，慢慢熟悉照顧愛車的方法。" },
 ] as const;
 
