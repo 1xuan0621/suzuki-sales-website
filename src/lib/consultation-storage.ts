@@ -1,3 +1,4 @@
+import "server-only";
 import { get, put } from "@vercel/blob";
 import type { StoredConsultation } from "./consultation";
 
