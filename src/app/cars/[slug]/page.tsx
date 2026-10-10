@@ -40,6 +40,20 @@ export default async function CarPage({ params }: Props) {
         <h1 className="text-4xl font-black leading-tight tracking-tight sm:text-5xl">SUZUKI {car.name}{focus && <span className="mt-3 block text-xl leading-8 tracking-normal text-[#555] sm:text-2xl">{focus.heading}</span>}</h1>
         {!focus && <p className="mt-3 text-xl font-bold text-[#555]">{car.detail.tagline}</p>}
         <p className="mt-5 text-[15px] leading-8 text-[#555]">{content.introduction}</p>
+        {car.detail.colors && car.detail.colors.length > 0 && <section aria-label="車色參考" className="mt-4">
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] leading-6 text-[#555]">
+            <strong className="text-[#333]">車色參考</strong>
+            {car.detail.colors.map((color) => <span key={color.name} className="inline-flex items-center gap-1.5 whitespace-nowrap">
+              {color.name}
+              <span
+                aria-hidden="true"
+                className="h-3.5 w-3.5 shrink-0 rounded-[3px] border border-black/20"
+                style={{ background: color.secondaryHex ? `linear-gradient(135deg, ${color.hex} 50%, ${color.secondaryHex} 50%)` : color.hex }}
+              />
+            </span>)}
+          </p>
+          <p className="mt-1 text-xs leading-5 text-[#666]">色塊僅供示意，車色以實車為準，供應請洽詢。</p>
+        </section>}
         <p className="mb-5 mt-6 text-sm text-[#666]">建議售價 <strong className="ml-2 text-3xl font-black text-[#b9000e]">{car.price}</strong></p>
         <ContactLinks carId={car.id} entry="car-page" />
         {focus && <p className="mt-3 text-sm leading-7 text-[#666]">{focus.inquiryPrompt}</p>}
@@ -70,9 +84,8 @@ export default async function CarPage({ params }: Props) {
       <FaqList items={priorityFaqs} defaultOpenId={focus.faqIds[0]} />
     </section>}
     {usage && <CarUsageSection content={usage} />}
-    <ArticleSection title="主要規格與車色">
+    <ArticleSection title="主要規格">
       <ul className="list-disc space-y-2 pl-5">{car.detail.specs.map((spec) => <li key={spec}>{spec}</li>)}</ul>
-      <p>車色參考：{car.detail.colors?.map((color) => color.name).join("、")}。實際車色與配備以台灣規配表及實車為準。</p>
       <p>油耗與續航為官方測試值，實際表現依道路、溫度、載重與駕駛方式而異。規格核對：<time dateTime={content.specsReviewedAt}>{content.specsReviewedAt}</time>。</p>
     </ArticleSection>
     <ArticleSection title="適合的需求與需要考慮的取捨">

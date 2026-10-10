@@ -24,6 +24,7 @@ export const dealer = {
 export interface ColorOption {
   name: string;
   hex: string;
+  secondaryHex?: string;
 }
 
 export interface CarDetail {
@@ -91,8 +92,8 @@ export const cars: Car[] = [
         { name: "2WD 銀", hex: "#b0b0b0" },
         { name: "2WD 灰", hex: "#7a7a7a" },
         { name: "ALLGRIP-e 綠（單色）", hex: "#556b2f" },
-        { name: "ALLGRIP-e 白黑（雙色）", hex: "#f0f0f0" },
-        { name: "ALLGRIP-e 灰黑（雙色）", hex: "#7a7a7a" },
+        { name: "ALLGRIP-e 白黑（雙色）", hex: "#f0f0f0", secondaryHex: "#171717" },
+        { name: "ALLGRIP-e 灰黑（雙色）", hex: "#7a7a7a", secondaryHex: "#171717" },
       ],
     },
   },
@@ -129,8 +130,8 @@ export const cars: Car[] = [
         { name: "橘", hex: "#f75000" },
         { name: "藍", hex: "#003fa7" },
         { name: "銀", hex: "#b0b0b0" },
-        { name: "黃灰（雙色）", hex: "#f2ff99" },
-        { name: "紅黑（雙色）", hex: "#ce1223" },
+        { name: "黃灰（雙色）", hex: "#f2ff99", secondaryHex: "#555555" },
+        { name: "紅黑（雙色）", hex: "#ce1223", secondaryHex: "#171717" },
       ],
     },
   },
@@ -170,9 +171,9 @@ export const cars: Car[] = [
         { name: "灰", hex: "#555555" },
         { name: "黑", hex: "#171717" },
         { name: "米", hex: "#c7bba2" },
-        { name: "黃黑（雙色）", hex: "#c4d413" },
-        { name: "米黑（雙色）", hex: "#c7bba2" },
-        { name: "藍黑（雙色）", hex: "#076b91" },
+        { name: "黃黑（雙色）", hex: "#c4d413", secondaryHex: "#171717" },
+        { name: "米黑（雙色）", hex: "#c7bba2", secondaryHex: "#171717" },
+        { name: "藍黑（雙色）", hex: "#076b91", secondaryHex: "#171717" },
       ],
     },
   },
@@ -209,10 +210,10 @@ export const cars: Car[] = [
         { name: "白", hex: "#f0f0f0" },
         { name: "銀", hex: "#b0b0b0" },
         { name: "灰", hex: "#7a7a7a" },
-        { name: "藍黑（雙色）", hex: "#1a3a5c" },
-        { name: "紅黑（雙色）", hex: "#c1121f" },
-        { name: "米黑（雙色）", hex: "#c7bba2" },
-        { name: "灰藍黑（雙色）", hex: "#8fa7ac" },
+        { name: "藍黑（雙色）", hex: "#1a3a5c", secondaryHex: "#171717" },
+        { name: "紅黑（雙色）", hex: "#c1121f", secondaryHex: "#171717" },
+        { name: "米黑（雙色）", hex: "#c7bba2", secondaryHex: "#171717" },
+        { name: "灰藍黑（雙色）", hex: "#8fa7ac", secondaryHex: "#171717" },
       ],
     },
   },
