@@ -22,15 +22,8 @@ export default function GuidesPage() {
       <header>
         <p className="text-xs font-bold tracking-[0.16em] text-[#b9000e]">跟鈺漣一起準備下一台車</p>
         <h1 className="mt-3 text-3xl font-black leading-snug sm:text-4xl">Suzuki 購車指南</h1>
-        <p className="mt-4 max-w-2xl text-base leading-8 text-[#555]">從 Jimny 發展史與改裝問題，到第一次買車、換車、選休旅、交車後保養、事故保險與突發狀況。<br className="hidden sm:block" />找到你正在想的問題，帶著清單一步一步確認。</p>
+        <p className="mt-4 max-w-2xl text-base leading-8 text-[#555]">從第一次買車、舊車換新車到選車與領牌，先把需求、預算和交車流程想清楚。<br className="hidden sm:block" />鈺漣陪你一步一步確認，也整理交車後的保養與保險資訊。</p>
       </header>
-      <aside aria-labelledby="quick-help-heading" className="mt-6 rounded-xl border border-[#e6c5c5] bg-[#fff5f3] px-5 py-4 text-[#9c0011]">
-        <h2 id="quick-help-heading" className="text-base font-bold leading-7">用車遇到狀況？先看現場速查</h2>
-        <div className="mt-1 grid grid-cols-2 gap-3 sm:flex sm:gap-7">
-          <Link href="/guides/car-accident-insurance#accident-summary" className="inline-flex min-h-11 items-center gap-2 py-2 text-sm font-bold underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b9000e]">碰撞出險 <span aria-hidden="true">→</span></Link>
-          <Link href="/guides/roadside-emergencies#accident-summary" className="inline-flex min-h-11 items-center gap-2 py-2 text-sm font-bold underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b9000e]">爆胎故障 <span aria-hidden="true">→</span></Link>
-        </div>
-      </aside>
       {guideCategories.map((category) => <section key={category.id} aria-labelledby={`guide-${category.id}-heading`} className="mt-10">
         <h2 id={`guide-${category.id}-heading`} className="text-xl font-bold">{category.title}</h2>
         <p className="mt-2 text-sm leading-7 text-[#666]">{category.description}</p>
