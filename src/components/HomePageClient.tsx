@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useConsultation } from "./ConsultationProvider";
@@ -24,7 +24,7 @@ import "@/components/car-shapes.css";
 type HomeTopic = { href: string; title: string; description: string };
 type HomePhoto = { src: string; alt: string; width: number; height: number; caption: string };
 
-export default function HomePageClient({ introduction, buyingTopics, jimnyTopics, jimnyPhoto }: { introduction: string; buyingTopics: HomeTopic[]; jimnyTopics: HomeTopic[]; jimnyPhoto: HomePhoto }) {
+export default function HomePageClient({ introduction, buyingTopics, jimnyTopics, jimnyPhoto, serviceReviews }: { introduction: string; buyingTopics: HomeTopic[]; jimnyTopics: HomeTopic[]; jimnyPhoto: HomePhoto; serviceReviews: ReactNode }) {
   const { toggleCar, isSelected } = useCompare();
   const { form, update, submitted, formError, website, setWebsite, sending, handleSubmit, beginConsultation } = useConsultation();
   const [modalCar, setModalCar] = useState<Car | null>(null);
@@ -346,6 +346,8 @@ export default function HomePageClient({ introduction, buyingTopics, jimnyTopics
 
             <DeliveryCarousel />
           </section>
+
+          {serviceReviews}
 
           {/* ═══════ 詢問表單區塊 ═══════ */}
           <section

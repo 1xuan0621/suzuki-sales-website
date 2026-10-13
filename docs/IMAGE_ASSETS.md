@@ -1,5 +1,23 @@
 # 圖片素材紀錄
 
+## 2026-10-13：網站購車評論與北投門面
+
+依業主本輪指示，首頁在交車照片後、諮詢表單前新增三則提到張鈺漣的北投所 Google 公開評論。使用瀏覽器開啟個別評論、核對五星及全文並截圖，只裁切星星／評論文字區塊（含原畫面的相對時間），沒有地圖、帳號頭像、名片或顧客照片；沒有重繪或改寫圖片中的文字。HTML 卡片提供作者、短節錄、個別原評價連結，截圖收合顯示、可另頁放大。未使用據點總分作為顧問評分，也未新增 Review／AggregateRating 結構化資料。
+
+| 公開素材 | 尺寸／檔案大小 | 原評價（2026-10-13 核對並截圖） |
+| --- | --- | --- |
+| `public/images/reviews/pj-google-review.webp` | 371 × 142／23,280 bytes | [PJ](https://maps.app.goo.gl/iaPbC7JiYzwg8Kvu7) |
+| `public/images/reviews/yuting-google-review.webp` | 371 × 163／26,526 bytes | [鈺婷](https://maps.app.goo.gl/eS3AvLA8U1wUsQNz7) |
+| `public/images/reviews/wu-google-review.webp` | 371 × 121／24,672 bytes | [吳清輝](https://maps.app.goo.gl/nUUVkVfiCuihFUMJA) |
+
+截圖由實際瀏覽器畫面按 DOM 區塊位置裁切，再以 lossless WebP 儲存，不放大、不額外有損壓縮。完整工作截圖僅作本機核對，不放入 `public/` 或 Git。
+
+業主本輪另同意將適合的官方北投照片用於網站。只採用[官方北投所據點頁](https://www.taiwansuzuki.com.tw/jt/locator?type=1)的[門面入口原圖](https://www.taiwansuzuki.com.tw/uploads/service_base/174799466172.jpg)，製成 `public/images/beitou-exterior-entrance.jpg`（1200 × 675／99,491 bytes），放在到店頁「交通與停車怎麼安排」作為招牌／入口辨識。原圖等比例縮圖、MozJPEG quality 82、移除 EXIF，未裁切或生成場景；圖說保留官方來源。照片不作為停車動線或當期展示車的證據。
+
+展示洽談區及顧客休息區暫不發布至網站；官方三張原檔與商家檔案版本繼續保留在本機 `.business-profile-private/2026-10-13/` 素材庫。顧客休息區來源是同址的北投廠，不混稱為北投所接待區。
+
+SWIFT 頁新增一段「車主心得整理」，以 [Mobile01 DeNASTARS 原文](https://www.mobile01.com/topicdetail.php?f=277&t=7065922)（2025-01-02 發布，2026-10-13 核對）摘要 2024 年購入第四代 SWIFT、使用三個月／3,600 公里的體驗；保留噪音與內裝取捨，不冒稱本站親身實測。不轉載論壇照片，其他車款沒有足夠合適資料時不補寫虛構經驗。
+
 ## 2026-10-07：顧問與 Jimny 真實合照
 
 業主於本輪提供三張真實照片，授權用於網站與備用素材庫。未使用 AI 生成、修飾人物或改動車輛；僅依既有規則按原比例縮至寬 1000px、MozJPEG quality 82 壓縮並移除 EXIF 等中繼資料，不放大、不裁切。日期為提供日期，非拍攝日期。

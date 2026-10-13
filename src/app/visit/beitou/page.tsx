@@ -1,4 +1,5 @@
 import ContactLinks from "@/components/ContactLinks";
+import Image from "next/image";
 import Link from "next/link";
 import { showroom } from "@/data/content";
 import { dealer, cars } from "@/data/site";
@@ -30,9 +31,24 @@ export default function VisitPage() {
       </ArticleSection>
     </div>
     <ArticleSection title="交通與停車怎麼安排">
-      <p>目的地為台北市北投區承德路六段337號。請使用上方地圖依出發位置查看開車、大眾運輸或步行路線，並留意出發當天的交通狀況。</p>
-      <p>北投所提供免費停車位。到店時可向現場人員詢問停放位置；如有上下車或行動協助需求，請在預約時告知顧問。</p>
-      <p>搭乘大眾運輸時，可先以地圖確認下車位置及後續步行路線；不熟悉附近環境，也可以在出發前向顧問詢問。</p>
+      <div className="grid items-start gap-6 lg:grid-cols-2">
+        <figure className="overflow-hidden rounded-xl border border-[#e5e5e5] bg-[#f5f5f5]">
+          <Image
+            src="/images/beitou-exterior-entrance.jpg"
+            alt="SUZUKI 北投所正面，凱騰鈴木北投招牌與右側入口門牌337"
+            width={1200}
+            height={675}
+            sizes="(min-width: 1180px) 500px, (min-width: 1024px) 45vw, (min-width: 640px) 85vw, 90vw"
+            className="h-auto w-full"
+          />
+          <figcaption className="px-4 py-3 text-xs leading-6 text-[#666]">抵達時可辨識「凱騰鈴木北投」招牌。照片來源：<a href={showroom.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">台灣 Suzuki 官方據點資料</a>。</figcaption>
+        </figure>
+        <div className="space-y-4">
+          <p>目的地為台北市北投區承德路六段337號。請使用上方地圖依出發位置查看開車、大眾運輸或步行路線，並留意出發當天的交通狀況。</p>
+          <p>北投所提供免費停車位。到店時可向現場人員詢問停放位置；如有上下車或行動協助需求，請在預約時告知顧問。</p>
+          <p>搭乘大眾運輸時，可先以地圖確認下車位置及後續步行路線；不熟悉附近環境，也可以在出發前向顧問詢問。</p>
+        </div>
+      </div>
     </ArticleSection>
     <ArticleSection title="預約與到店流程">
       <ol className="list-decimal space-y-3 pl-5">
@@ -46,6 +62,6 @@ export default function VisitPage() {
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{cars.map((car) => <Link key={car.id} href={`/cars/${car.id}`} className="rounded-xl border border-[#ddd] px-4 py-3 font-bold text-[#b9000e] no-underline hover:bg-red-50">SUZUKI {car.name} →</Link>)}</div>
       <Link href="/guides/first-car#paperwork" className="inline-block text-[#b9000e] underline underline-offset-4">外縣市客戶：購車與交車流程指南</Link>
     </ArticleSection>
-    <p className="mt-6 text-xs leading-7 text-[#666]">據點資料核對及內容更新：<time dateTime={showroom.reviewedAt}>{showroom.reviewedAt}</time> · <a href={showroom.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">台灣 Suzuki／凱騰鈴木官方據點資料</a></p>
+    <p className="mt-6 text-xs leading-7 text-[#666]">據點資料核對：<time dateTime={showroom.reviewedAt}>{showroom.reviewedAt}</time> · 內容更新：<time dateTime={showroom.updatedAt}>{showroom.updatedAt}</time> · <a href={showroom.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">台灣 Suzuki／凱騰鈴木官方據點資料</a></p>
   </ContentShell>;
 }

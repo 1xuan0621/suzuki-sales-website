@@ -7,7 +7,7 @@ export type { Guide } from "./guides";
 export const siteUrl = "https://suzuki-taipei.com";
 const startingPrice = (id: CarId) => cars.find((car) => car.id === id)!.price;
 export const homeContent = {
-  updatedAt: "2026-10-07",
+  updatedAt: "2026-10-13",
   title: "SUZUKI 台北購車與試乘諮詢｜汽車顧問張鈺漣",
   description: "SUZUKI 汽車顧問張鈺漣以台北為主要服務地區，提供全台選車、購車諮詢與跨縣市交車協助。了解六款車的價格、規格與購車流程，預約凱騰鈴木北投所賞車及試乘；交車安排依個案確認。",
   introduction: "以台北為主要服務地區，提供全台購車諮詢，並協助跨縣市購車與交車。實際服務據點位於凱騰鈴木北投所，到店賞車與試乘請先預約；交車地點、費用與時程依個案確認。",
@@ -37,7 +37,7 @@ export const showroom = {
   sourceUrl: "https://www.taiwansuzuki.com.tw/jt/locator?type=1",
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("凱騰鈴木北投所 台北市北投區承德路六段337號"),
   reviewedAt: "2026-09-08",
-  updatedAt: "2026-09-08",
+  updatedAt: "2026-10-13",
   title: "SUZUKI 台北到店賞車與試乘｜北投所交通及預約｜張鈺漣",
   description: "預約 SUZUKI 台北北投所賞車與試乘，查看承德路六段據點地址、營業時間、交通及停車確認事項。由鈺漣先確認車款與時段，外縣市客戶也可先遠端諮詢。",
 };
@@ -65,7 +65,7 @@ const carDates = { updatedAt: "2026-09-19", specsReviewedAt: contentReviewedAt, 
 export const carPages: Record<CarId, CarPageContent> = {
   swift: {
     ...carDates,
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-10-13",
     specsReviewedAt: "2026-09-20",
     pricesReviewedAt: "2026-09-20",
     description: `SUZUKI SWIFT 台灣建議售價 ${startingPrice("swift")}，1.2L 輕油電不用外接充電。比較停車尺寸、後座與行李箱需求，向鈺漣確認完整報價、車色交期及台北北投試乘時段。`,

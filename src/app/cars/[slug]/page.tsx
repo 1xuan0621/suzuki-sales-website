@@ -13,6 +13,8 @@ import CarPageGallery from "@/components/CarPageGallery";
 import PromotionNotice from "@/components/PromotionNotice";
 import CarUsageSection from "@/components/CarUsageSection";
 import { carUsage } from "@/data/car-usage";
+import OwnerExperienceSection from "@/components/OwnerExperienceSection";
+import { ownerExperiences } from "@/data/owner-experiences";
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -29,6 +31,7 @@ export default async function CarPage({ params }: Props) {
   const content = carPages[car.id];
   const focus = content.buyingFocus;
   const usage = carUsage[car.id];
+  const ownerExperience = ownerExperiences[car.id];
   const priorityFaqs = focus?.faqIds.map((id) => carFaqs[car.id].find((item) => item.id === id)!) || [];
   const remainingFaqs = carFaqs[car.id].filter((item) => !focus?.faqIds.includes(item.id));
   const relatedGuides = content.relatedGuides.map(getGuide).filter((guide) => guide !== undefined);
@@ -92,6 +95,7 @@ export default async function CarPage({ params }: Props) {
       <p><strong>可先評估的用車需求：</strong>{car.detail.whoFor}。</p>
       <ul className="list-disc space-y-2 pl-5">{content.considerations.map((text) => <li key={text}>{text}</li>)}</ul>
     </ArticleSection>
+    {ownerExperience && <OwnerExperienceSection content={ownerExperience} />}
     <ArticleSection id="test-drive" title={focus ? `${car.name} 台北北投賞車與試乘怎麼預約？` : "到店賞車與試乘觀察清單"}>
       <ul className="list-disc space-y-2 pl-5">{content.testDrive.map((text) => <li key={text}>{text}</li>)}</ul>
       <p>試乘車、路線與可預約時段須先確認，留下需求不代表預約已成立。</p>
