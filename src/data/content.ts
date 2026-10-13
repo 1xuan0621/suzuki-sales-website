@@ -24,7 +24,6 @@ export const homeContent = {
     alt: "鈺漣倚在綠色 Jimny 車門旁，身後是戶外樹蔭",
     width: 1000,
     height: 1419,
-    caption: "鈺漣與 Jimny 的戶外合照",
   },
 };
 

@@ -22,7 +22,7 @@ import "@/components/car-shapes.css";
    使用 useCompare，必須包在 CompareProvider 內
    ═══════════════════════════ */
 type HomeTopic = { href: string; title: string; description: string };
-type HomePhoto = { src: string; alt: string; width: number; height: number; caption: string };
+type HomePhoto = { src: string; alt: string; width: number; height: number };
 
 export default function HomePageClient({ introduction, buyingTopics, jimnyTopics, jimnyPhoto, serviceReviews }: { introduction: string; buyingTopics: HomeTopic[]; jimnyTopics: HomeTopic[]; jimnyPhoto: HomePhoto; serviceReviews: ReactNode }) {
   const { toggleCar, isSelected } = useCompare();
@@ -118,7 +118,7 @@ export default function HomePageClient({ introduction, buyingTopics, jimnyTopics
                     href="https://www.facebook.com/profile.php?id=100092443294776&locale=zh_TW"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="grid place-items-center w-9 h-9 bg-white/15 hover:bg-white/25 backdrop-blur-sm rounded-full text-white text-[17px] font-bold no-underline transition-all"
+                    className="grid place-items-center w-9 h-9 bg-[#0866FF] hover:bg-[#0759df] rounded-full text-white text-[17px] font-bold no-underline transition-colors"
                     aria-label="Facebook 粉絲專頁"
                   >
                     f
@@ -127,7 +127,7 @@ export default function HomePageClient({ introduction, buyingTopics, jimnyTopics
                     href="https://www.threads.net/@lian____06"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="grid place-items-center w-9 h-9 bg-white/15 hover:bg-white/25 backdrop-blur-sm rounded-full text-white text-[17px] font-bold no-underline transition-all"
+                    className="grid place-items-center w-9 h-9 bg-[#000] hover:bg-[#222] rounded-full text-white text-[17px] font-bold no-underline transition-colors"
                     aria-label="Threads"
                   >
                     @
@@ -273,7 +273,6 @@ export default function HomePageClient({ introduction, buyingTopics, jimnyTopics
                   sizes="(min-width: 1024px) 280px, (min-width: 390px) 320px, calc(100vw - 70px)"
                   className="h-auto w-full rounded-xl"
                 />
-                <figcaption className="mt-2 text-center text-xs leading-6 text-[#666]">{jimnyPhoto.caption}</figcaption>
               </figure>
               <div className="min-w-0 lg:col-start-2 lg:self-start">
                 <div className="grid gap-4 sm:grid-cols-2">

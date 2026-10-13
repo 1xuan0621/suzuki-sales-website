@@ -1,7 +1,7 @@
 import type { OwnerExperience } from "@/data/owner-experiences";
 
 export default function OwnerExperienceSection({ content }: { content: OwnerExperience }) {
-  return <section id="owner-experience" aria-labelledby="owner-experience-heading" className="mt-8 scroll-mt-6 rounded-2xl border border-[#e3e5de] bg-[#f4f6f0] p-6 sm:p-8">
+  return <section id="owner-experience" aria-labelledby="owner-experience-heading" className="mt-8 scroll-mt-6 rounded-2xl border border-[#a9b79b] border-l-4 border-l-[#586d46] bg-[#e3eadb] p-6 sm:p-8">
     <p className="text-sm font-bold tracking-widest text-[#59644c]">車主心得整理</p>
     <h2 id="owner-experience-heading" className="mt-2 text-xl font-bold leading-8 sm:text-2xl">{content.title}</h2>
     <p className="mt-2 text-xs leading-6 text-[#666]">{content.context}</p>

@@ -41,7 +41,7 @@ export default function VisitPage() {
             sizes="(min-width: 1180px) 500px, (min-width: 1024px) 45vw, (min-width: 640px) 85vw, 90vw"
             className="h-auto w-full"
           />
-          <figcaption className="px-4 py-3 text-xs leading-6 text-[#666]">抵達時可辨識「凱騰鈴木北投」招牌。照片來源：<a href={showroom.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">台灣 Suzuki 官方據點資料</a>。</figcaption>
+          <figcaption className="px-4 py-3 text-xs leading-6 text-[#666]">抵達時可辨識「凱騰鈴木北投」招牌。</figcaption>
         </figure>
         <div className="space-y-4">
           <p>目的地為台北市北投區承德路六段337號。請使用上方地圖依出發位置查看開車、大眾運輸或步行路線，並留意出發當天的交通狀況。</p>

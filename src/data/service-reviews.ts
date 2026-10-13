@@ -17,7 +17,7 @@ export const serviceReviews: ServiceReview[] = [
   {
     id: "pj",
     author: "PJ",
-    excerpt: "實在的報價，從開始到結束都親切有趣、沒有被推銷的壓力",
+    excerpt: "實在的報價，從開始到結束都親切有趣、沒有被推銷的壓力，購車／應答過程無可挑剔",
     sourceUrl: "https://maps.app.goo.gl/iaPbC7JiYzwg8Kvu7",
     screenshot: {
       src: "/images/reviews/pj-google-review.webp",
@@ -29,7 +29,7 @@ export const serviceReviews: ServiceReview[] = [
   {
     id: "yuting",
     author: "鈺婷",
-    excerpt: "服務好又有耐心，提供非常專業的服務體驗",
+    excerpt: "從一進門看車、試乘、都是交給張鈺漣小姐！服務好又有耐心，提供非常專業的服務體驗",
     sourceUrl: "https://maps.app.goo.gl/eS3AvLA8U1wUsQNz7",
     screenshot: {
       src: "/images/reviews/yuting-google-review.webp",

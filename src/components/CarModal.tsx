@@ -166,9 +166,8 @@ export default function CarModal({ car, onClose, onInterest }: CarModalProps) {
             </div>
 
             <details className="mb-3 text-xs leading-relaxed text-[#666]">
-              <summary className="cursor-pointer py-2">圖片與規格說明</summary>
+              <summary className="cursor-pointer py-2">規格說明</summary>
               <div className="space-y-2 pb-2">
-                <p>{car.detail.galleryPhotoCredit || "圖片：台灣 Suzuki。配備、車色以實車為準；成交條件請洽詢。"}</p>
                 <p>油耗／續航為測試值。規格核對：<time dateTime={contentReviewedAt}>{contentReviewedAt}</time>。</p>
                 <div className="flex flex-wrap gap-x-4 gap-y-2 text-[#b9000e]">
                   <a href={car.detail.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方車款介紹</a>
