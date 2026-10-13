@@ -6,10 +6,11 @@ export function ContactIcon({ type }: { type: "line" | "phone" }) {
   </svg>;
 }
 
-export default function ContactLinks({ carId, entry = "content" }: { carId?: string; entry?: string }) {
+export default function ContactLinks({ carId, entry = "content", locale = "zh-TW" }: { carId?: string; entry?: string; locale?: "zh-TW" | "en" }) {
+  const english = locale === "en";
   const button = "inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-xl px-4 py-3 text-sm font-bold no-underline transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#252525] sm:px-5 sm:text-base";
-  return <div aria-label="聯絡顧問" data-contact-actions data-car-id={carId} data-entry={entry} className="grid max-w-sm grid-cols-2 gap-3 sm:flex sm:max-w-none">
-    <a href={`https://line.me/R/ti/p/~${dealer.line}`} target="_blank" rel="noopener noreferrer" className={`${button} bg-[#06C755] text-white hover:bg-[#06C755] hover:brightness-95`}><ContactIcon type="line" />LINE 諮詢</a>
-    <a href={`tel:${dealer.phone.replace(/\D/g, "")}`} className={`${button} border border-[#bbb] bg-white text-[#333] hover:bg-[#eee]`}><ContactIcon type="phone" />電話諮詢</a>
+  return <div aria-label={english ? "Contact the advisor" : "聯絡顧問"} data-contact-actions data-car-id={carId} data-entry={entry} className="grid max-w-sm grid-cols-2 gap-3 sm:flex sm:max-w-none">
+    <a href={`https://line.me/R/ti/p/~${dealer.line}`} target="_blank" rel="noopener noreferrer" className={`${button} bg-[#06C755] text-white hover:bg-[#06C755] hover:brightness-95`}><ContactIcon type="line" />{english ? "Chat on LINE" : "LINE 諮詢"}</a>
+    <a href={`tel:${dealer.phone.replace(/\D/g, "")}`} className={`${button} border border-[#bbb] bg-white text-[#333] hover:bg-[#eee]`}><ContactIcon type="phone" />{english ? "Call" : "電話諮詢"}</a>
   </div>;
 }

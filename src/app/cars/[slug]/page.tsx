@@ -87,7 +87,7 @@ export default async function CarPage({ params }: Props) {
       <FaqList items={priorityFaqs} defaultOpenId={focus.faqIds[0]} />
     </section>}
     {usage && <CarUsageSection content={usage} />}
-    <ArticleSection title="主要規格">
+    <ArticleSection id="specifications" title="主要規格">
       <ul className="list-disc space-y-2 pl-5">{car.detail.specs.map((spec) => <li key={spec}>{spec}</li>)}</ul>
       <p>油耗與續航為官方測試值，實際表現依道路、溫度、載重與駕駛方式而異。規格核對：<time dateTime={content.specsReviewedAt}>{content.specsReviewedAt}</time>。</p>
     </ArticleSection>

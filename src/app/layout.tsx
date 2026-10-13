@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { siteSchema, serializeJsonLd } from "@/data/seo";
+import { siteSchema, englishSiteSchema, serializeJsonLd } from "@/data/seo";
 import { contentRoutes, siteUrl } from "@/data/content";
+import { englishRoutes } from "@/data/locales";
 import SiteProviders from "@/components/SiteProviders";
 import Analytics from "@/components/Analytics";
+import RootDocument from "@/components/RootDocument";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -15,9 +17,8 @@ export const metadata: Metadata = {
 };
 export const viewport = { width: "device-width", initialScale: 1 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="zh-TW"><body>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteSchema) }} />
+  return <RootDocument schemas={{ "zh-TW": serializeJsonLd(siteSchema), en: serializeJsonLd(englishSiteSchema) }}>
     <SiteProviders>{children}</SiteProviders>
-    <Analytics content={{ siteUrl, routes: contentRoutes.map(({ path, title }) => ({ path, title })) }} />
-  </body></html>;
+    <Analytics content={{ siteUrl, routes: [...contentRoutes, ...englishRoutes].map(({ path, title }) => ({ path, title })) }} />
+  </RootDocument>;
 }

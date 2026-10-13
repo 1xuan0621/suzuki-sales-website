@@ -24,11 +24,11 @@ export default function Analytics({ content }: { content: AnalyticsContent }) {
       if (!name && href.startsWith("tel:")) name = "phone_click";
       if (!name && /^https:\/\/(line\.me|lin\.ee)\//.test(href)) name = "line_click";
       if (!name && /^https:\/\/www\.google\.com\/maps\//.test(href)) name = "directions_click";
-      if (!name && /^\/(\?car=[a-z-]+)?#contact$/.test(href)) name = "consultation_click";
+      if (!name && /^\/(?:en)?(\?car=[a-z-]+)?#contact$/.test(href)) name = "consultation_click";
       if (!name || name === "generate_lead") return;
       const scope = action.closest<HTMLElement>("[data-car-id]");
       const entry = action.closest<HTMLElement>("[data-entry]")?.dataset.entry;
-      const carId = scope?.dataset.carId || (pathname.startsWith("/cars/") ? pathname.split("/")[2] : undefined);
+      const carId = scope?.dataset.carId || pathname.match(/^\/(?:en\/)?cars\/([^/]+)$/)?.[1];
       tracker!.event(name, carId, entry);
     }
     document.addEventListener("click", onClick, true);
