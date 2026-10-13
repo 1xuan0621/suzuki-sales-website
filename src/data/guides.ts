@@ -2,6 +2,8 @@ import type { ContentSourceId } from "./content-sources";
 import type { CarId } from "./site";
 import { jimnyHistoryGuide } from "./jimny-guides";
 import { jimnyModificationsGuide } from "./jimny-modifications";
+import { accidentInsuranceGuide } from "./insurance-guide";
+import { roadsideEmergenciesGuide } from "./roadside-guide";
 
 export interface GuidePoint { label: string; text: string }
 
@@ -21,11 +23,12 @@ export interface GuideCalculation {
 
 export interface Guide {
   slug: string;
-  category: "process" | "selection" | "ownership" | "jimny";
+  category: "process" | "selection" | "ownership" | "jimny" | "insurance";
   audience: string;
   title: string;
   description: string;
   introduction: string;
+  emergency?: { steps: GuidePoint[]; notice: string; contactReasons: string[] };
   updatedAt: string;
   reviewedAt: string;
   sourceIds: ContentSourceId[];
@@ -50,12 +53,13 @@ export interface Guide {
 
 const guideReviewedAt = "2026-09-09";
 export const guideIndex = {
-  updatedAt: "2026-10-07",
-  title: "Suzuki 購車指南｜Jimny 專題、選車與保養｜張鈺漣",
-  description: "從 Jimny 發展史、改裝與日常用車，到第一次買車、舊車換新、選號領牌、休旅與油電比較及保養，依你的問題找到實用答案與清單。",
+  updatedAt: "2026-10-13",
+  title: "Suzuki 購車指南｜保險專區、Jimny、選車與保養｜張鈺漣",
+  description: "從第一次買車、Jimny 專題到交車後保養與保險專區。碰撞、爆胎、故障、淹水先看現場速查，再了解出險、拖吊回廠及常見事故處理。",
 };
 
 export const guideCategories = [
+  { id: "insurance", title: "保險專區｜事故、道路應變與回廠", description: "碰撞與出險、爆胎與故障分開查，先看現場摘要。出險、回廠或不知道怎麼辦，都可以聯絡鈺漣。" },
   { id: "process", title: "準備買車與換車", description: "從預算、報價到交車，先把購車這件事安排好。" },
   { id: "selection", title: "找到適合自己的車", description: "用家人、停車位與日常路線，決定空間和動力怎麼選。" },
   { id: "jimny", title: "Jimny 專題", description: "先認識小越野車的故事，再看改裝、通勤與選購時真正要確認的事。" },
@@ -1218,7 +1222,7 @@ export const licensePlateGuide: Guide = {
   ],
 };
 
-export const guides = [jimnyHistoryGuide, jimnyModificationsGuide, firstCarGuide, tradeInGuide, licensePlateGuide, suvSelectionGuide, powertrainGuide, maintenanceGuide];
+export const guides = [accidentInsuranceGuide, roadsideEmergenciesGuide, jimnyHistoryGuide, jimnyModificationsGuide, firstCarGuide, tradeInGuide, licensePlateGuide, suvSelectionGuide, powertrainGuide, maintenanceGuide];
 export function getGuide(slug: string) { return guides.find((guide) => guide.slug === slug); }
 export function guideTitle(guide: Guide) { return `${guide.title}｜張鈺漣購車指南`; }
 

@@ -41,7 +41,7 @@ export default function FaqExplorer() {
       <label htmlFor="faq-search" className="sr-only">想先了解什麼？</label>
       <div className="relative">
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="pointer-events-none absolute left-3 top-3 h-5 w-5 text-[#777]"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4 4" /></svg>
-        <input id="faq-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜尋訂金、領牌、SWIFT…" className="h-11 w-full rounded-lg border border-[#ccc] bg-white py-2 pl-10 pr-3 text-base outline-offset-2 focus:outline-2 focus:outline-[#b9000e]" />
+        <input id="faq-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜尋爆胎、出險、訂金、SWIFT…" className="h-11 w-full rounded-lg border border-[#ccc] bg-white py-2 pl-10 pr-3 text-base outline-offset-2 focus:outline-2 focus:outline-[#b9000e]" />
       </div>
       <div ref={filterRow} role="group" aria-label="問題分類" className="mt-3 flex flex-nowrap gap-1 overflow-x-auto pb-1 [scrollbar-width:thin]">
         {[{ id: "all", title: "全部問題" }, ...groups].map((group) => <button key={group.id} type="button" aria-pressed={category === group.id} onClick={() => setCategory(group.id)} className={`min-h-11 shrink-0 whitespace-nowrap rounded-md border px-3 py-2 text-xs transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b9000e] ${category === group.id ? "border-[#333] bg-[#333] text-white" : "border-transparent bg-transparent text-[#555] hover:border-[#b9000e]"}`}>{group.title}</button>)}

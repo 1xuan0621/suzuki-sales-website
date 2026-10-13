@@ -1,5 +1,6 @@
 import type { CarId } from "./site";
 import type { ContentSourceId } from "./content-sources";
+import { emergencyFaqs } from "./emergency-faqs";
 
 export interface FaqItem {
   id: string;
@@ -13,12 +14,13 @@ export interface FaqItem {
 }
 
 export const faqPage = {
-  updatedAt: "2026-10-07",
-  title: "常見 QA｜購車、交車與 SUZUKI 車型問題｜張鈺漣",
-  description: "查找購車費用、訂金、交車、休旅選擇、油電回本與保養胎壓問題，也能了解 SWIFT 與 Jimny 重點問答，連到各車型完整說明。",
+  updatedAt: "2026-10-13",
+  title: "常見 QA｜購車、事故保險與 SUZUKI 車型問題｜張鈺漣",
+  description: "查找購車交車、保養胎壓及事故保險問題：停車被撞、玻璃飛石、爆胎、淹水與借車出險，也能了解 SWIFT 與 Jimny 重點問答。",
 };
 
 export const generalFaqGroups: { id: string; title: string; items: FaqItem[] }[] = [
+  { id: "emergency", title: "事故與保險", items: emergencyFaqs },
   { id: "selection", title: "選車與用車需求", items: [
     { id: "suv-or-hatchback", question: "小家庭一定要買休旅車嗎？掀背小車夠不夠？", answer: "不一定。先用正常前座坐姿，確認全家就座、安全座椅與常用行李能否同時安排；再看車位和上下車動作。若小車已滿足需求，可以一起比較停車便利性。車身比較高或比較長，都不代表你的乘坐組合一定更好用。", sourceIds: ["swift", "sCross"], links: [{ href: "/guides/suv-selection", label: "用五步驟挑家庭用車" }] },
     { id: "two-child-seats", question: "後座放兩張安全座椅，中間還能坐大人嗎？", answer: "不能只看五人座標示判斷。需以實際安全座椅正確安裝後，確認中間座面、肩部空間與安全帶扣具，讓成人試坐並正確繫帶。安裝位置和固定方式依車輛及安全座椅手冊，不為了擠出空間移動固定點。", sourceIds: [], links: [{ href: "/guides/suv-selection#seating", label: "帶家人試坐時確認這幾件事" }] },
