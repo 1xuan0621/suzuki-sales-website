@@ -1,9 +1,13 @@
-export default function PrivacyNotice({ locale = "zh-TW" }: { locale?: "zh-TW" | "en" }) {
-  if (locale === "en") return <details className="mx-auto mb-5 max-w-3xl text-left text-xs leading-6 text-[#666]">
-    <summary className="cursor-pointer py-2 text-center underline underline-offset-4">Consultation data and website analytics</summary>
-    <p>Your form details are used to contact you about your car purchase and are saved in the advisor&apos;s private request system. To correct or delete your details, contact the advisor by phone or LINE using the links on this page.</p>
-    <p className="mt-2">When Google Analytics is enabled, this website uses cookies and similar technologies to measure page views and clicks on model and contact links. This helps us understand whether the website supports your car search. Analytics events do not include your name, phone number, form details or request ID. A contact click does not mean a purchase or appointment has been completed.</p>
-    <a href="https://policies.google.com/technologies/partner-sites?hl=en" target="_blank" rel="noopener noreferrer" className="mt-2 inline-block underline">How Google uses information from partner websites</a>
+import { translator } from "@/data/translations";
+import type { SiteLocale } from "@/data/locales";
+
+export default function PrivacyNotice({ locale = "zh-TW" }: { locale?: SiteLocale }) {
+  const t = translator(locale);
+  if (locale !== "zh-TW") return <details className="mx-auto mb-5 max-w-3xl text-left text-xs leading-6 text-[#666]">
+    <summary className="cursor-pointer py-2 text-center underline underline-offset-4">{t("Consultation data and website analytics")}</summary>
+    <p>{t("Your form details are used to contact you about your car purchase and are saved in the advisor's private request system. To correct or delete your details, contact the advisor by phone or LINE using the links on this page.")}</p>
+    <p className="mt-2">{t("When Google Analytics is enabled, this website uses cookies and similar technologies to measure page views and clicks on model and contact links. This helps us understand whether the website supports your car search. Analytics events do not include your name, phone number, form details or request ID. A contact click does not mean a purchase or appointment has been completed.")}</p>
+    <a href={`https://policies.google.com/technologies/partner-sites?hl=${locale}`} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block underline">{t("How Google uses information from partner websites")}</a>
   </details>;
   return <details className="mx-auto mb-5 max-w-3xl text-left text-xs leading-6 text-[#666]">
     <summary className="cursor-pointer py-2 text-center underline underline-offset-4">諮詢資料與網站分析說明</summary>

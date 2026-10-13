@@ -1,3 +1,4 @@
+import { getCarSpecifications } from "./specifications";
 import { octoberCampaign, type Promotion } from "./promotions";
 
 export const contentReviewedAt = "2026-09-07";
@@ -67,11 +68,7 @@ export const cars: Car[] = [
     detail: {
       tagline: "純電新生活，即刻展開",
       specs: [
-        "動力系統：純電馬達 (61kWh 電池)",
-        "驅動方式：2WD 前驅 / ALLGRIP-e 四驅",
-        "續航里程：2WD 約 516km / ALLGRIP-e 約 444km (NEDC)",
-        "充電介面：AC Type 1 (J1772) / DC CCS1",
-        "DC 快充：約 45 分鐘 (10%→80%，實際依溫度與電池狀態而異)",
+        ...getCarSpecifications("e-vitara"),
         `售價：${eVitaraVersions.map((version) => `${version.name} ${version.priceTwd / 10000} 萬`).join(" / ")}`,
       ],
       whoFor: "重視環保、想降低日常通勤成本的科技先驅",
@@ -105,14 +102,7 @@ export const cars: Car[] = [
     highlights: ["24.5km/L 油耗", "日本進口", "車高 1,480mm"],
     detail: {
       tagline: "都會精靈，靈巧省油",
-      specs: [
-        "引擎：1.2L 直列三缸 + 12V HYBRID輕油電",
-        "馬力：81 PS / 5,700 rpm",
-        "油耗：24.5 km/L (官方能源效率標示)",
-        "尺寸：3,860 x 1,735 x 1,480 mm",
-        "行李箱：265L (後座傾倒 579L)",
-        "安全：全速域 ACC + LKA + DSBS II + 6 SRS 氣囊",
-      ],
+      specs: getCarSpecifications("swift"),
       whoFor: "首購族、市區通勤族；機械車位需核對限高、限寬與載重",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/swift",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178781313014.pdf",
@@ -143,16 +133,7 @@ export const cars: Car[] = [
     highlights: ["ALLGRIP PRO", "ACC 主動巡航", "DSBS II"],
     detail: {
       tagline: "為征服荒野而生",
-      specs: [
-        "引擎：1.5L 直列四缸",
-        "馬力：102 PS / 6,000 rpm",
-        "驅動：Part-time 4WD 加力箱 (2H/4H/4L)",
-        "尺寸：3,650 x 1,645 x 1,705 mm",
-        "油耗：14.5 km/L (官方能源效率標示)",
-        "底盤：階梯式大樑 (Ladder Frame)",
-        "安全：ACC + DSBS II + LDP + 6 SRS 氣囊",
-        "座艙：9 吋觸控螢幕，支援無線 Apple CarPlay / Android Auto",
-      ],
+      specs: getCarSpecifications("jimny"),
       whoFor: "戶外玩家、露營愛好者、想要個性化車款的你",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/jimny",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178382615010.pdf",
@@ -184,15 +165,7 @@ export const cars: Car[] = [
     highlights: ["ALLGRIP 四輪傳動", "1.4L BOOSTERJET", "48V 輕油電"],
     detail: {
       tagline: "型動新生，智慧升級",
-      specs: [
-        "引擎：1.4L BOOSTERJET 缸內直噴渦輪 + 48V輕油電",
-        "馬力：110.02 PS / 4,400 rpm",
-        "扭力：23.97 kgm / 2,000–2,500 rpm",
-        "驅動：ALLGRIP 適時四輪傳動 (Auto/Sport/Snow/Lock)",
-        "油耗：17.4 km/L (官方能源效率標示)",
-        "行李箱：375L (最大 710L)",
-        "安全：ACC + LKA + DSBS II + 6 SRS 氣囊",
-      ],
+      specs: getCarSpecifications("vitara"),
       whoFor: "熱愛戶外活動的小家庭，想要 SUV 機能與駕駛樂趣",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/vitara",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178418897488.pdf",
@@ -224,15 +197,7 @@ export const cars: Car[] = [
     highlights: ["440L 行李廂", "48V 輕油電", "6 SRS 氣囊"],
     detail: {
       tagline: "跨界全能，唯我電能",
-      specs: [
-        "引擎：1.4L BOOSTERJET + 48V 輕油電",
-        "馬力：110.02 PS / 4,400 rpm",
-        "扭力：23.97 kgm / 2,000–2,500 rpm",
-        "油耗：19.1 km/L (官方能源效率標示)",
-        "行李箱：440L (後座傾倒 1,230L)",
-        "驅動：2WD 前驅",
-        "安全：ACC + LKA + DSBS II + 360°環景 + 6 SRS 氣囊",
-      ],
+      specs: getCarSpecifications("s-cross"),
       whoFor: "經常長途出遊、需要大空間的大家庭或露營愛好者",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/s-cross",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178453550663.pdf",
@@ -261,15 +226,7 @@ export const cars: Car[] = [
     highlights: ["載重 915kg", "同級最強", "低月付方案"],
     detail: {
       tagline: "拼大生意，就選 CARRY",
-      specs: [
-        "引擎：1.5L 直列四缸",
-        "馬力：96.6 PS / 5,600 rpm",
-        "扭力：13.8 kgm / 4,400 rpm",
-        "載重：915 kg (同級最強)",
-        "貨台：2,565 x 1,660 x 290 mm (三邊可開)",
-        "油耗：14.7 km/L",
-        "保固：三年或十萬公里原廠保固",
-      ],
+      specs: getCarSpecifications("carry"),
       whoFor: "創業頭家、自營商、物流運輸業者",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/carry",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/169336257999.pdf",

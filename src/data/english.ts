@@ -70,17 +70,9 @@ export const englishCars: Record<CarId, {
   },
 };
 
-export const englishCarDetails: Record<CarId, { introduction: string; specs: string[]; testDrive: string[] }> = {
+export const englishCarDetails: Record<CarId, { introduction: string; testDrive: string[] }> = {
   swift: {
     introduction: "SWIFT pairs a 1.2L mild-hybrid engine with a CVT and does not need external charging. Start with your parking space, regular passengers and luggage, then compare an itemised quotation including colour, options, insurance and registration.",
-    specs: [
-      "Engine: 1.2L three-cylinder petrol with 12V mild hybrid",
-      "Power: 81 PS at 5,700 rpm",
-      "Official fuel economy: 24.5 km/L",
-      "Dimensions (L × W × H): 3,860 × 1,735 × 1,480 mm",
-      "Boot: 265 L; 579 L with the rear seats folded",
-      "Driver assistance and safety: full-speed ACC, LKA, DSBS II and 6 SRS airbags",
-    ],
     testDrive: [
       "Share your preferred date, number of passengers and typical commute so the advisor can check vehicle and time-slot availability.",
       "Notice acceleration, stop-start operation, braking and parking visibility on the agreed route.",
@@ -89,16 +81,6 @@ export const englishCarDetails: Record<CarId, { introduction: string; specs: str
   },
   jimny: {
     introduction: "This page covers Taiwan's current three-door, four-seat Jimny 2026. Explore its equipment and everyday practicality, then confirm the model year, production date, colour, available stock and itemised quotation with the advisor.",
-    specs: [
-      "Engine: 1.5L four-cylinder petrol",
-      "Power: 102 PS at 6,000 rpm",
-      "Drive: part-time 4WD with a transfer case (2H / 4H / 4L)",
-      "Dimensions (L × W × H): 3,650 × 1,645 × 1,705 mm",
-      "Official fuel economy: 14.5 km/L",
-      "Chassis: ladder frame",
-      "Driver assistance and safety: ACC, DSBS II, LDP and 6 SRS airbags",
-      "Cabin: 9-inch touchscreen with wireless Apple CarPlay and Android Auto",
-    ],
     testDrive: [
       "Ask about the ACC controls, touchscreen and phone connection using the actual display or test vehicle.",
       "Let your regular passengers try rear-seat access, and check luggage space and parking visibility.",
@@ -107,13 +89,6 @@ export const englishCarDetails: Record<CarId, { introduction: string; specs: str
   },
   "e-vitara": {
     introduction: "Begin with your charging routine: where you park, whether equipment can be installed and where you would charge on longer journeys. Compare both drive requirements and official test ranges when choosing between 2WD and ALLGRIP-e.",
-    specs: [
-      "Powertrain: electric motors with a 61 kWh battery",
-      "Drive: 2WD front-wheel drive or ALLGRIP-e all-wheel drive",
-      "NEDC range: approximately 516 km (2WD) or 444 km (ALLGRIP-e)",
-      "Charging: AC Type 1 (J1772) and DC CCS1",
-      "DC fast charging: approximately 45 minutes from 10% to 80%; time varies with temperature and battery condition",
-    ],
     testDrive: [
       "Try acceleration and deceleration, and check the driving position and screen controls.",
       "Ask for a demonstration of the charge port, charging information and everyday controls.",
@@ -122,15 +97,6 @@ export const englishCarDetails: Record<CarId, { introduction: string; specs: str
   },
   vitara: {
     introduction: "Consider VITARA through your drive requirements, passenger space and everyday routes. If weekdays mean commuting and weekends mean outdoor trips, compare it with S-CROSS using the same passengers and luggage.",
-    specs: [
-      "Engine: 1.4L BOOSTERJET direct-injection turbo with 48V mild hybrid",
-      "Power: 110.02 PS at 4,400 rpm",
-      "Torque: 23.97 kgm at 2,000–2,500 rpm",
-      "Drive: ALLGRIP four-wheel drive (Auto / Sport / Snow / Lock)",
-      "Official fuel economy: 17.4 km/L",
-      "Boot: 375 L; maximum 710 L",
-      "Driver assistance and safety: ACC, LKA, DSBS II and 6 SRS airbags",
-    ],
     testDrive: [
       "Experience acceleration, steering and parking visibility on an agreed route.",
       "Have your family try the seats, then check the boot opening against the dimensions of your usual luggage.",
@@ -139,15 +105,6 @@ export const englishCarDetails: Record<CarId, { introduction: string; specs: str
   },
   "s-cross": {
     introduction: "Think about how your family uses a car each day: who sits in the back, whether passengers and luggage travel together, and how easy your parking space is to access. Check S-CROSS in person and compare your drive requirements with VITARA.",
-    specs: [
-      "Engine: 1.4L BOOSTERJET turbo with 48V mild hybrid",
-      "Power: 110.02 PS at 4,400 rpm",
-      "Torque: 23.97 kgm at 2,000–2,500 rpm",
-      "Official fuel economy: 19.1 km/L",
-      "Boot: 440 L; 1,230 L with the rear seats folded",
-      "Drive: 2WD front-wheel drive",
-      "Driver assistance and safety: ACC, LKA, DSBS II, 360° camera and 6 SRS airbags",
-    ],
     testDrive: [
       "Try the front and rear seats together, including access, storage and air conditioning.",
       "Check parking visibility and ask the advisor to demonstrate relevant assistance features.",
@@ -156,15 +113,6 @@ export const englishCarDetails: Record<CarId, { introduction: string; specs: str
   },
   carry: {
     introduction: "Start with the job: cargo size and weight, loading methods and daily routes, then review purchase and operating costs. The cargo-bed and payload figures help with initial selection; confirm your intended use against the vehicle's approved specifications.",
-    specs: [
-      "Engine: 1.5L four-cylinder petrol",
-      "Power: 96.6 PS at 5,600 rpm",
-      "Torque: 13.8 kgm at 4,400 rpm",
-      "Payload: 915 kg",
-      "Cargo bed (L × W × H): 2,565 × 1,660 × 290 mm, with three opening sides",
-      "Official fuel economy: 14.7 km/L",
-      "Manufacturer warranty: 3 years or 100,000 km; confirm the applicable terms",
-    ],
     testDrive: [
       "Share cargo dimensions, weight and loading methods before arranging a visit.",
       "Try getting in and out of the cab and check the position of everyday controls.",

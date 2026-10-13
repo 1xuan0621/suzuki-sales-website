@@ -4,6 +4,8 @@ import { createContext, useCallback, useContext, useRef, useState, type FormEven
 import { usePathname } from "next/navigation";
 import { cars } from "@/data/site";
 import { trackLead } from "@/lib/analytics";
+import { localeForPath } from "@/data/locales";
+import { translator } from "@/data/translations";
 
 type Form = { name: string; contact: string; car: string; usage: string; budget: string };
 type SubmissionError = { message: string; englishMessage: string };
@@ -22,12 +24,12 @@ function responseErrorInEnglish(status: number) {
 
 function useConsultationState() {
   const pathname = usePathname();
-  const english = pathname === "/en" || pathname.startsWith("/en/");
+  const locale = localeForPath(pathname);
   const [form, setForm] = useState<Form>({ name: "", contact: "", car: "", usage: "", budget: "" });
   const draft = useRef(form);
   const [submitted, setSubmitted] = useState(false);
   const [submissionError, setSubmissionError] = useState<SubmissionError | null>(null);
-  const formError = submissionError ? (english ? submissionError.englishMessage : submissionError.message) : "";
+  const formError = submissionError ? (locale === "zh-TW" ? submissionError.message : translator(locale)(submissionError.englishMessage)) : "";
   const [website, setWebsite] = useState("");
   const requestId = useRef("");
   const sendingRef = useRef(false);

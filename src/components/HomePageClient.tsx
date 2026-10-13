@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useConsultation } from "./ConsultationProvider";
 import ConsultationPrefill from "./ConsultationPrefill";
 import PrivacyNotice from "./PrivacyNotice";
-import SiteHeader from "./SiteHeader";
+import SiteFrame from "./SiteFrame";
 import { cars, homeCars, services, usageOptions, budgetRanges, dealer, type Car } from "@/data/site";
 import { R, CAR_SHAPE_CLASS } from "@/data/constants";
 import { useCompare } from "@/components/CarCompareProvider";
@@ -40,15 +40,8 @@ export default function HomePageClient({ introduction, buyingTopics, jimnyTopics
   return (
     <>
       <Suspense fallback={null}><ConsultationPrefill /></Suspense>
-      <main
-        className="min-h-screen bg-[#2f2f2f] antialiased"
-        style={{
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Noto Sans TC", Arial, sans-serif',
-        }}
-      >
-        {/* ── 頁面容器 ── */}
-        <div className="max-w-[1180px] mx-auto my-7 bg-[#f5f5f5] rounded-[20px] shadow-[0_26px_80px_rgba(0,0,0,0.28)] overflow-hidden max-sm:my-0 max-sm:rounded-none max-sm:shadow-none">
-          <SiteHeader />
+      <SiteFrame>
+        <main>
           {/* ═══════ HERO — 大頭照 + 資訊 ═══════ */}
           <section
             data-entry="hero"
@@ -118,7 +111,7 @@ export default function HomePageClient({ introduction, buyingTopics, jimnyTopics
                     href="https://www.facebook.com/profile.php?id=100092443294776&locale=zh_TW"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="grid place-items-center w-9 h-9 bg-[#0866FF] hover:bg-[#0759df] rounded-full text-white text-[17px] font-bold no-underline transition-colors"
+                    className="grid place-items-center w-9 h-9 bg-[#145DBF] hover:bg-[#0F4C9B] rounded-full text-white text-[17px] font-bold no-underline transition-colors"
                     aria-label="Facebook 粉絲專頁"
                   >
                     f
@@ -500,8 +493,8 @@ export default function HomePageClient({ introduction, buyingTopics, jimnyTopics
             <PrivacyNotice />
             © 2026 Suzuki 汽車顧問 {dealer.fullName}｜凱騰鈴木北投所
           </footer>
-        </div>
-      </main>
+        </main>
+      </SiteFrame>
 
       {/* ═══════ Modal Overlay — 車款詳細 ═══════ */}
       {modalCar && (
