@@ -1,6 +1,7 @@
 export const editorialReviewedAt = "2026-09-08";
 
-// Community discussions inform the questions; factual answers use these primary sources.
+// Community discussions inform the questions; factual guidance uses primary sources.
+// Owner work orders support only their explicitly labelled historical case, not maintenance rules.
 // Research scope and discussion links: docs/BUYING_CONTENT_RESEARCH.md.
 export const contentSources = {
   consumer: { title: "行政院消保會｜購買新車注意事項", url: "https://cpc.ey.gov.tw/Page/E9F89E01AAE23194/3e4100ad-fb9f-4f2c-8e3b-3cb893c32b18" },
@@ -44,6 +45,8 @@ export const contentSources = {
   tax: { title: "財政部｜購車與汰舊換新貨物稅減徵條件", url: "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-saving-manual/national/commodity-tax/0Q6AK66" },
   tradeInTax: { title: "財政部｜新購與舊換新減稅條件、流程及文件", url: "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-saving-secret/re5JYe3" },
   service: { title: "Taiwan Suzuki｜保養維修中心", url: "https://www.taiwansuzuki.com.tw/locator?type=2" },
+  suzukiAfterSales: { title: "Taiwan Suzuki｜售後服務詢問與客服", url: "https://www.taiwansuzuki.com.tw/contact" },
+  swiftMaintenanceCase2023: { title: "公開車主工單｜2023 年式 SWIFT、2024-08-24 分享（歷史個案，非保養規範或現行報價）", url: "https://www.mobile01.com/topicdetail.php?f=277&t=7007071" },
   maintenancePrinciples: { title: "Toyota Taiwan｜保養表讀法參考（週期與保固不適用 Suzuki）", url: "https://www.toyota.com.tw/owner_maintenance.aspx" },
   repairConsent: { title: "彰化縣消保官｜汽車維修項目、報價與追加同意", url: "https://www.chcg.gov.tw/DTO/senior/03bulletin/bulletin_search_con.aspx?bull_id=356805" },
   tirePressure: { title: "台灣普利司通｜冷胎胎壓與原廠標示怎麼看", url: "https://www.bridgestone.com.tw/zh/tyre-clinic/tyre-talk/tire-maintenance2" },
