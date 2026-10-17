@@ -4,7 +4,7 @@ import ContentShell from "@/components/ContentShell";
 import ContactLinks from "@/components/ContactLinks";
 import SourceLinks from "@/components/SourceLinks";
 import GuideFlow from "@/components/GuideFlow";
-import { GuideChecklist, GuideOptions, GuideWorkedExample } from "@/components/GuideContent";
+import { GuideChecklist, GuideComparison, GuideOptions, GuideWorkedExample } from "@/components/GuideContent";
 import { getGuide, guides, guideTitle } from "@/data/guides";
 import { dealer, getCar } from "@/data/site";
 import { guideSchema, pageMetadata, serializeJsonLd } from "@/data/seo";
@@ -60,9 +60,9 @@ export default async function GuidePage({ params }: Props) {
         </div>
       </header>
       <section aria-labelledby="article-flow-heading" className="mx-auto mt-8 rounded-2xl border border-[#e5dcd5] bg-[#f5f1ed] p-4 sm:p-6">
-        <h2 id="article-flow-heading" className="text-lg font-bold">{guide.sections.length}{guide.category === "insurance" ? " 個處理重點" : guide.category === "jimny" ? " 個閱讀重點" : ` 步${guide.category === "process" ? "看懂流程" : guide.category === "ownership" ? "看懂保養" : "整理你的選擇"}`}</h2>
-        <p className="mt-1 text-sm leading-7 text-[#665c56]">{guide.category === "insurance" ? "先確保人身安全，再依目前的狀況查看處理方式。" : guide.category === "jimny" ? "從頭認識，或直接點選你想找的答案。" : "按順序看，或點選目前需要的步驟。"}</p>
-        <GuideFlow sections={guide.sections} label={guide.category === "insurance" ? "用車狀況與處理重點" : guide.category === "process" ? "購車流程" : "指南閱讀重點"} />
+        <h2 id="article-flow-heading" className="text-lg font-bold">{guide.sections.length}{guide.emergency ? " 個處理重點" : guide.category === "insurance" ? " 個投保重點" : guide.category === "jimny" ? " 個閱讀重點" : ` 步${guide.category === "process" ? "看懂流程" : guide.category === "ownership" ? "看懂保養" : "整理你的選擇"}`}</h2>
+        <p className="mt-1 text-sm leading-7 text-[#665c56]">{guide.emergency ? "先確保人身安全，再依目前的狀況查看處理方式。" : guide.category === "insurance" ? "先看差異，再依用車情況整理需求；也可以直接跳到你想知道的答案。" : guide.category === "jimny" ? "從頭認識，或直接點選你想找的答案。" : "按順序看，或點選目前需要的步驟。"}</p>
+        <GuideFlow sections={guide.sections} label={guide.emergency ? "用車狀況與處理重點" : guide.category === "insurance" ? "投保需求與保障差異" : guide.category === "process" ? "購車流程" : "指南閱讀重點"} />
       </section>
       <div className="mx-auto mt-3 max-w-3xl divide-y divide-[#ddd]">
         {guide.sections.map((section, index) => <section id={section.id} key={section.id} className="scroll-mt-6 py-9 sm:py-11">
@@ -70,6 +70,7 @@ export default async function GuidePage({ params }: Props) {
           {section.paragraphs.length > 0 && <div className="mt-4 space-y-3 text-base leading-8 text-[#4b4b4b]">
             {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>}
+          {section.comparison && <div className="mt-5"><GuideComparison comparison={section.comparison} /></div>}
           {section.options && <div className="mt-5"><GuideOptions options={section.options} /></div>}
           {section.points && <div className="mt-5"><GuideChecklist points={section.points} /></div>}
           {section.calculation && <div className="mt-6"><GuideWorkedExample example={section.calculation} /></div>}

@@ -21,6 +21,43 @@ export function GuideOptions({ options }: { options: NonNullable<Guide["sections
   </div>;
 }
 
+export function GuideComparison({ comparison }: { comparison: NonNullable<Guide["sections"][number]["comparison"]> }) {
+  return <div>
+    <div className="hidden rounded-xl border border-[#ded6d0] bg-white px-5 pb-2 md:block">
+      <table className="w-full table-fixed border-collapse text-left text-sm leading-7">
+        <caption className="py-4 text-left text-base font-bold text-[#333]">{comparison.caption}</caption>
+        <thead>
+          <tr className="border-y border-[#ded6d0] bg-[#f5f1ed]">
+            <th scope="col" className="w-[26%] px-3 py-3 align-top font-bold text-[#333]">比較項目</th>
+            {comparison.columns.map((column) => <th key={column} scope="col" className="px-3 py-3 align-top font-bold text-[#333]">{column}</th>)}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-[#e8e2dd]">
+          {comparison.rows.map((row) => <tr key={row.label}>
+            <th scope="row" className="px-3 py-4 align-top font-bold text-[#333]">{row.label}</th>
+            {row.values.map((value, index) => <td key={comparison.columns[index]} className="px-3 py-4 align-top text-[#555]">{value}</td>)}
+          </tr>)}
+        </tbody>
+      </table>
+    </div>
+    <div className="md:hidden">
+      <p className="mb-3 text-base font-bold leading-7 text-[#333]">{comparison.caption}</p>
+      <div className="space-y-3">
+        {comparison.rows.map((row) => <section key={row.label} className="overflow-hidden rounded-xl border border-[#ded6d0] bg-white">
+          <h3 className="border-b border-[#ded6d0] bg-[#f5f1ed] px-4 py-3 text-base font-bold leading-7 text-[#333]">{row.label}</h3>
+          <dl className="divide-y divide-[#e8e2dd] px-4">
+            {comparison.columns.map((column, index) => <div key={column} className="grid grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-3 py-3 text-sm leading-7">
+              <dt className="font-bold text-[#333]">{column}</dt>
+              <dd className="text-[#555]">{row.values[index]}</dd>
+            </div>)}
+          </dl>
+        </section>)}
+      </div>
+    </div>
+    {comparison.note && <p className="mt-3 text-sm leading-7 text-[#665c56]">{comparison.note}</p>}
+  </div>;
+}
+
 const operations = {
   add: { symbol: "+", label: "加上" },
   subtract: { symbol: "−", label: "減去" },

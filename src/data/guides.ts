@@ -4,6 +4,7 @@ import { jimnyHistoryGuide } from "./jimny-guides";
 import { jimnyModificationsGuide } from "./jimny-modifications";
 import { accidentInsuranceGuide } from "./insurance-guide";
 import { roadsideEmergenciesGuide } from "./roadside-guide";
+import { insuranceBuyingGuides } from "./insurance-buying-guides";
 
 export interface GuidePoint { label: string; text: string }
 
@@ -44,6 +45,7 @@ export interface Guide {
     paragraphs: string[];
     points?: GuidePoint[];
     options?: { title: string; answer: string; facts: GuidePoint[] }[];
+    comparison?: { caption: string; columns: string[]; rows: { label: string; values: string[] }[]; note?: string };
     calculation?: GuideCalculation;
     details?: { title: string; paragraphs: string[]; points?: GuidePoint[] };
     note?: string;
@@ -53,9 +55,9 @@ export interface Guide {
 
 const guideReviewedAt = "2026-09-09";
 export const guideIndex = {
-  updatedAt: "2026-10-13",
+  updatedAt: "2026-10-17",
   title: "Suzuki 購車指南｜第一次買車、換車與選車｜張鈺漣",
-  description: "從第一次買車、舊車換新車到選車與領牌，整理需求、預算、報價及交車流程，也提供 Jimny 專題、交車後保養與保險事故處理資訊。",
+  description: "從第一次買車、舊車換新車到選車與領牌，整理需求、預算、報價及交車流程，也提供 Jimny 專題、保養，以及強制險、第三人、超額與甲乙丙式車險選購指南。",
 };
 
 export const guideCategories = [
@@ -63,7 +65,7 @@ export const guideCategories = [
   { id: "selection", title: "找到適合自己的車", description: "用家人、停車位與日常路線，決定空間和動力怎麼選。" },
   { id: "jimny", title: "Jimny 專題", description: "先認識小越野車的故事，再看改裝、通勤與選購時真正要確認的事。" },
   { id: "ownership", title: "交車後的保養與使用", description: "知道何時回廠、工單怎麼看，慢慢熟悉照顧愛車的方法。" },
-  { id: "insurance", title: "保險專區｜事故、道路應變與回廠", description: "碰撞與出險、爆胎與故障分開查，先看現場摘要。出險、回廠或不知道怎麼辦，都可以聯絡鈺漣。" },
+  { id: "insurance", title: "保險專區｜看懂保障，選出自己的需求", description: "先分清保誰、賠什麼，再比較甲乙丙式與報價。已經發生碰撞、爆胎或故障，也有現場處理與回廠指南。" },
 ] as const;
 
 export const firstCarGuide: Guide = {
@@ -206,7 +208,7 @@ export const firstCarGuide: Guide = {
     {
       id: "payment", step: "貸款與保險", title: "貸款與保險，各問一個核心問題",
       paragraphs: [],
-      link: { href: "/faq#insurance-coverage", label: "看常見車險問題" },
+      link: { href: "/guides/car-insurance-basics", label: "先看懂強制險、第三人與超額保誰" },
       action: "貸款看總額，保險看保障",
       options: [
         {
@@ -1250,7 +1252,7 @@ export const licensePlateGuide: Guide = {
   ],
 };
 
-export const guides = [firstCarGuide, tradeInGuide, licensePlateGuide, suvSelectionGuide, powertrainGuide, jimnyHistoryGuide, jimnyModificationsGuide, maintenanceGuide, accidentInsuranceGuide, roadsideEmergenciesGuide];
+export const guides = [firstCarGuide, tradeInGuide, licensePlateGuide, suvSelectionGuide, powertrainGuide, jimnyHistoryGuide, jimnyModificationsGuide, maintenanceGuide, ...insuranceBuyingGuides, accidentInsuranceGuide, roadsideEmergenciesGuide];
 export function getGuide(slug: string) { return guides.find((guide) => guide.slug === slug); }
 export function guideTitle(guide: Guide) { return `${guide.title}｜張鈺漣購車指南`; }
 
