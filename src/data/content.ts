@@ -11,6 +11,7 @@ export const homeContent = {
   title: "SUZUKI 台北購車與試乘諮詢｜汽車顧問張鈺漣",
   description: "SUZUKI 汽車顧問張鈺漣以台北為主要服務地區，提供全台選車、購車諮詢與跨縣市交車協助。了解六款車的價格、規格與購車流程，預約凱騰鈴木北投所賞車及試乘；交車安排依個案確認。",
   introduction: "以台北為主要服務地區，提供全台購車諮詢，並協助跨縣市購車與交車。實際服務據點位於凱騰鈴木北投所，到店賞車與試乘請先預約；交車地點、費用與時程依個案確認。",
+  mobileIntroduction: "我是鈺漣，2018 年起從事汽車銷售，2025 年加入 Suzuki。提供全台購車諮詢，北投賞車與試乘請先預約。",
   buyingTopics: [
     { href: "/cars/jimny", title: "Jimny 2026 改款、價格與試乘", description: `建議售價 ${startingPrice("jimny")}。先看新舊配備差異，再確認車色、交期與台北試乘。` },
     { href: "/cars/swift", title: "SWIFT 選購：輕油電、空間與價格", description: `建議售價 ${startingPrice("swift")}。一次了解充電、停車尺寸與後座需求，準備詢價與試乘。` },
@@ -35,8 +36,18 @@ export const showroom = {
   hours: ["週一至週五 08:30–21:00", "週六、週日 09:00–21:00"],
   sourceUrl: "https://www.taiwansuzuki.com.tw/jt/locator?type=1",
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("凱騰鈴木北投所 台北市北投區承德路六段337號"),
+  transit: {
+    reviewedAt: "2026-10-18",
+    bus: "搭乘 756 或 757，在「建民里」站下車，再步行前往承德路六段337號。南北向站牌位置不同，請依下車位置開啟步行導航。",
+    connections: [
+      { title: "從臺北車站出發", description: "在「臺北車站（承德）」站搭 756 往淡江大學，於「建民里」下車。", href: "https://pda5284.gov.taipei/MQS/route.jsp?rid=16504", linkLabel: "756 路線與到站資訊" },
+      { title: "從捷運大橋頭站轉乘", description: "在「捷運大橋頭站」公車站搭 757 往淡海，於「建民里」下車。", href: "https://pda5284.gov.taipei/MQS/route.jsp?rid=16707", linkLabel: "757 路線與到站資訊" },
+    ],
+    walkingUrl: "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent("凱騰鈴木北投所 台北市北投區承德路六段337號") + "&travelmode=walking",
+    note: "下車後請依行人穿越道與號誌通行，認明凱騰鈴木北投招牌及337號門牌。公車班次與改道以官方當日資訊為準；出發前仍請先確認賞車或試乘預約。",
+  },
   reviewedAt: "2026-09-08",
-  updatedAt: "2026-10-13",
+  updatedAt: "2026-10-18",
   title: "SUZUKI 台北到店賞車與試乘｜北投所交通及預約｜張鈺漣",
   description: "預約 SUZUKI 台北北投所賞車與試乘，查看承德路六段據點地址、營業時間、交通及停車確認事項。由鈺漣先確認車款與時段，外縣市客戶也可先遠端諮詢。",
 };

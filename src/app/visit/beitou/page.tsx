@@ -46,9 +46,21 @@ export default function VisitPage() {
         <div className="space-y-4">
           <p>目的地為台北市北投區承德路六段337號。請使用上方地圖依出發位置查看開車、大眾運輸或步行路線，並留意出發當天的交通狀況。</p>
           <p>北投所提供免費停車位。到店時可向現場人員詢問停放位置；如有上下車或行動協助需求，請在預約時告知顧問。</p>
-          <p>搭乘大眾運輸時，可先以地圖確認下車位置及後續步行路線；不熟悉附近環境，也可以在出發前向顧問詢問。</p>
         </div>
       </div>
+    </ArticleSection>
+    <ArticleSection title="搭公車與捷運轉乘怎麼到店">
+      <p>{showroom.transit.bus}</p>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {showroom.transit.connections.map((connection) => <div key={connection.title} className="rounded-xl border border-[#e5e5e5] bg-[#fafafa] p-5">
+          <h3 className="mb-2 font-bold text-[#222]">{connection.title}</h3>
+          <p>{connection.description}</p>
+          <a href={connection.href} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-[#b9000e] underline underline-offset-4">{connection.linkLabel} ↗</a>
+        </div>)}
+      </div>
+      <a data-entry="visit" href={showroom.transit.walkingUrl} target="_blank" rel="noopener noreferrer" className="inline-block rounded-xl bg-[#e60012] px-5 py-2 font-bold text-white no-underline">下車後開啟步行導航</a>
+      <p>{showroom.transit.note}</p>
+      <p className="text-xs text-[#666]">交通資料核對：<time dateTime={showroom.transit.reviewedAt}>{showroom.transit.reviewedAt}</time> · 來源：臺北市公車動態資訊</p>
     </ArticleSection>
     <ArticleSection title="預約與到店流程">
       <ol className="list-decimal space-y-3 pl-5">

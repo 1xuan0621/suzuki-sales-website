@@ -1,13 +1,9 @@
 import "server-only";
+import { createHmac } from "node:crypto";
 import { put } from "@vercel/blob";
 import type { StoredConsultation } from "./consultation";
 
 type DeliveryStatus = "confirmed" | "unconfirmed" | "failed" | "not_configured";
-
-// Prevent formula interpretation in the existing spreadsheet receiver.
-export function spreadsheetValue(value: string) {
-  return /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
-}
 
 export async function sendDiscord(record: StoredConsultation, endpoint: string | undefined, send = fetch): Promise<DeliveryStatus> {
   if (!endpoint) return "not_configured";
@@ -40,31 +36,36 @@ export async function sendDiscord(record: StoredConsultation, endpoint: string |
   } catch { return "unconfirmed"; }
 }
 
-export async function sendSpreadsheet(record: StoredConsultation, endpoint: string | undefined, send = fetch): Promise<DeliveryStatus> {
-  if (!endpoint) return "not_configured";
+export async function sendSpreadsheet(record: StoredConsultation, endpoint: string | undefined, secret: string | undefined, send = fetch): Promise<DeliveryStatus> {
+  // Never fall back to the former unsigned receiver when configuration is incomplete.
+  if (!endpoint || !secret || secret.length < 32) return "not_configured";
   try {
     const url = new URL(endpoint);
-    if (url.origin !== "https://script.google.com" || !url.pathname.startsWith("/macros/s/")) return "failed";
+    if (url.origin !== "https://script.google.com" || !/^\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url.pathname) || url.search || url.hash) return "failed";
+    const timestamp = String(Math.floor(Date.now() / 1000));
+    const payload = JSON.stringify({
+      requestId: record.requestId, receivedAt: record.receivedAt,
+      name: record.name, contact: record.contact,
+      car: record.car, usage: record.usage, budget: record.budget,
+    });
+    const signature = createHmac("sha256", secret).update(`${timestamp}.${payload}`, "utf8").digest("hex");
     const res = await send(url, {
-      method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      signal: AbortSignal.timeout(6000),
-      body: new URLSearchParams({
-        name: spreadsheetValue(record.name), contact: spreadsheetValue(record.contact),
-        car: record.car, usage: record.usage, budget: record.budget,
-        timestamp: record.receivedAt, requestId: record.requestId,
-      }),
+      method: "POST", headers: { "Content-Type": "application/json" },
+      signal: AbortSignal.timeout(12000),
+      body: JSON.stringify({ timestamp, payload, signature }),
     });
     if (!res.ok) return "failed";
     // A Google login/error HTML page with HTTP 200 is not a write acknowledgment.
     const result = await res.json();
-    return result.ok === true || result.success === true || result.result === "success" ? "confirmed" : "unconfirmed";
+    if (result.ok === false) return result.error === "receiver_error" ? "unconfirmed" : "failed";
+    return result.ok === true && result.requestId === record.requestId ? "confirmed" : "unconfirmed";
   } catch { return "unconfirmed"; }
 }
 
 export async function deliverConsultation(record: StoredConsultation) {
   const [discord, spreadsheet] = await Promise.all([
     sendDiscord(record, process.env.DISCORD_WEBHOOK_URL),
-    sendSpreadsheet(record, process.env.GOOGLE_SHEETS_WEBHOOK_URL),
+    sendSpreadsheet(record, process.env.GOOGLE_SHEETS_WEBHOOK_URL, process.env.GOOGLE_SHEETS_WEBHOOK_SECRET),
   ]);
   await put(`delivery/${record.requestId}.json`, JSON.stringify({
     requestId: record.requestId, attemptedAt: new Date().toISOString(), discord, spreadsheet,

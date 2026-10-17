@@ -24,7 +24,7 @@ import "@/components/car-shapes.css";
 type HomeTopic = { href: string; title: string; description: string };
 type HomePhoto = { src: string; alt: string; width: number; height: number };
 
-export default function HomePageClient({ introduction, buyingTopics, jimnyTopics, jimnyPhoto, serviceReviews }: { introduction: string; buyingTopics: HomeTopic[]; jimnyTopics: HomeTopic[]; jimnyPhoto: HomePhoto; serviceReviews: ReactNode }) {
+export default function HomePageClient({ introduction, mobileIntroduction, buyingTopics, jimnyTopics, jimnyPhoto, serviceReviews }: { introduction: string; mobileIntroduction: string; buyingTopics: HomeTopic[]; jimnyTopics: HomeTopic[]; jimnyPhoto: HomePhoto; serviceReviews: ReactNode }) {
   const { toggleCar, isSelected } = useCompare();
   const { form, update, submitted, formError, website, setWebsite, sending, handleSubmit, beginConsultation } = useConsultation();
   const [modalCar, setModalCar] = useState<Car | null>(null);
@@ -45,7 +45,7 @@ export default function HomePageClient({ introduction, buyingTopics, jimnyTopics
           {/* ═══════ HERO — 大頭照 + 資訊 ═══════ */}
           <section
             data-entry="hero"
-            className="relative px-11 pb-[54px] pt-[34px] text-white overflow-hidden max-sm:px-[22px] max-sm:pb-10 max-sm:pt-6"
+            className="relative px-11 pb-[54px] pt-[34px] text-white overflow-hidden max-sm:px-[22px] max-sm:pb-6 max-sm:pt-5"
             style={{
               background: `radial-gradient(circle at 85% 30%, rgba(255,255,255,0.16), transparent 28%), linear-gradient(135deg, ${R}, #bd0010 70%, #9d000b)`,
             }}
@@ -53,10 +53,10 @@ export default function HomePageClient({ introduction, buyingTopics, jimnyTopics
             <div className="absolute w-[420px] h-[110px] -left-[120px] bottom-12 bg-white/8 skew-x-[-24deg] pointer-events-none max-sm:hidden" />
             <div className="absolute w-[360px] h-[160px] -right-[100px] top-[88px] bg-white/8 skew-x-[-24deg] pointer-events-none max-sm:hidden" />
 
-            <div className="relative z-10 flex items-center gap-10 max-md:flex-col max-md:text-center">
+            <div className="relative z-10 flex items-center gap-10 max-md:flex-col max-md:text-center max-sm:grid max-sm:grid-cols-[84px_minmax(0,1fr)] max-sm:gap-x-4 max-sm:gap-y-4 max-sm:text-left">
               {/* 大頭照 */}
               <div className="flex-shrink-0">
-                <div className="w-[140px] h-[140px] max-sm:w-[120px] max-sm:h-[120px] rounded-full border-4 border-white/70 shadow-[0_8px_24px_rgba(0,0,0,0.15)] overflow-hidden bg-white/10">
+                <div className="w-[140px] h-[140px] max-sm:w-[84px] max-sm:h-[84px] rounded-full border-4 border-white/70 shadow-[0_8px_24px_rgba(0,0,0,0.15)] overflow-hidden bg-white/10">
                   <img
                     src="/images/avatar.jpg"
                     alt={dealer.fullName}
@@ -79,34 +79,34 @@ export default function HomePageClient({ introduction, buyingTopics, jimnyTopics
                 </div>
               </div>
 
-              <div className="flex-1">
+              <div className="flex-1 max-sm:contents">
                 <div>
                   <h1
-                    className="m-0 leading-none tracking-[0.06em] font-bold"
-                    style={{ fontSize: "clamp(44px, 7vw, 72px)" }}
+                    className="m-0 text-[clamp(44px,7vw,72px)] leading-none tracking-[0.06em] font-bold max-sm:text-4xl"
                   >
-                    <span className="mb-4 flex items-center gap-3 text-xl leading-snug tracking-normal max-md:justify-center max-sm:text-lg">
+                    <span className="mb-4 flex items-center gap-3 text-xl leading-snug tracking-normal max-md:justify-center max-sm:mb-2 max-sm:justify-start max-sm:gap-2 max-sm:text-sm">
                       <img
                         src="/suzuki-logo.svg"
                         alt="SUZUKI"
                         width={496}
                         height={332}
-                        className="h-[42px] w-auto shrink-0 brightness-0 invert max-sm:h-[34px]"
+                        className="h-[42px] w-auto shrink-0 brightness-0 invert max-sm:h-[26px]"
                       />
                       <span>台北汽車顧問</span>
                     </span>
                     {dealer.fullName}
                   </h1>
-                  <p className="inline-block mt-[18px] pb-3 border-b-2 border-white/80 text-[19px] tracking-[0.18em] max-sm:text-base max-sm:tracking-[0.12em]">
+                  <p className="inline-block mt-[18px] pb-3 border-b-2 border-white/80 text-[19px] tracking-[0.18em] max-sm:hidden">
                     全台購車諮詢 / 台北預約試乘
                   </p>
                 </div>
 
-                <p className="mt-3 max-w-[650px] text-[15px] leading-7 text-white">{dealer.biography}</p>
-                <p className="mt-2 max-w-[650px] text-sm leading-7 text-white/95">{introduction}</p>
+                <p className="mt-3 max-w-[650px] text-[15px] leading-7 text-white max-sm:hidden">{dealer.biography}</p>
+                <p className="mt-2 max-w-[650px] text-sm leading-7 text-white/95 max-sm:hidden">{introduction}</p>
+                <p className="hidden text-[15px] leading-7 text-white max-sm:col-span-2 max-sm:block">{mobileIntroduction}</p>
 
                 {/* 社群按鈕 — 僅 logo 小圓 */}
-                <div className="flex justify-end max-md:justify-center gap-2 mt-4 md:mt-0">
+                <div className="flex justify-end max-md:justify-center gap-2 mt-4 md:mt-0 max-sm:col-span-2 max-sm:mt-0 max-sm:justify-end">
                   <a
                     href="https://www.facebook.com/profile.php?id=100092443294776&locale=zh_TW"
                     target="_blank"
