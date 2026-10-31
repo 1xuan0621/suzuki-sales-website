@@ -48,7 +48,7 @@ export default function LocalizedCarCards({ models, locale }: { models: Localize
         </article>;
       })}
     </div>
-    <p className="mt-4 text-xs leading-6 text-[#666]">{t("Prices are in New Taiwan dollars and refer to Taiwan-market models. Paint, accessories, insurance, registration and final terms are confirmed separately. Select up to three models to compare below.")}</p>
+    <p className="mt-4 text-xs leading-6 text-[#666]">{t("Select up to three models to compare.")}</p>
     {comparison.length > 0 && <section aria-label={t("Selected models")} className="mt-6 rounded-2xl border border-[#ddd] bg-white p-4 sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h3 className="text-xl font-bold">{t("Compare your shortlist")}{" "}<span className="text-sm font-normal text-[#666]">({comparison.length}/3)</span></h3>

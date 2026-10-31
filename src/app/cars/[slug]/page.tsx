@@ -1,6 +1,5 @@
 import FaqList from "@/components/FaqList";
 import { carFaqs } from "@/data/faq";
-import { editorialReviewedAt } from "@/data/content-sources";
 import ContactLinks from "@/components/ContactLinks";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -15,6 +14,7 @@ import CarUsageSection from "@/components/CarUsageSection";
 import { carUsage } from "@/data/car-usage";
 import OwnerExperienceSection from "@/components/OwnerExperienceSection";
 import { ownerExperiences } from "@/data/owner-experiences";
+import ReferenceDetails from "@/components/ReferenceDetails";
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -37,8 +37,8 @@ export default async function CarPage({ params }: Props) {
   const relatedGuides = content.relatedGuides.map(getGuide).filter((guide) => guide !== undefined);
   return <ContentShell label={`SUZUKI ${car.name}`} carId={car.id}>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(carSchema(car)) }} />
-    <div data-car-id={car.id} data-entry="car-page" className="grid items-start gap-8 lg:grid-cols-2">
-      <div>
+    <div data-car-id={car.id} data-entry="car-page" className="grid items-start gap-6 lg:grid-cols-2 lg:gap-x-10">
+      <div className="min-w-0">
         <p className="mb-3 text-sm font-bold tracking-widest text-[#b9000e]">{car.subtitle} · 台灣車款資訊</p>
         <h1 className="text-4xl font-black leading-tight tracking-tight sm:text-5xl">SUZUKI {car.name}{focus && <span className="mt-3 block text-xl leading-8 tracking-normal text-[#555] sm:text-2xl">{focus.heading}</span>}</h1>
         {!focus && <p className="mt-3 text-xl font-bold text-[#555]">{car.detail.tagline}</p>}
@@ -55,34 +55,31 @@ export default async function CarPage({ params }: Props) {
               />
             </span>)}
           </p>
-          <p className="mt-1 text-xs leading-5 text-[#666]">色塊僅供示意，車色以實車為準，供應請洽詢。</p>
         </section>}
-        <p className="mb-5 mt-6 text-sm text-[#666]">建議售價 <strong className="ml-2 text-3xl font-black text-[#b9000e]">{car.price}</strong></p>
-        <ContactLinks carId={car.id} entry="car-page" />
-        {focus && <p className="mt-3 text-sm leading-7 text-[#666]">{focus.inquiryPrompt}</p>}
-        {focus && <nav aria-label="車款選購重點" className="mt-5 flex flex-wrap gap-x-5 gap-y-3 text-sm font-bold text-[#b9000e]">
-          <Link href="#pricing" className="underline underline-offset-4">價格與報價</Link>
-          <Link href={`#${focus.faqIds[0]}`} className="underline underline-offset-4">{car.id === "jimny" ? "2026 改款差異" : "輕油電與選購重點"}</Link>
-          <Link href="#test-drive" className="underline underline-offset-4">台北試乘準備</Link>
-          {usage && <Link href="#daily-use" className="underline underline-offset-4">{usage.label}檢查</Link>}
-          {ownerExperience && <Link href="#owner-experience" className="underline underline-offset-4">車主心得</Link>}
-          <Link href="#faq" className="underline underline-offset-4">更多車型 QA</Link>
-        </nav>}
-        {!focus && <Link href="#faq" className="mr-5 mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">查看車型常見 QA</Link>}
-        {!focus && usage && <Link href="#daily-use" className="mr-5 mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">{usage.label}檢查</Link>}
-        {!focus && ownerExperience && <Link href="#owner-experience" className="mr-5 mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">車主心得</Link>}
-        <Link href="/visit/beitou" className="mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">台北北投到店交通與試乘預約</Link>
       </div>
-      <CarPageGallery car={car} />
+      <div className="min-w-0">
+        <CarPageGallery car={car} />
+      </div>
+      <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#e5e1dd] bg-white p-5 sm:px-6 lg:col-span-2">
+        <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm text-[#666]">建議售價 <strong className="text-3xl font-black text-[#b9000e]">{car.price}</strong></p>
+        <ContactLinks carId={car.id} entry="car-page" />
+      </div>
+      <nav aria-label="車款選購重點" className="flex flex-wrap gap-2 border-t border-[#ddd] pt-5 text-sm font-bold text-[#9b000b] lg:col-span-2 [&_a]:rounded-lg [&_a]:bg-white [&_a]:px-3 [&_a]:py-2 [&_a]:ring-1 [&_a]:ring-[#e5e1dd] [&_a:hover]:bg-[#fff1f1] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-2">
+        <a href="#pricing">價格與報價</a>
+        {focus && <a href={`#${focus.faqIds[0]}`}>{car.id === "jimny" ? "2026 改款差異" : "輕油電與選購重點"}</a>}
+        <a href="#specifications">主要規格</a>
+        <a href="#test-drive">試乘準備</a>
+        {usage && <a href="#daily-use">{usage.label}</a>}
+        {ownerExperience && <a href="#owner-experience">車主心得</a>}
+        <a href="#faq">車型 QA</a>
+        <Link href="/visit/beitou">北投交通與預約</Link>
+      </nav>
     </div>
     <ArticleSection id="pricing" title={focus ? `${car.name} 台灣價格與報價確認` : "台灣版本與建議售價"}>
       <div className="overflow-x-auto"><table className="w-full text-left"><caption className="sr-only">{car.name} 台灣版本價格</caption><thead><tr className="border-b border-[#ddd]"><th scope="col" className="py-3 pr-4">版本</th><th scope="col" className="py-3">建議售價</th></tr></thead><tbody>
         {carVersions(car.id).map((version) => <tr key={version.name} className="border-b border-[#eee]"><th scope="row" className="py-3 pr-4 font-medium">{version.name}</th><td className="py-3 font-bold text-[#b9000e]">NT$ {version.priceTwd.toLocaleString("en-US")} 起</td></tr>)}
       </tbody></table></div>
       {focus && <p>{focus.priceNote}</p>}
-      <p>售價核對：<time dateTime={content.pricesReviewedAt}>{content.pricesReviewedAt}</time>。以上為建議售價，車色、選配、保險、領牌與成交條件請另行確認；實際供應版本與交期需洽詢。</p>
-      {car.id === "e-vitara" && <a href={eVitaraPriceSource} target="_blank" rel="noopener noreferrer" className="text-[#b9000e] underline">e VITARA 官方上市價格資料</a>}
-      {focus && <a href="https://www.taiwansuzuki.com.tw/" target="_blank" rel="noopener noreferrer" className="text-[#b9000e] underline underline-offset-4">Taiwan Suzuki 官方車款與建議售價</a>}
     </ArticleSection>
     {focus && <section aria-labelledby="buying-focus-heading" className="mt-8">
       <h2 id="buying-focus-heading" className="mb-4 text-xl font-bold sm:text-2xl">{focus.faqHeading}</h2>
@@ -91,27 +88,29 @@ export default async function CarPage({ params }: Props) {
     {usage && <CarUsageSection content={usage} />}
     <ArticleSection id="specifications" title="主要規格">
       <ul className="list-disc space-y-2 pl-5">{car.detail.specs.map((spec) => <li key={spec}>{spec}</li>)}</ul>
-      <p>油耗與續航為官方測試值，實際表現依道路、溫度、載重與駕駛方式而異。規格核對：<time dateTime={content.specsReviewedAt}>{content.specsReviewedAt}</time>。</p>
     </ArticleSection>
-    <ArticleSection title="適合的需求與需要考慮的取捨">
-      <p><strong>可先評估的用車需求：</strong>{car.detail.whoFor}。</p>
+    <ArticleSection title="適合誰？選車時看這些">
+      <p>{car.detail.whoFor}。</p>
       <ul className="list-disc space-y-2 pl-5">{content.considerations.map((text) => <li key={text}>{text}</li>)}</ul>
     </ArticleSection>
     {ownerExperience && <OwnerExperienceSection content={ownerExperience} />}
     <ArticleSection id="test-drive" title={focus ? `${car.name} 台北北投賞車與試乘怎麼預約？` : "到店賞車與試乘觀察清單"}>
       <ul className="list-disc space-y-2 pl-5">{content.testDrive.map((text) => <li key={text}>{text}</li>)}</ul>
-      <p>試乘車、路線與可預約時段須先確認，留下需求不代表預約已成立。</p>
     </ArticleSection>
-    <ArticleSection title="購車方案與資料來源">
+    <ArticleSection title="購車方案">
       <PromotionNotice promotion={car.detail.promotion} />
-      <p>期間方案以官方活動條件及有效期限為準，最新購車方案請洽詢。</p>
-      <div className="flex flex-wrap gap-5 text-[#b9000e]"><a href={car.detail.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方車款介紹</a><a href={car.detail.specUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方規配表（PDF）</a></div>
-      <p className="text-xs">內容整理：張鈺漣購車諮詢網站 · 內容更新：<time dateTime={content.updatedAt}>{content.updatedAt}</time>。選車建議依實際需求討論。</p>
+      <ReferenceDetails>
+        <div className="flex flex-wrap gap-x-5 gap-y-2 text-[#9b000b]">
+          <a href={car.detail.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方車款介紹</a>
+          <a href={car.detail.specUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方規配表（PDF）</a>
+          {car.id === "e-vitara" && <a href={eVitaraPriceSource} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">e VITARA 官方上市價格</a>}
+          {focus && <a href="https://www.taiwansuzuki.com.tw/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方建議售價</a>}
+        </div>
+      </ReferenceDetails>
     </ArticleSection>
     <section id="faq" aria-labelledby="car-faq-heading" className="mt-8 scroll-mt-6 rounded-2xl border border-[#e5e1dd] bg-white p-6 sm:p-8">
       <p className="text-sm font-bold text-[#b9000e]">車型常見 QA</p>
       <h2 id="car-faq-heading" className="mb-2 mt-2 text-2xl font-bold">{car.name}，你可能想問</h2>
-      <p className="mb-4 text-xs leading-7 text-[#777]">問答資料核對日期以各題標示為準；未另標示者為 <time dateTime={editorialReviewedAt}>{editorialReviewedAt}</time>。</p>
       <FaqList items={remainingFaqs} />
       <div className="mt-4 border-t border-[#eee] pt-5"><p className="text-sm leading-7 text-[#666]">還有訂金、保險、交車或保養的問題？</p><Link href="/faq" className="mt-2 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">查看通用購車 QA →</Link></div>
     </section>

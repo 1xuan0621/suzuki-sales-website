@@ -5,6 +5,7 @@ import { showroom } from "@/data/content";
 import { dealer, cars } from "@/data/site";
 import { pageMetadata, breadcrumbSchema, serializeJsonLd } from "@/data/seo";
 import ContentShell, { ArticleSection } from "@/components/ContentShell";
+import ReferenceDetails from "@/components/ReferenceDetails";
 
 export const metadata = pageMetadata("/visit/beitou", showroom.title, showroom.description);
 export default function VisitPage() {
@@ -19,15 +20,15 @@ export default function VisitPage() {
         <address className="not-italic">{showroom.address}</address>
         <p><strong>展示間電話：</strong><a data-entry="visit" href={showroom.phoneHref} className="underline underline-offset-4">{showroom.phone}</a></p>
         <div><p className="font-bold">官方公告營業時間</p>{showroom.hours.map((hours) => <p key={hours}>{hours}</p>)}</div>
-        <p>營業時間不代表顧問全時在場。國定假日、臨時調整與您的預約時間請另行確認。</p>
+        <p>賞車與試乘請先和鈺漣約好時間。</p>
         <a data-entry="visit" href={showroom.mapsUrl} target="_blank" rel="noopener noreferrer" className="inline-block rounded-xl bg-[#e60012] px-5 py-2 font-bold text-white no-underline">開啟地圖導航</a>
       </ArticleSection>
       <ArticleSection title="購車與試乘請聯繫顧問">
         <p><strong>汽車顧問：</strong>{dealer.fullName}</p>
         <p><strong>顧問手機：</strong><a data-entry="visit" href={`tel:${dealer.phone.replace(/\D/g, "")}`} className="underline underline-offset-4">{dealer.phone}</a></p>
         <p><strong>LINE：</strong>@{dealer.line}</p>
-        <p>顧問可先了解車款、用途及購車需求，再確認到店安排。展示間電話與顧問手機分別提供據點及個人服務聯繫。</p>
-        <p>跨縣市購車及交車可個別討論，交車地點、費用、時程與可安排範圍需事前確認。</p>
+        <p>告訴鈺漣想看的車款、用途及方便的時間，一起安排賞車與試乘。</p>
+        <p>外縣市購車也可先聊聊，討論交車地點、費用與時程。</p>
       </ArticleSection>
     </div>
     <ArticleSection title="交通與停車怎麼安排">
@@ -60,13 +61,12 @@ export default function VisitPage() {
       </div>
       <a data-entry="visit" href={showroom.transit.walkingUrl} target="_blank" rel="noopener noreferrer" className="inline-block rounded-xl bg-[#e60012] px-5 py-2 font-bold text-white no-underline">下車後開啟步行導航</a>
       <p>{showroom.transit.note}</p>
-      <p className="text-xs text-[#666]">交通資料核對：<time dateTime={showroom.transit.reviewedAt}>{showroom.transit.reviewedAt}</time> · 來源：臺北市公車動態資訊</p>
     </ArticleSection>
     <ArticleSection title="預約與到店流程">
       <ol className="list-decimal space-y-3 pl-5">
         <li>先告知想了解的車款、方便的日期與同行人數；尚未決定車款也可以先討論用途。</li>
         <li>由顧問確認展示或試乘車、時段、可安排路線、試乘資格及需攜帶的資料。</li>
-        <li>收到顧問確認後再出發；網站表單顯示收件成功，代表收到需求，並非試乘預約已成立。</li>
+        <li>收到顧問確認的車款與時段後，再安排出發。</li>
         <li>到店依自己的需求試坐、查看載物及停車條件，試乘後再整理版本與報價問題。</li>
       </ol>
     </ArticleSection>
@@ -74,6 +74,8 @@ export default function VisitPage() {
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{cars.map((car) => <Link key={car.id} href={`/cars/${car.id}`} className="rounded-xl border border-[#ddd] px-4 py-3 font-bold text-[#b9000e] no-underline hover:bg-red-50">SUZUKI {car.name} →</Link>)}</div>
       <Link href="/guides/first-car#paperwork" className="inline-block text-[#b9000e] underline underline-offset-4">外縣市客戶：購車與交車流程指南</Link>
     </ArticleSection>
-    <p className="mt-6 text-xs leading-7 text-[#666]">據點資料核對：<time dateTime={showroom.reviewedAt}>{showroom.reviewedAt}</time> · 內容更新：<time dateTime={showroom.updatedAt}>{showroom.updatedAt}</time> · <a href={showroom.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">台灣 Suzuki／凱騰鈴木官方據點資料</a></p>
+    <ReferenceDetails className="mt-6">
+      <a href={showroom.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">台灣 Suzuki／凱騰鈴木官方據點資料</a>
+    </ReferenceDetails>
   </ContentShell>;
 }

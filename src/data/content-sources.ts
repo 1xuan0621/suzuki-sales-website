@@ -10,6 +10,7 @@ export const contentSources = {
   insurance: { title: "金管會｜強制汽車責任保險法", url: "https://law.fsc.gov.tw/LawContent.aspx?id=FL006889" },
   autoInsurance: { title: "金管會｜自用汽車保險契約範本（PDF）", url: "https://www.fsc.gov.tw/userfiles/file/自用汽車保險定型化契約範本2018-12-24.pdf" },
   autoInsuranceCurrent: { title: "金管會｜自用汽車保險定型化契約範本（現行條文）", url: "https://law.fsc.gov.tw/LawContent.aspx?id=FL047990" },
+  evInsurance: { title: "行政院消保處／金管會｜電動車專屬保險與附加條款", url: "https://eycc.ey.gov.tw/Page/9FAC64F67005E355/b35e0d3d-0e72-42f4-abf3-66927f37fd14" },
   carClaimProcess: { title: "國泰產險｜汽車事故處理與理賠流程", url: "https://www.cathay-ins.com.tw/cathayins/personal/claim/car/" },
   carCoverage: { title: "富邦產險｜汽車保險保障範圍說明", url: "https://www.fubon.com/insurance/b2c/content/car_coverage/index.html" },
   compulsoryCoverage: { title: "強制汽車責任保險｜駕駛、乘客與事故給付對象", url: "https://www.cali.org.tw/Consumer1/Detail?sn=30" },

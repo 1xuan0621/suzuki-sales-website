@@ -67,7 +67,7 @@ const operations = {
 export function GuideWorkedExample({ example }: { example: GuideCalculation }) {
   return <figure className="rounded-2xl border border-[#d4ddd7] bg-[#f0f5f1] p-4 sm:p-6">
     <figcaption>
-      <span className="text-xs font-bold tracking-wider text-[#536759]">假設範例 · 非實際報價</span>
+      <span className="text-xs font-bold tracking-wider text-[#536759]">試算範例</span>
       <h3 className="mt-2 text-lg font-bold leading-7 text-[#253c2e]">{example.title}</h3>
       <p className="mt-2 text-sm leading-7 text-[#4e5e53]">{example.context}</p>
     </figcaption>

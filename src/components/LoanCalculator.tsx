@@ -239,14 +239,7 @@ export default function LoanCalculator() {
             </div>
           </div>
 
-          <aside aria-labelledby="loan-notice-title" className="mt-5 w-full rounded-xl bg-[#f6f6f6] p-4 text-left text-[13px] leading-7 text-[#555]">
-            <h3 id="loan-notice-title" className="mb-2 text-sm font-bold text-[#333]">試算說明</h3>
-            <ul className="list-disc space-y-2 pl-4 marker:text-[#888]">
-              <li>採本息平均攤還計算，金額未含手續費。</li>
-              <li>預設年利率為 {LOAN_RATE_MIN}%，僅供試算參考，非專案報價。</li>
-              <li>活動貸款額度、期數、利率及實際條件，依金融機構核定為準。</li>
-            </ul>
-          </aside>
+          <p className="mt-5 text-left text-xs leading-6 text-[#666]">本息平均攤還，未含手續費；實際利率與條件依核貸結果。</p>
         </div>
       </div>
     </section>

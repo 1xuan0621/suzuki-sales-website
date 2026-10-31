@@ -13,8 +13,8 @@ export const englishCars: Record<CarId, {
     description: "A Japan-built compact car with a 1.2L mild-hybrid engine. Explore Taiwan pricing, everyday space and a test drive in Beitou, Taipei.",
     highlights: ["24.5 km/L official fuel economy", "Imported from Japan", "1,480 mm vehicle height"],
     considerations: [
-      "Check passenger and luggage space together. Bring the dimensions of your stroller or regular luggage and try the boot with the rear seats upright.",
-      "For mechanical parking, check length, width, height, weight limits and access conditions. Vehicle height alone does not confirm compatibility.",
+      "SWIFT has a 265 L boot with the rear seats upright, expanding to 579 L when folded. For family trips with a stroller and luggage, compare S-CROSS's 430–440 L boot, depending on rear seatback angle.",
+      "SWIFT measures 3,860 × 1,735 × 1,480 mm and weighs 945 kg unladen, with a 4.8 m turning radius. A 1,550 mm parking height limit leaves 70 mm above the body; mechanical bays also need matching length, width, load and wheel-track limits.",
       "Fuel economy is an official test result. Traffic, short trips, air conditioning and driving style affect everyday consumption.",
     ],
   },
@@ -23,9 +23,9 @@ export const englishCars: Record<CarId, {
     description: "Meet the Taiwan-specification Jimny 2026: a three-door, four-seat model with ALLGRIP PRO and updated driver assistance. Ask about pricing and a Taipei test drive.",
     highlights: ["ALLGRIP PRO", "Adaptive cruise control", "DSBS II"],
     considerations: [
-      "Try rear-seat access with your regular passengers, and check the trade-off between seating and luggage space.",
+      "Jimny is a three-door, four-seat model measuring 3,650 × 1,645 × 1,705 mm. Its short body suits city parking, while rear passengers enter through the front doors.",
       "Four-wheel drive does not guarantee safe passage on every surface. Follow the owner's manual for drive modes and operating conditions.",
-      "If you often travel long distances with several passengers, compare the seating and ride with other SUVs before deciding.",
+      "For regular trips with three or four people and luggage, start with the five-door VITARA or S-CROSS. Jimny is easier to use for one or two people, with the rear seats available for extra luggage space.",
     ],
   },
   "e-vitara": {
@@ -33,8 +33,8 @@ export const englishCars: Record<CarId, {
     description: "Compare Taiwan's e VITARA 2WD and ALLGRIP-e versions, prices, charging connections and official range figures before arranging a Taipei test drive.",
     highlights: ["All-electric drive", "2WD: 516 km NEDC range", "ALLGRIP-e all-wheel drive option"],
     considerations: [
-      "If you rely on public charging, check compatible connectors, access hours and alternative charging sites along your usual routes.",
-      "NEDC range is a test result, not a guaranteed distance at highway speeds, with a full load or with air conditioning in use.",
+      "Use Type 1 (J1772) for AC charging and CCS1 for DC charging. Official development-stage targets at room temperature are about 9 hours from 10% to 100% at 7 kW AC, or 45 minutes from 10% to 80% with DC fast charging.",
+      "Choose front-wheel-drive 2WD for longer range: 516 km in the official NEDC test. Choose dual-motor ALLGRIP-e for four-wheel drive and TRAIL mode, with a 444 km NEDC test range.",
       "Home charging feasibility and cost require a qualified professional to inspect the power supply, wiring and parking space.",
     ],
   },
@@ -43,9 +43,9 @@ export const englishCars: Record<CarId, {
     description: "A 1.4L turbo mild-hybrid SUV with ALLGRIP four-wheel drive. Compare Taiwan pricing, everyday space and your driving needs with S-CROSS.",
     highlights: ["ALLGRIP four-wheel drive", "1.4L BOOSTERJET", "48V mild hybrid"],
     considerations: [
-      "Start with whether you need four-wheel drive, then compare purchase and running costs for your usual journeys.",
+      "Choose VITARA when four-wheel drive matters to your routes. ALLGRIP offers Auto, Sport, Snow and Lock modes; the 1.4L turbo and 48V mild hybrid use petrol without external charging.",
       "Tyres, road conditions and driver inputs still limit grip. Four-wheel drive is not a guarantee of access on every road.",
-      "Check camping equipment or a stroller using its actual dimensions and the seating arrangement you normally use.",
+      "VITARA has 375 L of boot space with the rear seats upright. If family luggage takes priority over four-wheel drive, compare S-CROSS's 430–440 L boot, depending on rear seatback angle.",
     ],
   },
   "s-cross": {
@@ -53,8 +53,8 @@ export const englishCars: Record<CarId, {
     description: "A front-wheel-drive crossover with a 48V mild-hybrid engine and a 440 L boot. Explore Taiwan pricing and compare family space with VITARA.",
     highlights: ["440 L boot", "48V mild hybrid", "6 SRS airbags"],
     considerations: [
-      "Boot capacity alone does not tell you whether everything fits. Check the opening, item dimensions and space with passengers seated.",
-      "The version presented here is Taiwan's front-wheel-drive model. If you need four-wheel drive, compare VITARA rather than overseas S-CROSS specifications.",
+      "S-CROSS provides 430–440 L of boot space with the rear seats upright, depending on backrest angle, or up to 1,230 L when folded. Use the upright-seat figure when planning trips with passengers and luggage together.",
+      "Taiwan's S-CROSS uses front-wheel drive and a 1.4L turbo with a 48V mild hybrid. Choose it for family road trips without charging stops; choose VITARA if you also need ALLGRIP four-wheel drive.",
       "Driver assistance has operating limits. The driver must continue to pay attention to the road and remain in control.",
     ],
   },
@@ -63,8 +63,8 @@ export const englishCars: Record<CarId, {
     description: "A practical work truck with a 915 kg payload and a three-side-opening cargo bed. Check Taiwan pricing and suitability for your daily loading needs.",
     highlights: ["915 kg payload", "Three-side-opening cargo bed", "1.5L petrol engine"],
     considerations: [
-      "Check both cargo dimensions and weight, including the effect of fitted equipment. A load fitting on the bed does not establish that it can be carried.",
-      "Discuss special cargo, equipment or body modifications before ordering, and confirm suitability and applicable requirements.",
+      "CARRY's cargo bed is 2,565 × 1,660 mm, with a 915 kg payload. Start with cargo dimensions for bulky goods and total weight for dense loads; include fitted equipment in your loading plan.",
+      "The bed sits 750 mm above the ground and opens on three sides, making it easier to load from the rear or either side. Plan the stacking layout around your usual goods and loading method.",
       "Commercial financing and campaign eligibility need individual confirmation. A general consumer offer may not apply to every business use.",
     ],
   },

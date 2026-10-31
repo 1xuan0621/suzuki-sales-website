@@ -71,7 +71,7 @@ export const cars: Car[] = [
         ...getCarSpecifications("e-vitara"),
         `售價：${eVitaraVersions.map((version) => `${version.name} ${version.priceTwd / 10000} 萬`).join(" / ")}`,
       ],
-      whoFor: "重視環保、想降低日常通勤成本的科技先驅",
+      whoFor: "有固定充電地點，想改開純電車的通勤族",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/eVITARA",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178453449654.pdf",
       promotion: {
@@ -104,7 +104,7 @@ export const cars: Car[] = [
     detail: {
       tagline: "都會精靈，靈巧省油",
       specs: getCarSpecifications("swift"),
-      whoFor: "首購族、市區通勤族；機械車位需核對限高、限寬與載重",
+      whoFor: "一至兩人通勤、重視小車尺寸與停車便利的買家",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/swift",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178781313014.pdf",
       promotion: {
@@ -134,7 +134,7 @@ export const cars: Car[] = [
     detail: {
       tagline: "為征服荒野而生",
       specs: getCarSpecifications("jimny"),
-      whoFor: "戶外玩家、露營愛好者、想要個性化車款的你",
+      whoFor: "一至兩人出遊、喜歡方正外型與四驅機能的買家",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/jimny",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178382615010.pdf",
       images: ["jimny", "jimny-side", "jimny-int"],
@@ -166,7 +166,7 @@ export const cars: Car[] = [
     detail: {
       tagline: "型動新生，智慧升級",
       specs: getCarSpecifications("vitara"),
-      whoFor: "熱愛戶外活動的小家庭，想要 SUV 機能與駕駛樂趣",
+      whoFor: "通勤之外也有戶外行程、需要四驅的小家庭",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/vitara",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178418897488.pdf",
       promotion: {
@@ -198,7 +198,7 @@ export const cars: Car[] = [
     detail: {
       tagline: "跨界全能，唯我電能",
       specs: getCarSpecifications("s-cross"),
-      whoFor: "經常長途出遊、需要大空間的大家庭或露營愛好者",
+      whoFor: "常載家人、嬰兒車與旅行行李的家庭",
       sourceUrl: "https://www.taiwansuzuki.com.tw/cars/s-cross",
       specUrl: "https://www.taiwansuzuki.com.tw/uploads/car_list/178453550663.pdf",
       promotion: {

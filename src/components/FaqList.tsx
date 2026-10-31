@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import type { FaqItem } from "@/data/faq";
 import SourceLinks from "./SourceLinks";
+import ReferenceDetails from "./ReferenceDetails";
 
 export default function FaqList({ items, defaultOpenId }: { items: FaqItem[]; defaultOpenId?: string }) {
   const container = useRef<HTMLDivElement>(null);
@@ -57,8 +58,7 @@ export default function FaqList({ items, defaultOpenId }: { items: FaqItem[]; de
         </div>}
         {item.points && <ul className="list-disc space-y-2 pl-5">{item.points.map((point) => <li key={point}>{point}</li>)}</ul>}
         {item.links && <div className="flex flex-wrap gap-x-5 gap-y-2">{item.links.map((link) => <Link key={link.href} href={link.href} className="text-sm font-medium text-[#555] underline underline-offset-4 hover:text-[#b9000e]">{link.label} <span aria-hidden="true">→</span></Link>)}</div>}
-        {item.sourceIds.length > 0 && <div className="border-t border-[#e5e1dd] pt-3"><p className="mb-1 text-[11px] leading-5 text-[#777]">參考資料</p><SourceLinks ids={item.sourceIds} /></div>}
-        {item.reviewedAt && <p className="text-xs text-[#777]">本題更新與資料核對：<time dateTime={item.reviewedAt}>{item.reviewedAt}</time></p>}
+        {item.sourceIds.length > 0 && <ReferenceDetails><SourceLinks ids={item.sourceIds} /></ReferenceDetails>}
       </div>
     </details>)}
   </div>;

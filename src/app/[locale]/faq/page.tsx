@@ -25,7 +25,6 @@ export default async function LocalizedPage({ params }: Props) {
       <header>
         <p className="mb-3 text-sm font-bold tracking-wide text-[#b9000e]">{t("From first enquiry to delivery")}</p>
         <h1 className="text-3xl font-black leading-snug sm:text-4xl">{t("Your buying questions, answered")}</h1>
-        <p className="mt-3 text-base leading-7 text-[#666]">{t("Start with the essentials, then confirm the details for your chosen model and circumstances with the advisor.")}</p>
         <div className="mt-5"><ContactLinks entry="content" locale={locale} /></div>
       </header>
       <div className="mt-8 space-y-3">

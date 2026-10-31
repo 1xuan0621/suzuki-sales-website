@@ -4,6 +4,7 @@ import { requireForeignLocale } from "@/lib/site-locale";
 import Link from "next/link";
 import ContactLinks from "@/components/ContactLinks";
 import LocalizedShell from "@/components/LocalizedShell";
+import ReferenceDetails from "@/components/ReferenceDetails";
 import { ArticleSection } from "@/components/ContentShell";
 import { showroom } from "@/data/content";
 import { localizedRoutes } from "@/data/locales";
@@ -33,7 +34,6 @@ export default async function LocalizedPage({ params }: Props) {
         <address className="not-italic">{t("No. 337, Section 6, Chengde Road, Beitou District, Taipei City, Taiwan")}<span lang="zh-Hant" className="mt-1 block text-sm">{showroom.address}</span></address>
         <p><strong>{t("Showroom phone:")}</strong> <a data-entry="visit" href={showroom.phoneHref} className="underline underline-offset-4">{showroom.phone}</a></p>
         <div><p className="font-bold">{t("Published opening hours (Taiwan time)")}</p><p>{t("Monday–Friday: 08:30–21:00")}</p><p>{t("Saturday–Sunday: 09:00–21:00")}</p></div>
-        <p>{t("Opening hours do not mean the advisor is always on site. Confirm public holidays, temporary changes and your appointment time separately.")}</p>
         <a data-entry="visit" href={showroom.mapsUrl} target="_blank" rel="noopener noreferrer" className="inline-block rounded-xl bg-[#e60012] px-5 py-2 font-bold text-white no-underline">{t("Open directions")}</a>
       </ArticleSection>
       <ArticleSection title={t("Contact your sales advisor")}>
@@ -62,7 +62,7 @@ export default async function LocalizedPage({ params }: Props) {
       <ol className="list-decimal space-y-3 pl-5">
         <li>{t("Share your preferred model, date and number of visitors. If you have not chosen a model, start with your driving needs.")}</li>
         <li>{t("The advisor checks the display or test vehicle, time slot, route, test-drive eligibility and documents to bring.")}</li>
-        <li>{t("Wait for the advisor to confirm before travelling. A successful website form submission confirms receipt of your enquiry, not a booked test drive.")}</li>
+        <li>{t("Confirm your appointment before travelling.")}</li>
         <li>{t("At the showroom, try the seats and check luggage and parking requirements. Discuss versions and an itemised quotation after your visit or test drive.")}</li>
       </ol>
     </ArticleSection>
@@ -70,6 +70,8 @@ export default async function LocalizedPage({ params }: Props) {
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{cars.map((car) => <Link key={car.id} href={`/${locale}/cars/${car.id}`} className="rounded-xl border border-[#ddd] px-4 py-3 font-bold text-[#b9000e] no-underline hover:bg-red-50">{t("SUZUKI")}{" "}{car.name} →</Link>)}</div>
       <Link href={`/${locale}/faq`} className="inline-block text-[#b9000e] underline underline-offset-4">{t("Questions about purchasing and delivery →")}</Link>
     </ArticleSection>
-    <p className="mt-6 text-xs leading-7 text-[#666]">{t("Location details last checked:")}{" "}<time dateTime={showroom.reviewedAt}>{showroom.reviewedAt}</time>{t(". Source content updated:")}{" "}<time dateTime={showroom.updatedAt}>{showroom.updatedAt}</time>. <a href={showroom.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{t("Official Taiwan Suzuki showroom information (Chinese)")}</a></p>
+    <ReferenceDetails label={t("Reference materials")} className="mt-6">
+      <a href={showroom.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{t("Official Taiwan Suzuki showroom information (Chinese)")}</a>
+    </ReferenceDetails>
   </LocalizedShell>;
 }

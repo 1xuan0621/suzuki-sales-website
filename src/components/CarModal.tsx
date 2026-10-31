@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useModalDialog } from "@/lib/use-modal-dialog";
 import CarPhotoGallery from "./CarPhotoGallery";
-import { contentReviewedAt, type Car } from "@/data/site";
+import type { Car } from "@/data/site";
 import PromotionNotice from "./PromotionNotice";
 import Link from "next/link";
 import ContactLinks from "./ContactLinks";
@@ -166,9 +166,8 @@ export default function CarModal({ car, onClose, onInterest }: CarModalProps) {
             </div>
 
             <details className="mb-3 text-xs leading-relaxed text-[#666]">
-              <summary className="cursor-pointer py-2">規格說明</summary>
+              <summary className="cursor-pointer py-2">參考資料</summary>
               <div className="space-y-2 pb-2">
-                <p>油耗／續航為測試值。規格核對：<time dateTime={contentReviewedAt}>{contentReviewedAt}</time>。</p>
                 <div className="flex flex-wrap gap-x-4 gap-y-2 text-[#b9000e]">
                   <a href={car.detail.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方車款介紹</a>
                   <a href={car.detail.specUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">官方規配表（PDF）</a>
