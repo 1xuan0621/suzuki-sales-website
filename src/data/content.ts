@@ -75,7 +75,7 @@ const carDates = { updatedAt: "2026-09-19", specsReviewedAt: contentReviewedAt, 
 export const carPages: Record<CarId, CarPageContent> = {
   swift: {
     ...carDates,
-    updatedAt: "2026-10-13",
+    updatedAt: "2026-10-31",
     specsReviewedAt: "2026-09-20",
     pricesReviewedAt: "2026-09-20",
     description: `SUZUKI SWIFT 台灣建議售價 ${startingPrice("swift")}，1.2L 輕油電不用外接充電。比較停車尺寸、後座與行李箱需求，向鈺漣確認完整報價、車色交期及台北北投試乘時段。`,
@@ -94,7 +94,7 @@ export const carPages: Record<CarId, CarPageContent> = {
   },
   jimny: {
     ...carDates,
-    updatedAt: "2026-10-07",
+    updatedAt: "2026-10-31",
     specsReviewedAt: "2026-09-20",
     pricesReviewedAt: "2026-09-20",
     description: `Jimny 2026 改款台灣建議售價 ${startingPrice("jimny")}。對照 2024 型錄，了解 ACC、DSBS II 與 9 吋車機升級，確認三門四人座是否適合日常需求，向鈺漣詢問報價、交期與台北北投試乘。`,
@@ -123,7 +123,7 @@ export const carPages: Record<CarId, CarPageContent> = {
   },
   vitara: {
     ...carDates,
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-10-31",
     description: "比較 SUZUKI VITARA 台灣售價、輕油電與 ALLGRIP 四驅規格，了解與 S-CROSS 的空間及用途差異。鈺漣提供全台購車諮詢，台北北投賞車及試乘請先預約。",
     introduction: "VITARA 可從四驅需求、車身與空間配置來評估。若平日通勤、週末戶外出遊，請把常走道路、乘坐人數及裝備一起列入選車條件，再與 S-CROSS 比較。",
     considerations: ["先確認四驅是否符合自己的使用情境，再比較價格與日常支出。", "四驅仍受輪胎、路況與駕駛操作限制，不能視為任何路面的通行保證。", "露營裝備或嬰兒車是否好放，應以實際尺寸及後座使用情況確認。"],
@@ -143,7 +143,7 @@ export const carPages: Record<CarId, CarPageContent> = {
   },
   carry: {
     ...carDates,
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-10-31",
     description: "查看 SUZUKI CARRY 台灣售價、貨台尺寸與載重規格，整理商用購車及交車前確認事項。鈺漣提供全台購車諮詢，跨縣市交車地點、費用及時程依個案確認。",
     introduction: "工作車先看工作內容：貨物尺寸、重量、裝卸方式與每天的路線，再看購車及使用成本。CARRY 的貨台與載重資料可作為初步篩選，實際用途仍需對照車輛核定資料。",
     considerations: ["重量估算須包含實際裝載與加裝設備的影響，不能只看貨台放不放得下。", "特殊貨物、設備或車體改裝需求，請在下訂前確認適用性及相關要求。", "商用貸款與活動資格需個別審核，不能將一般購車優惠直接套用到所有用途。"],

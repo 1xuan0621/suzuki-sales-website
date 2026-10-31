@@ -65,10 +65,12 @@ export default async function CarPage({ params }: Props) {
           <Link href={`#${focus.faqIds[0]}`} className="underline underline-offset-4">{car.id === "jimny" ? "2026 改款差異" : "輕油電與選購重點"}</Link>
           <Link href="#test-drive" className="underline underline-offset-4">台北試乘準備</Link>
           {usage && <Link href="#daily-use" className="underline underline-offset-4">{usage.label}檢查</Link>}
+          {ownerExperience && <Link href="#owner-experience" className="underline underline-offset-4">車主心得</Link>}
           <Link href="#faq" className="underline underline-offset-4">更多車型 QA</Link>
         </nav>}
         {!focus && <Link href="#faq" className="mr-5 mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">查看車型常見 QA</Link>}
         {!focus && usage && <Link href="#daily-use" className="mr-5 mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">{usage.label}檢查</Link>}
+        {!focus && ownerExperience && <Link href="#owner-experience" className="mr-5 mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">車主心得</Link>}
         <Link href="/visit/beitou" className="mt-5 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">台北北投到店交通與試乘預約</Link>
       </div>
       <CarPageGallery car={car} />
