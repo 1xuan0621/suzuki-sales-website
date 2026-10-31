@@ -254,8 +254,7 @@ export default function HomePageClient({ introduction, mobileIntroduction, buyin
             <div className="grid gap-x-8 gap-y-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-center">
               <div className="lg:col-start-2 lg:self-end">
                 <p className="text-xs font-bold tracking-widest text-[#b9000e]">JIMNY 專題</p>
-                <h2 id="jimny-topics-heading" className="mt-2 text-2xl font-bold leading-snug">喜歡 Jimny，從認識它開始</h2>
-                <p className="mt-3 text-sm leading-7 text-[#666]">從小越野車的故事，到買車前常問的改裝與日常使用問題。</p>
+                <h2 id="jimny-topics-heading" className="mt-2 text-2xl font-bold leading-snug">Jimny 歷代車型與改裝指南</h2>
               </div>
               <figure className="w-full max-w-[320px] justify-self-center lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:max-w-none">
                 <Image
@@ -380,7 +379,7 @@ export default function HomePageClient({ introduction, mobileIntroduction, buyin
                     onError={(event) => { event.currentTarget.hidden = true; }}
                   />
                   <h3 className="mt-4 text-[22px] font-bold text-[#202020]">掃碼加入 LINE</h3>
-                  <p className="m-0 text-[#666] text-sm">快速聯繫・即時回覆</p>
+                  <p className="m-0 text-[#666] text-sm">詢問車款、報價與試乘</p>
                 </aside>
 
                 <form onSubmit={handleSubmit} className="grid gap-[14px]" aria-busy={sending}>

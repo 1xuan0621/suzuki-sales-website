@@ -15,7 +15,7 @@ export const englishCars: Record<CarId, {
     considerations: [
       "SWIFT has a 265 L boot with the rear seats upright, expanding to 579 L when folded. For family trips with a stroller and luggage, compare S-CROSS's 430–440 L boot, depending on rear seatback angle.",
       "SWIFT measures 3,860 × 1,735 × 1,480 mm and weighs 945 kg unladen, with a 4.8 m turning radius. A 1,550 mm parking height limit leaves 70 mm above the body; mechanical bays also need matching length, width, load and wheel-track limits.",
-      "Fuel economy is an official test result. Traffic, short trips, air conditioning and driving style affect everyday consumption.",
+      "To track your own fuel use, divide kilometres driven between full tanks by litres refilled.",
     ],
   },
   jimny: {
@@ -35,7 +35,7 @@ export const englishCars: Record<CarId, {
     considerations: [
       "Use Type 1 (J1772) for AC charging and CCS1 for DC charging. Official development-stage targets at room temperature are about 9 hours from 10% to 100% at 7 kW AC, or 45 minutes from 10% to 80% with DC fast charging.",
       "Choose front-wheel-drive 2WD for longer range: 516 km in the official NEDC test. Choose dual-motor ALLGRIP-e for four-wheel drive and TRAIL mode, with a 444 km NEDC test range.",
-      "Home charging feasibility and cost require a qualified professional to inspect the power supply, wiring and parking space.",
+      "For home charging, get an installation quote after an electrician checks the parking space, power supply and wiring.",
     ],
   },
   vitara: {
@@ -65,30 +65,30 @@ export const englishCars: Record<CarId, {
     considerations: [
       "CARRY's cargo bed is 2,565 × 1,660 mm, with a 915 kg payload. Start with cargo dimensions for bulky goods and total weight for dense loads; include fitted equipment in your loading plan.",
       "The bed sits 750 mm above the ground and opens on three sides, making it easier to load from the rear or either side. Plan the stacking layout around your usual goods and loading method.",
-      "Commercial financing and campaign eligibility need individual confirmation. A general consumer offer may not apply to every business use.",
+      "For work use, budget for the vehicle, financing and fitted equipment, including any cargo box.",
     ],
   },
 };
 
 export const englishCarDetails: Record<CarId, { introduction: string; testDrive: string[] }> = {
   swift: {
-    introduction: "SWIFT pairs a 1.2L mild-hybrid engine with a CVT and does not need external charging. Start with your parking space, regular passengers and luggage, then compare an itemised quotation including colour, options, insurance and registration.",
+    introduction: "A compact 1.2L mild-hybrid hatchback for city commuting and easier parking. SWIFT uses petrol and needs no external charging.",
     testDrive: [
-      "Share your preferred date, number of passengers and typical commute so the advisor can check vehicle and time-slot availability.",
+      "Tell the advisor your preferred date and usual commute to plan a useful test-drive route.",
       "Notice acceleration, stop-start operation, braking and parking visibility on the agreed route.",
       "Adjust the front seats to your normal position, then try the rear seats and luggage space with your family.",
     ],
   },
   jimny: {
-    introduction: "This page covers Taiwan's current three-door, four-seat Jimny 2026. Explore its equipment and everyday practicality, then confirm the model year, production date, colour, available stock and itemised quotation with the advisor.",
+    introduction: "Taiwan’s Jimny 2026 is a three-door, four-seat off-roader. Its short body suits one or two people who want city manoeuvrability and four-wheel drive.",
     testDrive: [
       "Ask about the ACC controls, touchscreen and phone connection using the actual display or test vehicle.",
       "Let your regular passengers try rear-seat access, and check luggage space and parking visibility.",
-      "Experience steering, braking and bumps on the agreed road route. An off-road experience is not included unless separately confirmed.",
+      "On the road, pay attention to steering, braking and how bumps feel from each seat.",
     ],
   },
   "e-vitara": {
-    introduction: "Begin with your charging routine: where you park, whether equipment can be installed and where you would charge on longer journeys. Compare both drive requirements and official test ranges when choosing between 2WD and ALLGRIP-e.",
+    introduction: "An electric SUV with a choice of front-wheel-drive 2WD or dual-motor ALLGRIP-e. Choose 2WD for longer test range, or ALLGRIP-e for four-wheel drive.",
     testDrive: [
       "Try acceleration and deceleration, and check the driving position and screen controls.",
       "Ask for a demonstration of the charge port, charging information and everyday controls.",
@@ -96,7 +96,7 @@ export const englishCarDetails: Record<CarId, { introduction: string; testDrive:
     ],
   },
   vitara: {
-    introduction: "Consider VITARA through your drive requirements, passenger space and everyday routes. If weekdays mean commuting and weekends mean outdoor trips, compare it with S-CROSS using the same passengers and luggage.",
+    introduction: "A 1.4L turbo SUV with a 48V mild hybrid and ALLGRIP four-wheel drive. Fill up with petrol; no charger is needed.",
     testDrive: [
       "Experience acceleration, steering and parking visibility on an agreed route.",
       "Have your family try the seats, then check the boot opening against the dimensions of your usual luggage.",
@@ -104,7 +104,7 @@ export const englishCarDetails: Record<CarId, { introduction: string; testDrive:
     ],
   },
   "s-cross": {
-    introduction: "Think about how your family uses a car each day: who sits in the back, whether passengers and luggage travel together, and how easy your parking space is to access. Check S-CROSS in person and compare your drive requirements with VITARA.",
+    introduction: "S-CROSS is a front-wheel-drive mild-hybrid SUV for family trips. Its boot holds 430–440 L with the rear seats in use, depending on backrest angle; no external charging is needed.",
     testDrive: [
       "Try the front and rear seats together, including access, storage and air conditioning.",
       "Check parking visibility and ask the advisor to demonstrate relevant assistance features.",
@@ -112,11 +112,11 @@ export const englishCarDetails: Record<CarId, { introduction: string; testDrive:
     ],
   },
   carry: {
-    introduction: "Start with the job: cargo size and weight, loading methods and daily routes, then review purchase and operating costs. The cargo-bed and payload figures help with initial selection; confirm your intended use against the vehicle's approved specifications.",
+    introduction: "CARRY is a work truck with a 915 kg payload and a cargo bed that opens on three sides. The 2,565 × 1,660 mm bed makes it easy to plan space for tools and goods.",
     testDrive: [
       "Share cargo dimensions, weight and loading methods before arranging a visit.",
       "Try getting in and out of the cab and check the position of everyday controls.",
-      "Confirm display, test-drive and loading-demonstration availability in advance; do not assume a vehicle will be on site.",
+      "Book ahead so the advisor can arrange the available vehicle and any loading demonstration.",
     ],
   },
 };
@@ -129,41 +129,41 @@ export const englishFaqs = [
   {
     id: "total-cost",
     question: "Is the price on the website the total delivery price?",
-    answer: "Website prices are recommended starting prices in New Taiwan dollars (NT$ / TWD). Ask for an itemised quotation covering the agreed vehicle price, colour and options, insurance, registration and taxes, financing charges and any separately arranged transport. Confirm what is already included before comparing quotations.",
+    answer: "Website prices are recommended starting prices in NT$. Your quotation adds any options, insurance, registration, finance fees and transport. Compare the final total and avoid counting included items twice.",
   },
   {
     id: "test-drive-booking",
     question: "How do I arrange a showroom visit or test drive?",
-    answer: "Send the model you are interested in, your preferred date and the number of people visiting. The advisor will confirm the display or test vehicle, time, route, eligibility and documents to bring. A successful website submission means your enquiry has been received; your appointment is confirmed separately by the advisor.",
+    answer: "Send your preferred model, date and number of visitors by LINE or the enquiry form. The advisor will reply with the available vehicle, appointment time and documents to bring.",
   },
   {
     id: "delivery-time",
     question: "When can I receive my car, and can delivery be arranged outside Taipei?",
-    answer: "Timing depends on the model, colour, available stock and the steps needed before delivery. Tell the advisor if you have a target date. Customers across Taiwan can discuss purchasing remotely; delivery location, transport costs, timing and the available service area are agreed individually.",
+    answer: "Delivery follows vehicle allocation, payment or financing, registration and accessory fitting. Give the advisor your target date early. For delivery outside Taipei, request a separate quote for the location and transport cost.",
   },
   {
     id: "cash-or-loan",
     question: "Can I ask about financing or current offers?",
-    answer: "Yes. Share your intended model, budget and purchase timing so the advisor can explain the available options. Financing is subject to individual review, and campaign eligibility and deadlines must be confirmed. Ask for the full payment schedule, fees and terms before choosing a plan; a monthly payment alone does not show the total cost.",
+    answer: "Yes. Send your model, budget and purchase timing. Compare the down payment, all instalments, final payment and fees together. Loan approval and terms depend on the lender.",
   },
   {
     id: "taiwan-phone",
     question: "Can I use the form without a Taiwan mobile number?",
-    answer: "The online form accepts a Taiwan mobile number beginning with 09 or +8869. If you do not have one, please contact the advisor through LINE. Mention your preferred language and how you would like to be contacted when arranging your enquiry or visit.",
+    answer: "Use LINE if you do not have a Taiwan mobile number. The form accepts numbers starting with 09 or +8869. Include your preferred language in your message.",
   },
   {
     id: "purchase-documents",
     question: "What information should I prepare before buying?",
-    answer: "Start with the model, intended use, budget, purchase timing and whether you plan to pay in cash or apply for financing. Registration and financing documents depend on the purchaser and application. Ask the advisor to confirm the required documents for your circumstances before ordering.",
+    answer: "For a first enquiry, send the model, budget, purchase timing and whether you prefer cash or financing. Registration documents differ for personal and company purchases; request the matching document list when ordering.",
   },
   {
     id: "hybrid-plug",
     question: "Which of these cars need external charging?",
-    answer: "The SWIFT, VITARA and S-CROSS mild-hybrid models described on this website do not need external charging. e VITARA is all-electric and needs a charging plan. Use the Taiwan specification for the exact model you are considering, as equipment and powertrains can differ across markets.",
+    answer: "SWIFT, VITARA and S-CROSS use petrol and need no external charging. The all-electric e VITARA uses Type 1 (J1772) AC charging or CCS1 DC fast charging.",
   },
   {
     id: "showroom-parking",
     question: "Is parking available at the Beitou showroom?",
-    answer: "The Beitou showroom provides free parking. Ask the staff where to park when you arrive. Please mention any boarding or mobility assistance needs when booking, and confirm the appointment before travelling.",
+    answer: "Yes, parking at the Beitou showroom is free. Staff can show you where to park on arrival. Mention any mobility assistance needs when booking.",
   },
 ];

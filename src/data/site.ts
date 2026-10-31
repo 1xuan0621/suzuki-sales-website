@@ -62,11 +62,11 @@ export const cars: Car[] = [
     id: "e-vitara",
     name: "e VITARA",
     subtitle: "純電休旅",
-    description: "純電驅動，智慧出行",
+    description: "純電休旅，前驅／四驅雙版本",
     price: `${eVitaraVersions[0].priceTwd / 10000} 萬起`,
     highlights: ["純電行駛", "2WD 續航 516km (NEDC)", "ALLGRIP-e 四驅"],
     detail: {
-      tagline: "純電新生活，即刻展開",
+      tagline: "Type 1 慢充、CCS1 快充",
       specs: [
         ...getCarSpecifications("e-vitara"),
         `售價：${eVitaraVersions.map((version) => `${version.name} ${version.priceTwd / 10000} 萬`).join(" / ")}`,
@@ -223,7 +223,7 @@ export const cars: Car[] = [
     subtitle: "商用貨車",
     description: "頭家首選，載重 915kg",
     price: "49.9 萬起",
-    highlights: ["載重 915kg", "同級最強", "三邊開啟貨台"],
+    highlights: ["載重 915kg", "1.5L 引擎", "三邊開啟貨台"],
     detail: {
       tagline: "拼大生意，就選 CARRY",
       specs: getCarSpecifications("carry"),
@@ -255,10 +255,10 @@ export const homeCars = homeCarOrder.map((id) => cars.find((car) => car.id === i
 
 export const services = [
   { title: "新車介紹", desc: "掌握 Suzuki 全車系最新資訊與價格", icon: "📖" },
-  { title: "車款比較", desc: "依你的需求幫你分析最適合的車款", icon: "⚖️" },
-  { title: "預約試乘", desc: "先確認車款與時段，預約台北北投到店", icon: "🚗", href: "/visit/beitou" },
-  { title: "購車諮詢", desc: "從選車到成交，陪你走完整個流程", icon: "💬" },
-  { title: "貸款試算", desc: "試算月付金額，保險需求另行諮詢", icon: "💰", href: "#loan-calculator" },
+  { title: "車款比較", desc: "比較車身尺寸、載物空間與動力", icon: "⚖️" },
+  { title: "預約試乘", desc: "預約台北北投所賞車與試乘", icon: "🚗", href: "/visit/beitou" },
+  { title: "購車諮詢", desc: "車色、報價、付款與交車安排", icon: "💬" },
+  { title: "貸款試算", desc: "計算頭期款、每月付款與總支出", icon: "💰", href: "#loan-calculator" },
   { title: "交車服務", desc: "跨縣市交車可洽詢，地點與費用另約", icon: "🔑", href: "/guides/first-car#paperwork" },
 ] as const;
 

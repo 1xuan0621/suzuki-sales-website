@@ -36,11 +36,11 @@ const routeTitles = {
 export const localizedRoutes = foreignLocales.flatMap((locale) => {
   const titles = routeTitles[locale];
   return [
-    { path: `/${locale}`, title: titles.home },
-    ...cars.map((car) => ({ path: `/${locale}/cars/${car.id}`, title: titles.car(car.name) })),
-    { path: `/${locale}/visit/beitou`, title: titles.visit },
-    { path: `/${locale}/faq`, title: titles.faq },
-  ].map((route) => ({ ...route, title: `${route.title} | ${dealer.fullName}`, updatedAt: "2026-10-13" }));
+    { path: `/${locale}`, title: titles.home, updatedAt: "2026-11-01" },
+    ...cars.map((car) => ({ path: `/${locale}/cars/${car.id}`, title: titles.car(car.name), updatedAt: "2026-11-01" })),
+    { path: `/${locale}/visit/beitou`, title: titles.visit, updatedAt: "2026-11-01" },
+    { path: `/${locale}/faq`, title: titles.faq, updatedAt: "2026-11-01" },
+  ].map((route) => ({ ...route, title: `${route.title} | ${dealer.fullName}` }));
 });
 
 export const englishRoutes = localizedRoutes.filter((route) => localeForPath(route.path) === "en");

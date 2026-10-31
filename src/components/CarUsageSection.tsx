@@ -33,10 +33,6 @@ export default function CarUsageSection({ content }: { content: CarUsageContent 
     {otherTopics.length > 0 && <div className="mt-8 grid gap-8 border-t border-[#e9e6e0] pt-7 lg:grid-cols-2 lg:gap-9">
       {otherTopics.map((topic) => <Topic key={topic.title} topic={topic} />)}
     </div>}
-    <aside className="mt-7 rounded-xl bg-[#f5f5f5] px-5 py-4 text-[15px] leading-8 text-[#555]">
-      <h3 className="font-bold text-[#252525]">到店前，先準備這些</h3>
-      <p className="mt-1">{content.preparation}</p>
-    </aside>
     <ReferenceDetails className="mt-5">
       <ul className="flex flex-wrap gap-x-5 gap-y-1">
         {content.sources.map((source) => <li key={source.href}><a href={source.href} target="_blank" rel="noopener noreferrer" className="text-[#9b000b] underline underline-offset-4">{source.label}</a></li>)}

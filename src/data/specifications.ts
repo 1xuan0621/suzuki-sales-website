@@ -24,8 +24,8 @@ const templates = {
     en: "Charging: AC {acConnector} ({acStandard}) and DC {dcConnector}",
   },
   fastCharging: {
-    "zh-TW": "DC 快充：約 {chargeMinutes} 分鐘 ({chargeStartPercent}%→{chargeEndPercent}%，實際依溫度與電池狀態而異)",
-    en: "DC fast charging: approximately {chargeMinutes} minutes from {chargeStartPercent}% to {chargeEndPercent}%; time varies with temperature and battery condition",
+    "zh-TW": "DC 快充：{chargeStartPercent}%→{chargeEndPercent}% 約 {chargeMinutes} 分鐘（室溫開發目標）",
+    en: "DC fast charging: {chargeStartPercent}%–{chargeEndPercent}% in approximately {chargeMinutes} minutes (room-temperature development target)",
   },
   threeCylinderHybrid: {
     "zh-TW": "引擎：{engineLitres}L 直列三缸 + {hybridVolts}V HYBRID輕油電",
@@ -108,7 +108,7 @@ const templates = {
     en: "Cabin: {screenInches}-inch touchscreen with wireless {phonePlatformA} and {phonePlatformB}",
   },
   payload: {
-    "zh-TW": "載重：{payloadKg} kg (同級最強)",
+    "zh-TW": "載重：{payloadKg} kg",
     en: "Payload: {payloadKg} kg",
   },
   threeSideCargoBed: {

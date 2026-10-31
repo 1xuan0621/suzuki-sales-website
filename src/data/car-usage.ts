@@ -12,7 +12,6 @@ export interface CarUsageContent {
   introduction: string;
   image: { src: string; alt: string; caption: string; width: number; height: number };
   topics: [UsageTopic, ...UsageTopic[]];
-  preparation: string;
   reviewedAt: string;
   sources: { label: string; href: string }[];
 }
@@ -39,7 +38,6 @@ export const carUsage: Partial<Record<CarId, CarUsageContent>> = {
         { label: "承重看公斤，進出看最窄處", text: "SWIFT 空車重 945 kg，車內物品及加裝設備另計。入口和轉角量的是牆柱間的淨寬；車格前方的止輪擋位置，則會影響後方能留下多少取物空間。" },
       ],
     }],
-    preparation: "傳車位的淨寬、淨長、設備限高與承重標示給鈺漣，就能先算出尺寸差額；兩側有牆柱的話，再附一張照片。",
     reviewedAt: "2026-10-31",
     sources: [
       { label: "台灣 Suzuki SWIFT 官方規格表", href: "https://www.taiwansuzuki.com.tw/uploads/car_list/178781313014.pdf" },
@@ -66,7 +64,6 @@ export const carUsage: Partial<Record<CarId, CarUsageContent>> = {
         { label: "費用要把停車費加回來", text: "算法是充電度數 × 每度電價，再加停車或占位費。例如一次充 20 度、假設每度 8 元，加 30 元停車費，合計就是 190 元。" },
       ],
     }],
-    preparation: "告訴鈺漣每天開幾公里、晚上停在哪裡，以及最常跑的長途路線，討論適合你的充電安排。",
     reviewedAt: "2026-10-31",
     sources: [{ label: "台灣 Suzuki e VITARA 充電資訊", href: "https://www.taiwansuzuki.com.tw/cars/eVITARA" }],
   },
@@ -91,7 +88,6 @@ export const carUsage: Partial<Record<CarId, CarUsageContent>> = {
         { label: "LOCK：泥濘等受困情境", text: "用於協助脫困。操作前先看隨車手冊的切換條件；日常柏油通勤使用 AUTO，不需要一直開著 LOCK。" },
       ],
     }],
-    preparation: "想體驗模式差異，可預約一般道路試乘，由鈺漣示範模式介面，再比較起步、轉向與乘坐感受。",
     reviewedAt: "2026-10-31",
     sources: [{ label: "台灣 Suzuki VITARA ALLGRIP 說明", href: "https://www.taiwansuzuki.com.tw/cars/vitara" }],
   },
@@ -115,7 +111,6 @@ export const carUsage: Partial<Record<CarId, CarUsageContent>> = {
         { label: "住家車位：車長 4.305 m、車高 1.585 m", text: "以長 5 m 的車格計算，扣除車身後前後共剩 69.5 cm。若機械車位限高 1.55 m，S-CROSS 的標示車高已超出 3.5 cm，應另找較高的車位。" },
       ],
     }],
-    preparation: "預約賞車時可以說明要帶嬰兒車或行李箱試放，並讓平常坐後座的家人一起來。",
     reviewedAt: "2026-10-31",
     sources: [
       { label: "台灣 Suzuki S-CROSS 官方規格表", href: "https://www.taiwansuzuki.com.tw/uploads/car_list/178453550663.pdf" },
@@ -159,7 +154,6 @@ export const carUsage: Partial<Record<CarId, CarUsageContent>> = {
         ],
       },
     ],
-    preparation: "預約時告訴鈺漣平常坐幾人，並帶最大件行李或兒童安全座椅，直接體驗三門車的日常用法。",
     reviewedAt: "2026-10-31",
     sources: [
       { label: "台灣 Suzuki Jimny 官方規格表", href: "https://www.taiwansuzuki.com.tw/uploads/car_list/178382615010.pdf" },
@@ -196,16 +190,7 @@ export const carUsage: Partial<Record<CarId, CarUsageContent>> = {
           { label: "設備：把重量與施工一起估", text: "報價清單列出設備、支架、水箱與電源的重量，交由車商與合格施工單位安排固定方式、車籍及保固事項。" },
         ],
       },
-      {
-        title: "一天上下車很多次，鞋子和隨身工具也帶來",
-        answer: "工作車除了載貨，還會反覆停靠、拿單據和上下車。穿平常工作的鞋試坐，最容易發現踏板、坐姿與取物是否順手。",
-        checks: [
-          { label: "駕駛座：調好再試上下車", text: "將座椅移到踩踏板順手的位置，調整後視鏡，再做幾次上下車動作；水壺、單據和常用工具也找好固定位置。" },
-          { label: "配送路線：挑最窄、最陡的地方討論", text: "把常去巷弄、停靠點及坡道照片帶來，連同一趟貨重一起討論車型。重載需求優先看核定載重與總重，超過就分趟或選更大車型。" },
-        ],
-      },
     ],
-    preparation: "傳最大件貨物的包裝尺寸、每箱重量與一趟箱數給鈺漣，有固定設備再附配置圖，就能直接討論裝載方式。",
     reviewedAt: "2026-10-31",
     sources: [
       { label: "台灣 Suzuki CARRY 貨台與載重資料", href: "https://www.taiwansuzuki.com.tw/cars/carry" },

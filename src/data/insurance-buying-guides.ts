@@ -10,11 +10,10 @@ export const insuranceBasicsGuide: Guide = {
   title: "汽車保險怎麼保？先看懂強制險、第三人與超額",
   description: "強制險、第三人、超額、車體險差在哪？用對方、自己的車、駕駛與乘客四個角度，整理新車投保的保障缺口與需求。",
   introduction: "車險分四個方向選：對方的人傷與財損、自己的車損、駕駛受傷、乘客受傷。先看自己需要承擔哪種風險，再選險種與額度。",
-  updatedAt: "2026-10-31", reviewedAt,
+  updatedAt: "2026-11-01", reviewedAt,
   sourceIds: ["insurance", "compulsoryCoverage", "carCoverage", "liabilityCoverage", "excessCoverage", "passengerCoverage", "driverCoverage"],
   sourceNote,
   relatedSlugs: ["car-damage-insurance", "car-insurance-quote", "car-accident-insurance"],
-  conversation: "鈺漣你好，我想買＿＿，平常由＿＿開、會載＿＿，最擔心＿＿。想先整理保險需求，再請承保窗口確認保障與報價。",
   sections: [
     {
       id: "coverage-map", step: "保誰、賠什麼", action: "先分清四種損失",
@@ -29,7 +28,7 @@ export const insuranceBasicsGuide: Guide = {
           { label: "自己的車受損", values: ["車體險；失竊另看竊盜險", "甲、乙、丙式保障事故不同，不能只看保額。"] },
           { label: "駕駛或車內乘客受傷", values: ["駕駛人傷害、乘客保障；乘客另有強制險法定保障", "自己開車與坐在車內，適用保障不同。"] },
         ],
-        note: "強制險依法提供基本給付，不以加害人有無過失為限。第三人、乘客與超額責任保障則須核對依法應負賠償責任等條件；各項仍有承保範圍與不保事項。",
+        note: "強制險依法提供基本給付，不以加害人有無過失為限。第三人、乘客與超額責任保障則以依法應負的賠償責任等條件為前提。",
       },
     },
     {
@@ -48,12 +47,12 @@ export const insuranceBasicsGuide: Guide = {
       paragraphs: ["第三人責任險分體傷與財損。超額通常搭配指定的基礎責任險及最低保額，在承保事故超過約定額度後接續。比較時同時看體傷、財損與乘客是否包含。"],
       calculation: {
         title: "假設依法應賠對方修車 180 萬元",
-        context: "只示範財損額度怎麼接，不是建議保額。假設事故屬承保範圍、沒有自負額，第三人財損可賠至 100 萬元。",
+        context: "假設事故屬承保範圍、無自負額，第三人財損額度為 100 萬元。",
         steps: [{
           title: "先看基礎額度後，還剩多少",
           rows: [{ label: "依法應賠的財損", value: "180 萬元" }, { label: "第三人財損給付", value: "100 萬元", operation: "subtract" }],
           result: { label: "還需處理的差額", value: "80 萬元" },
-          explanation: "這 80 萬是否能由超額承接，要看超額是否含財損、啟動條件及剩餘可用額度；沒有適用保障，就可能需要自己負擔。",
+          explanation: "超額若含財損、符合啟動條件且額度足夠，可接續這 80 萬；保障不足的部分自行負擔。",
         }],
       },
       points: [
@@ -63,8 +62,8 @@ export const insuranceBasicsGuide: Guide = {
     },
     {
       id: "driver-passengers", step: "自己與家人", action: "駕駛、乘客分開問",
-      title: "常載家人，要另外確認哪兩件事？",
-      paragraphs: ["第三人責任險對車內乘客及部分親屬有不保約定，不能把家人一律當成一般第三人。請承保窗口依實際乘坐關係核對。"],
+      title: "常載家人：駕駛與乘客保障分開選",
+      paragraphs: ["第三人責任險對車內乘客及部分親屬有不保約定，不能把家人一律當成一般第三人。"],
       options: [
         { title: "自己在開車", answer: "看駕駛人傷害險", facts: [
           { label: "問什麼", text: "只保單一車輛事故，還是也涵蓋兩車碰撞？限定誰駕駛？" },
@@ -75,7 +74,7 @@ export const insuranceBasicsGuide: Guide = {
           { label: "看什麼", text: "每人、每事故額度與承保人數；超額是否也涵蓋乘客。" },
         ] },
       ],
-      note: "責任險與傷害險的啟動條件不同。已有個人意外或醫療保單，也請逐項比對給付項目，不能直接當成完全重複。",
+      note: "乘客責任險以駕駛依法應負的賠償責任為前提；傷害險則看約定的事故與給付項目。",
     },
     {
       id: "your-needs", step: "整理你的需求", action: "帶三個答案去問",
@@ -83,8 +82,8 @@ export const insuranceBasicsGuide: Guide = {
       paragraphs: ["先維持有效強制險，再把對外賠償、駕乘傷害與自己修車的需求列出來。小刮傷能自行處理，不代表也能承擔大額賠償。"],
       points: [
         { label: "誰開、載誰", text: "自己開、夫妻輪流、偶爾借朋友，是否常載家人；有營業或工作用途也要如實說明。" },
-        { label: "車停哪、最怕什麼", text: "停車場自撞、路邊不明刮傷、低窪積水，分別對應不同保障，沒有一個險名能概括全部。" },
-        { label: "一次最多能自行負擔多少", text: "把可以承擔的修車費與年度保費分開想，再比較車體險範圍及自負額，不用照抄別人的保單。" },
+        { label: "車停哪、最怕什麼", text: "停車場自撞、路邊不明刮傷、低窪積水，分別對應不同保障。" },
+        { label: "一次最多能自行負擔多少", text: "把可以承擔的修車費與年度保費分開想，再比較車體險範圍及自負額。" },
       ],
       link: { href: "/guides/car-damage-insurance", label: "下一篇：用情境比較甲、乙、丙式" },
     },
@@ -97,12 +96,11 @@ export const carDamageGuide: Guide = {
   audience: "甲、乙、丙式：差在哪裡？",
   title: "車體險甲乙丙式怎麼選？自撞、刮傷與天災一次比較",
   description: "用車對車、自撞柱子、不明刮傷與淹水情境比較甲乙丙式，說明新車是否必須乙式、舊車何時調整，以及自負額與附加保障。",
-  introduction: "甲、乙、丙式都是看「自己的車」。最關鍵的差別是事故原因：丙式以車對車碰撞為主，乙式多了自撞等列明事故，甲式再擴及惡意破壞、不明原因等；每一種都有不保事項。",
-  updatedAt: "2026-10-31", reviewedAt,
+  introduction: "甲、乙、丙式都是看「自己的車」。最關鍵的差別是事故原因：丙式以車對車碰撞為主，乙式多了自撞等列明事故，甲式再擴及惡意破壞、不明原因等。",
+  updatedAt: "2026-11-01", reviewedAt,
   sourceIds: ["carCoverage", "carDamageCoverage", "carDamageAddons", "carDamageTerms", "autoInsuranceCurrent", "carSalesContract", "evInsurance"],
   sourceNote,
   relatedSlugs: ["car-insurance-basics", "car-insurance-quote", "car-accident-insurance"],
-  conversation: "鈺漣你好，我想比較＿＿的乙式與丙式，平常停＿＿、由＿＿開。如果自撞修車，我能先負擔約＿＿，也想確認＿＿是否要另加保。",
   sections: [
     {
       id: "comparison", step: "甲乙丙差異", action: "用事故情境比較",
@@ -116,7 +114,7 @@ export const carDamageGuide: Guide = {
           { label: "自己倒車撞到柱子", values: ["屬保障範圍", "屬保障範圍", "不在主險範圍"] },
           { label: "他人惡意刮車、原因不明的車損", values: ["可涵蓋，仍須查證", "不在主險範圍", "不在主險範圍"] },
           { label: "一般墜落物、火災等列明事故", values: ["屬保障範圍", "屬保障範圍", "不在主險範圍"] },
-          { label: "颱風、洪水或因雨積水造成車損", values: ["須另核對天災附約", "須另核對天災附約", "須另詢可加保方案"] },
+          { label: "颱風、洪水或因雨積水造成車損", values: ["需天災附約", "需天災附約", "另看天災保障"] },
           { label: "整台車失竊", values: ["另看竊盜險", "另看竊盜險", "另看竊盜險"] },
         ],
         note: "若墜落物等損害由除外天災引起，仍要看天災附約。自然耗損、機械故障也不能直接當成車體險事故。",
@@ -129,7 +127,7 @@ export const carDamageGuide: Guide = {
       points: [
         { label: "有影像或找到對方", text: "保留行車紀錄器、現場照片及對方車輛資料，通知警方與保險公司；丙式要符合車對車碰撞及確認事故的要求。" },
         { label: "對方逃逸", text: "先報警並保存影像，由警方查證事故，再交保險公司依碰撞證據與條款審核。" },
-        { label: "沒有證據、原因不明", text: "不要把不明刮傷說成自撞。先如實通報，核對甲式或特定不明損失附約是否適用；乙、丙式主險不能直接當成有保。" },
+        { label: "沒有證據、原因不明", text: "乙、丙式主險不保原因不明的刮傷，需有甲式或適用的刮損附約。據實通報事故，不要把不明刮傷改報為自撞。" },
       ],
       link: { href: "/guides/car-accident-insurance", label: "已經發生事故：看報案、出險與回廠流程" },
     },
@@ -147,7 +145,7 @@ export const carDamageGuide: Guide = {
           { label: "再核對保額", text: "「限額車對車」可能另有較低約定額度，不要與一般丙式只比名字。" },
         ] },
       ],
-      note: "汽車買賣契約不得排除或限制自由投保。若有貸款，另外閱讀融資契約的保險要求與受益安排；請對方把條件寫清楚，不把口頭說法當成所有新車的規定。",
+      note: "購車可自由選擇投保通路。貸款另有保險要求時，應列在融資契約中。",
     },
     {
       id: "deductible", step: "自負額與車值", action: "分清自己付多少",
@@ -155,7 +153,7 @@ export const carDamageGuide: Guide = {
       paragraphs: ["保費是買保障的費用；自負額是符合承保事故後，依約由自己負擔的部分；保額是契約約定的額度，不代表每次都領得到這筆錢。"],
       calculation: {
         title: "假設核定修復費 3 萬元、自負額 5,000 元",
-        context: "只示範固定自負額，假設全數修復項目均承保，沒有其他扣減，且未超過可賠額度。",
+        context: "假設全數修復項目承保、無其他扣減，且未超過可賠額度。",
         steps: [{ title: "扣除約定由自己負擔的部分", rows: [{ label: "核定承保修復費", value: "30,000 元" }, { label: "自負額", value: "5,000 元", operation: "subtract" }], result: { label: "示意給付", value: "25,000 元" } }],
       },
       points: [
@@ -165,12 +163,12 @@ export const carDamageGuide: Guide = {
     },
     {
       id: "add-ons", step: "容易漏掉的附約", action: "按使用情境補問",
-      title: "有車體險後，這三件事還要另問",
+      title: "依停車環境、借車習慣與代步需求加保",
       paragraphs: [],
       points: [
-        { label: "停在低窪、地下室或戶外", text: "核對颱風、洪水、因雨積水等附約承保哪些原因、自負額及限制；甲式不代表自動含天災。" },
+        { label: "停在低窪、地下室或戶外", text: "加看颱風、洪水、因雨積水附約及自負額；甲式主險也不含這些天災。" },
         { label: "會借朋友、多人輪流開", text: "確認約定駕駛人名單及限制。「許可使用免追償」與「約定駕駛」是不同約定，有免追償不代表任何駕駛都自動承保。" },
-        { label: "擔心失竊或修車期間沒車用", text: "分別確認竊盜、代車費用與道路救援的事故原因、天數、額度及啟動條件，不預設買車體險就全部附送。" },
+        { label: "擔心失竊或修車期間沒車用", text: "竊盜、代車費用與道路救援分開選，列出適用事故、天數與額度。" },
       ],
       link: { href: "/guides/car-insurance-quote", label: "下一篇：拿到報價，逐項看懂保費與條件" },
     },
@@ -184,16 +182,15 @@ export const insuranceQuoteGuide: Guide = {
   title: "車險報價怎麼看？比價、出險與續保的五個重點",
   description: "同款車保費為什麼不同？業務和網路投保怎麼比？用報價核對清單看懂保額、自負額、約定駕駛，以及小刮傷出險與隔年續保的考量。",
   introduction: "先把保障與條件排成同一張清單，再比較保費。報價比較便宜，可能是通路不同，也可能是保額、自負額或駕駛限制不同。",
-  updatedAt: "2026-10-31", reviewedAt,
+  updatedAt: "2026-11-01", reviewedAt,
   sourceIds: ["carPremiumFactors", "carDamageCoverage", "carDamageAddons", "carRenewalClaims", "autoInsuranceCurrent", "carSalesContract", "onlineCarInsurance", "carClaimProcess"],
   sourceNote,
   relatedSlugs: ["car-insurance-basics", "car-damage-insurance", "car-accident-insurance"],
-  conversation: "鈺漣你好，我在比較＿＿的保險，想確認兩份報價的保障、自負額與駕駛限制是否相同，也想知道出險時各由誰協助。",
   sections: [
     {
-      id: "same-conditions", step: "先對齊條件", action: "逐項比較兩份報價",
+      id: "same-conditions", step: "比價條件", action: "逐項比較兩份報價",
       title: "兩張都寫乙式，為什麼還不能直接比價格？",
-      paragraphs: ["把下面項目在兩張報價上逐一圈出來。有缺項就先請對方補齊，別只比最後總額。"],
+      paragraphs: ["乙式名稱相同，保額、自負額、駕駛限制和附約仍可能不同。比價前先把這些條件列在同一張表。"],
       comparison: {
         caption: "車險報價核對清單",
         columns: ["核對內容", "漏看的影響"],
@@ -211,7 +208,6 @@ export const insuranceQuoteGuide: Guide = {
       title: "同一款車，別人的保費可以直接當標準嗎？",
       paragraphs: ["不行。車體險保費會受車型、車價、被保險人年齡與性別、投保及賠款紀錄等因素影響，選擇的保障與自負額也會造成差異。"],
       points: [
-        { label: "看網友保單，借用的是核對方法", text: "先看有哪些保障與限制，不把網友的總保費當成自己一定能買到的價格。" },
         { label: "沒有出險，不代表已有連續投保優惠", text: "過去沒買過或曾中斷投保，與連續投保且無賠款的紀錄可能不同，請保險公司核對適用係數。" },
         { label: "車變舊，保費不一定按車價同比例下降", text: "保額與費率計算並非同一件事；續保請重新看保障、係數與報價明細。" },
       ],
@@ -219,7 +215,7 @@ export const insuranceQuoteGuide: Guide = {
     {
       id: "buying-channel", step: "業務或網路", action: "比保障也比協助",
       title: "一定要跟汽車業務買？自己網路保可以嗎？",
-      paragraphs: ["汽車買賣契約不得排除或限制消費者自由投保。可以詢問不同通路；網路平台的可投保車型、險種與條件仍以各公司規定為準。"],
+      paragraphs: ["可以自行網路投保，汽車買賣契約不得限制自由投保。不同通路可選的險種、保額與協助範圍可能不同。"],
       options: [
         { title: "由窗口協助投保", answer: "問清楚協助到哪裡", facts: [
           { label: "確認服務", text: "由誰解釋保障、辦理更改與追蹤理賠？事故時應直接聯絡哪家保險公司？" },
@@ -242,14 +238,14 @@ export const insuranceQuoteGuide: Guide = {
       ],
       details: {
         title: "換一家保險公司，紀錄就會消失嗎？",
-        paragraphs: ["換公司不會自動清除既有賠款紀錄，仍可能影響新公司的報價與承保，請新公司核對適用紀錄與條件。社群上的拒保經驗，不代表每個人出險相同次數就會得到同一結果。"],
+        paragraphs: ["不會。既有賠款紀錄仍可能影響新公司的報價與承保，換公司前也要提供正確投保紀錄。"],
       },
       link: { href: "/guides/car-accident-insurance", label: "事故發生後，報案、估價與和解怎麼安排" },
     },
     {
       id: "before-payment", step: "付款與續保前", action: "把最後四件事問完",
       title: "付款前，用四個常見情境檢查保障",
-      paragraphs: ["把保單拿出來，直接問：「如果發生下面這件事，會用到哪一項？哪些要我自己出？」比只問是不是全險，更容易發現缺口。"],
+      paragraphs: [],
       points: [
         { label: "倒車撞柱子，或停車被不明刮傷", text: "對照車體險型別、自負額與證據要求。" },
         { label: "撞到別人的車，車上家人也受傷", text: "分別對照對外財損、乘客保障與超額承接條件。" },

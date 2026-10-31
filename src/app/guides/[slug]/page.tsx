@@ -50,18 +50,12 @@ export default async function GuidePage({ params }: Props) {
           <p className="mt-2 text-base font-medium leading-8 text-[#333]">{guide.introduction}</p>
         </div>}
         <div id="guide-contact" tabIndex={-1} className={guide.emergency ? "mt-5 scroll-mt-6 rounded-2xl border border-[#ddd] bg-white p-4 sm:p-6" : "mt-5 scroll-mt-6"}>
-          {guide.emergency && <>
-            <h2 className="text-lg font-bold">這三個時候，記得聯絡鈺漣</h2>
-            <ul className="mb-4 mt-3 space-y-2 text-[15px] font-medium leading-7 text-[#444]">
-              {guide.emergency.contactReasons.map((reason) => <li key={reason} className="flex gap-2"><span aria-hidden="true" className="text-[#b9000e]">✓</span><span>{reason}</span></li>)}
-            </ul>
-          </>}
+          {guide.emergency && <h2 className="mb-4 text-lg font-bold">出險與回廠協助</h2>}
           <ContactLinks entry="guide" />
         </div>
       </header>
       <section aria-labelledby="article-flow-heading" className="mx-auto mt-8 rounded-2xl border border-[#e5dcd5] bg-[#f5f1ed] p-4 sm:p-6">
-        <h2 id="article-flow-heading" className="text-lg font-bold">{guide.sections.length}{guide.emergency ? " 個處理重點" : guide.category === "insurance" ? " 個投保重點" : guide.category === "jimny" ? " 個閱讀重點" : ` 步${guide.category === "process" ? "看懂流程" : guide.category === "ownership" ? "看懂保養" : "整理你的選擇"}`}</h2>
-        <p className="mt-1 text-sm leading-7 text-[#665c56]">{guide.emergency ? "先確保人身安全，再依目前的狀況查看處理方式。" : guide.category === "insurance" ? "先看差異，再依用車情況整理需求；也可以直接跳到你想知道的答案。" : guide.category === "jimny" ? "從頭認識，或直接點選你想找的答案。" : "按順序看，或點選目前需要的步驟。"}</p>
+        <h2 id="article-flow-heading" className="text-lg font-bold">本文目錄</h2>
         <GuideFlow sections={guide.sections} label={guide.emergency ? "用車狀況與處理重點" : guide.category === "insurance" ? "投保需求與保障差異" : guide.category === "process" ? "購車流程" : "指南閱讀重點"} />
       </section>
       <div className="mx-auto mt-3 max-w-3xl divide-y divide-[#ddd]">
@@ -84,11 +78,6 @@ export default async function GuidePage({ params }: Props) {
           </details>}
           {section.link && <Link href={section.link.href} className="mt-5 inline-block text-sm font-medium text-[#b9000e] underline underline-offset-4">{section.link.label} →</Link>}
         </section>)}
-        <section aria-labelledby="conversation-heading" className="py-8">
-          <h2 id="conversation-heading" className="text-xl font-bold">{guide.category === "insurance" ? "聯絡鈺漣時，可以先提供這些資訊" : "找鈺漣聊，可以這樣開始"}</h2>
-          <blockquote className="mt-4 border-l-2 border-[#b9000e] pl-5 text-base leading-8 text-[#444]">{guide.conversation}</blockquote>
-          <a href="#guide-contact" className="mt-4 inline-flex min-h-11 items-center py-2 text-sm text-[#b9000e] underline underline-offset-4">返回聯絡區，找鈺漣聊聊 ↑</a>
-        </section>
       </div>
       <footer className="mx-auto max-w-3xl border-t border-[#ddd] pt-6">
         {relatedCars.length > 0 && <section aria-labelledby="related-cars-heading" className="mb-6">

@@ -54,7 +54,7 @@ export default function LoanCalculator() {
       <div className="flex items-end justify-between gap-5 mb-5 max-sm:flex-col max-sm:items-start">
         <div>
           <p className="m-0 text-[#666] text-[15px] font-bold">貸款試算</p>
-          <h2 className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">試算月付金額，輕鬆購車</h2>
+          <h2 className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">每月繳多少？頭期款與總支出一起算</h2>
         </div>
       </div>
 
@@ -196,7 +196,7 @@ export default function LoanCalculator() {
                 <span>{LOAN_RATE_MIN}%</span>
                 <span>{LOAN_RATE_MAX}%</span>
               </div>
-              <p id="loan-rate-hint" className="mt-2 text-xs leading-relaxed text-[#666]">試算範圍 {LOAN_RATE_MIN}%–{LOAN_RATE_MAX}%；輸入超出範圍時，依上下限計算並於離開欄位後調整。</p>
+              <p id="loan-rate-hint" className="mt-2 text-xs leading-relaxed text-[#666]">可試算年利率 {LOAN_RATE_MIN}%–{LOAN_RATE_MAX}%。</p>
             </div>
           </div>
         </div>

@@ -80,12 +80,7 @@ export default async function LocalizedCarPage({ params }: Props) {
 
     <ArticleSection id="test-drive" title={t("Plan a test drive in Beitou, Taipei")}>
       <ul className="list-disc space-y-3 pl-5">{detail.testDrive.map((item) => <li key={item}>{t(item)}</li>)}</ul>
-      <p>{t("Confirm your test-drive vehicle and time with the advisor.")}</p>
       <Link href={`/${locale}/visit/beitou`} className="inline-block font-bold text-[#b9000e] underline underline-offset-4">{t("Showroom address, parking and booking →")}</Link>
-    </ArticleSection>
-
-    <ArticleSection title={t("Current offers")}>
-      <p>{t("Ask the advisor about current offers for {model}.", { model: car.name })}</p>
     </ArticleSection>
 
     <ReferenceDetails label={t("Reference materials")} className="mt-6">

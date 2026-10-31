@@ -29,14 +29,13 @@ export interface Guide {
   title: string;
   description: string;
   introduction: string;
-  emergency?: { steps: GuidePoint[]; notice: string; contactReasons: string[] };
+  emergency?: { steps: GuidePoint[]; notice: string };
   updatedAt: string;
   reviewedAt: string;
   sourceIds: ContentSourceId[];
   sourceNote?: string;
   relatedSlugs: string[];
   relatedCars?: CarId[];
-  conversation: string;
   sections: {
     id: string;
     step: string;
@@ -55,7 +54,7 @@ export interface Guide {
 
 const guideReviewedAt = "2026-09-09";
 export const guideIndex = {
-  updatedAt: "2026-10-17",
+  updatedAt: "2026-11-01",
   title: "Suzuki 購車指南｜第一次買車、換車與選車｜張鈺漣",
   description: "從第一次買車、舊車換新車到選車與領牌，整理需求、預算、報價及交車流程，也提供 Jimny 專題、保養，以及強制險、第三人、超額與甲乙丙式車險選購指南。",
 };
@@ -74,12 +73,11 @@ export const firstCarGuide: Guide = {
   audience: "第一次買車",
   title: "第一次買 Suzuki，從看車到開回家",
   description: "第一次買車不用先背熟規格。鈺漣陪你從用車需求與預算開始，弄懂 Suzuki 試乘、購車菜單、訂金、貸款保險和交車當天要確認的事。",
-  introduction: "先決定自己能負擔多少，再看車、談報價。照下面六步走，每次只處理眼前這一步。",
-  updatedAt: "2026-10-31",
+  introduction: "第一次買車，先分開算交車前的自備款與每月養車費。試乘帶家人與常用行李；訂車時，把版本、配件、總價和交期寫進明細。",
+  updatedAt: "2026-11-01",
   reviewedAt: guideReviewedAt,
   sourceIds: ["consumer", "loan", "insurance", "registration", "service", "swift", "jimny", "eVitara"],
   relatedSlugs: ["suv-selection", "car-maintenance"],
-  conversation: "鈺漣你好，我第一次買車，平常坐＿＿人、車停＿＿，交車前預算＿＿，想了解＿＿。",
   sections: [
     {
       id: "budget", step: "需求與預算", title: "買車前，要準備哪兩筆錢？",
@@ -112,7 +110,7 @@ export const firstCarGuide: Guide = {
       ],
       calculation: {
         title: "買一台 80 萬的車，要自己出多少？",
-        context: "把車價、貸款與其他費用分開，依序加減。實際金額請用你的報價明細替換。",
+        context: "假設成交車價 80 萬、貸款 50 萬，保險、領牌與配件共 6 萬。",
         steps: [
           {
             title: "先算自己需要支付的總額",
@@ -164,7 +162,7 @@ export const firstCarGuide: Guide = {
       paragraphs: [
         "帶著平常會坐車的人一起來，按日常使用方式試。"
       ],
-      note: "出發前先確認車款、展示或試乘車、時段。需要試駕時，另確認駕照與相關安排。",
+      note: "預約時指定想看的版本；要親自試駕，一併約定駕照查驗與試駕安排。",
       link: { href: "/visit/beitou", label: "查看北投所位置與到店資訊" },
       action: "帶家人與常用行李",
       points: [
@@ -206,7 +204,7 @@ export const firstCarGuide: Guide = {
       action: "把車、配件、費用寫清楚",
     },
     {
-      id: "payment", step: "貸款與保險", title: "貸款與保險，各問一個核心問題",
+      id: "payment", step: "貸款與保險", title: "貸款比總支出，保險看保額與賠償範圍",
       paragraphs: [],
       link: { href: "/guides/car-insurance-basics", label: "先看懂強制險、第三人與超額保誰" },
       action: "貸款看總額，保險看保障",
@@ -220,8 +218,8 @@ export const firstCarGuide: Guide = {
               text: "頭款、全部期款、尾期款及另收費用，再和現金方案比較。"
             },
             {
-              label: "再確認",
-              text: "總費用年百分率、提前清償條件。試算只供抓預算，實際貸款須審核。"
+              label: "提前還清要付多少",
+              text: "查看總費用年百分率、綁約期間與提前清償費用；用核准條件重算總支出。"
             }
           ]
         },
@@ -234,8 +232,8 @@ export const firstCarGuide: Guide = {
               text: "強制險不賠修車費。對方財物與自己的車損，要分別看第三人責任險、車體險等保障。"
             },
             {
-              label: "再確認",
-              text: "保額、自負額與不賠的情況，不能只問有沒有「全險」。"
+              label: "自己要負擔多少",
+              text: "逐項看保額、自負額與除外責任；「全險」不是保障項目的名稱。"
             }
           ]
         }
@@ -246,7 +244,6 @@ export const firstCarGuide: Guide = {
       paragraphs: [
         "看車、付款、保險生效、領牌與配件施工，先和業務約定順序。"
       ],
-      note: "查進度可以問：「目前完成哪一步？下一步需要我做什麼？」證件另按約定管道交付，本站諮詢表單不收證件或銀行資料。",
       link: { href: "/guides/license-plate", label: "想自己挑車牌？先看選號、競標與領牌期限" },
       action: "約定每一步的日期",
       points: [
@@ -256,7 +253,7 @@ export const firstCarGuide: Guide = {
         },
         {
           label: "準備領牌文件",
-          text: "請承辦人按個人、公司或委託代辦身分提供清單。"
+          text: "按個人、公司或委託代辦身分取得文件清單，約定交付對象及證件交還日期。"
         },
         {
           label: "有指定用車日",
@@ -301,12 +298,11 @@ export const tradeInGuide: Guide = {
   audience: "舊車換新車",
   title: "換一台 Suzuki，舊車和新車怎麼接上？",
   description: "舊車還能開，現在換 Suzuki 值不值得？鈺漣帶你分開看舊車估價、新車報價與減稅，算出要補的錢，再安排交車和舊車交接。",
-  introduction: "換車先弄清楚兩件事：還要準備多少錢、哪天交出舊車。先估價、再決定賣車或報廢，最後安排新舊車交接。",
-  updatedAt: "2026-09-22",
+  introduction: "換車要補的錢＝新車自備款－舊車可用收入。舊車有貸款，先扣結清金額與費用；再對好舊車款入帳、新車付款與交接日期，避免短期資金或用車空缺。",
+  updatedAt: "2026-11-01",
   reviewedAt: guideReviewedAt,
   sourceIds: ["consumer", "tradeInTax", "registration", "service", "eVitara"],
   relatedSlugs: ["first-car", "powertrain-choice"],
-  conversation: "鈺漣你好，我的舊車是＿＿、＿＿年、＿＿公里，還有／沒有貸款，想換＿＿，希望＿＿前交車。",
   sections: [
     {
       id: "needs", step: "確認換車原因", title: "這次換車，最想改善什麼？",
@@ -357,7 +353,6 @@ export const tradeInGuide: Guide = {
               label: "可用的舊車款",
               value: "15 萬元"
             },
-            explanation: "下一步，再把剩下的 15 萬拿來付新車。"
           },
           {
             title: "舊車款能抵新車時，還差多少？",
@@ -395,28 +390,28 @@ export const tradeInGuide: Guide = {
     {
       id: "tax", step: "賣車或報廢", title: "舊車要出售，還是報廢？",
       paragraphs: [
-        "先拿到實車估價，再比較兩種方式。"
+        "比較舊車出售淨額與報廢回收、減稅合計，才知道哪一種能抵更多新車款。"
       ],
-      note: "同一台舊車的出售收入，不能再加上這台車的報廢減稅。新購減稅是另一組條件，另行核對；未收到的退稅，先別當成交車當天可用的錢。",
+      note: "同一台舊車只能選出售或報廢，不能把兩邊收入相加。新購減稅另外計算；退稅尚未入帳時，交車款仍需先備妥。",
       action: "比較兩種舊車處理方式",
       options: [
         {
           title: "出售舊車",
-          answer: "看實際賣價",
+          answer: "收購價減去結清款",
           facts: [
             {
-              label: "先確認",
-              text: "收購價、貸款結清費用，以及何時收到車款。"
+              label: "算可用收入",
+              text: "收購價－貸款結清金額－相關費用。另約定車款入帳或抵款日期。"
             }
           ]
         },
         {
           title: "報廢換購",
-          answer: "看減稅資格",
+          answer: "回收價加上適用減稅",
           facts: [
             {
-              label: "先確認",
-              text: "能否申請、要備哪些文件，以及申請與退款時間。"
+              label: "算可用收入",
+              text: "回收價＋符合資格的舊換新減稅－貸款結清金額及費用。減稅款與回收款分開記入帳時間。"
             }
           ]
         }
@@ -443,7 +438,7 @@ export const tradeInGuide: Guide = {
     {
       id: "schedule", step: "銜接交車時間", title: "每天要用車，先排好交接日期",
       paragraphs: [
-        "先告訴業務：「舊車每天還要用，不能提早交出去。」確認新車供應、核貸、領牌與施工進度後，再約舊車交付日。"
+        "每天需要用車，就把舊車交付日排在新車可交之後。交接日期與估價有效期一起寫明。"
       ],
       points: [
         {
@@ -497,12 +492,11 @@ const suvSelectionGuide: Guide = {
   title: "家庭休旅怎麼選？先試家人、行李和停車位",
   description: "小家庭一定需要休旅車嗎？從安全座椅、嬰兒車、長輩上下車、後座舒適度到停車條件，用五個步驟縮小選擇。",
   introduction: "常帶嬰兒車與行李，優先看 S-CROSS；想要四驅的家庭休旅，可從 VITARA 開始。接著用家人試坐、行李容量與車位空間，選出適合每天使用的車。",
-  updatedAt: "2026-10-31", reviewedAt: "2026-09-11",
+  updatedAt: "2026-11-01", reviewedAt: "2026-09-11",
   sourceIds: ["swift", "vitara", "sCross", "jimny", "eVitara"],
   sourceNote: "試坐與比較清單為本站依用車需求整理；乘坐舒適度沒有統一排名，車型配置以台灣版本為準。",
   relatedSlugs: ["powertrain-choice", "first-car"],
   relatedCars: ["vitara", "s-cross"],
-  conversation: "鈺漣你好，平常坐＿＿人、有＿＿張安全座椅，常帶＿＿，車位限制＿＿，想比較＿＿。",
   sections: [
     {
       id: "needs", step: "列出乘坐情境", title: "先列出最常遇到的用車情境",
@@ -528,7 +522,7 @@ const suvSelectionGuide: Guide = {
     {
       id: "seating", step: "家人一起試坐", title: "座位夠，不代表你的組合坐得下",
       paragraphs: [
-        "先調好駕駛座，再試後座。不要為了讓後座看起來寬敞，刻意把前座往前移。"
+        "前座保持平常駕駛坐姿，再讓後座乘客入座，空間比較才有意義。"
       ],
       note: "安全座椅試裝先和展間約定；依車輛及座椅手冊安裝，不任意移動固定點。",
       action: "全家一起試坐與上下車",
@@ -588,11 +582,11 @@ const suvSelectionGuide: Guide = {
       points: [
         {
           label: "駕駛觀察",
-          text: "起步、煞車、視野、轉彎與停車。"
+          text: "起步和煞停是否容易控制？轉彎時能否看清車頭兩側，倒車時能否判斷車尾位置？"
         },
         {
           label: "乘客觀察",
-          text: "座椅支撐、噪音、路面震動與上下車。"
+          text: "後座過路面接縫會不會彈跳、腰背是否有支撐，以及行駛中交談是否吃力。"
         }
       ],
       details: {
@@ -620,7 +614,7 @@ const suvSelectionGuide: Guide = {
         },
         {
           label: "e VITARA",
-          text: "把每週充電位置與時間一起考慮。"
+          text: "有住家或公司充電位，可利用停車時間補電；主要靠公共站，則把繞路、充電與等候時間算進每週行程。"
         }
       ],
     },
@@ -634,18 +628,16 @@ const maintenanceGuide: Guide = {
   title: "第一次汽車保養怎麼準備？週期、工單與日常檢查",
   description: "Suzuki 保養該看 5,000 還是 10,000 公里？學會核對台灣適用年式手冊與使用條件，再用匿名 SWIFT 歷史工單分清檢查、更換與費用。",
   introduction: "保養單分成三類看：到期保養、故障維修、自選清潔。先看各項材料與工資，再決定要做哪些；輪胎、煞車等安全項目則依檢查結果處理。",
-  updatedAt: "2026-10-31", reviewedAt: "2026-10-16",
+  updatedAt: "2026-11-01", reviewedAt: "2026-10-16",
   sourceIds: ["service", "suzukiAfterSales", "repairContract", "tirePressure", "swiftMaintenanceCase2023"],
   sourceNote: "本次未取得可確認適用各台灣年式 Suzuki 的完整保養表，因此不列統一換油公里數、耗材更換週期或保固結論；請依自己的隨車手冊、保養與保證文件核對。公開車主工單僅用於歷史案例判讀，不能取代原廠規範或當次報價。",
   relatedSlugs: ["powertrain-choice", "first-car"],
-  conversation: "鈺漣你好，我的車是＿＿、＿＿年式，目前＿＿公里，上次保養＿＿，想確認＿＿。",
   sections: [
     {
       id: "schedule", step: "找到保養表", title: "保養表怎麼看？分清里程、時間與更換項目",
       paragraphs: [
-        "看到不同公里數，先確認說的是回廠檢查、換機油，還是其他零件的保養。首次檢查、贈送健檢與後續定期更換項目，也要分開看。"
+        "5,000 或 10,000 公里不能單獨當成換油答案：先找到自己車型年式保養表的「引擎機油」那一列，看更換里程、月份與使用條件。其他零件及首次檢查各有對應項目。"
       ],
-      note: "服務廠建議提早保養時，請在工單寫下原因、項目與費用，方便下次追蹤。",
       link: { href: "https://www.taiwansuzuki.com.tw/contact", label: "向 Taiwan Suzuki 詢問售後服務與適用文件" },
       action: "核對年式、項目與使用條件",
       points: [
@@ -663,23 +655,21 @@ const maintenanceGuide: Guide = {
         },
         {
           label: "需要縮短週期的項目",
-          text: "採用嚴苛條件保養時，請服務廠列出適用的使用情境、需提前處理的零件，以及新的時間或里程。"
+          text: "服務廠若建議提早保養，請在工單列出適用的嚴苛使用條件、需提前處理的零件、時間或里程與費用。"
         }
       ],
       details: {
         title: "手冊不在身邊，或兩種說法不一致時怎麼問？",
         paragraphs: [
-          "可向原服務廠或 Taiwan Suzuki 售後服務詢問適用文件；官方客服為 0800-098345。準備車型年式、目前里程、上次保養日期與工單，方便一起核對。",
-          "可以這樣問：「我的車是＿＿年式 Suzuki＿＿，平常＿＿使用。請確認適用台灣的手冊名稱、版本與頁碼，說明這次到期的檢查／更換項目，以及下次應回廠的日期或里程；若建議與手冊不同，也請註明原因。」"
+          "準備車型年式、目前里程與上次工單，向原服務廠或 Taiwan Suzuki 客服 0800-098345 取得適用保養表。",
+          "請接待人員直接圈出三件事：這次到期要換的、只需檢查的、下次回廠的日期或里程。建議與手冊不同時，再問是哪種使用條件或檢查結果造成差異。"
         ]
       },
     },
     {
       id: "work-order", step: "看懂保養工單", title: "拿到工單，先把項目分成三類",
-      paragraphs: [
-        "不認識的品項，直接問接待人員：「這一項屬於哪一類？」"
-      ],
-      note: "先看材料規格、數量、工資與總額。維修及追加項目、費用應先告知並取得同意，再施工；取車時核對實際工單，不把「建議處理」當成已經更換。",
+      paragraphs: [],
+      note: "維修與追加項目都應先告知費用、取得同意再施工。取車時對照材料規格、數量、工資及總額，分清已更換與待處理項目。",
       link: { href: "/faq#maintenance-extras", label: "保養加項可以怎麼問？" },
       action: "每個項目先分清楚用途",
       options: [
@@ -717,7 +707,7 @@ const maintenanceGuide: Guide = {
       details: {
         title: "匿名工單實例：2023 年式 SWIFT，當次 5,090 元怎麼看？",
         paragraphs: [
-          "這是車主於 2024-08-24 分享的歷史工單：2023 年式 SWIFT 1.2 輕油電，當時里程 10,000 公里。以下用來拆解當次費用，並非現行價目或保養間隔。"
+          "車主於 2024-08-24 分享的歷史工單：2023 年式 SWIFT 1.2 輕油電，當時里程 10,000 公里。下列金額為該次支出。"
         ],
         points: [
           { label: "材料與工資：合計 5,090 元", text: "保養工資 1,200 元、機油 2,472 元、機油濾芯 370 元、洩油塞墊片 45 元、洩油螺絲 86 元、引擎空氣濾芯 917 元。" },
@@ -789,11 +779,11 @@ const maintenanceGuide: Guide = {
       points: [
         {
           label: "收好工單",
-          text: "保留日期、里程、零件規格與數量、工資、折扣及檢查結果。比較別人的單據時，也核對是否自備機油、使用贈送保養或另有優惠，才知道費用差在哪裡。"
+          text: "保留日期、里程、材料、工資與檢查結果。比價時，將自備機油、贈送項目及折扣分開看。"
         },
         {
           label: "問清後續",
-          text: "把下次應回廠的日期、里程與對應項目一起記下，依適用文件判斷先到條件；本次待觀察或未完成的項目，也請寫明處理方式與何時複查。"
+          text: "記下下次回廠日期、里程與項目；待觀察或未完成的部分，寫明何時複查、由誰處理。"
         },
         {
           label: "預留耗材費",
@@ -817,18 +807,15 @@ const powertrainGuide: Guide = {
   title: "汽油、輕油電、油電與純電怎麼選？從里程和充電開始",
   description: "一年開不多就不適合油電嗎？先分清輕油電、一般油電與純電，再用年里程、實際價差、能源費和充電時間評估。",
   introduction: "想省油又維持加油習慣，可先看輕油電或一般油電；有固定充電位置，再把純電車納入比較。用一年開多少公里、每年省多少能源費，算出多付的車價幾年能回收。",
-  updatedAt: "2026-10-31", reviewedAt: "2026-09-11",
+  updatedAt: "2026-11-01", reviewedAt: "2026-09-11",
   sourceIds: ["swift", "vitara", "sCross", "eVitara", "fit", "energyLabel"],
   sourceNote: "費用範例全部為假設值，展示計算方式；不是現行油價、電價、實測油耗或 Suzuki 報價。各車型的充電、保養與保固依台灣版本資料確認。",
   relatedSlugs: ["suv-selection", "car-maintenance"],
   relatedCars: ["swift", "e-vitara"],
-  conversation: "鈺漣你好，我一年開＿＿公里，市區／高速約＿＿，預計開＿＿年，＿＿能充電，想比較＿＿。",
   sections: [
     {
       id: "systems", step: "先分清動力", title: "四種動力，日常使用差在哪？",
-      paragraphs: [
-        "先看補充能源的方式，英文縮寫只用來辨識系統。"
-      ],
+      paragraphs: [],
       action: "先看加油還是充電",
       options: [
         {
@@ -872,7 +859,7 @@ const powertrainGuide: Guide = {
           ]
         }
       ],
-      note: "PHEV 是另一類「插電式油電」。不要只看到 Hybrid，就認為都能純電行駛或都不用充電。",
+      note: "PHEV 是可外接充電的插電式油電，與不用插電的 MHEV、HEV 不同。",
     },
     {
       id: "routine", step: "記下一週路線", title: "先用自己的路線比較",
@@ -881,7 +868,7 @@ const powertrainGuide: Guide = {
       points: [
         {
           label: "一年大約開多少",
-          text: "通勤加上假日行程，估出年里程。"
+          text: "例如每天通勤來回 40 公里 × 每週 5 天 × 50 週＝10,000 公里，再加假日 2,000 公里，年里程約 12,000 公里。"
         },
         {
           label: "常走什麼路",
@@ -893,13 +880,13 @@ const powertrainGuide: Guide = {
     {
       id: "cost", step: "算持有成本", title: "多花的車價，能靠油費省回來嗎？",
       paragraphs: [
-        "先看「每年省多少」，再看要花幾年。不要只比較一公升能跑多遠。"
+        "購車價差 ÷ 每年省下的油費＝單靠油費回收價差的年數。再與預計持有年限比較。"
       ],
       link: { href: "/guides/first-car#budget", label: "交車前現金需求，另看購車預算" },
       action: "看每年省多少、要花幾年",
       calculation: {
         title: "假設多花 6 萬買較省油的車",
-        context: "先用相同的里程與油價比較兩台假設車，不代表任何兩款實車。",
+        context: "兩台假設車使用相同的年里程與油價，條件如下。",
         steps: [
           {
             title: "先看一年少付多少油錢",
@@ -936,12 +923,11 @@ const powertrainGuide: Guide = {
               label: "單靠油費約需",
               value: "10 年"
             },
-            explanation: "每年省 6,000 元，累積 10 年才有 60,000 元。這還沒算其他費用差異。"
           }
         ],
         notice: {
-          title: "省油，不代表總花費一定比較低",
-          text: "保險、稅費、保養、融資及未來賣車的價差，也要一起比較。若每年沒有省下錢，就不能用這個除法估回本年限。"
+          title: "若只開 5 年，油費省 3 萬，還差 3 萬",
+          text: "以上例計算，5 年省下 6,000 × 5＝30,000 元，尚未抵回 6 萬價差。再加上保險、稅費、保養、融資及賣車收入差額，才是完整持有成本。"
         },
         assumptions: [
           {
@@ -967,20 +953,12 @@ const powertrainGuide: Guide = {
         paragraphs: [],
         points: [
           {
-            label: "A 車：先算一年用多少油",
-            text: "12,000 公里 ÷ 每公升 15 公里 = 800 公升。"
+            label: "A 車一年油費",
+            text: "12,000 公里 ÷ 15 公里／公升 × 30 元／公升＝24,000 元。"
           },
           {
-            label: "A 車：再算一年油費",
-            text: "800 公升 × 每公升 30 元 = 24,000 元。"
-          },
-          {
-            label: "B 車：先算一年用多少油",
-            text: "12,000 公里 ÷ 每公升 20 公里 = 600 公升。"
-          },
-          {
-            label: "B 車：再算一年油費",
-            text: "600 公升 × 每公升 30 元 = 18,000 元。"
+            label: "B 車一年油費",
+            text: "12,000 公里 ÷ 20 公里／公升 × 30 元／公升＝18,000 元。"
           },
           {
             label: "比較純電車",
@@ -1022,8 +1000,8 @@ const powertrainGuide: Guide = {
               text: "以住家或公司附近的 CCS1 站為主，查看營業時間、每度電費與停車費。"
             },
             {
-              label: "再問自己",
-              text: "繞路、等待能否融入作息？準備第二個相容站點，長途另查目的地。"
+              label: "安排時間與備用站",
+              text: "把充電排進購物或用餐時間，另外計入繞路與等候；主站滿位時，改去第二個相容站點。"
             }
           ]
         }
@@ -1057,20 +1035,19 @@ export const licensePlateGuide: Guide = {
   audience: "選車牌與領牌",
   title: "新車車牌怎麼選？選號費用、競標與領牌期限",
   description: "順編、一般選號與競標差在哪？整理自用小型車選號費、英文與數字查詢、跨區領牌、委託代辦，以及付款前一定要確認的期限。",
-  introduction: "先決定要不要挑號碼，再確認車輛何時能領牌。看到喜歡的號碼先別急著付錢，一般選號的領牌期限很短。",
-  updatedAt: "2026-09-22",
-  reviewedAt: "2026-09-20",
+  introduction: "不挑號碼可領順編號牌；想指定號碼，可選一般選號或競標。自用小型車一般選號基本費 2,000 元，網路轉帳成功後，須在次日起第二個工作日收件截止前完成領牌。",
+  updatedAt: "2026-11-01",
+  reviewedAt: "2026-11-01",
   sourceIds: ["platePortal", "plateRules", "plateSelection", "plateAuction", "plateCosts"],
   sourceNote: "本文以台灣自用小型車新領牌為主要情境；其他車種、已領牌車換號或有領牌限制者，需另向監理機關確認。選題參考公開買家討論，費用與期限依官方資料核對；付款前仍以當次系統及招標公告為準，不承諾指定號碼或交期。",
   relatedSlugs: ["first-car", "trade-in"],
-  conversation: "鈺漣你好，我偏好車牌＿＿或＿＿，選號預算＿＿，希望＿＿前交車，想自己辦／請你協助。",
   sections: [
     {
       id: "options", step: "選方式與預算", title: "先選一種方式，再抓預算",
       paragraphs: [
         "以下以自用小型汽車新領牌為例。"
       ],
-      note: "上面只比較挑號碼的費用。一般領牌規費、稅費、保險、系統／轉帳費與代辦費，另行核對；報價「含選號」也要問清包含哪些。",
+      note: "選號費之外，領牌規費、稅費、保險、系統／轉帳費與代辦費另列。報價寫「含選號」時，請列出包含的項目。",
       action: "先決定要不要指定號碼",
       options: [
         {
@@ -1128,7 +1105,7 @@ export const licensePlateGuide: Guide = {
       options: [
         {
           title: "一般網路選號",
-          answer: "次一工作日截止前",
+          answer: "次日起第二個工作日截止前",
           facts: [
             {
               label: "從何時算",
@@ -1136,7 +1113,7 @@ export const licensePlateGuide: Guide = {
             },
             {
               label: "要完成什麼",
-              text: "在次一工作日收件截止前辦妥領牌。不是固定 24 小時，假日與受理時段另確認。"
+              text: "例如週一轉帳，週二、週三都是工作日，最遲週三收件截止前完成領牌；遇假日順延計算。"
             }
           ]
         },
@@ -1180,7 +1157,7 @@ export const licensePlateGuide: Guide = {
       details: {
         title: "想要的號碼查不到？",
         paragraphs: [
-          "可能還沒開放、已被選走，或另行標售，請以官方清單與公告確認。紀念日、好記的排列可依喜好挑選；吉凶評分不代表行車安全。"
+          "想找同一組數字，可查其他監理所、站的英文組合。整組號牌也可能尚未開放、已被選走或正在標售，可查該站招標公告。"
         ]
       },
     },
@@ -1193,7 +1170,7 @@ export const licensePlateGuide: Guide = {
       options: [
         {
           title: "自己操作",
-          answer: "先備好工具",
+          answer: "會員、憑證與線上轉帳",
           facts: [
             {
               label: "核對項目",
@@ -1203,7 +1180,7 @@ export const licensePlateGuide: Guide = {
         },
         {
           title: "委託操作",
-          answer: "先問清楚分工",
+          answer: "約好查號、繳費與送件",
           facts: [
             {
               label: "核對項目",
@@ -1244,7 +1221,6 @@ export const licensePlateGuide: Guide = {
           text: "保存官方繳費證明，領牌後核對車牌與行照。結果不明先查紀錄或聯絡承辦人。"
         }
       ],
-      note: "證件按約定管道交付，本站諮詢表單不需身分證字號或銀行資料。",
       action: "核對資料、費用與期限",
     },
   ],

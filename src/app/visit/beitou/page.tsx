@@ -13,22 +13,19 @@ export default function VisitPage() {
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd({ "@context": "https://schema.org", ...breadcrumbSchema("/visit/beitou", "台北北投到店資訊") }) }} />
     <p className="mb-3 text-sm font-bold tracking-widest text-[#b9000e]">台北賞車 · 先預約再出發</p>
     <h1 className="max-w-4xl text-4xl font-black leading-tight sm:text-5xl">SUZUKI 台北到店賞車與試乘</h1>
-    <p className="mt-5 max-w-3xl text-[15px] leading-8 text-[#555]">鈺漣的實際服務據點位於凱騰鈴木北投所。全台客戶都可先遠端購車諮詢；需要到店時，先確認想看的車款、展示或試乘車及時間，再安排前往台北。</p>
+    <p className="mt-5 max-w-3xl text-[15px] leading-8 text-[#555]">在凱騰鈴木北投所賞車與試乘，現場提供免費停車位。外縣市買家也可先透過 LINE 詢價、討論車款與交車安排。</p>
     <div className="mt-6"><ContactLinks entry="visit" /></div>
     <div className="grid gap-x-6 lg:grid-cols-2">
       <ArticleSection title={showroom.name}>
         <address className="not-italic">{showroom.address}</address>
         <p><strong>展示間電話：</strong><a data-entry="visit" href={showroom.phoneHref} className="underline underline-offset-4">{showroom.phone}</a></p>
         <div><p className="font-bold">官方公告營業時間</p>{showroom.hours.map((hours) => <p key={hours}>{hours}</p>)}</div>
-        <p>賞車與試乘請先和鈺漣約好時間。</p>
         <a data-entry="visit" href={showroom.mapsUrl} target="_blank" rel="noopener noreferrer" className="inline-block rounded-xl bg-[#e60012] px-5 py-2 font-bold text-white no-underline">開啟地圖導航</a>
       </ArticleSection>
       <ArticleSection title="購車與試乘請聯繫顧問">
         <p><strong>汽車顧問：</strong>{dealer.fullName}</p>
         <p><strong>顧問手機：</strong><a data-entry="visit" href={`tel:${dealer.phone.replace(/\D/g, "")}`} className="underline underline-offset-4">{dealer.phone}</a></p>
         <p><strong>LINE：</strong>@{dealer.line}</p>
-        <p>告訴鈺漣想看的車款、用途及方便的時間，一起安排賞車與試乘。</p>
-        <p>外縣市購車也可先聊聊，討論交車地點、費用與時程。</p>
       </ArticleSection>
     </div>
     <ArticleSection title="交通與停車怎麼安排">
@@ -45,8 +42,8 @@ export default function VisitPage() {
           <figcaption className="px-4 py-3 text-xs leading-6 text-[#666]">抵達時可辨識「凱騰鈴木北投」招牌。</figcaption>
         </figure>
         <div className="space-y-4">
-          <p>目的地為台北市北投區承德路六段337號。請使用上方地圖依出發位置查看開車、大眾運輸或步行路線，並留意出發當天的交通狀況。</p>
-          <p>北投所提供免費停車位。到店時可向現場人員詢問停放位置；如有上下車或行動協助需求，請在預約時告知顧問。</p>
+          <p>導航搜尋「凱騰鈴木北投所」，入口在承德路六段337號。</p>
+          <p>停放位置可詢問現場人員；需要協助上下車，可在預約時告知。</p>
         </div>
       </div>
     </ArticleSection>
@@ -64,10 +61,9 @@ export default function VisitPage() {
     </ArticleSection>
     <ArticleSection title="預約與到店流程">
       <ol className="list-decimal space-y-3 pl-5">
-        <li>先告知想了解的車款、方便的日期與同行人數；尚未決定車款也可以先討論用途。</li>
-        <li>由顧問確認展示或試乘車、時段、可安排路線、試乘資格及需攜帶的資料。</li>
-        <li>收到顧問確認的車款與時段後，再安排出發。</li>
-        <li>到店依自己的需求試坐、查看載物及停車條件，試乘後再整理版本與報價問題。</li>
+        <li>用 LINE 傳想看的車款、日期與同行人數，預約展示或試乘車。</li>
+        <li>收到鈺漣回覆的車款與時段後再出發，需攜帶的資料會在預約時說明。</li>
+        <li>常用的嬰兒車、行李或安全座椅可一起帶來，家人坐好後直接試放。</li>
       </ol>
     </ArticleSection>
     <ArticleSection title="出發前先了解車款">

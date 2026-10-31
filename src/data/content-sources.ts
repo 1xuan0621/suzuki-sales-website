@@ -50,7 +50,7 @@ export const contentSources = {
   windowTintRules: { title: "交通部公路局｜2026 年新車隔熱紙管理新制", url: "https://www.thb.gov.tw/News_Content_table.aspx?n=12181&s=291839" },
   windowTintProducts: { title: "車輛安全審驗中心｜隔熱紙合格產品查詢", url: "https://www.car-safety.org.tw/car_safety/TemplateTwoContent?OpID=536" },
   platePortal: { title: "監理服務網｜官方選號及轉帳入口", url: "https://www.mvdis.gov.tw/m3-emv-plate/webpickno/member/operatePickNo?keepQryData=y" },
-  plateRules: { title: "監理法規｜牌照號碼選號及招標作業規定", url: "https://www.mvdis.gov.tw/webMvdisLaw/LawArticle.aspx?LawID=I0124002" },
+  plateRules: { title: "交通部｜牌照號碼選號及招標作業規定（2026 年修正）", url: "https://ws.thb.gov.tw/Download.ashx?icon=.pdf&n=5YWs6Lev55uj55CG5qmf6Zec6LuK6Lyb54mM54Wn6Jmf56K86YG46Jmf5Y%2BK5oub5qiZ5L2c5qWt6KaP5a6aLnBkZg%3D%3D&u=LzAwMS9VcGxvYWQvNDUwL3JlbGZpbGUvMTI0ODEvOTc3LzdkOWM3NmI3LTNhNjktNGM3MC04MzM3LWUzODI5MjcwZWYyMy5wZGY%3D" },
   plateSelection: { title: "監理服務網｜網路選號須知（PDF）", url: "https://www.mvdis.gov.tw/files/m3/plate/webpicknoinfo.pdf" },
   plateAuction: { title: "監理服務網｜網路競標約定條款（PDF）", url: "https://www.mvdis.gov.tw/files/m3/plate/notice_2020.pdf" },
   plateCosts: { title: "公路局｜選號方式與基本選號費", url: "https://www.thb.gov.tw/News_Content.aspx?n=87&s=62364&sms=13235" },
