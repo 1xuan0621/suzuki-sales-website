@@ -125,7 +125,7 @@ export default async function CarPage({ params }: Props) {
       </ul>
     </ArticleSection>
     <nav aria-label="返回車款總覽" className="mt-8 border-t border-[#ddd] pt-5">
-      <Link href="/cars" className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#b9000e] underline underline-offset-4"><span aria-hidden="true">←</span>回全車款總覽</Link>
+      <Link href={`/cars#${car.id}`} className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#b9000e] underline underline-offset-4"><span aria-hidden="true">←</span>回全車款總覽</Link>
     </nav>
   </ContentShell>;
 }

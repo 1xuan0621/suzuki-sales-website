@@ -1,10 +1,13 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
-import type { Car } from "@/data/site";
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
+import { getCar, type Car } from "@/data/site";
+
+const STORAGE_KEY = "suzuki:comparison:ids:v1";
 
 interface CompareContextType {
   selected: Car[];
+  ready: boolean;
   toggleCar: (car: Car) => void;
   removeCar: (id: string) => void;
   clearAll: () => void;
@@ -21,6 +24,35 @@ export function useCompare() {
 
 export default function CompareProvider({ children }: { children: ReactNode }) {
   const [selected, setSelected] = useState<Car[]>([]);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const restored: Car[] = [];
+    try {
+      const stored: unknown = JSON.parse(window.sessionStorage.getItem(STORAGE_KEY) ?? "[]");
+      if (Array.isArray(stored)) {
+        for (const id of stored) {
+          if (typeof id !== "string" || restored.some((car) => car.id === id)) continue;
+          const car = getCar(id);
+          if (car) restored.push(car);
+          if (restored.length === 3) break;
+        }
+      }
+    } catch {
+      // Comparison remains usable when storage is blocked or contains invalid data.
+    }
+    setSelected(restored);
+    setReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!ready) return;
+    try {
+      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(selected.map((car) => car.id)));
+    } catch {
+      // Keep the current in-memory selection if session storage is unavailable.
+    }
+  }, [ready, selected]);
 
   const toggleCar = useCallback((car: Car) => {
     setSelected((prev) => {
@@ -43,7 +75,7 @@ export default function CompareProvider({ children }: { children: ReactNode }) {
   );
 
   return (
-    <CompareContext.Provider value={{ selected, toggleCar, removeCar, clearAll, isSelected }}>
+    <CompareContext.Provider value={{ selected, ready, toggleCar, removeCar, clearAll, isSelected }}>
       {children}
     </CompareContext.Provider>
   );

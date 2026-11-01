@@ -152,11 +152,19 @@ const specifications: Record<CarId, {
       chargeMinutes: 45,
       chargeStartPercent: 10,
       chargeEndPercent: 80,
+      // Taiwan Suzuki e VITARA page, reviewed 2026-11-01:
+      // https://www.taiwansuzuki.com.tw/cars/eVITARA
+      bootLitres: 238,
+      slidForwardBootLitres: 306,
+      rearSeatSlideMm: 160,
     },
     rows: ["electricPowertrain", "electricDrive", "electricRange", "chargingConnections", "fastCharging"],
   },
   swift: {
     facts: {
+      // Taiwan Suzuki SWIFT specification sheet p. 2, reviewed 2026-11-01:
+      // https://www.taiwansuzuki.com.tw/uploads/car_list/178781313014.pdf
+      seats: 5,
       engineLitres: 1.2,
       hybridVolts: 12,
       powerPs: 81,
@@ -211,6 +219,9 @@ const specifications: Record<CarId, {
   },
   carry: {
     facts: {
+      // Taiwan Suzuki CARRY brochure p. 6, reviewed 2026-11-01:
+      // https://www.taiwansuzuki.com.tw/uploads/car_list/169336217741.pdf
+      driveSystem: "RWD",
       engineLitres: 1.5,
       powerPs: 96.6,
       powerRpm: 5600,
@@ -278,44 +289,58 @@ export function getCarSpecifications(id: CarId, locale: SpecificationLocale = "z
   );
 }
 
-// The single-screen preview uses the same facts as the full specifications.
-const previewSpecifications: Record<CarId, readonly (readonly [string, string])[]> = {
-  "e-vitara": [
-    ["電池容量", "{batteryKwh} kWh"],
-    ["充電接頭", "AC {acConnector} / DC {dcConnector}"],
-    ["前驅續航（{rangeStandard}）", "約 {frontRangeKm} km"],
-    ["四驅續航（{rangeStandard}）", "約 {allWheelRangeKm} km"],
-  ],
-  swift: [
-    ["動力", "{engineLitres}L\n{hybridVolts}V 輕油電"],
-    ["官方油耗", "{fuelEconomyKml} km/L"],
-    ["行李廂", "直立 {bootLitres} L\n後座倒放 {expandedBootLitres} L"],
-    ["安全配備", "{airbags} SRS 氣囊\n全速域 ACC"],
-  ],
-  jimny: [
-    ["引擎", "{engineLitres}L・{powerPs} PS"],
-    ["四驅模式", "{driveModes} 加力箱"],
-    ["官方油耗", "{fuelEconomyKml} km/L"],
-    ["安全配備", "{airbags} SRS 氣囊\nACC・DSBS II"],
-  ],
-  vitara: [
-    ["動力", "{engineLitres}L 渦輪\n{hybridVolts}V 輕油電"],
-    ["四輪傳動", "{driveSystem}\n適時四驅"],
-    ["官方油耗", "{fuelEconomyKml} km/L"],
-    ["行李廂", "{bootLitres} L\n最大 {expandedBootLitres} L"],
-  ],
-  "s-cross": [
-    ["動力", "{engineLitres}L 渦輪\n{hybridVolts}V 輕油電"],
-    ["官方油耗", "{fuelEconomyKml} km/L"],
-    ["行李廂", "椅背調整後 {bootLitres} L\n後座倒放 {expandedBootLitres} L"],
-    ["安全配備", "{cameraDegrees}° 環景\n{airbags} SRS 氣囊"],
-  ],
-  carry: [
-    ["引擎", "{engineLitres}L・{powerPs} PS"],
-    ["最大載重", "{payloadKg} kg"],
-    ["三邊開啟貨台（長×寬×高）", "{cargoDimensionsMm} mm"],
-    ["官方油耗", "{fuelEconomyKml} km/L"],
-  ],
+// Comparison views read the same facts without parsing translated specification text.
+export function getCarSpecificationFacts(id: CarId): Readonly<SpecificationFacts> {
+  return specifications[id].facts;
+}
+
+// Every preview answers the same four questions in the same position.
+const previewFields = [
+  ["powertrain", "動力"],
+  ["efficiency", "官方油耗／續航"],
+  ["space", "空間／載物"],
+  ["equipment", "行車配備"],
+] as const;
+type PreviewField = typeof previewFields[number][0];
+
+const previewSpecifications: Record<CarId, Record<PreviewField, string>> = {
+  "e-vitara": {
+    powertrain: "純電馬達\n{batteryKwh} kWh 電池",
+    efficiency: "約 {frontRangeKm}／{allWheelRangeKm} km\n前驅／四驅・{rangeStandard}",
+    space: "行李廂 {bootLitres} L\n後座滑至最前 {slidForwardBootLitres} L",
+    equipment: "{frontDrive} 前驅\n{allWheelDrive} 四驅",
+  },
+  swift: {
+    powertrain: "{engineLitres}L\n{hybridVolts}V 輕油電",
+    efficiency: "{fuelEconomyKml} km/L",
+    space: "行李廂 {bootLitres} L\n後座傾倒 {expandedBootLitres} L",
+    equipment: "{airbags} SRS 氣囊\n全速域 ACC",
+  },
+  jimny: {
+    powertrain: "{engineLitres}L 汽油引擎\n{powerPs} PS",
+    efficiency: "{fuelEconomyKml} km/L",
+    // Same Taiwan-model seating facts as car-usage.ts and the Jimny full page.
+    space: "三門四人座\n後座 50/50 傾倒",
+    equipment: "{driveModes}\n加力箱四驅",
+  },
+  vitara: {
+    powertrain: "{engineLitres}L 渦輪\n{hybridVolts}V 輕油電",
+    efficiency: "{fuelEconomyKml} km/L",
+    space: "行李廂 {bootLitres} L\n最大 {expandedBootLitres} L",
+    equipment: "{driveSystem}\n適時四驅",
+  },
+  "s-cross": {
+    powertrain: "{engineLitres}L 渦輪\n{hybridVolts}V 輕油電",
+    efficiency: "{fuelEconomyKml} km/L",
+    space: "椅背調整後 {bootLitres} L\n後座傾倒 {expandedBootLitres} L",
+    equipment: "{cameraDegrees}° 環景\n{airbags} SRS 氣囊",
+  },
+  carry: {
+    powertrain: "{engineLitres}L 汽油引擎\n{powerPs} PS",
+    efficiency: "{fuelEconomyKml} km/L",
+    space: "載重 {payloadKg} kg\n三邊開啟貨台",
+    equipment: "後輪驅動",
+  },
 };
 
 export function getCarPreviewSpecifications(id: CarId) {
@@ -324,5 +349,5 @@ export function getCarPreviewSpecifications(id: CarId) {
     if (!(key in facts)) throw new Error(`Missing specification fact: ${id}.${key}`);
     return formatFact(key, facts[key], "zh-TW");
   });
-  return previewSpecifications[id].map(([label, value]) => ({ label: interpolate(label), value: interpolate(value) }));
+  return previewFields.map(([field, label]) => ({ label, value: interpolate(previewSpecifications[id][field]) }));
 }

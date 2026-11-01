@@ -17,7 +17,7 @@ export default function LocalizedShell({ children, hero, label, carId, locale }:
           {label && <nav aria-label={chinese ? "麵包屑" : t("Breadcrumb")} className="mb-7 flex flex-wrap items-center gap-x-2 text-sm leading-6 text-[#666]">
             <Link href={chinese ? "/" : `/${locale}`} className="inline-flex min-h-11 items-center underline underline-offset-4">{chinese ? "首頁" : t("Home")}</Link>
             <span aria-hidden="true">/</span>
-            {carId && <><Link href={chinese ? "/cars" : `/${locale}/cars`} className="inline-flex min-h-11 items-center underline underline-offset-4">{carCatalogNavigation[locale].label}</Link><span aria-hidden="true">/</span></>}
+            {carId && <><Link href={chinese ? `/cars#${carId}` : `/${locale}/cars#${carId}`} className="inline-flex min-h-11 items-center underline underline-offset-4">{carCatalogNavigation[locale].label}</Link><span aria-hidden="true">/</span></>}
             <span aria-current="page">{label}</span>
           </nav>}
           {children}

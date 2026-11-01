@@ -19,6 +19,7 @@ export default function CarCompareButton({ car, locale = "zh-TW" }: { car: Car; 
 
   return <button
     type="button"
+    data-compare-car={car.id}
     aria-pressed={active}
     aria-label={atLimit ? copy.full : active ? copy.removeLabel(car.name) : copy.addLabel(car.name)}
     disabled={atLimit}
