@@ -10,9 +10,10 @@ import { ArticleSection } from "@/components/ContentShell";
 import { carPages, carVersions } from "@/data/content";
 import { englishCars, englishCarDetails } from "@/data/english";
 import { getCarSpecificationMessages } from "@/data/specifications";
-import { localizedRoutes } from "@/data/locales";
+import { carCatalogNavigation, localizedRoutes } from "@/data/locales";
 import { cars, eVitaraPriceSource, getCar } from "@/data/site";
 import { carSchema, pageMetadata, serializeJsonLd } from "@/data/seo";
+import CarCompareButton from "@/components/CarCompareButton";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -48,7 +49,10 @@ export default async function LocalizedCarPage({ params }: Props) {
         <p className="mb-3 text-sm font-bold tracking-wide text-[#b9000e]">{t("{type} · Taiwan model", { type: t(content.subtitle) })}</p>
         <h1 className="text-4xl font-black leading-tight tracking-tight sm:text-5xl">{t("SUZUKI")}{" "}{car.name}</h1>
         <p className="mt-5 text-[15px] leading-8 text-[#555]">{t(detail.introduction)}</p>
-        <p className="mb-5 mt-6 text-sm leading-7 text-[#666]">{t("Recommended starting price")}<strong className="block text-3xl font-black text-[#b9000e]">{t("NT$")}{" "}{versions[0].priceTwd.toLocaleString("en-US")}</strong></p>
+        <div className="mb-5 mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <p className="text-sm leading-7 text-[#666]">{t("Recommended starting price")}<strong className="block text-3xl font-black text-[#b9000e]">{t("NT$")}{" "}{versions[0].priceTwd.toLocaleString("en-US")}</strong></p>
+          <div className="w-fit max-w-full"><CarCompareButton car={car} locale={locale} /></div>
+        </div>
         <ContactLinks carId={car.id} entry="car-page" locale={locale} />
         <Link data-entry="car-page" data-car-id={car.id} href={`/${locale}?car=${car.id}#contact`} className="mt-4 inline-block text-sm font-bold text-[#b9000e] underline underline-offset-4">{t("Send a {model} enquiry →", { model: car.name })}</Link>
       </div>
@@ -57,7 +61,7 @@ export default async function LocalizedCarPage({ params }: Props) {
           <Image src={`/images/${name}.jpg`} alt={t(index === 2 ? "SUZUKI {model} interior" : index === 1 ? "SUZUKI {model} exterior detail" : "SUZUKI {model} exterior", { model: car.name })} fill sizes={index === 0 ? "(min-width: 1024px) 500px, 90vw" : "(min-width: 1024px) 250px, 43vw"} className="object-contain" />
         </div>)}
       </div>
-      <nav aria-label={t("On this page")} className="flex flex-wrap gap-x-6 gap-y-3 border-t border-[#ddd] pt-5 text-sm font-bold text-[#b9000e] lg:col-span-2">
+      <nav aria-label={t("On this page")} className="flex flex-wrap gap-x-6 gap-y-3 border-t border-[#ddd] pt-5 text-sm font-bold text-[#b9000e] lg:col-span-2 [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center">
         <a href="#pricing" className="underline underline-offset-4">{t("Prices")}</a>
         <a href="#specifications" className="underline underline-offset-4">{t("Specifications")}</a>
         <a href="#test-drive" className="underline underline-offset-4">{t("Test drive")}</a>
@@ -95,8 +99,10 @@ export default async function LocalizedCarPage({ params }: Props) {
       <ul className="space-y-3 text-[#b9000e]">
         {sourceContent.relatedCars.map((id) => <li key={id}><Link href={`/${locale}/cars/${id}`} className="underline underline-offset-4">{t("Explore SUZUKI {model} →", { model: getCar(id)!.name })}</Link></li>)}
         <li><Link href={`/${locale}/faq`} className="underline underline-offset-4">{t("Buying, quotations and delivery: common questions →")}</Link></li>
-        <li><Link href={`/${locale}#cars`} className="underline underline-offset-4">{t("View all six models →")}</Link></li>
       </ul>
     </ArticleSection>
+    <nav aria-label={carCatalogNavigation[locale].label} className="mt-8 border-t border-[#ddd] pt-5">
+      <Link href={`/${locale}/cars`} className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#b9000e] underline underline-offset-4"><span aria-hidden="true">←</span>{carCatalogNavigation[locale].backLabel}</Link>
+    </nav>
   </LocalizedShell>;
 }

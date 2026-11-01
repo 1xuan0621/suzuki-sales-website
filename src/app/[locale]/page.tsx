@@ -4,13 +4,13 @@ import { requireForeignLocale } from "@/lib/site-locale";
 import Image from "next/image";
 import Link from "next/link";
 import LocalizedShell from "@/components/LocalizedShell";
-import LocalizedCarCards from "@/components/LocalizedCarCards";
+import CarCards from "@/components/CarCards";
+import { carCatalogContent } from "@/data/car-catalog";
 import LocalizedConsultation from "@/components/LocalizedConsultation";
 import ConsultationPrefill from "@/components/ConsultationPrefill";
 import { ContactIcon } from "@/components/ContactLinks";
 import { homeCars, dealer } from "@/data/site";
-import { carVersions } from "@/data/content";
-import { englishCars, englishFaqs } from "@/data/english";
+import { englishFaqs } from "@/data/english";
 import { pageMetadata, serializeJsonLd } from "@/data/seo";
 import { siteUrl } from "@/data/content";
 import { localizedRoutes } from "@/data/locales";
@@ -26,7 +26,6 @@ export async function generateMetadata({ params }: Props) {
 export default async function LocalizedPage({ params }: Props) {
   const locale = requireForeignLocale((await params).locale);
   const t = translator(locale);
-  const models = homeCars.map((car) => ({ id: car.id, name: car.name, subtitle: t(englishCars[car.id].subtitle), description: t(englishCars[car.id].description), highlights: englishCars[car.id].highlights.map((text) => t(text)), priceTwd: Math.min(...carVersions(car.id).map((version) => version.priceTwd)) }));
   const contactCard = "flex min-w-0 items-center gap-3 rounded-2xl border border-[#e7e7e7] border-l-5 bg-white p-4 shadow-[0_6px_18px_rgba(20,20,20,0.05)]";
   const contactAction = "mt-2 inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-lg border px-3 py-2 text-sm font-bold no-underline transition-colors focus-visible:outline-2 focus-visible:outline-offset-4";
   return <LocalizedShell locale={locale} hero={
@@ -80,8 +79,8 @@ export default async function LocalizedPage({ params }: Props) {
     <section id="cars" className="mt-5 scroll-mt-6 border-t border-[#ddd] pt-[34px] sm:mt-[34px]" aria-labelledby="models-heading">
       <p className="text-xs font-bold uppercase tracking-widest text-[#b9000e]">{t("THE TAIWAN LINEUP")}</p>
       <h2 id="models-heading" className="mt-2 text-[23px] font-bold leading-tight sm:text-[28px]">{t("Find your Suzuki")}</h2>
-      <p className="mb-6 mt-3 text-sm leading-7 text-[#666]">{t("Start with your daily journeys, passengers, parking and cargo needs.")}</p>
-      <LocalizedCarCards models={models} locale={locale} />
+      <Link href={`/${locale}/cars`} className="mb-4 mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#a9000d] underline underline-offset-4">{carCatalogContent[locale].browse} <span aria-hidden="true">→</span></Link>
+      <CarCards compact locale={locale} />
     </section>
     <section className="mt-10 rounded-2xl border border-[#e6d9d5] bg-[#fff8f4] p-6 sm:p-8" aria-labelledby="visit-heading">
       <p className="text-xs font-bold uppercase tracking-widest text-[#b9000e]">{t("FROM SHORTLIST TO SHOWROOM")}</p>

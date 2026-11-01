@@ -15,6 +15,7 @@ import { carUsage } from "@/data/car-usage";
 import OwnerExperienceSection from "@/components/OwnerExperienceSection";
 import { ownerExperiences } from "@/data/owner-experiences";
 import ReferenceDetails from "@/components/ReferenceDetails";
+import CarCompareButton from "@/components/CarCompareButton";
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -62,9 +63,10 @@ export default async function CarPage({ params }: Props) {
       </div>
       <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#e5e1dd] bg-white p-5 sm:px-6 lg:col-span-2">
         <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm text-[#666]">建議售價 <strong className="text-3xl font-black text-[#b9000e]">{car.price}</strong></p>
+        <div className="w-fit max-w-full"><CarCompareButton car={car} locale="zh-TW" /></div>
         <ContactLinks carId={car.id} entry="car-page" />
       </div>
-      <nav aria-label="車款選購重點" className="flex flex-wrap gap-2 border-t border-[#ddd] pt-5 text-sm font-bold text-[#9b000b] lg:col-span-2 [&_a]:rounded-lg [&_a]:bg-white [&_a]:px-3 [&_a]:py-2 [&_a]:ring-1 [&_a]:ring-[#e5e1dd] [&_a:hover]:bg-[#fff1f1] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-2">
+      <nav aria-label="車款選購重點" className="flex flex-wrap gap-2 border-t border-[#ddd] pt-5 text-sm font-bold text-[#9b000b] lg:col-span-2 [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_a]:rounded-lg [&_a]:bg-white [&_a]:px-3 [&_a]:py-2 [&_a]:ring-1 [&_a]:ring-[#e5e1dd] [&_a:hover]:bg-[#fff1f1] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-2">
         <a href="#pricing">價格與報價</a>
         {focus && <a href={`#${focus.faqIds[0]}`}>{car.id === "jimny" ? "2026 改款差異" : "輕油電與選購重點"}</a>}
         <a href="#specifications">主要規格</a>
@@ -122,5 +124,8 @@ export default async function CarPage({ params }: Props) {
         <li><Link href="/visit/beitou" className="underline underline-offset-4">北投所交通與預約資訊</Link></li>
       </ul>
     </ArticleSection>
+    <nav aria-label="返回車款總覽" className="mt-8 border-t border-[#ddd] pt-5">
+      <Link href="/cars" className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#b9000e] underline underline-offset-4"><span aria-hidden="true">←</span>回全車款總覽</Link>
+    </nav>
   </ContentShell>;
 }

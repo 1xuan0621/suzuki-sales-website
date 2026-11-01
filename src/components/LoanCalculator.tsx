@@ -4,6 +4,12 @@ import { useState, useMemo } from "react";
 import { cars } from "@/data/site";
 import { LOAN_RATE_MIN, LOAN_RATE_MAX } from "@/data/constants";
 
+const rangeClassName = `block h-11 w-full cursor-pointer appearance-none rounded-full
+  [&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:border-0 [&::-webkit-slider-runnable-track]:bg-transparent
+  [&::-webkit-slider-thumb]:-mt-2 [&::-webkit-slider-thumb]:box-border [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white [&::-webkit-slider-thumb]:bg-[#e60012] [&::-webkit-slider-thumb]:shadow-sm
+  [&::-moz-range-track]:h-2 [&::-moz-range-track]:border-0 [&::-moz-range-track]:bg-transparent [&::-moz-range-progress]:bg-transparent
+  [&::-moz-range-thumb]:box-border [&::-moz-range-thumb]:h-6 [&::-moz-range-thumb]:w-6 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-white [&::-moz-range-thumb]:bg-[#e60012] [&::-moz-range-thumb]:shadow-sm`;
+
 function parsePrice(priceStr: string): number {
   const cleaned = priceStr.replace(/[^0-9.]/g, "");
   const n = parseFloat(cleaned);
@@ -122,12 +128,15 @@ export default function LoanCalculator() {
                   setLoanRatio(Number(e.target.value));
                   setDownPayment(Math.round(principal * (100 - Number(e.target.value)) / 100));
                 }}
-                className="w-full h-2 rounded-full appearance-none cursor-pointer"
+                className={rangeClassName}
                 style={{
-                  background: `linear-gradient(to right, #e60012 ${((loanRatio - 50) / 40) * 100}%, #e0e0e0 ${((loanRatio - 50) / 40) * 100}%)`,
+                  backgroundImage: `linear-gradient(to right, #e60012 ${((loanRatio - 50) / 40) * 100}%, #e0e0e0 ${((loanRatio - 50) / 40) * 100}%)`,
+                  backgroundSize: "100% 8px",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
                 }}
               />
-              <div className="flex justify-between text-[12px] text-[#999] mt-1">
+              <div className="flex justify-between text-[12px] text-[#666] mt-1">
                 <span>50%</span>
                 <span>90%</span>
               </div>
@@ -145,7 +154,7 @@ export default function LoanCalculator() {
                     type="button"
                     aria-pressed={months === n}
                     onClick={() => setMonths(n)}
-                    className={`px-4 h-10 rounded-lg font-extrabold text-[14px] cursor-pointer border-2 transition-all ${
+                    className={`px-4 min-h-11 rounded-lg font-extrabold text-[14px] cursor-pointer border-2 transition-all ${
                       months === n
                         ? "bg-[#e60012] text-white border-[#e60012]"
                         : "bg-white text-[#555] border-[#d9d9d9] hover:border-[#e60012] hover:text-[#e60012]"
@@ -173,7 +182,7 @@ export default function LoanCalculator() {
                     onChange={(e) => setRateInput(e.target.value)}
                     onBlur={() => setRateInput(String(rate))}
                     aria-describedby="loan-rate-hint"
-                    className="w-20 h-9 px-2 border border-[#d9d9d9] rounded-lg text-right"
+                    className="w-20 h-11 px-2 border border-[#d9d9d9] rounded-lg text-right"
                   />
                   <span>%</span>
                 </div>
@@ -187,12 +196,15 @@ export default function LoanCalculator() {
                 step={0.01}
                 value={rate}
                 onChange={(e) => setRateInput(e.target.value)}
-                className="w-full h-2 rounded-full appearance-none cursor-pointer"
+                className={rangeClassName}
                 style={{
-                  background: `linear-gradient(to right, #e60012 ${((rate - LOAN_RATE_MIN) / (LOAN_RATE_MAX - LOAN_RATE_MIN)) * 100}%, #e0e0e0 ${((rate - LOAN_RATE_MIN) / (LOAN_RATE_MAX - LOAN_RATE_MIN)) * 100}%)`,
+                  backgroundImage: `linear-gradient(to right, #e60012 ${((rate - LOAN_RATE_MIN) / (LOAN_RATE_MAX - LOAN_RATE_MIN)) * 100}%, #e0e0e0 ${((rate - LOAN_RATE_MIN) / (LOAN_RATE_MAX - LOAN_RATE_MIN)) * 100}%)`,
+                  backgroundSize: "100% 8px",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
                 }}
               />
-              <div className="flex justify-between text-[12px] text-[#999] mt-1">
+              <div className="flex justify-between text-[12px] text-[#666] mt-1">
                 <span>{LOAN_RATE_MIN}%</span>
                 <span>{LOAN_RATE_MAX}%</span>
               </div>
@@ -203,36 +215,36 @@ export default function LoanCalculator() {
 
         {/* Result Card */}
         <div className="p-6 bg-white border border-[#e7e7e7] rounded-[18px] shadow-[0_12px_30px_rgba(20,20,20,0.08)] flex flex-col justify-center items-center text-center">
-          <p className="m-0 text-[14px] font-extrabold text-[#888] mb-2">每月應付金額</p>
+          <p className="m-0 text-[14px] font-extrabold text-[#555] mb-2">每月應付金額</p>
           <p className="m-0 text-[42px] font-extrabold text-[#e60012] leading-none">
             {monthlyPayment > 0 ? Math.round(monthlyPayment).toLocaleString() : "—"}
           </p>
-          <p className="m-0 text-[14px] text-[#999] mt-1">元 / 月</p>
+          <p className="m-0 text-[14px] text-[#666] mt-1">元 / 月</p>
 
           <div className="w-full mt-5 pt-4 border-t border-[#eee] space-y-2 text-left">
             <div className="flex justify-between text-[14px]">
-              <span className="text-[#888]">貸款成數</span>
+              <span className="text-[#666]">貸款成數</span>
               <span className="font-extrabold text-[#555]">{loanRatio}%</span>
             </div>
             <div className="flex justify-between text-[14px]">
-              <span className="text-[#888]">頭期款</span>
+              <span className="text-[#666]">頭期款</span>
               <span className="font-extrabold text-[#555]">{effectiveDownPayment.toLocaleString()} 元</span>
             </div>
             <div className="flex justify-between text-[14px]">
-              <span className="text-[#888]">貸款總額</span>
+              <span className="text-[#666]">貸款總額</span>
               <span className="font-extrabold text-[#555]">{loanAmount.toLocaleString()} 元</span>
             </div>
             <div className="flex justify-between text-[14px]">
-              <span className="text-[#888]">期數</span>
+              <span className="text-[#666]">期數</span>
               <span className="font-extrabold text-[#555]">{months} 期（{Math.round(months / 12 * 10) / 10} 年）</span>
             </div>
             <div className="flex justify-between text-[14px]">
-              <span className="text-[#888]">年利率</span>
+              <span className="text-[#666]">年利率</span>
               <span className="font-extrabold text-[#555]">{rate}%</span>
             </div>
 
             <div className="flex justify-between text-[14px]">
-              <span className="text-[#888]">總繳金額</span>
+              <span className="text-[#666]">總繳金額</span>
               <span className="font-extrabold text-[#555]">
                 {monthlyPayment > 0 ? Math.round(monthlyPayment * months + effectiveDownPayment).toLocaleString() : "—"} 元
               </span>

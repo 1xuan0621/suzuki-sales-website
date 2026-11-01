@@ -1,41 +1,28 @@
 "use client";
 
-import { Suspense, useRef, useState, type ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useConsultation } from "./ConsultationProvider";
 import ConsultationPrefill from "./ConsultationPrefill";
 import PrivacyNotice from "./PrivacyNotice";
 import SiteFrame from "./SiteFrame";
-import { cars, homeCars, services, usageOptions, budgetRanges, dealer, type Car } from "@/data/site";
-import { R, CAR_SHAPE_CLASS } from "@/data/constants";
-import { useCompare } from "@/components/CarCompareProvider";
+import { cars, usageOptions, budgetRanges, dealer } from "@/data/site";
+import { R } from "@/data/constants";
 import CompareBar from "@/components/CompareBar";
 import LoanCalculator from "@/components/LoanCalculator";
 import DeliveryCarousel from "@/components/DeliveryCarousel";
-import CarModal from "@/components/CarModal";
 
-import "@/components/car-shapes.css";
-
-/* ═══════════════════════════
-   HomePage（內層）
-   使用 useCompare，必須包在 CompareProvider 內
-   ═══════════════════════════ */
 type HomeTopic = { href: string; title: string; description: string };
 type HomePhoto = { src: string; alt: string; width: number; height: number };
 
-export default function HomePageClient({ introduction, mobileIntroduction, buyingTopics, jimnyTopics, jimnyPhoto, serviceReviews }: { introduction: string; mobileIntroduction: string; buyingTopics: HomeTopic[]; jimnyTopics: HomeTopic[]; jimnyPhoto: HomePhoto; serviceReviews: ReactNode }) {
-  const { toggleCar, isSelected } = useCompare();
-  const { form, update, submitted, formError, website, setWebsite, sending, handleSubmit, beginConsultation } = useConsultation();
-  const [modalCar, setModalCar] = useState<Car | null>(null);
-  const contactHeading = useRef<HTMLHeadingElement>(null);
+export default function HomePageClient({ introduction, mobileIntroduction, jimnyTopics, jimnyPhoto, serviceReviews, carCards }: { introduction: string; mobileIntroduction: string; jimnyTopics: HomeTopic[]; jimnyPhoto: HomePhoto; serviceReviews: ReactNode; carCards: ReactNode }) {
+  const { form, update, submitted, formError, website, setWebsite, sending, handleSubmit } = useConsultation();
 
 
   const lineHref = `https://line.me/R/ti/p/~${dealer.line}`;
   const phoneHref = `tel:${dealer.phone.replace(/\D/g, "")}`;
 
-  const openModal = (car: Car) => setModalCar(car);
-  const closeModal = () => setModalCar(null);
 
   return (
     <>
@@ -111,7 +98,7 @@ export default function HomePageClient({ introduction, mobileIntroduction, buyin
                     href="https://www.facebook.com/profile.php?id=100092443294776&locale=zh_TW"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="grid place-items-center w-9 h-9 bg-[#145DBF] hover:bg-[#0F4C9B] rounded-full text-white text-[17px] font-bold no-underline transition-colors"
+                    className="grid place-items-center w-11 h-11 bg-[#145DBF] hover:bg-[#0F4C9B] rounded-full text-white text-[17px] font-bold no-underline transition-colors"
                     aria-label="Facebook 粉絲專頁"
                   >
                     f
@@ -120,7 +107,7 @@ export default function HomePageClient({ introduction, mobileIntroduction, buyin
                     href="https://www.threads.net/@lian____06"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="grid place-items-center w-9 h-9 bg-[#000] hover:bg-[#222] rounded-full text-white text-[17px] font-bold no-underline transition-colors"
+                    className="grid place-items-center w-11 h-11 bg-[#000] hover:bg-[#222] rounded-full text-white text-[17px] font-bold no-underline transition-colors"
                     aria-label="Threads"
                   >
                     @
@@ -197,56 +184,14 @@ export default function HomePageClient({ introduction, mobileIntroduction, buyin
             </article>
           </section>
 
-          {/* ═══════ 車款區塊 — 6 台，點卡片開 Modal ═══════ */}
-          <section className="w-[calc(100%-88px)] mx-auto mt-[34px] pt-[34px] border-t border-[#ddd] max-sm:w-[calc(100%-28px)] max-sm:mt-5">
-            <h2 className="mt-0 mb-5 text-[28px] font-bold leading-tight max-sm:text-[23px]">熱門車款</h2>
-            <div className="mb-6 grid gap-3 sm:grid-cols-2">
-              {buyingTopics.map((topic) => <Link key={topic.href} href={topic.href} className="rounded-xl border border-[#e1d8d2] bg-[#fffaf6] p-5 no-underline transition-colors hover:border-[#b9000e] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b9000e]">
-                <h3 className="text-lg font-bold leading-7 text-[#b9000e]">{topic.title} <span aria-hidden="true">→</span></h3>
-              </Link>)}
+          <section id="cars" aria-labelledby="home-cars-heading" className="mx-auto mt-5 w-[calc(100%-28px)] scroll-mt-6 border-t border-[#ddd] pt-6 sm:mt-[34px] sm:w-[calc(100%-88px)] sm:pt-[34px]">
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+              <h2 id="home-cars-heading" className="text-[23px] font-bold sm:text-[28px]">找到適合你的 Suzuki</h2>
+              <Link href="/cars" className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#a9000d] underline underline-offset-4">車款總覽與比較 <span aria-hidden="true">→</span></Link>
             </div>
-
-            {/* 車款卡片 — 3 欄 (6 台) */}
-            <div id="cars" className="scroll-mt-6 grid grid-cols-3 gap-6 max-[980px]:grid-cols-2 max-[680px]:grid-cols-1 max-sm:gap-[14px]">
-              {homeCars.map((car) => {
-                const shapeClass = CAR_SHAPE_CLASS[car.id] ?? "";
-                const selected = isSelected(car.id);
-                return (
-                  <div key={car.id} className="flex flex-col gap-2">
-                    <button
-                      onClick={() => openModal(car)}
-                      className="flex flex-col flex-1 items-center p-[26px_20px] text-center bg-white border border-[#e7e7e7] rounded-[18px] shadow-[0_12px_30px_rgba(20,20,20,0.08)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(20,20,20,0.12)] cursor-pointer"
-                      aria-haspopup="dialog"
-                    >
-                      <div className={`car-shape ${shapeClass} shrink-0`} />
-                      <h3 className="mt-5 mb-1 text-[26px] font-bold text-[#202020]">
-                        {car.name}
-                      </h3>
-                      <p className="m-0 mt-0 text-[13px] text-[#999] font-bold">{car.subtitle}</p>
-                      <p className="m-0 mt-1 text-sm leading-6 text-[#666]">{car.description}</p>
-                      <p className="m-0 mt-auto pt-3 text-[18px] font-extrabold text-[#e60012]">
-                        {car.price}
-                      </p>
-                    </button>
-                    <Link href={`/cars/${car.id}`} className="rounded-lg px-2 py-3 text-center text-sm font-bold text-[#b9000e] underline underline-offset-4">查看 {car.name} 完整介紹</Link>
-                    {/* 加入比較按鈕 */}
-                    <button
-                      aria-pressed={selected}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleCar(car);
-                      }}
-                      className={`w-full h-[38px] rounded-[10px] font-extrabold text-[13px] cursor-pointer border-2 transition-all ${
-                        selected
-                          ? "bg-[#e60012] text-white border-[#e60012]"
-                          : "bg-white text-[#e60012] border-[#e60012]/40 hover:bg-[#fff5f5] hover:border-[#e60012]"
-                      }`}
-                    >
-                      {selected ? "✓ 已選取比較" : "+ 加入比較"}
-                    </button>
-                  </div>
-                );
-              })}
+            {carCards}
+            <div className="mt-3 flex justify-end">
+              <a href="#loan-calculator" className="inline-flex min-h-11 items-center text-sm font-bold text-[#a9000d] underline underline-offset-4">貸款試算 →</a>
             </div>
           </section>
 
@@ -279,50 +224,7 @@ export default function HomePageClient({ introduction, mobileIntroduction, buyin
             </div>
           </section>
 
-          {/* ═══════ 服務項目 ═══════ */}
-          <section className="w-[calc(100%-88px)] mx-auto mt-[34px] pt-5 max-sm:w-[calc(100%-28px)] max-sm:mt-5">
-            <div className="flex items-end justify-between gap-5 mb-5 max-sm:flex-col max-sm:items-start">
-              <div>
-                <p className="m-0 text-[#666] text-[15px] font-bold">服務項目</p>
-                <h2 className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">
-                  購車流程，一次協助
-                </h2>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-6 gap-3 max-lg:grid-cols-3 max-sm:grid-cols-1 max-sm:gap-[14px]">
-              {services.map((s) => {
-                const inner = (
-                  <>
-                    <span className="text-[26px] leading-none">{s.icon}</span>
-                    <span className="text-[#333] text-[15px] font-extrabold leading-tight">
-                      {s.title}
-                    </span>
-                    <span className="text-[#888] text-[13px] leading-snug">{s.desc}</span>
-                  </>
-                );
-                if ("href" in s) {
-                  return (
-                    <Link
-                      key={s.title}
-                      href={s.href}
-                      className="flex flex-col gap-1.5 min-h-[112px] p-4 bg-white border border-[#e7e7e7] rounded-[14px] shadow-[0_2px_8px_rgba(20,20,20,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(20,20,20,0.10)] hover:border-l-[#e60012] hover:border-l-3 no-underline cursor-pointer"
-                    >
-                      {inner}
-                    </Link>
-                  );
-                }
-                return (
-                  <div
-                    key={s.title}
-                    className="flex flex-col gap-1.5 min-h-[112px] p-4 bg-white border border-[#e7e7e7] rounded-[14px] shadow-[0_2px_8px_rgba(20,20,20,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(20,20,20,0.10)] hover:border-l-[#e60012] hover:border-l-3"
-                  >
-                    {inner}
-                  </div>
-                );
-              })}
-            </div>
-          </section>
+          {/* 服務項目卡片暫不顯示；原始資料保留於 site.ts。 */}
 
           {/* ═══════ 交車照片 — Carousel ═══════ */}
           <section className="w-[calc(100%-88px)] mx-auto mt-[34px] pt-[34px] border-t border-[#ddd] max-sm:w-[calc(100%-28px)] max-sm:mt-5">
@@ -353,7 +255,7 @@ export default function HomePageClient({ introduction, mobileIntroduction, buyin
               </div>
               <div>
                 <p className="m-0 text-[#666] text-[15px] font-bold">快速諮詢</p>
-                <h2 ref={contactHeading} tabIndex={-1} id="contact-heading" className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">
+                <h2 tabIndex={-1} id="contact-heading" className="mt-0.5 mb-0 text-[28px] leading-tight max-sm:text-[23px]">
                   留下需求，我將盡快與您聯繫
                 </h2>
               </div>
@@ -488,28 +390,12 @@ export default function HomePageClient({ introduction, mobileIntroduction, buyin
             <LoanCalculator />
           </section>
 
-          <footer className="py-[26px] px-6 text-[#9b9b9b] text-center text-sm">
+          <footer className="py-[26px] px-6 text-[#666] text-center text-sm">
             <PrivacyNotice />
             © 2026 Suzuki 汽車顧問 {dealer.fullName}｜凱騰鈴木北投所
           </footer>
         </main>
       </SiteFrame>
-
-      {/* ═══════ Modal Overlay — 車款詳細 ═══════ */}
-      {modalCar && (
-        <CarModal
-          car={modalCar}
-          onClose={closeModal}
-          onInterest={() => {
-            beginConsultation(modalCar.name);
-            closeModal();
-            requestAnimationFrame(() => {
-              contactHeading.current?.focus({ preventScroll: true });
-              document.getElementById("contact")?.scrollIntoView({ behavior: "instant", block: "start" });
-            });
-          }}
-        />
-      )}
 
       <CompareBar />
     </>

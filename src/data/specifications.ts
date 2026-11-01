@@ -277,3 +277,52 @@ export function getCarSpecifications(id: CarId, locale: SpecificationLocale = "z
     template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key])),
   );
 }
+
+// The single-screen preview uses the same facts as the full specifications.
+const previewSpecifications: Record<CarId, readonly (readonly [string, string])[]> = {
+  "e-vitara": [
+    ["電池容量", "{batteryKwh} kWh"],
+    ["充電接頭", "AC {acConnector} / DC {dcConnector}"],
+    ["前驅續航（{rangeStandard}）", "約 {frontRangeKm} km"],
+    ["四驅續航（{rangeStandard}）", "約 {allWheelRangeKm} km"],
+  ],
+  swift: [
+    ["動力", "{engineLitres}L\n{hybridVolts}V 輕油電"],
+    ["官方油耗", "{fuelEconomyKml} km/L"],
+    ["行李廂", "直立 {bootLitres} L\n後座倒放 {expandedBootLitres} L"],
+    ["安全配備", "{airbags} SRS 氣囊\n全速域 ACC"],
+  ],
+  jimny: [
+    ["引擎", "{engineLitres}L・{powerPs} PS"],
+    ["四驅模式", "{driveModes} 加力箱"],
+    ["官方油耗", "{fuelEconomyKml} km/L"],
+    ["安全配備", "{airbags} SRS 氣囊\nACC・DSBS II"],
+  ],
+  vitara: [
+    ["動力", "{engineLitres}L 渦輪\n{hybridVolts}V 輕油電"],
+    ["四輪傳動", "{driveSystem}\n適時四驅"],
+    ["官方油耗", "{fuelEconomyKml} km/L"],
+    ["行李廂", "{bootLitres} L\n最大 {expandedBootLitres} L"],
+  ],
+  "s-cross": [
+    ["動力", "{engineLitres}L 渦輪\n{hybridVolts}V 輕油電"],
+    ["官方油耗", "{fuelEconomyKml} km/L"],
+    ["行李廂", "椅背調整後 {bootLitres} L\n後座倒放 {expandedBootLitres} L"],
+    ["安全配備", "{cameraDegrees}° 環景\n{airbags} SRS 氣囊"],
+  ],
+  carry: [
+    ["引擎", "{engineLitres}L・{powerPs} PS"],
+    ["最大載重", "{payloadKg} kg"],
+    ["三邊開啟貨台（長×寬×高）", "{cargoDimensionsMm} mm"],
+    ["官方油耗", "{fuelEconomyKml} km/L"],
+  ],
+};
+
+export function getCarPreviewSpecifications(id: CarId) {
+  const { facts } = specifications[id];
+  const interpolate = (template: string) => template.replace(/\{(\w+)\}/g, (_, key: string) => {
+    if (!(key in facts)) throw new Error(`Missing specification fact: ${id}.${key}`);
+    return formatFact(key, facts[key], "zh-TW");
+  });
+  return previewSpecifications[id].map(([label, value]) => ({ label: interpolate(label), value: interpolate(value) }));
+}

@@ -55,7 +55,7 @@ export default function DeliveryCarousel() {
                 const t = e.currentTarget;
                 t.style.display = "none";
                 const p = t.parentElement!;
-                p.classList.add("flex", "items-center", "justify-center", "text-[#bbb]", "font-bold");
+                p.classList.add("flex", "items-center", "justify-center", "text-[#666]", "font-bold");
                 p.textContent = `📸 交車照 ${n}`;
               }}
             />
@@ -68,18 +68,18 @@ export default function DeliveryCarousel() {
         <button
           onClick={() => setIdx((p) => Math.max(0, p - 1))}
           disabled={idx === 0}
-          className={`grid place-items-center w-10 h-10 rounded-full bg-white border border-[#e0e0e0] shadow-sm text-[#333] text-lg transition-all hover:bg-[#f5f5f5] ${idx === 0 ? "opacity-30 pointer-events-none" : ""}`}
+          className={`grid place-items-center w-11 h-11 rounded-full bg-white border border-[#e0e0e0] shadow-sm text-[#333] text-lg transition-all hover:bg-[#f5f5f5] ${idx === 0 ? "opacity-30 pointer-events-none" : ""}`}
           aria-label="上一頁"
         >
           ‹
         </button>
-        <span className="text-[#999] text-sm font-bold">
+        <span className="text-[#666] text-sm font-bold">
           {idx + 1} / {max + 1}
         </span>
         <button
           onClick={() => setIdx((p) => Math.min(max, p + 1))}
           disabled={idx >= max}
-          className={`grid place-items-center w-10 h-10 rounded-full bg-white border border-[#e0e0e0] shadow-sm text-[#333] text-lg transition-all hover:bg-[#f5f5f5] ${idx >= max ? "opacity-30 pointer-events-none" : ""}`}
+          className={`grid place-items-center w-11 h-11 rounded-full bg-white border border-[#e0e0e0] shadow-sm text-[#333] text-lg transition-all hover:bg-[#f5f5f5] ${idx >= max ? "opacity-30 pointer-events-none" : ""}`}
           aria-label="下一頁"
         >
           ›

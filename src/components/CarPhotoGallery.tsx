@@ -162,8 +162,8 @@ export default function CarPhotoGallery({ car, photos, expanded, onExpandedChang
       </div>
       <div className="flex h-12 shrink-0 items-center gap-3 border-b border-[#eee] bg-[#fafafa] px-5 sm:px-6">
         <h3 className="shrink-0 whitespace-nowrap text-lg font-bold text-[#333]">{car.name}</h3>
-        <p className="min-w-0 flex-1 truncate text-xs text-[#777]">{car.subtitle}</p>
-        <p aria-live="polite" aria-atomic="true" className="shrink-0 whitespace-nowrap text-xs tabular-nums text-[#777]">
+        <p className="min-w-0 flex-1 truncate text-xs text-[#666]">{car.subtitle}</p>
+        <p aria-live="polite" aria-atomic="true" className="shrink-0 whitespace-nowrap text-xs tabular-nums text-[#666]">
           <span className="sr-only">{label} · </span>{index + 1} / {images.length}
         </p>
       </div>

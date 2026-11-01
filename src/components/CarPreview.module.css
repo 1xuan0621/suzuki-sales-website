@@ -1,0 +1,136 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  border: 0;
+  padding: 12px;
+  background: rgb(0 0 0 / 50%);
+  color: #333;
+  text-align: left;
+}
+
+.overlay::backdrop { background: transparent; }
+
+.card {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  max-width: 488px;
+  padding: 16px;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 0 26px 80px rgb(0 0 0 / 30%);
+}
+
+.heading h2 {
+  padding-right: 48px;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 32px;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding-right: 52px;
+  color: #555;
+  font-size: 13px;
+  line-height: 24px;
+}
+
+.price { color: #b9000e; font-size: 20px; font-weight: 800; white-space: nowrap; }
+.price span { color: #555; font-size: 12px; font-weight: 400; }
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  color: #555;
+  font-size: 20px;
+  cursor: pointer;
+}
+.close:hover { background: #e5e5e5; }
+
+.overview { display: grid; gap: 12px; min-width: 0; }
+.photo {
+  position: relative;
+  height: clamp(76px, calc(100dvh - 470px), 220px);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.specifications { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.specifications > div { border-radius: 10px; background: #f5f5f5; padding: 10px; }
+.specifications dt { color: #555; font-size: 12px; line-height: 18px; }
+.specifications dd { margin-top: 2px; white-space: pre-line; overflow-wrap: anywhere; font-size: 14px; font-weight: 600; line-height: 20px; }
+.audience { color: #555; font-size: 14px; line-height: 22px; }
+.audience strong { color: #333; }
+
+.detailLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #b9000e;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+  text-decoration: none;
+}
+.detailLink:hover { background: #93000b; }
+
+@media (min-width: 720px) {
+  .card { max-width: 720px; gap: 16px; padding: 24px; }
+  .close { top: 16px; right: 16px; }
+  .overview { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .photo { height: auto; min-height: 200px; }
+  .specifications > div { padding: 12px; }
+  .specifications dd { font-size: 15px; line-height: 22px; }
+  .audience { font-size: 15px; line-height: 24px; }
+}
+
+@media (max-height: 620px) {
+  .card, .overview { gap: 8px; }
+  .card { padding: 12px; }
+  .specifications > div { padding: 8px; }
+  .photo { height: 76px; }
+}
+
+@media (min-width: 560px) and (max-height: 500px) {
+  .card { max-width: 720px; }
+  .overview { grid-template-columns: 0.8fr 1.2fr; }
+  .photo { height: auto; min-height: 0; }
+  .specifications { gap: 6px; }
+  .specifications > div { padding: 6px 8px; }
+  .audience { line-height: 20px; }
+}
+
+@media (min-width: 560px) and (max-height: 350px) {
+  .overlay { padding: 8px; }
+  .card { gap: 6px; padding: 10px; }
+  .close { top: 8px; right: 8px; }
+  .heading h2 { font-size: 22px; line-height: 28px; }
+  .priceRow { line-height: 22px; }
+  .specifications > div { padding: 4px 8px; }
+}

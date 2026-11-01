@@ -167,6 +167,7 @@ export function carVersions(id: CarId) {
 
 export const contentRoutes = [
   { path: "/", updatedAt: homeContent.updatedAt, title: homeContent.title },
+  { path: "/cars", updatedAt: "2026-11-01", title: "SUZUKI 全車款總覽與比較｜張鈺漣" },
   ...cars.map((car) => ({ path: `/cars/${car.id}`, updatedAt: carPages[car.id].updatedAt, title: carTitle(car.id) })),
   { path: "/visit/beitou", updatedAt: showroom.updatedAt, title: showroom.title },
   { path: "/guides", updatedAt: guideIndex.updatedAt, title: guideIndex.title },
