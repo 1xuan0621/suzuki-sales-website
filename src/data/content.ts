@@ -74,7 +74,7 @@ const carDates = { updatedAt: "2026-11-01", specsReviewedAt: contentReviewedAt, 
 export const carPages: Record<CarId, CarPageContent> = {
   swift: {
     ...carDates,
-    updatedAt: "2026-11-01",
+    updatedAt: "2026-11-05",
     specsReviewedAt: "2026-09-20",
     pricesReviewedAt: "2026-09-20",
     description: `SUZUKI SWIFT 台灣建議售價 ${startingPrice("swift")}，1.2L 輕油電不用外接充電。比較停車尺寸、後座與行李箱需求，向鈺漣確認完整報價、車色交期及台北北投試乘時段。`,
@@ -92,7 +92,7 @@ export const carPages: Record<CarId, CarPageContent> = {
   },
   jimny: {
     ...carDates,
-    updatedAt: "2026-11-01",
+    updatedAt: "2026-11-05",
     specsReviewedAt: "2026-09-20",
     pricesReviewedAt: "2026-09-20",
     description: `Jimny 2026 改款台灣建議售價 ${startingPrice("jimny")}。對照 2024 型錄，了解 ACC、DSBS II 與 9 吋車機升級，確認三門四人座是否適合日常需求，向鈺漣詢問報價、交期與台北北投試乘。`,

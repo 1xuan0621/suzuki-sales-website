@@ -28,15 +28,15 @@ export const ownerExperiences: Partial<Record<CarId, OwnerExperience>> = {
     },
   },
   jimny: {
-    title: "三門 Jimny 載人與載物，車主怎麼取捨？",
-    context: "2020 年三門 Jimny · 交車後環島經驗",
-    summary: "作者喜歡 Jimny 的方正造型與開闊視野，也分享後座放倒與立起時，載物空間的明顯差異；與朋友環島時，同行者則有因車身晃動而不適的經驗。常載家人與行李的話，試乘時可一起體驗後座進出、乘坐感受及行李擺放。",
+    title: "喜歡內裝風格，也在意晃動：Jimny 車主的取捨",
+    context: "作者自述購入 2025 年車 · 2026 年 2 月心得，屬改款前版本",
+    summary: "作者喜歡 Jimny 的硬派內裝線條，也能接受自己行駛國道時的隔音感受；較不滿意的是隨身物品的收納、轉彎時明顯的車身晃動，以及頭枕舒適度。賞車時，可帶常用的水壺與隨身包試放，讓同行家人坐後座試乘，確認自己是否能接受這些取捨。",
     source: {
       name: "PTT car 板",
-      author: "holocon11212",
-      href: "https://www.ptt.cc/bbs/car/M.1598602864.A.5E1.html",
-      publishedAt: "2020-08-28",
-      reviewedAt: "2026-10-31",
+      author: "Muilie",
+      href: "https://www.ptt.cc/bbs/car/M.1770905026.A.D75.html",
+      publishedAt: "2026-02-12",
+      reviewedAt: "2026-11-05",
     },
   },
   vitara: {
