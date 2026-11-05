@@ -38,6 +38,8 @@
 
 /* ── SWIFT ── */
 .car-shape.swift {
+  background: linear-gradient(180deg, #d4e88a 0%, #a8c94d 64%, #789a32 100%);
+  box-shadow: inset 0 -12px 0 rgba(0,0,0,0.15), 0 10px 18px rgba(120,154,50,0.16);
   width: 142px;
   height: 76px;
   border-radius: 44px 50px 22px 24px;
@@ -54,6 +56,9 @@
 
 /* ── e VITARA ── */
 .car-shape.e-vitara {
+  /* Cool silver with a defined edge keeps the body visible on white cards. */
+  background: linear-gradient(180deg, #e0e5e9 0%, #a5b0ba 64%, #74818e 100%);
+  box-shadow: inset 0 0 0 1px rgba(78,94,110,0.28), inset 0 -12px 0 rgba(0,0,0,0.15), 0 10px 18px rgba(78,94,110,0.18);
   width: 166px;
   height: 84px;
   border-radius: 26px 44px 18px 18px;
@@ -77,6 +82,8 @@
 
 /* ── VITARA ── */
 .car-shape.vitara {
+  background: linear-gradient(180deg, #4bafe0 0%, #197db5 64%, #155780 100%);
+  box-shadow: inset 0 -12px 0 rgba(0,0,0,0.15), 0 10px 18px rgba(25,125,181,0.16);
   width: 162px;
   height: 92px;
   border-radius: 18px 34px 17px 17px;
@@ -138,10 +145,10 @@
   border-radius: 0;
   background:
     linear-gradient(180deg, #f4f4f4 0%, #e9e9e9 100%) 45px 27px / 30px 20px no-repeat,
-    linear-gradient(180deg, #f20a1e 0%, var(--brand-red) 66%, #a9000d 100%) 24px 17px / 84px 66px no-repeat,
-    linear-gradient(180deg, #f20a1e 0%, var(--brand-red) 66%, #a9000d 100%) 104px 55px / 100px 28px no-repeat,
-    linear-gradient(90deg, #f20a1e 0%, var(--brand-red) 100%) 104px 42px / 100px 8px no-repeat,
-    linear-gradient(90deg, #a9000d 0%, #a9000d 100%) 112px 68px / 78px 5px no-repeat;
+    linear-gradient(180deg, #555b63 0%, #292e35 66%, #15191e 100%) 24px 17px / 84px 66px no-repeat,
+    linear-gradient(180deg, #555b63 0%, #292e35 66%, #15191e 100%) 104px 55px / 100px 28px no-repeat,
+    linear-gradient(90deg, #555b63 0%, #292e35 100%) 104px 42px / 100px 8px no-repeat,
+    linear-gradient(90deg, #15191e 0%, #15191e 100%) 112px 68px / 78px 5px no-repeat;
   box-shadow: none;
   transform: translateY(0);
 }
@@ -153,9 +160,9 @@
   border: 0;
   border-radius: 2px 2px 8px 8px;
   background:
-    linear-gradient(90deg, #a9000d 0 6px, transparent 6px 44px, #a9000d 44px 50px, transparent 50px 86px, #a9000d 86px 100%) 0 0 / 100% 100% no-repeat;
+    linear-gradient(90deg, #15191e 0 6px, transparent 6px 44px, #15191e 44px 50px, transparent 50px 86px, #15191e 86px 100%) 0 0 / 100% 100% no-repeat;
   box-shadow:
     inset 0 -12px 0 rgba(0,0,0,0.14),
-    0 13px 18px -18px rgba(230,0,18,0.28);
+    0 13px 18px -18px rgba(21,25,30,0.28);
 }
 .car-shape.carry::after { left: 43px; bottom: -1px; box-shadow: 140px 0 0 #202020; }
