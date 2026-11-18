@@ -138,19 +138,19 @@ export default function HomePageClient({ introduction, mobileIntroduction, jimny
             </article>
 
             <article className="flex min-w-0 items-center gap-3 p-4 bg-white border border-[#e7e7e7] rounded-2xl shadow-[0_6px_18px_rgba(20,20,20,0.05)] border-l-5 border-l-[#06C755]">
-              <div className="flex-shrink-0 grid place-items-center w-11 h-11 rounded-full bg-[#06C755] text-white text-[11px] font-extrabold">
+              <div aria-hidden="true" className="flex-shrink-0 grid place-items-center w-11 h-11 rounded-full bg-[#06C755] text-white text-[11px] font-extrabold">
                 LINE
               </div>
               <div className="min-w-0 flex-1">
                 <p className="m-0 text-[#666] text-xs font-bold leading-5">LINE 聯絡</p>
-                <h2 className="my-1 whitespace-nowrap text-[22px] font-semibold leading-7 text-[#06C755]">
+                <h2 className="my-1 whitespace-nowrap text-[22px] font-semibold leading-7 text-[#087b3a]">
                   @{dealer.line}
                 </h2>
                 <a
                   href={lineHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-flex min-h-10 items-center justify-center whitespace-nowrap px-3 py-2 border border-[#06C755] rounded-lg text-[#06C755] font-extrabold no-underline transition-colors hover:bg-[#06C755] hover:text-white text-sm"
+                  className="mt-2 inline-flex min-h-10 items-center justify-center whitespace-nowrap px-3 py-2 border border-[#087b3a] rounded-lg text-[#087b3a] font-extrabold no-underline transition-colors hover:bg-[#087b3a] hover:text-white text-sm"
                 >
                   加入好友
                 </a>

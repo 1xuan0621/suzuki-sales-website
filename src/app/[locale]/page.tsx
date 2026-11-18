@@ -60,8 +60,8 @@ export default async function LocalizedPage({ params }: Props) {
         <div aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#06C755] text-[11px] font-extrabold text-white">{t("LINE")}</div>
         <div className="min-w-0 flex-1">
           <p className="text-xs font-bold leading-5 text-[#666]">{t("Chat on LINE")}</p>
-          <h2 className="my-1 whitespace-nowrap text-[22px] font-semibold leading-7 text-[#06C755]">@{dealer.line}</h2>
-          <a href={`https://line.me/R/ti/p/~${dealer.line}`} target="_blank" rel="noopener noreferrer" className={`${contactAction} border-[#06C755] text-[#06C755] hover:bg-[#06C755] hover:text-white`}>{t("Add on LINE")}</a>
+          <h2 className="my-1 whitespace-nowrap text-[22px] font-semibold leading-7 text-[#087b3a]">@{dealer.line}</h2>
+          <a href={`https://line.me/R/ti/p/~${dealer.line}`} target="_blank" rel="noopener noreferrer" className={`${contactAction} border-[#087b3a] text-[#087b3a] hover:bg-[#087b3a] hover:text-white`}>{t("Add on LINE")}</a>
         </div>
       </article>
       <article className={`${contactCard} border-l-[#e60012] sm:col-span-2 lg:col-span-1`}>

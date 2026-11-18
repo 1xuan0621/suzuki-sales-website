@@ -1,17 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --color-suzuki: #e30016;
   --color-suzuki-light: #ff4d4d;
   --color-suzuki-dark: #b30011;
-  --font-sans: 'Noto Sans TC', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: system-ui, "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", sans-serif;
 }
 
 html {
   font-family: var(--font-sans);
   scroll-behavior: smooth;
   background-color: #2f2f2f;
+}
+
+html:lang(ja) {
+  --font-sans: system-ui, "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+}
+
+html:lang(ko) {
+  --font-sans: system-ui, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans CJK KR", sans-serif;
 }
 
 body {

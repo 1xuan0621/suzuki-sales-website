@@ -7,7 +7,7 @@ export const jimnyHistoryGuide: Guide = {
   title: "Jimny 發展史：四代演進、JB64／JB74 與五門版一次看懂",
   description: "從 1970 年初代到 2018 年第四代，整理 Suzuki Jimny 發展史、JB64 與 JB74 差別、五門 Nomade，以及 2026 更新與台灣選車時要分清楚的事。",
   introduction: "Jimny 在 1970、1981、1998、2018 年先後迎來四代車型。方正外形之外，它一直保留小型越野車的核心結構。三門 JB64／JB74 與五門 Nomade 都屬於第四代，2026 更新則著重安全與車內配備。",
-  updatedAt: "2026-11-01",
+  updatedAt: "2026-11-18",
   reviewedAt: "2026-10-07",
   sourceIds: ["jimnyHistory", "jimnyHistoryCatalog", "jimnyGlobal", "jimnyFiveDoor", "jimnyNomade", "jimnyDrive", "jimny", "jimny2026"],
   sourceNote: "歷史年份依 Suzuki 日本與全球資料整理；日本車名、型式與海外上市資訊用來辨識車系，台灣販售版本與配備另以 Taiwan Suzuki 公告為準。",
@@ -77,7 +77,7 @@ export const jimnyHistoryGuide: Guide = {
           facts: [{ label: "型次意思", text: "日本官方歷史資料把 JB74 的「1 型～5 型」列在同一車型下，用來區分推出後的更新。" }],
         },
       ],
-      link: { href: "/cars/jimny", label: "查看台灣現行 Jimny 與 2026 更新重點" },
+      link: { href: "/cars/jimny#pricing", label: "查看台灣現售三門 Jimny 的版本與建議售價" },
     },
     {
       id: "before-test-drive",
@@ -90,7 +90,7 @@ export const jimnyHistoryGuide: Guide = {
         { label: "座位與行李", text: "保留平常要坐的座位，再放推車或露營用品；需要倒下後座才能裝入，就要重新安排乘客或行李。" },
         { label: "日常乘坐", text: "在可安排的市區與較快路段，分別留意路面震動、風噪及後座舒適度。" },
       ],
-      link: { href: "/guides/jimny-modifications", label: "接著看 Jimny 改裝前要確認的事" },
+      link: { href: "/cars/jimny#test-drive", label: "北投試乘時，怎麼試後座、放行李與聽隔音？" },
     },
   ],
 };

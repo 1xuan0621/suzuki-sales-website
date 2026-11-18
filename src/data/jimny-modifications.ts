@@ -7,7 +7,7 @@ export const jimnyModificationsGuide: Guide = {
   title: "Jimny 改裝先改什麼？AT 胎、避震升高、車頂架與驗車重點",
   description: "Jimny 通勤一定要換 AT 胎嗎？升高兩吋能合法上路嗎？整理輪胎、避震、車頂架、2026 感知器與保固確認清單，先弄懂用途再決定改裝。",
   introduction: "通勤與偶爾露營可先用原廠配置。AT 胎偏向兼顧非鋪裝路，車頂架增加載物位置；升高則涉及車高變更規定。按路況與行李需求挑項目，比一次買齊套件更實際。",
-  updatedAt: "2026-11-01",
+  updatedAt: "2026-11-18",
   reviewedAt: "2026-10-07",
   sourceIds: ["jimny", "allTerrainTyres", "vehicleEquipment", "vehicleModificationRules", "roofRackRules", "service"],
   sourceNote: "選題參考 Mobile01 與 PTT 的公開改裝、通勤討論，並非本站客戶調查或改裝實測。技術與規定依下列原廠、輪胎製造商及政府資料核對；本文不認證個別套件，也不提供施工或越野操作教學。海外案例不能直接視為台灣可合法上路的方案。",
@@ -23,7 +23,7 @@ export const jimnyModificationsGuide: Guide = {
         { title: "露營或有非鋪裝路需求", answer: "看營地道路與裝備", facts: [{ label: "安排方式", text: "營地若全程柏油路，按一般道路需求選胎；行李裝不下，先調整裝備或座位分配，再評估車頂架。" }] },
       ],
       details: { title: "Jimny 四驅可以一直開嗎？", paragraphs: ["台灣官方將一般柏油道路列為 2H 使用情境；4H 用於相應的越野或積雪路況，4L 是低速高扭力用途。不要把分時四驅當成日常常駐模式，也不能只因下雨就一律切到 4H。切換條件與步驟依自己的隨車手冊。"] },
-      link: { href: "/cars/jimny#daily-use", label: "看 Jimny 日常用車與試放重點" },
+      link: { href: "/cars/jimny#test-drive", label: "先試原廠 Jimny 的隔音與四人載物空間" },
     },
     {
       id: "tyres", step: "輪胎與輪圈", action: "按路況比較，別只看胎紋",
@@ -69,7 +69,7 @@ export const jimnyModificationsGuide: Guide = {
         { label: "三個責任窗口", text: "原車保固找誰、配件故障找誰、安裝問題找誰？期限、條件與處理方式請留下書面紀錄。" },
         { label: "加裝設備的保險", text: "提供設備清單與價值，請保險承辦人列出需申報或加保的項目、保費與保障範圍。" },
       ],
-      link: { href: "/cars/jimny#test-drive", label: "先了解台北北投 Jimny 賞車與試乘安排" },
+      link: { href: "/visit/beitou", label: "到北投試乘 Jimny，查看交通與預約方式" },
     },
   ],
 };

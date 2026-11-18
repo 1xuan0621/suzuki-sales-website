@@ -81,7 +81,7 @@ export default async function CarPage({ params }: Props) {
       <div className="overflow-x-auto"><table className="w-full text-left"><caption className="sr-only">{car.name} 台灣版本價格</caption><thead><tr className="border-b border-[#ddd]"><th scope="col" className="py-3 pr-4">版本</th><th scope="col" className="py-3">建議售價</th></tr></thead><tbody>
         {carVersions(car.id).map((version) => <tr key={version.name} className="border-b border-[#eee]"><th scope="row" className="py-3 pr-4 font-medium">{version.name}</th><td className="py-3 font-bold text-[#b9000e]">NT$ {version.priceTwd.toLocaleString("en-US")} 起</td></tr>)}
       </tbody></table></div>
-      {focus && <p>{focus.priceNote}</p>}
+      {focus && <p>{focus.priceNote} <Link href="/guides/first-car#contract" className="font-medium text-[#9b000b] underline underline-offset-4">購車報價單逐項核對清單</Link></p>}
     </ArticleSection>
     {focus && <section aria-labelledby="buying-focus-heading" className="mt-8">
       <h2 id="buying-focus-heading" className="mb-4 text-xl font-bold sm:text-2xl">{focus.faqHeading}</h2>

@@ -166,7 +166,7 @@ export default function CompareBar({ locale = "zh-TW", showContactActions = true
       </section>}
       {showContactActions && <nav aria-label="快速聯絡" aria-hidden={!showContact} inert={!showContact} className="md:hidden border-t border-[#eee] px-3 pt-1.5 pb-[calc(6px+env(safe-area-inset-bottom))]">
         <div className="flex gap-2">
-          <a href={`https://line.me/R/ti/p/~${dealer.line}`} target="_blank" rel="noopener noreferrer" className="flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-[#06C755] text-sm font-bold text-white no-underline"><ContactIcon type="line" />加入 LINE</a>
+          <a href={`https://line.me/R/ti/p/~${dealer.line}`} target="_blank" rel="noopener noreferrer" className="flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-[#087b3a] text-sm font-bold text-white no-underline hover:bg-[#066531]"><ContactIcon type="line" />加入 LINE</a>
           <a href={`tel:${dealer.phone.replace(/\D/g, "")}`} className="flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-[#e60012] text-sm font-bold text-white no-underline"><ContactIcon type="phone" />電話諮詢</a>
         </div>
       </nav>}

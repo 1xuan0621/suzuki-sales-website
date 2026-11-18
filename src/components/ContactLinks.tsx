@@ -13,7 +13,7 @@ export default function ContactLinks({ carId, entry = "content", locale = "zh-TW
   const t = translator(locale);
   const button = "inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-xl px-4 py-3 text-sm font-bold no-underline transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#252525] sm:px-5 sm:text-base";
   return <div aria-label={foreign ? t("Contact the advisor") : "聯絡顧問"} data-contact-actions data-car-id={carId} data-entry={entry} className="grid max-w-sm grid-cols-2 gap-3 sm:flex sm:max-w-none">
-    <a href={`https://line.me/R/ti/p/~${dealer.line}`} target="_blank" rel="noopener noreferrer" className={`${button} bg-[#06C755] text-white hover:bg-[#06C755] hover:brightness-95`}><ContactIcon type="line" />{foreign ? t("Chat on LINE") : "LINE 諮詢"}</a>
+    <a href={`https://line.me/R/ti/p/~${dealer.line}`} target="_blank" rel="noopener noreferrer" className={`${button} bg-[#087b3a] text-white hover:bg-[#066531]`}><ContactIcon type="line" />{foreign ? t("Chat on LINE") : "LINE 諮詢"}</a>
     <a href={`tel:${dealer.phone.replace(/\D/g, "")}`} className={`${button} border border-[#bbb] bg-white text-[#333] hover:bg-[#eee]`}><ContactIcon type="phone" />{foreign ? t("Call") : "電話諮詢"}</a>
   </div>;
 }
