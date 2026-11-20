@@ -50,7 +50,7 @@ export default function DeliveryCarousel() {
               sizes="(max-width: 639px) calc(100vw - 28px), (max-width: 1180px) calc((100vw - 120px) / 3), 354px"
               loading="lazy"
               className="w-full h-full object-cover"
-              style={{ objectPosition: "center bottom" }}
+              style={{ objectPosition: n === "15" ? "center 70%" : "center bottom" }}
               onError={(e) => {
                 const t = e.currentTarget;
                 t.style.display = "none";
